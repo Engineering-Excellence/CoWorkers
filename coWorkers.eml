@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component jdk="17" jdk_type="JavaSDK">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$">
+		<excludeFolder url="file://$MODULE_DIR$/build"/>
+	</contentEntry>
+	<lib name="cos.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/cos.jar!/"/>
+	</lib>
+	<lib name="jsp-api.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/jsp-api.jar!/"/>
+	</lib>
+	<lib name="jstl-1.2.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/jstl-1.2.jar!/"/>
+	</lib>
+	<lib name="mybatis-3.0.6.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/mybatis-3.0.6.jar!/"/>
+	</lib>
+	<lib name="ojdbc8.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/ojdbc8.jar!/"/>
+	</lib>
+	<lib name="servlet-api.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/servlet-api.jar!/"/>
+	</lib>
+	<levels>
+		<level name="Apache Tomcat v9.0" value="project"/>
+		<level name="org.eclipse.jst.j2ee.internal.web.container" value="project"/>
+		<level name="org.eclipse.jst.j2ee.internal.module.container" value="project"/>
+	</levels>
+</component>
