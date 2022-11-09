@@ -1,18 +1,19 @@
 package com.silvertier.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
-// 곽규창 - (가칭) 덧글 DTO
+// 곽규창(Kyle) - 덧글 DTO
 public class CommentDTO {
 
     private int commentID;    // PK, 댓글번호
+    private String userName;    // 성명
+    private String content;  // 덧글 내용
+    private Date writeDate; // 입력일
+    private Date updateDate;    // 수정일
+    private Date deleteDate;    // 삭제일
+    private String ip;      // IP 주소
     private int postID;    // FK, 메인글의 글번호
-    private int userID;    // (FK), 아이디
-    private String commentContent;  // 덧글 내용
-    private Date commentWriteDate;
-    private Date commentUpdateDate;
-    private Date commentDeleteDate;
-    private String commentIp;
+    private int userID;    // FK, 아이디
 
     public int getCommentID() {
         return commentID;
@@ -20,6 +21,54 @@ public class CommentDTO {
 
     public void setCommentID(int commentID) {
         this.commentID = commentID;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Date getWriteDate() {
+        return writeDate;
+    }
+
+    public void setWriteDate(Date writeDate) {
+        this.writeDate = writeDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public Date getDeleteDate() {
+        return deleteDate;
+    }
+
+    public void setDeleteDate(Date deleteDate) {
+        this.deleteDate = deleteDate;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public int getPostID() {
@@ -36,45 +85,5 @@ public class CommentDTO {
 
     public void setUserID(int userID) {
         this.userID = userID;
-    }
-
-    public String getCommentContent() {
-        return commentContent;
-    }
-
-    public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent;
-    }
-
-    public Date getCommentWriteDate() {
-        return commentWriteDate;
-    }
-
-    public void setCommentWriteDate(Date commentWriteDate) {
-        this.commentWriteDate = commentWriteDate;
-    }
-
-    public Date getCommentUpdateDate() {
-        return commentUpdateDate;
-    }
-
-    public void setCommentUpdateDate(Date commentUpdateDate) {
-        this.commentUpdateDate = commentUpdateDate;
-    }
-
-    public Date getCommentDeleteDate() {
-        return commentDeleteDate;
-    }
-
-    public void setCommentDeleteDate(Date commentDeleteDate) {
-        this.commentDeleteDate = commentDeleteDate;
-    }
-
-    public String getCommentIp() {
-        return commentIp;
-    }
-
-    public void setCommentIp(String commentIp) {
-        this.commentIp = commentIp;
     }
 }

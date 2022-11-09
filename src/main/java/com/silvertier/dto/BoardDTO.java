@@ -1,21 +1,22 @@
 package com.silvertier.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
-// 곽규창 - (가칭) 메인 게시판 DTO
+// 곽규창(Kyle) - 게시판 DTO
 public class BoardDTO {
 
     private int postID; // PK, 글번호
-    private int userID; // (FK), (int)아이디 != (String)계정
     private String subject; // 제목
+    private String userName;    // 성명
     private String content; // 내용
-    private Date writeDate;
-    private Date updateDate;
-    private Date deleteDate;
-    private int hit;
-    private String ip;
+    private Date writeDate; // 입력일
+    private Date updateDate;    // 수정일
+    private Date deleteDate;    // 삭제일
+    private int hit;    // 조회수
     private int commentCount;   // 덧글 수
     private String isNotice;    // 공지글 여부
+    private String ip;  // IP 주소
+    private int userID; // FK, 사원번호
 
     public int getPostID() {
         return postID;
@@ -25,20 +26,20 @@ public class BoardDTO {
         this.postID = postID;
     }
 
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
     public String getSubject() {
         return subject;
     }
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getContent() {
@@ -81,14 +82,6 @@ public class BoardDTO {
         this.hit = hit;
     }
 
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
     public int getCommentCount() {
         return commentCount;
     }
@@ -103,5 +96,21 @@ public class BoardDTO {
 
     public void setIsNotice(String isNotice) {
         this.isNotice = isNotice;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }
