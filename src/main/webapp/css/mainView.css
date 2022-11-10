@@ -1,0 +1,29 @@
+#li1 {
+	color: white;
+}
+
+#header {
+	text-align: center;
+	vertical-align: middle;
+	height: 45px;
+	background-color: #110235;
+	color: white;
+	font-weight: bold;
+	font-family: Dancing Script;
+	font-size: 20px;
+}
+
+ul {
+	height: 665px;
+}
+
+li {
+	height: 100px;
+	color: white;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+	cursor: pointer;
+}
