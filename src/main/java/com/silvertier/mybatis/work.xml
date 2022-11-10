@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.silvertier.dto.WorkDTO">
+    <insert id="insert" parameterType="wdto">
+        /*
+            insert into COWORK(WORKID ,ip ,userName, positionName, SUBJECT, CONTENT, PRIORITY ,
+                               currentProgress,workProgress,startDate ,DEADLINE,writeDate )
+            values (cowork_WORKID_seq.nextval, #{ip}, #{userName}, #{positionName}, #{SUBJECT}, #{CONTENT}, #{PRIORITY}
+                   , #{currentProgress}, #{workProgress},  TO_DATE(#{startDate}, 'yyyy-MM-dd')  TO_DATE(#{DEADLINE}, 'yyyy-MM-dd'), #{writeDate})
+        */
+        insert into COWORK( workID, ip, userName,  subject, content
+                          , priority, currentProgress, workProgress, startDate, deadline)
+        values ( cowork_workID_seq.nextval, #{ip}, '고길동', #{subject}, #{content}, #{priority}
+               , #{currentProgress}, #{workProgress}, #{startDate} , #{deadline})
+
+    </insert>
+    <select id="selectCount" resultType="int">
+        select count(*)
+        from COWORK
+    </select>
+    <select id="selectList" parameterType="java.util.HashMap" resultType="wdto">
+        <![CDATA[
+        SELECT *
+        FROM (SELECT rownum rnum, AA.*
+              FROM (SELECT * FROM COWORK ORDER BY workID DESC) AA
+              WHERE rownum <= #{endNo})
+        WHERE rnum >= #{startNo}
+        ]]>
+    </select>
+
+
+</mapper>
