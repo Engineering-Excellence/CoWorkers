@@ -8,8 +8,8 @@
 	
 	<typeAliases>
 		<!-- 별명 설정 -->
-		<typeAlias type="com.silvertier.dto.BoardDTO" alias="boardDTO" />	<!-- 별명 경로는 '.'으로 구분 주의 -->
-		<typeAlias type="com.silvertier.dto.CommentDTO" alias="commentDTO" />
+		<typeAlias type="com.silvertier.dto.EventDTO" alias="boardDTO" />	<!-- 별명 경로는 '.'으로 구분 주의 -->
+		<typeAlias type="com.silvertier.dto.EventCommentDTO" alias="commentDTO" />
 	</typeAliases>
 	
 	<environments default="development">
@@ -26,8 +26,8 @@
 	
 	<mappers>
 		<!-- 실행할 sql 명령이 저장된 파일의 위치 -->
-		<mapper resource="com/silvertier/mybatis/board.xml" />
-		<mapper resource="com/silvertier/mybatis/comment.xml" />
+		<mapper resource="com/silvertier/mybatis/event.xml" />
+		<mapper resource="com/silvertier/mybatis/eventComment.xml" />
 	</mappers>
 	
 </configuration>
