@@ -17,7 +17,7 @@
 <body>
 	<fmt:requestEncoding value="UTF-8"/>
 	
-		<div id="wrap" class="wrap">X
+		<div id="wrap" class="wrap">
 			<div class="main-top">
 				<header id="header" class="header">Silver Tier</header>
 			</div>

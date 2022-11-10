@@ -19,16 +19,6 @@ public class HomeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("HomeController -> doGet");
-		actionDo(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("HomeController -> doPost");
-		actionDo(request, response);
-	}
-	
-	protected void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("HomeController -> actionDO");
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -63,6 +53,10 @@ public class HomeController extends HttpServlet {
 				viewpage += "board";
 				break;
 				
+			case "/work.sil":
+				viewpage += "work";
+				break;
+				
 			case "/file.sil":
 				viewpage += "file";
 				break;
@@ -75,7 +69,11 @@ public class HomeController extends HttpServlet {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewpage);
 		dispatcher.forward(request, response);
-		
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("HomeController -> doPost");
+		doGet(request, response);
+	}
+	
 }

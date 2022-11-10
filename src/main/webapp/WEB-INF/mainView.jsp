@@ -27,7 +27,10 @@
 					  		<a href="board.sil">글</a>
 					  	</li>
 						<li>
-							<a href="file.sil">업무</a>	
+							<a href="work.sil">업무</a>	
+						</li>
+						<li>
+							<a href="file.sil">파일</a>	
 						</li>
 						<li>
 							<a href="event.sil">일정</a>

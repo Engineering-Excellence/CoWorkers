@@ -33,39 +33,40 @@
 						<th id="th1">아이디</th>
 						<td>
 							<input id="accountID" class="form-control" type="text" name="accountID" placeholder="가입할 ID를 입력해주세요." autocomplete="off">
-							<button id="btnId" class="btn btn-primary" type="button" onclick="idCheck()">중복체크</button>						
+							<button id="btnId" class="btn btn-primary" type="button" onclick="idCheck()">ID 체크</button>						
 						</td>
 					</tr>
 					<tr>
 						<th id="th1">비밀번호</th>
 						<td colspan="2">
-							<input id="accountPassword" class="form-control" type="password" name="accountPassword" placeholder="비밀번호를 입력해주세요.">
+							<input id="accountPassword" class="form-control" type="password" name="accountPassword" placeholder="비밀번호를 입력해주세요." maxlength="18" onkeypress="pwCheck()">
 						</td>
 					</tr>
 					<tr>
 						<th id="th1">비밀번호 확인</th>
 						<td colspan="2">
-							<input id="accountPassword2" class="form-control" type="password" name="accountPassword2" placeholder="비밀번호를 한번 더 입력해주세요.">
+							<input id="accountPassword2" class="form-control" type="password" name="accountPassword2" placeholder="비밀번호를 한번 더 입력해주세요." maxlength="18" onkeypress="pwCheck()">
 						</td>
 					</tr>	
 					<tr>
 						<th id="th1">성함</th>
 						<td colspan="2">
-							<input id="userName" class="form-control" type="text" name="userName" placeholder="이름을 입력해주세요." autocomplete="off">						
+							<input id="userName" class="form-control" type="text" name="userName" placeholder="이름을 입력해주세요." autocomplete="off" onkeyup="nameCheck()">						
 						</td>
 					</tr>				
 					<tr>
 						<th id="th1">주민등록번호</th>
 						<td colspan="2">
-							<input id="registerNumber" class="form-control" type="text" name="registerNumber" autocomplete="off">
+							<input id="registerNumber" class="form-control" type="text" name="registerNumber" maxlength="6" placeholder="앞 번호 6자리" autocomplete="off">
 							&nbsp; - &nbsp;						
-							<input id="registerNumber2" class="form-control" type="text" name="registerNumber" autocomplete="off">						
+							<input id="registerNumber2" class="form-control" type="password" name="registerNumber2" maxlength="7" placeholder="뒷 번호 7자리" autocomplete="off">
+							<button id="registerCheck" class="btn btn-primary" type="button" name="registerCheck" onclick="regCheck()">유효검사</button>
 						</td>
 					</tr>
 					<tr>
 						<th id="th1">휴대전화 번호</th>
 						<td colspan="2">
-							<input id="mobileNumber" class="form-control" type="text" name="mobileNumber" placeholder="휴대전화 번호를 입력해주세요." autocomplete="off">
+							<input id="mobileNumber" class="form-control" type="text" name="mobileNumber" placeholder="' - ' 을 제외한 휴대전화 번호를 입력해주세요." autocomplete="off" onkeypress="mobileCheck()">
 						</td>
 					</tr>
 					<tr>
@@ -83,9 +84,15 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="center">
-							<button id="regbtn" class="btn btn-success" type="submit">가입하기</button>
-							<button id="regbtn" class="btn btn-warning" type="reset">다시쓰기</button>
-							<button id="regbtn" class="btn btn-secondary" type="button" onclick="history.back()">돌아가기</button>
+							<h5 id="idCheckMsg"	style="color: green; font-weight: bold;"></h5>
+							<h5 id="pwCheckMsg"	style="color: red; font-weight: bold;"></h5>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<button id="btnform" class="btn btn-success" type="submit">가입하기</button>
+							<button id="btnform" class="btn btn-warning" type="reset">다시쓰기</button>
+							<button id="btnform" class="btn btn-secondary" type="button" onclick="history.back()">돌아가기</button>
 						</td>
 					</tr>
 				</tbody>

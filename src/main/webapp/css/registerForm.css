@@ -10,12 +10,12 @@
 }
 
 #registerNumber {
-	width: 176px;
+	width: 130px;
 	display: inline-block;
 }
 
 #registerNumber2 {
-	width: 176px;
+	width: 130px;
 	display: inline-block;
 }
 
@@ -35,7 +35,7 @@
 	width: 600px;
 }
 
-#regbtn{
+#btnform{
 	text-align: center;
 	align-items: center;
 	margin: auto;
@@ -44,4 +44,8 @@
 
 #gender {
 	margin-left: 3px;
+}
+
+#registerCheck {
+	margin-left: 2px;
 }
