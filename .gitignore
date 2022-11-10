@@ -257,10 +257,11 @@ Temporary Items
 ### Et Cetera
 #.gitignore
 .idea/
-#.settings/
+.settings/
 build/
 classes/
 *.iml
 *.eml
 .classpath
 .project
+src/main/java/com/silvertier/mybatis/db.properties
