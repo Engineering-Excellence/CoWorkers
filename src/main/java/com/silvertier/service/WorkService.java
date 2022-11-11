@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class WorkService {
@@ -26,7 +27,6 @@ public class WorkService {
     public void insert(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("service insert()");
         SqlSession mapper = MySession.getSession();
-        System.out.println("연결 성공: " + mapper);
         WorkDTO dto = new WorkDTO();
         dto.setIp(request.getRemoteAddr());
         dto.setSubject(request.getParameter("subject"));
@@ -47,7 +47,7 @@ public class WorkService {
 
 
     public void selectList(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("MvcBoardService 클래스의 selectList() 메서드 실행");
+        System.out.println("Service selectList()");
         SqlSession mapper = MySession.getSession();
 
         int currentPage = 1;
@@ -61,7 +61,7 @@ public class WorkService {
 
         int pageSize = 10;
         int totalCount = dao.selectCount(mapper);
-        System.out.println(totalCount);
+        System.out.println("totalCount: "+totalCount);
 
         WorkList workList = new WorkList(pageSize, totalCount, currentPage);
 
@@ -70,7 +70,7 @@ public class WorkService {
         hmap.put("endNo", workList.getEndNo());
 
         workList.setList(dao.selectList(mapper, hmap));
-        System.out.println(workList.getList());
+        System.out.println("list: " + workList.getList());
 
         request.setAttribute("workList", workList);
 
@@ -78,4 +78,13 @@ public class WorkService {
 
     }
 
+
+    public void selectEmergency(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("service selectEmergency()");
+        SqlSession mapper = MySession.getSession();
+        ArrayList<WorkDTO> emergency = dao.selectEmergency(mapper);
+        request.setAttribute("emergency", emergency);
+        System.out.println("emergency: " + emergency);
+        mapper.close();
+    }
 }

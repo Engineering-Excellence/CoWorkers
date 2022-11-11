@@ -27,7 +27,7 @@
 <body>
 
 <fmt:requestEncoding value="UTF-8"/>
-<jsp:useBean id="date" class="java.util.Date"/>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -76,70 +76,61 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">게시판</h1>
 
             <div class="table-responsive">
                 <table class="table table-striped">
                     <%--<table class="table" width="1000" align="center" border="1" cellpadding="5" cellspacing="0">--%>
                     <thead>
-                    <tr class="table-warning">
-                        <th style="width: 200px; text-align: center;"><a href="#">홈</a></th>
-                        <th style="width: 200px; text-align: center;"><a href="#">업무</a></th>
-                        <th style="width: 200px; text-align: center;"><a href="#">캘린더</a></th>
-                    </tr>
-                </table>
-                <table class="table" style="width: 1500px; margin-left: auto; margin-right: auto;">
                     <tr class="table-primary">
-                        <th colspan="10" style="font-size: 30px; text-align: center;">업무</th>
+                        <th colspan="5">게시판 보기</th>
                     </tr>
-                    <tr class="table-success">
-                        <th style="width: 100px; text-align: center;">우선순위</th>
-                        <th style="width: 500px; text-align: center;">업무명</th>
-                        <th style="width: 100px; text-align: center;">상태</th>
-                        <th style="width: 200px; text-align: center;">담당자(직급)</th>
-                        <th style="width: 200px; text-align: center;">진척도</th>
-                        <th style="width: 200px; text-align: center;">작성일</th>
-                        <th style="width: 200px; text-align: center;">시작일</th>
-                        <th style="width: 200px; text-align: center;">마감일</th>
+                    <tr>
+                        <td colspan="5" align="right">
+                            ${boardList.totalCount}개 (${boardList.currentPage} / ${boardList.totalPage} 페이지)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="70" style="text-align: center">글번호</th>
+                        <th width="620" style="text-align: center">제목</th>
+                        <th width="120" style="text-align: center">이름</th>
+                        <th width="120" style="text-align: center">작성일</th>
+                        <th width="70" style="text-align: center">조회수</th>
                     </tr>
                     </thead>
 
                     <tbody>
 
                     <!-- 공지글이 있으면 출력한다. -->
-                    <c:if test="${currentPage==1}">
-                        <c:forEach var="emergency" items="${priority}">
-                            <tr class="bg-primary">
-                                <td align="center">${emergency.priority}</td>
+                    <c:if test="${currentPage == 1}">
+                        <c:forEach var="boardDTO" items="${notice}">
+                            <tr>
+                                <td align="center">${boardDTO.postID}</td>
                                 <td>
-                                    <c:set var="subject" value="${fn:replace(emergency.subject, '<', '&lt;')}"/>
-                                    <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
-                                        ${subject}
+                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
+                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
+                                    <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
+                                            ${subject}
+                                    </a>
                                 </td>
                                 <td align="center">
-                                        ${emergency.currentProgress}
-                                </td>
-                                </td>
-                                <td align="center">
-                                    <c:set var="userName" value="${fn:replace(emergency.userName, '<', '&lt;')}"/>
-                                    <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
-                                        ${userName}
+                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '<', '&lt;')}"/>
+                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '>', '&gt;')}"/>
+                                        ${name}
                                 </td>
                                 <td align="center">
-                                        ${emergency.workProgress}
-                                </td>
-                                <td align="center">
-                                    <c:if test="${emergency.writeDate.year==date.year&&emergency.writeDate.month==date.month&&emergency.writeDate.date==date.date}">
-                                        <fmt:formatDate value="${emergency.writeDate}" pattern="a h:mm:ss"/>
+                                    <jsp:useBean id="date" class="java.util.Date"/>
+                                    <c:if test="${date.year == boardDTO.writeDate.year && date.month == boardDTO.writeDate.month &&
+						date.date == boardDTO.writeDate.date}">
+                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="a h:mm"/>
                                     </c:if>
-                                    <c:if test="${emergency.writeDate.year!=date.year||emergency.writeDate.month!=date.month||emergency.writeDate.date!=date.date}">
-                                        <fmt:formatDate value="${emergency.writeDate}" pattern="MM/dd"/>
+                                    <c:if test="${date.year != boardDTO.writeDate.year || date.month != boardDTO.writeDate.month ||
+						date.date != boardDTO.writeDate.date}">
+                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="yyyy.MM.dd.(E)"/>
                                     </c:if>
                                 </td>
                                 <td align="center">
-                                    <fmt:formatDate value="${emergency.startDate}" pattern="yyyy.MM.dd.(E)"/>
-                                </td>
-                                <td align="center">
-                                    <fmt:formatDate value="${emergency.deadline}" pattern="yyyy.MM.dd.(E)"/>
+                                        ${boardDTO.hit}
                                 </td>
                             </tr>
                         </c:forEach>
@@ -149,134 +140,123 @@
                     <c:set var="list" value="${boardList.list}"/>
                     <c:if test="${list.size() == 0}">
                         <tr>
-                            <td colspan="10">
+                            <td colspan="5">
                                 <marquee>저장된 글이 없습니다.</marquee>
                             </td>
                         </tr>
                     </c:if>
-                    <c:set var="list" value="${workList.list}"/>
-                    <c:if test="${list.size() == 0}">
-                        <tr>
-                            <td colspan="10" align="center">
-                                <img style="width: 350px" src="images/thief.jpg">
-                            </td>
-                        </tr>
-                    </c:if>
                     <c:if test="${list.size() != 0}">
-                        <c:forEach var="dto" items="${list}">
+                        <c:forEach var="boardDTO" items="${list}">
                             <tr>
-                                <td align="center">${dto.priority}</td>
+                                <td align="center">${boardDTO.postID}</td>
                                 <td>
-                                    <c:set var="subject" value="${fn:replace(dto.subject, '<', '&lt;')}"/>
-                                    <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
-                                        ${subject}
+                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
+                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
+                                    <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
+                                            ${subject}
+                                    </a>
                                 </td>
                                 <td align="center">
-                                        ${dto.currentProgress}
-                                </td>
-                                </td>
-                                <td align="center">
-                                    <c:set var="userName" value="${fn:replace(dto.userName, '<', '&lt;')}"/>
-                                    <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
-                                        ${userName}
+                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '<', '&lt;')}"/>
+                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '>', '&gt;')}"/>
+                                        ${name}
                                 </td>
                                 <td align="center">
-                                        ${dto.workProgress}
-                                </td>
-                                <td align="center">
-                                    <c:if test="${dto.writeDate.year==date.year&&dto.writeDate.month==date.month&&dto.writeDate.date==date.date}">
-                                        <fmt:formatDate value="${dto.writeDate}" pattern="a h:mm:ss"/>
+                                    <jsp:useBean id="date" class="java.util.Date"/>
+                                    <c:if test="${date.year == boardDTO.writeDate.year && date.month == boardDTO.writeDate.month &&
+						date.date == boardDTO.writeDate.date}">
+                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="a h:mm"/>
                                     </c:if>
-                                    <c:if test="${dto.writeDate.year!=date.year||dto.writeDate.month!=date.month||dto.writeDate.date!=date.date}">
-                                        <fmt:formatDate value="${dto.writeDate}" pattern="MM/dd"/>
+                                    <c:if test="${date.year != boardDTO.writeDate.year || date.month != boardDTO.writeDate.month ||
+						date.date != boardDTO.writeDate.date}">
+                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="yyyy.MM.dd.(E)"/>
                                     </c:if>
                                 </td>
                                 <td align="center">
-                                    <fmt:formatDate value="${dto.startDate}" pattern="yyyy.MM.dd.(E)"/>
-                                </td>
-                                <td align="center">
-                                    <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
+                                        ${boardDTO.hit}
                                 </td>
                             </tr>
                         </c:forEach>
                     </c:if>
 
-
                     <!-- 페이지 이동 버튼 -->
                     <tr>
-                        <td colspan="9" align="center">
+                        <td colspan="5" align="center">
                             <%--처음으로--%>
 
-                            <c:if test="${workList.currentPage>1}">
+                            <c:if test="${boardList.currentPage > 1}">
                                 <input type="button" class="button" value="◀◀◀" title="첫 페이지로"
                                        onclick="location.href='?currentPage=1'">
                             </c:if>
-                            <c:if test="${workList.currentPage<=1}">
+                            <c:if test="${boardList.currentPage <= 1}">
                                 <input type="button" class="button2" disabled value="◀◀◀" title="현재 첫 페이지 입니다.">
                             </c:if>
 
 
-                            <c:if test="${workList.startPage>1}">
+                            <c:if test="${boardList.startPage > 1}">
                                 <input type="button" class="button" value="◀◀" title="이전 10 페이지로"
-                                       onclick="location.href='?currentPage=${workList.currentPage-10}'">
+                                       onclick="location.href='?currentPage=${boardList.currentPage - 1}'">
                             </c:if>
-                            <c:if test="${workList.startPage<=1}">
+                            <c:if test="${boardList.startPage <= 1}">
                                 <input type="button" class="button2" disabled value="◀◀" title="현재 첫 10 페이지 입니다.">
                             </c:if>
 
 
-                            <c:if test="${workList.currentPage>1}">
+                            <c:if test="${boardList.currentPage > 1}">
                                 <input type="button" class="button" value="◀" title="이전 페이지로"
-                                       onclick="location.href='?currentPage=${workList.currentPage-1}'">
+                                       onclick="location.href='?currentPage=${boardList.currentPage-1}'">
                             </c:if>
-                            <c:if test="${workList.currentPage<=1}">
+                            <c:if test="${boardList.currentPage <= 1}">
                                 <input type="button" class="button2" disabled value="◀" title="현재 첫 페이지 입니다.">
                             </c:if>
 
 
-                            <c:forEach var="i" begin="${workList.startPage}" end="${workList.endPage}" step="1">
-                                <c:if test="${i==workList.currentPage}">
+                            <c:forEach var="i" begin="${boardList.startPage}" end="${boardList.endPage}" step="1">
+                                <c:if test="${i == boardList.currentPage}">
                                     <ruby>
                                         <b>[${i}]</b>
                                         <rt>▼</rt>
                                     </ruby>
                                 </c:if>
-                                <c:if test="${i!=workList.currentPage}">
+                                <c:if test="${i != boardList.currentPage}">
                                     <a href="?currentPage=${i}">[${i}]</a>
                                 </c:if>
                             </c:forEach>
 
 
-                            <c:if test="${workList.currentPage<workList.totalPage}">
+                            <c:if test="${boardList.currentPage < boardList.totalPage}">
                                 <input type="button" class="button" value="▶" title="다음 페이지로"
-                                       onclick="location.href='?currentPage=${workList.currentPage+1}'">
+                                       onclick="location.href='?currentPage=${boardList.currentPage+1}'">
                             </c:if>
-                            <c:if test="${workList.currentPage>=workList.totalPage}">
+                            <c:if test="${boardList.currentPage >= boardList.totalPage}">
                                 <input type="button" class="button2" disabled value="▶" title="현재 마지막 페이지 입니다.">
                             </c:if>
 
 
-                            <c:if test="${workList.endPage<workList.totalPage}">
+                            <c:if test="${boardList.endPage < boardList.totalPage}">
                                 <input type="button" class="button" value="▶▶" title="다음 10페이지로"
-                                       onclick="location.href='?currentPage=${workList.startPage+10}'">
+                                       onclick="location.href='?currentPage=${boardList.startPage+10}'">
                             </c:if>
-                            <c:if test="${workList.endPage>=workList.totalPage}">
+                            <c:if test="${boardList.endPage >= boardList.totalPage}">
                                 <input type="button" class="button2" disabled value="▶▶" title="현재 마지막 10 페이지 입니다.">
                             </c:if>
 
 
-                            <c:if test="${workList.currentPage<workList.totalPage}">
+                            <c:if test="${boardList.currentPage < boardList.totalPage}">
                                 <input type="button" class="button" value="▶▶▶" title="마지막 페이지로"
-                                       onclick="location.href='?currentPage=${workList.totalPage}'">
+                                       onclick="location.href='?currentPage=${boardList.totalPage}'">
                             </c:if>
-                            <c:if test="${workList.currentPage>=workList.totalPage}">
+                            <c:if test="${boardList.currentPage >= boardList.totalPage}">
                                 <input type="button" class="button2" disabled value="▶▶▶" title="현재 마지막 페이지 입니다.">
                             </c:if>
                         </td>
+                    </tr>
+
+                    <!-- 글쓰기 버튼 -->
                     <tr>
-                        <td align="right" colspan="10">
+                        <td colspan="5" align="right">
                             <input type="button" class="btn btn-outline-primary btn-sm" value="글쓰기"
-                                   onclick="location.href='workInsert.sil'">
+                                   onclick="location.href='boardInsert.sil'">
                         </td>
                     </tr>
                     </tbody>

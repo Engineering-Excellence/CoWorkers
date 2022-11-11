@@ -1,7 +1,7 @@
 package com.silvertier.dto;
 
 import java.util.ArrayList;
-
+//조우철 anbin
 public class WorkList {
         private ArrayList<WorkDTO> list = new ArrayList<>();
         private int pageSize = 10;

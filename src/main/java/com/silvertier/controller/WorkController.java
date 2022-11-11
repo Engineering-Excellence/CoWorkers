@@ -28,6 +28,7 @@ public class WorkController extends HttpServlet {
             case "/work.sil":
                 viewPage += "work";
                 service.selectList(request, response);
+                service.selectEmergency(request, response);
                 break;
             case "/workInsert.sil":
                 viewPage += "workInsert";
@@ -41,6 +42,15 @@ public class WorkController extends HttpServlet {
                 break;
             case "/workDelete.sil":
                 viewPage += "workDelete";
+                break;
+            case "/workList.sil":
+                viewPage += "workList";
+                break;
+            case "/workView.sil":
+                viewPage += "workView";
+                break;
+            case "/test.sil":
+                viewPage += "test";
                 break;
         }
         viewPage += ".jsp";

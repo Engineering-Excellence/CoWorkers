@@ -37,4 +37,10 @@ public class WorkDAO {
         return (ArrayList<WorkDTO>) mapper.selectList("selectList", hmap);
     }
 
+    public ArrayList<WorkDTO> selectEmergency(SqlSession mapper) {
+        System.out.println("dao selectEmergency()");
+        return (ArrayList<WorkDTO>) mapper.selectList("selectEmergency");
+    }
+
+
 }

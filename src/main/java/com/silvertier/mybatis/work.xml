@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.silvertier.dto.WorkDTO">
+<!--조우철 anbin-->
     <insert id="insert" parameterType="wdto">
         /*
             insert into COWORK(WORKID ,ip ,userName, positionName, SUBJECT, CONTENT, PRIORITY ,
@@ -26,6 +27,9 @@
               WHERE rownum <= #{endNo})
         WHERE rnum >= #{startNo}
         ]]>
+    </select>
+    <select id="selectEmergency" resultType="wdto">
+        select * from COWORK where priority = 1 order by workID desc
     </select>
 
 
