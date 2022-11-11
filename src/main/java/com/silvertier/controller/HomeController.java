@@ -64,6 +64,10 @@ public class HomeController extends HttpServlet {
 			case "/event.sil":
 				viewpage += "event";
 				break;
+				
+			case "/userInsert.sil":
+				viewpage += "userInsert";
+				break;
 		}	
 		viewpage += ".jsp";
 		

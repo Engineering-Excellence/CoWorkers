@@ -1,3 +1,5 @@
+/* 김태형 (Terry) - login CSS 파일 */
+
 #wrap {
 	width: 100%;
 	height: 100%; 
@@ -29,7 +31,7 @@ hr {
 	font-size: 15px;	
 }
 
-#tdIn {
+#id {
 	margin-left: 10px;
 	width: 400px;
 	display: inline-block;
@@ -39,7 +41,7 @@ hr {
 	height: 50px;
 }
 
-#tdIn2 {
+#tdIn {
 	width: 120px;
 }
 

@@ -1,3 +1,5 @@
+/* 김태형 (Terry) - registerForm CSS 파일 */
+
 #accountID {
 	vertical-align: middle;
 	width: 280px;
@@ -10,12 +12,7 @@
 }
 
 #registerNumber {
-	width: 130px;
-	display: inline-block;
-}
-
-#registerNumber2 {
-	width: 130px;
+	width: 290px;
 	display: inline-block;
 }
 

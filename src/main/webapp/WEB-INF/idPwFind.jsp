@@ -8,15 +8,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, height=device-height initial-scale=1">
 	<title>아이디 찾기</title>
-	<script src="js/jquery-3.6.1.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script type="text/javascript" src="./js/idPwFind.js"></script>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="./css/idPwFind.css">
+	<script src="js/jquery-3.6.1.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="./js/idPwFind.js"></script>
 </head>
 <body>
+	<fmt:requestEncoding value="UTF-8"/>
 
+	<!-- 김태형 (Terry) - idPwFind(ID/PW 찾기) jsp 파일 -->
 	<div class="container" style="margin-top: 20px;">
 		<table class="table table-hover table-bordered" style="border: 1px solid gray">
 			<thead>

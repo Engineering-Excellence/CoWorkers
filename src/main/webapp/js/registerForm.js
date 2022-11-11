@@ -1,3 +1,5 @@
+// 김태형 (Terry) - registerForm 기능용 js 파일
+
 onload = function () {
 	$('#accountID').focus();
 }
@@ -47,13 +49,20 @@ function pwCheck() {
 	
 function regCheck() {
 	
-	let juminFront = $('#registerNumber').val(); 
-	let juminBack = $('#registerNumber2').val(); 
-	let jumin = juminFront.concat(juminBack); 
-	let checkForm = [ 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5 ]
+	let registerNumber = document.getElementById('registerNumber').value
+	let check = '234567892345';
 	
+	let sum = 0;
+	for (let i = 0; i < 12; i++) {
+		sum += registerNumber.charAt(i) * check.charAt(i)
+	}
 	
-		
+	let form = (11 - (sum % 11)) % 10;
+	if (form == registerNumber.substring(12)) {
+		window.alert('유효한 주민등록번호 입니다.')
+	} else {
+		window.alert('유효하지않은 주민등록번호 입니다.')
+	}
 }	
 	
 function nameCheck() {
@@ -75,4 +84,9 @@ function mobileCheck() {
 		document.getElementById('mobileNumber').value = "";
 	}
 }
+	
+function emailCheck() {
+	
+}
+
 	

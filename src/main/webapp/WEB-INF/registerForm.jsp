@@ -8,17 +8,19 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, height=device-height initial-scale=1">
 	<title>회원가입</title>
-	<script type="text/javascript" src="./js/registerForm.js"></script>
-	<script src="js/jquery-3.6.1.js"></script>
-	<script src="js/bootstrap.js"></script>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="./css/registerForm.css">
+	<script type="text/javascript" src="./js/registerForm.js"></script>
+	<script src="js/jquery-3.6.1.js"></script>
+	<script src="js/bootstrap.js"></script>
 </head>
 <body>
 
+	<!-- 김태형 (Terry) - registerForm(회원가입) jsp 파일 -->
+	
 	<div id="container" class="container">
-		<form action="login.sil" method="post">
+		<form action="userInsert.sil" method="post">
 			<table class="table table-hover table-bordered" style="border: 1px solid gray">
 				<thead>
 					<tr>
@@ -39,13 +41,13 @@
 					<tr>
 						<th id="th1">비밀번호</th>
 						<td colspan="2">
-							<input id="accountPassword" class="form-control" type="password" name="accountPassword" placeholder="비밀번호를 입력해주세요." maxlength="18" onkeypress="pwCheck()">
+							<input id="accountPassword" class="form-control" type="password" name="accountPassword" placeholder="비밀번호를 입력해주세요." maxlength="18" onkeyup="pwCheck()">
 						</td>
 					</tr>
 					<tr>
 						<th id="th1">비밀번호 확인</th>
 						<td colspan="2">
-							<input id="accountPassword2" class="form-control" type="password" name="accountPassword2" placeholder="비밀번호를 한번 더 입력해주세요." maxlength="18" onkeypress="pwCheck()">
+							<input id="accountPassword2" class="form-control" type="password" name="accountPassword2" placeholder="비밀번호를 한번 더 입력해주세요." maxlength="18" onkeyup="pwCheck()">
 						</td>
 					</tr>	
 					<tr>
@@ -57,9 +59,7 @@
 					<tr>
 						<th id="th1">주민등록번호</th>
 						<td colspan="2">
-							<input id="registerNumber" class="form-control" type="text" name="registerNumber" maxlength="6" placeholder="앞 번호 6자리" autocomplete="off">
-							&nbsp; - &nbsp;						
-							<input id="registerNumber2" class="form-control" type="password" name="registerNumber2" maxlength="7" placeholder="뒷 번호 7자리" autocomplete="off">
+							<input id="registerNumber" class="form-control" type="text" name="registerNumber" maxlength="13" placeholder="주민등록번호 13자리를 입력해주세요" autocomplete="off">
 							<button id="registerCheck" class="btn btn-primary" type="button" name="registerCheck" onclick="regCheck()">유효검사</button>
 						</td>
 					</tr>
@@ -72,20 +72,21 @@
 					<tr>
 						<th id="th1">성별</th>
 						<td colspan="2"	align="center">
-							<input id="gender" type="radio" name="gender" autocomplete="off">남자
+							<input id="gender" type="radio" name="gender" autocomplete="off" checked="checked">남자
 							<input id="gender" type="radio" name="gender" autocomplete="off">여자
 						</td>
 					</tr>
 					<tr>
 						<th id="th1">이메일</th>
 						<td colspan="2">
-							<input id="email" class="form-control" type="text" name="email" placeholder="이메일을 입력해주세요." autocomplete="off">
+							<input id="email" class="form-control" type="text" name="email" placeholder="이메일을 입력해주세요." autocomplete="off" onkeypress="emailCheck()">
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center">
 							<h5 id="idCheckMsg"	style="color: green; font-weight: bold;"></h5>
 							<h5 id="pwCheckMsg"	style="color: red; font-weight: bold;"></h5>
+							<h5 id="emailCheckMsg" style="color: red; font-weight: bold;"></h5>
 						</td>
 					</tr>
 					<tr>
