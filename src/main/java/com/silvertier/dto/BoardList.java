@@ -2,6 +2,7 @@ package com.silvertier.dto;
 
 import java.util.ArrayList;
 
+// 곽규창(Kyle)
 public class BoardList {
 
     private ArrayList<BoardDTO> list = new ArrayList<>();

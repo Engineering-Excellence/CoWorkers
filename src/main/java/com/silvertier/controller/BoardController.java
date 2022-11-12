@@ -7,6 +7,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
+// 곽규창(Kyle)
 @WebServlet(name = "BoardController", value = "*.sil")
 public class BoardController extends HttpServlet {
 

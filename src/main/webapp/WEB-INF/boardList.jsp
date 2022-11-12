@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<%-- 곽규창(Kyle) --%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -20,6 +21,7 @@
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/coWorkers.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 </head>
 
@@ -78,8 +80,10 @@
             <h1 class="page-header">게시판</h1>
 
             <div class="table-responsive">
+
                 <table class="table table-striped">
                     <%--<table class="table" width="1000" align="center" border="1" cellpadding="5" cellspacing="0">--%>
+
                     <thead>
                     <tr class="table-primary">
                         <th colspan="5">게시판 보기</th>
@@ -90,14 +94,51 @@
                         </td>
                     </tr>
                     <tr>
-                        <th width="70" style="text-align: center">글번호</th>
-                        <th width="620" style="text-align: center">제목</th>
-                        <th width="120" style="text-align: center">이름</th>
-                        <th width="120" style="text-align: center">작성일</th>
-                        <th width="70" style="text-align: center">조회수</th>
+                        <th width="150" style="text-align: center">글번호</th>
+                        <th width="500" style="text-align: center">제목</th>
+                        <th width="150" style="text-align: center">이름</th>
+                        <th width="150" style="text-align: center">작성일</th>
+                        <th width="150" style="text-align: center">조회수</th>
                     </tr>
                     </thead>
+
                     <tbody>
+
+                    <!-- 공지글이 있으면 출력한다. -->
+                    <c:if test="${currentPage == 1}">
+                        <c:forEach var="boardDTO" items="${notice}">
+                            <tr class="table-warning">
+                                <td align="center"><i class="bi bi-bell"></i></td>
+                                <td>
+                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
+                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
+                                    <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
+                                            ${subject}
+                                    </a>
+                                </td>
+                                <td align="center">
+                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '<', '&lt;')}"/>
+                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '>', '&gt;')}"/>
+                                        ${name}
+                                </td>
+                                <td align="center">
+                                    <jsp:useBean id="date" class="java.util.Date"/>
+                                    <c:if test="${date.year == boardDTO.writeDate.year && date.month == boardDTO.writeDate.month &&
+						date.date == boardDTO.writeDate.date}">
+                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="a h:mm"/>
+                                    </c:if>
+                                    <c:if test="${date.year != boardDTO.writeDate.year || date.month != boardDTO.writeDate.month ||
+						date.date != boardDTO.writeDate.date}">
+                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="yyyy.MM.dd.(E)"/>
+                                    </c:if>
+                                </td>
+                                <td align="center">
+                                        ${boardDTO.hit}
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+
                     <!-- 글을 출력한다. -->
                     <c:set var="list" value="${boardList.list}"/>
                     <c:if test="${list.size() == 0}">
@@ -108,41 +149,34 @@
                         </tr>
                     </c:if>
                     <c:if test="${list.size() != 0}">
-                        <c:forEach var="vo" items="${list}">
+                        <c:forEach var="boardDTO" items="${list}">
                             <tr>
-                                <td align="center">${vo.idx}</td>
+                                <td align="center">${boardDTO.postID}</td>
                                 <td>
-                                    <!-- 글 레벨에 따른 들여쓰기 -->
-                                    <c:if test="${vo.lev > 0}">
-                                        <c:forEach var="i" begin="1" end="${vo.lev}" step="1">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                        </c:forEach>
-                                        Re.
-                                    </c:if>
-                                    <c:set var="subject" value="${fn:replace(vo.subject, '<', '&lt;')}"/>
-                                    <c:set var="subject" value="${fn:replace(vo.subject, '>', '&gt;')}"/>
-                                    <a href="increment.nhn?idx=${vo.idx}&currentPage=${boardList.currentPage}">
+                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
+                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
+                                    <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
                                             ${subject}
                                     </a>
                                 </td>
                                 <td align="center">
-                                    <c:set var="name" value="${fn:replace(vo.name, '<', '&lt;')}"/>
-                                    <c:set var="name" value="${fn:replace(vo.name, '>', '&gt;')}"/>
+                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '<', '&lt;')}"/>
+                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '>', '&gt;')}"/>
                                         ${name}
                                 </td>
                                 <td align="center">
-                                    <jsp:useBean id="date" class="java.util.Date"/>
-                                    <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month &&
-						date.date == vo.writeDate.date}">
-                                        <fmt:formatDate value="${vo.writeDate}" pattern="a h:mm"/>
+                                    <%--<jsp:useBean id="date" class="java.util.Date"/>--%>
+                                    <c:if test="${date.year == boardDTO.writeDate.year && date.month == boardDTO.writeDate.month &&
+						date.date == boardDTO.writeDate.date}">
+                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="a h:mm"/>
                                     </c:if>
-                                    <c:if test="${date.year != vo.writeDate.year || date.month != vo.writeDate.month ||
-						date.date != vo.writeDate.date}">
-                                        <fmt:formatDate value="${vo.writeDate}" pattern="yyyy.MM.dd.(E)"/>
+                                    <c:if test="${date.year != boardDTO.writeDate.year || date.month != boardDTO.writeDate.month ||
+						date.date != boardDTO.writeDate.date}">
+                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="yyyy.MM.dd.(E)"/>
                                     </c:if>
                                 </td>
                                 <td align="center">
-                                        ${vo.hit}
+                                        ${boardDTO.hit}
                                 </td>
                             </tr>
                         </c:forEach>
@@ -153,69 +187,69 @@
                         <td colspan="5" align="center">
                             <%--처음으로--%>
 
-                            <c:if test="${boardList.currentPage>1}">
+                            <c:if test="${boardList.currentPage > 1}">
                                 <input type="button" class="button" value="◀◀◀" title="첫 페이지로"
                                        onclick="location.href='?currentPage=1'">
                             </c:if>
-                            <c:if test="${boardList.currentPage<=1}">
+                            <c:if test="${boardList.currentPage <= 1}">
                                 <input type="button" class="button2" disabled value="◀◀◀" title="현재 첫 페이지 입니다.">
                             </c:if>
 
 
-                            <c:if test="${boardList.startPage>1}">
+                            <c:if test="${boardList.startPage > 1}">
                                 <input type="button" class="button" value="◀◀" title="이전 10 페이지로"
-                                       onclick="location.href='?currentPage=${boardList.currentPage-1}'">
+                                       onclick="location.href='?currentPage=${boardList.currentPage - 1}'">
                             </c:if>
-                            <c:if test="${boardList.startPage<=1}">
+                            <c:if test="${boardList.startPage <= 1}">
                                 <input type="button" class="button2" disabled value="◀◀" title="현재 첫 10 페이지 입니다.">
                             </c:if>
 
 
-                            <c:if test="${boardList.currentPage>1}">
+                            <c:if test="${boardList.currentPage > 1}">
                                 <input type="button" class="button" value="◀" title="이전 페이지로"
                                        onclick="location.href='?currentPage=${boardList.currentPage-1}'">
                             </c:if>
-                            <c:if test="${boardList.currentPage<=1}">
+                            <c:if test="${boardList.currentPage <= 1}">
                                 <input type="button" class="button2" disabled value="◀" title="현재 첫 페이지 입니다.">
                             </c:if>
 
 
                             <c:forEach var="i" begin="${boardList.startPage}" end="${boardList.endPage}" step="1">
-                                <c:if test="${i==boardList.currentPage}">
+                                <c:if test="${i == boardList.currentPage}">
                                     <ruby>
                                         <b>[${i}]</b>
                                         <rt>▼</rt>
                                     </ruby>
                                 </c:if>
-                                <c:if test="${i!=boardList.currentPage}">
+                                <c:if test="${i != boardList.currentPage}">
                                     <a href="?currentPage=${i}">[${i}]</a>
                                 </c:if>
                             </c:forEach>
 
 
-                            <c:if test="${boardList.currentPage<boardList.totalPage}">
+                            <c:if test="${boardList.currentPage < boardList.totalPage}">
                                 <input type="button" class="button" value="▶" title="다음 페이지로"
                                        onclick="location.href='?currentPage=${boardList.currentPage+1}'">
                             </c:if>
-                            <c:if test="${boardList.currentPage>=boardList.totalPage}">
+                            <c:if test="${boardList.currentPage >= boardList.totalPage}">
                                 <input type="button" class="button2" disabled value="▶" title="현재 마지막 페이지 입니다.">
                             </c:if>
 
 
-                            <c:if test="${boardList.endPage<boardList.totalPage}">
+                            <c:if test="${boardList.endPage < boardList.totalPage}">
                                 <input type="button" class="button" value="▶▶" title="다음 10페이지로"
                                        onclick="location.href='?currentPage=${boardList.startPage+10}'">
                             </c:if>
-                            <c:if test="${boardList.endPage>=boardList.totalPage}">
+                            <c:if test="${boardList.endPage >= boardList.totalPage}">
                                 <input type="button" class="button2" disabled value="▶▶" title="현재 마지막 10 페이지 입니다.">
                             </c:if>
 
 
-                            <c:if test="${boardList.currentPage<boardList.totalPage}">
+                            <c:if test="${boardList.currentPage < boardList.totalPage}">
                                 <input type="button" class="button" value="▶▶▶" title="마지막 페이지로"
                                        onclick="location.href='?currentPage=${boardList.totalPage}'">
                             </c:if>
-                            <c:if test="${boardList.currentPage>=boardList.totalPage}">
+                            <c:if test="${boardList.currentPage >= boardList.totalPage}">
                                 <input type="button" class="button2" disabled value="▶▶▶" title="현재 마지막 페이지 입니다.">
                             </c:if>
                         </td>
@@ -225,11 +259,13 @@
                     <tr>
                         <td colspan="5" align="right">
                             <input type="button" class="btn btn-outline-primary btn-sm" value="글쓰기"
-                                   onclick="location.href='insert.nhn'">
+                                   onclick="location.href='boardInsert.sil'">
                         </td>
                     </tr>
                     </tbody>
+
                 </table>
+
             </div>
         </div>
     </div>

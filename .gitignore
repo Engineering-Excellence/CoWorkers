@@ -255,9 +255,9 @@ Temporary Items
 
 
 ### Et Cetera
-#.gitignore
+.gitignore
 .idea/
-.settings/
+#.settings/
 build/
 classes/
 *.iml

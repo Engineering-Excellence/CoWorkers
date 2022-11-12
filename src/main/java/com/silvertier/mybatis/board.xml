@@ -2,6 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.silvertier.dto.BoardDTO">
 
+    <!-- 전체 글의 개수 -->
+    <select id="selectCount" resultType="int">
+        SELECT COUNT(*)
+        FROM BOARD
+    </select>
 
-
+    <!-- 1 페이지 분량의 글 목록 -->
+    <select id="selectList" parameterType="java.util.HashMap" resultType="boardDTO">
+        <![CDATA[
+        SELECT *
+        FROM (SELECT ROWNUM RNUM, AA.*
+              FROM (SELECT *
+                    FROM BOARD
+                    ORDER BY postID DESC) AA
+              WHERE ROWNUM <= #{endNo})
+        WHERE RNUM >= #{startNo}
+        ]]>
+    </select>
 </mapper>
