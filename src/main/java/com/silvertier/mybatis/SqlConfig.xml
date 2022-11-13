@@ -8,8 +8,8 @@
 	
 	<typeAliases>
 		<!-- 별명 설정 -->
-		<typeAlias type="com.silvertier.dto.EventDTO" alias="boardDTO" />	<!-- 별명 경로는 '.'으로 구분 주의 -->
-		<typeAlias type="com.silvertier.dto.EventCommentDTO" alias="commentDTO" />
+		<typeAlias type="com.silvertier.dto.EventDTO" alias="eDTO" />	<!-- 별명 경로는 '.'으로 구분 주의 -->
+		<typeAlias type="com.silvertier.dto.EventCommentDTO" alias="ecoDTO" />
 	</typeAliases>
 	
 	<environments default="development">

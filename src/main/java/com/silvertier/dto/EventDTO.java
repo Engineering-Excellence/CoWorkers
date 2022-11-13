@@ -1,6 +1,6 @@
 package com.silvertier.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 //캘린더에 표시하는 일정 DTO
 public class EventDTO {
@@ -18,7 +18,7 @@ public class EventDTO {
 	private int hit;	//	일정(스케줄) 내용 조회수
 	private int commentCount;	//댓글 개수
 	private String ip;	//작성자 ip
-	private String isAllDay; // all day 일정 이벤트 여부 => 값 : y/n
+	private String isAllDay = "no"; // all day 일정 이벤트 여부 => 값 : y/n
 	
 	public EventDTO() {	}
 
