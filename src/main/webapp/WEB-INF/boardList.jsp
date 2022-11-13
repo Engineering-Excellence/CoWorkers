@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%-- 곽규창(Kyle) --%>
+<%-- 곽규창(Kyle) 글 목록 --%>
 <!DOCTYPE html>
 <html lang="ko">
 

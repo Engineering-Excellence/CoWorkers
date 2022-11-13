@@ -9,8 +9,8 @@
 	<typeAliases>
 		<!-- 별명 설정 -->
 		<typeAlias type="com.silvertier.dto.BoardDTO" alias="boardDTO" />	<!-- 별명 경로는 '.'으로 구분 주의 -->
-		<typeAlias type="com.silvertier.dto.CommentDTO" alias="commentDTO" />
-		<typeAlias type="com.silvertier.dto.FileDTO" alias="fileDTO" />
+		<typeAlias type="com.silvertier.dto.BoardCommentDTO" alias="commentDTO" />
+		<typeAlias type="com.silvertier.dto.BoardFileDTO" alias="fileDTO" />
 	</typeAliases>
 	
 	<environments default="development">

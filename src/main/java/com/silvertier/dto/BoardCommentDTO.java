@@ -3,7 +3,7 @@ package com.silvertier.dto;
 import java.sql.Date;
 
 // 곽규창(Kyle) - 덧글 DTO
-public class CommentDTO {
+public class BoardCommentDTO {
 
     private int commentID;    // PK, 댓글번호
     private String userName;    // 성명

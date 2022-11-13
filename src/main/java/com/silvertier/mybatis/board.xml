@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.silvertier.dto.BoardDTO">
 
-    <!-- 전체 글의 개수 -->
-    <select id="selectCount" resultType="int">
+    <!-- 전체 글의 개수를 불러온다. -->
+    <select id="boardSelectCount" resultType="int">
         SELECT COUNT(*)
         FROM BOARD
     </select>
 
-    <!-- 1 페이지 분량의 글 목록 -->
-    <select id="selectList" parameterType="java.util.HashMap" resultType="boardDTO">
+    <!-- 1 페이지 분량의 글 목록을 불러온다. -->
+    <select id="boardSelectList" parameterType="java.util.HashMap" resultType="boardDTO">
         <![CDATA[
         SELECT *
         FROM (SELECT ROWNUM RNUM, AA.*
@@ -20,4 +20,10 @@
         WHERE RNUM >= #{startNo}
         ]]>
     </select>
+
+    <!-- 새 글을 저장한다. -->
+    <insert id="boardInsert" parameterType="boardDTO">
+        INSERT INTO board (postID, subject, userName, content, isNotice, userID)
+        VALUES (BOARD_POSTID_SEQ.nextval, #{subject}, #{userName}, #{content}, 'true', 4)
+    </insert>
 </mapper>

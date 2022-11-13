@@ -1,6 +1,7 @@
 package com.silvertier.service;
 
 import com.silvertier.dao.BoardDAO;
+import com.silvertier.dto.BoardDTO;
 import com.silvertier.dto.BoardList;
 import com.silvertier.mybatis.MySession;
 import org.apache.ibatis.session.SqlSession;
@@ -21,7 +22,7 @@ public class BoardService {
     private final BoardDAO dao = BoardDAO.getInstance();
 
     // 페이징을 위한 클래스 객체를 생성하여 request 영역에 저장하는 메서드를 호출하는 메서드
-    public void selectList(HttpServletRequest request, HttpServletResponse response) {
+    public void boardSelectList(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("BoardService 클래스의 selectList() 메서드 실행");
         SqlSession mapper = MySession.getSession();
 
@@ -42,11 +43,28 @@ public class BoardService {
         hashMap.put("startNo", boardList.getStartNo());
         hashMap.put("endNo", boardList.getEndNo());
 
-        boardList.setList(dao.selectList(mapper, hashMap));
+        boardList.setList(dao.boardSelectList(mapper, hashMap));
         System.out.println(boardList);
 
         request.setAttribute("boardList", boardList);
 
+        mapper.close();
+    }
+
+    // 게시판에 새 글을 저장하는 메서드를 호출하는 메서드
+    public void boardInsert(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("BoardService 클래스의 boardInsert() 메서드 실행");
+        SqlSession mapper = MySession.getSession();
+
+        BoardDTO dto = new BoardDTO();
+        dto.setSubject(request.getParameter("subject"));
+        dto.setUserName(request.getParameter("userName"));
+        dto.setContent(request.getParameter("content"));
+        System.out.println(dto);
+
+        dao.boardInsert(mapper, dto);
+
+        mapper.commit();
         mapper.close();
     }
 }

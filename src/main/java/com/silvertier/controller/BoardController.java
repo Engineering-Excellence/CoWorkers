@@ -42,50 +42,51 @@ public class BoardController extends HttpServlet {
                 break;
             case "/boardInsertOK.sil":
                 /*
-                    insert.jsp에서 테이블에 저장할 데이터를 입력하고 submit 버튼을 클릭하면 폼에 입력한 정보가
+                    boardInsert.jsp에서 테이블에 저장할 데이터를 입력하고 submit 버튼을 클릭하면 폼에 입력한 정보가
                     Controller의 doPost() 메서드의 HttpServletRequest 인터페이스 타입의 객체인 request에 저장된다.
                     doPost() 메서드는 request 객체에 저장된 데이터를 가지고 actionDo() 메서드를 실행하므로
-                    insert.jsp에서 폼에 입력한 데이터는 actionDo() 메서드의 request 객체에 저장된다.
+                    boardInsert.jsp에서 폼에 입력한 데이터는 actionDo() 메서드의 request 객체에 저장된다.
                  */
-//                service.insert(request, response);
+                service.boardInsert(request, response);
+                service.boardSelectList(request, response);
 
                 viewPage += "boardList";
                 break;
             case "/boardList.sil":
                 // 브라우저에 출력할 1 페이지 분량의 글과 페이징 작업에 사용할 8개의 변수가 저장된 클래스 객체를
                 // 얻어오는 메소드를 호출한다.
-                service.selectList(request, response);
+                service.boardSelectList(request, response);
                 viewPage += "boardList";
                 break;
             case "/boardHit.sil":
                 // 조회수를 증가시키는 메서드를 호출한다.
-//                service.hit(request, response);
+//                service.boardHit(request, response);
                 viewPage += "boardHit";
                 break;
             case "/boardView.sil":
                 // 조회수를 증가시킨 글 1건을 얻어오는 메서드를 호출한다.
-//                service.selectByIdx(request, response);
+//                service.boardSelectByIdx(request, response);
                 viewPage += "boardView";
                 break;
             case "/boardUpdate.sil":
                 // 글 1건을 수정하는 메서드를 호출한다.
-//                service.update(request, response);
+//                service.boardUpdate(request, response);
                 viewPage += "boardReturn";
                 break;
             case "/boardDelete.sil":
                 // 글 1건을 삭제하는 메서드를 호출한다.
-//                service.delete(request, response);
+//                service.boardDelete(request, response);
                 viewPage += "boardReturn";
                 break;
-            case "/boardReply.sil":
+            case "/boardComment.sil":
                 // 답글을 입력하는 페이지에 질문글을 출력하기 위해서 질문글 1건을 얻어온 후 답글을 입력하는 페이지로 넘겨준다.
-//                service.selectByIdx(request, response);
-                viewPage += "reply";
+//                service.boardSelectByIdx(request, response);
+                viewPage += "boardComment";
                 break;
-            case "/boardReplyInsert.sil":
+            case "/boardCommentInsert.sil":
                 // 답글이 브라우저에 표시될 위치를 정하기 위해서 조건에 만족하는 seq 값을 1씩 증가시킨 후 답글을 저장하는
                 // 메서드를 호출한다.
-//                service.replyInsert(request, response);
+//                service.boardCommentInsert(request, response);
                 viewPage += "boardReturn";
                 break;
             default:

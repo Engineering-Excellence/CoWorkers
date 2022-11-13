@@ -1,7 +1,7 @@
 package com.silvertier.dto;
 
 // 곽규창(Kyle) - 파일 DTO
-public class FileDTO {
+public class BoardFileDTO {
 
     private int fileID; // PK, 파일번호
     private String fileName;    // 파일명
