@@ -31,7 +31,7 @@ hr {
 	font-size: 15px;	
 }
 
-#id {
+#accountID {
 	margin-left: 10px;
 	width: 400px;
 	display: inline-block;
@@ -74,4 +74,9 @@ form {
 	width: 800px;
 	height: 400px;
 	background-color: lavender;
+}
+
+#accountPassword {
+	margin-left: 10px;
+	width: 400px;
 }

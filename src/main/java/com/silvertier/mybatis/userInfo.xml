@@ -2,9 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.silvertier.dto.CommentDTO">
 
-	<insert id="insert" parameterType="userDTO">
-		insert into userinfo (userid, accountid, accountpassword, username, registernumber, isgender, email)
-		values (userinfo_userid_seq.nextval, #{accountid}, #{accountpassword}, #{username}, #{registernumber}, #{isgender}, #{email})
+	<insert id="insert" parameterType="userInfoDTO">
+		insert into UserInfo (userID, accountID, accountPassword, userName, registerNumber, mobileNumber, gender, email)
+		values (UserInfo_userID_seq.nextval, #{accountID}, #{accountPassword}, #{userName}, #{registerNumber}, #{mobileNumber}, #{gender}, #{email})
 	</insert>
-
+	
+	<select id="selectByID" parameterType="int" resultType="userInfoDTO">
+		select * from UserInfo where userID = #{userID}
+	</select>
+	
 </mapper>

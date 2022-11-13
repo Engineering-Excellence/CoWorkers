@@ -30,14 +30,14 @@
 						<tr>
 							<th id="thTag">아이디</th>
 							<td id="tdTag">
-								<input id="id" class="form-control" type="text" name="id"></input>
+								<input id="accountID" class="form-control" type="text" name="id"></input>
 								<input id="submit" class="btn btn-primary" type="submit" value="로그인"></input>
 							</td>
 						</tr>
 						<tr>
 							<th id="thTag">비밀번호</th>
 							<td id="tdTag">
-								<input id="password" class="form-control" type="text" name="paswword">
+								<input id="accountPassword" class="form-control" type="text" name="paswword">
 							</td>
 						</tr>
 						<tr>

@@ -13,16 +13,13 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-
-	<jsp:useBean id="userDTO" class="com.silvertier.dto.UserInfoDTO">
-		<jsp:setProperty property="*" name="userDTO"/>
+	<jsp:useBean id="userInfoDTO" class="com.silvertier.dto.UserInfoDTO">
+		<jsp:setProperty property="*" name="userInfoDTO"/>
 	</jsp:useBean>
-	
 <%
-	System.out.println(userDTO);
+	System.out.println(userInfoDTO);
 	
-	
-	UserInfoService.getInstance().insert(userDTO);
+	UserInfoService.getInstance().insert(request, response);
 	response.sendRedirect("login.sil");
 %>
 

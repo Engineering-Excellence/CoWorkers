@@ -8,7 +8,7 @@
 	
 	<typeAliases>
 		<!-- 별명 설정 -->
-		<typeAlias type="com.silvertier.dto.UserInfoDTO" alias="userDTO" />	<!-- 별명 경로는 '.'으로 구분 주의 -->
+		<typeAlias type="com.silvertier.dto.UserInfoDTO" alias="userInfoDTO" />	<!-- 별명 경로는 '.'으로 구분 주의 -->
 		<typeAlias type="com.silvertier.dto.PositionDTO" alias="positionDTO" />
 	</typeAliases>
 	

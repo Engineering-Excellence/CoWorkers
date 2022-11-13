@@ -12,11 +12,17 @@ public class UserInfoDAO {
 		return instance;
 	}
 	
-	public void insert(SqlSession mapper, UserInfoDTO userDTO) {
+	public void insert(SqlSession mapper, UserInfoDTO userInfoDTO) {
 		System.out.println("UserInfoDAO -> insert()");
-		mapper.insert("insert", userDTO);
+		mapper.insert("insert", userInfoDTO);
 	}
 	
+	public UserInfoDTO selectByID(SqlSession mapper, int userID) {
+		System.out.println("UserInfoDAO -> selectByID()");
+		return (UserInfoDTO) mapper.selectOne("selectByID", userID);
+	}
+	
+
 	
 	
 }

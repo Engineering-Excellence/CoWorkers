@@ -20,7 +20,7 @@
 	<!-- 김태형 (Terry) - registerForm(회원가입) jsp 파일 -->
 	
 	<div id="container" class="container">
-		<form action="userInsert.sil" method="post">
+		<form action="userInsert.sil" method="post" onsubmit="return joinCheck(this)">
 			<table class="table table-hover table-bordered" style="border: 1px solid gray">
 				<thead>
 					<tr>
@@ -29,13 +29,13 @@
 						</th>
 					</tr>
 				</thead>
-				
 				<tbody>
 					<tr>
 						<th id="th1">아이디</th>
 						<td>
 							<input id="accountID" class="form-control" type="text" name="accountID" placeholder="가입할 ID를 입력해주세요." autocomplete="off">
-							<button id="btnId" class="btn btn-primary" type="button" onclick="idCheck()">ID 체크</button>						
+							<button id="btnId" class="btn btn-primary" type="button" onclick="idCheck()">ID 체크
+							</button>						
 						</td>
 					</tr>
 					<tr>
@@ -66,27 +66,26 @@
 					<tr>
 						<th id="th1">휴대전화 번호</th>
 						<td colspan="2">
-							<input id="mobileNumber" class="form-control" type="text" name="mobileNumber" placeholder="' - ' 을 제외한 휴대전화 번호를 입력해주세요." autocomplete="off" onkeypress="mobileCheck()">
+							<input id="mobileNumber" class="form-control" type="text" name="mobileNumber" placeholder="' - ' 을 제외한 휴대전화 번호를 입력해주세요." autocomplete="off" onkeydown="mobileCheck()">
 						</td>
 					</tr>
 					<tr>
 						<th id="th1">성별</th>
 						<td colspan="2"	align="center">
-							<input id="gender" type="radio" name="gender" autocomplete="off" checked="checked">남자
-							<input id="gender" type="radio" name="gender" autocomplete="off">여자
+							<input id="gender" type="radio" name="gender" value="male" autocomplete="off" checked="checked">남자
+							<input id="gender" type="radio" name="gender" value="female" autocomplete="off">여자
 						</td>
 					</tr>
 					<tr>
 						<th id="th1">이메일</th>
 						<td colspan="2">
-							<input id="email" class="form-control" type="text" name="email" placeholder="이메일을 입력해주세요." autocomplete="off" onkeypress="emailCheck()">
+							<input id="email" class="form-control" type="text" name="email" placeholder="이메일을 입력해주세요." autocomplete="off">
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center">
 							<h5 id="idCheckMsg"	style="color: green; font-weight: bold;"></h5>
 							<h5 id="pwCheckMsg"	style="color: red; font-weight: bold;"></h5>
-							<h5 id="emailCheckMsg" style="color: red; font-weight: bold;"></h5>
 						</td>
 					</tr>
 					<tr>

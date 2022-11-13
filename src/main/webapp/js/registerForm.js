@@ -79,14 +79,52 @@ function mobileCheck() {
 	
 	let mobileNumber = $('#mobileNumber').val();
 	
-	if (mobileNumber.length > 10) {
+	if (mobileNumber.length > 11) {
 		window.alert('휴대전화번호는 11자리 입니다.')
 		document.getElementById('mobileNumber').value = "";
 	}
+	
+function joinCheck(obj) {
+	
+	if (!obj.accountID.value || obj.accountID.value.trim().length == 0) {
+		window.alert('아이디가 입력되지 않았습니다.')
+		obj.accountID.focus();
+		return false;
+	}
+	
+	if (!obj.accountPassword.value || obj.accountPassword.value.trim().length == 0) {
+		window.alert('패스워드가 입력되지 않았습니다.')
+		obj.accountPassword.focus();
+		return false;
+	}
+	
+	if (!obj.userName.value || obj.userName.value.trim().length == 0) {
+		window.alert('이름이 입력되지 않았습니다.')
+		obj.userName.focus();
+		return false;
+	}
+	
+	if (!obj.registerNumber.value || obj.registerNumber.value.trim().length == 0) {
+		window.alert('주민등록번호가 입력되지 않았습니다.')
+		obj.registerNumber.focus();
+		return false;
+	}
+	
+	if (!obj.mobileNumber.value || obj.mobileNumber.value.trim().length == 0) {
+		window.alert('전화번호가 입력되지 않았습니다.')
+		obj.mobileNumber.focus();
+		return false;
+	}
+	
+	if (!obj.email.value || obj.email.value.trim().length == 0) {
+		window.alert('이메일이 입력되지 않았습니다.')
+		obj.email.focus();
+		return false;
+	}
+}	
+	
+	
 }
 	
-function emailCheck() {
-	
-}
 
 	

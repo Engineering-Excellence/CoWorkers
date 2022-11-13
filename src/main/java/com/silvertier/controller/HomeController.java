@@ -9,10 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.silvertier.dto.UserInfoDTO;
+import com.silvertier.service.UserInfoService;
+
 @WebServlet("*.sil")
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-     
+    
+	UserInfoService service = UserInfoService.getInstance();
+	
     public HomeController() {
         super();
     }
@@ -36,6 +41,11 @@ public class HomeController extends HttpServlet {
 			case "/login.sil":
 				viewpage += "login";
 				break;
+				
+			case "/loginOK.sil":
+				service.selectByID(request, response);
+				viewpage += "loginOK";
+				break;
 			
 			case "/mainView.sil":
 				viewpage += "mainView";
@@ -43,6 +53,11 @@ public class HomeController extends HttpServlet {
 				
 			case "/registerForm.sil":
 				viewpage += "registerForm";
+				break;
+				
+			case "/userInsert.sil":
+				viewpage += "userInsert";
+				service.insert(request, response);
 				break;
 				
 			case "/idPwFind.sil":
@@ -63,10 +78,6 @@ public class HomeController extends HttpServlet {
 				
 			case "/event.sil":
 				viewpage += "event";
-				break;
-				
-			case "/userInsert.sil":
-				viewpage += "userInsert";
 				break;
 		}	
 		viewpage += ".jsp";
