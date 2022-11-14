@@ -17,6 +17,5 @@ public class EventDAO {
 		mapper.insert("insert", eDTO);
 	}
 	
-	
 
 }

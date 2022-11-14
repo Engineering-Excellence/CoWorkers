@@ -29,7 +29,7 @@ public class EventService {
 		eDTO.setContent(request.getParameter("content"));
 		eDTO.setIp(request.getParameter("ip"));
 		//isAllDay의 값이 "yes"일 경우에만 값을 받아와서 EventDTO 클래스 객체에 저장한다. 
-		if(request.getParameter("isAllDay")=="yes") {
+		if(request.getParameter("isAllDay").equals("yes")) {
 			eDTO.setIsAllDay(request.getParameter("isAllDay"));
 		}
 		//날짜 데이터 (string) => java.sql.Date 타입으로 변환 작업
@@ -37,7 +37,7 @@ public class EventService {
 		eDTO.setStartDate(tempDate);
 		tempDate = Date.valueOf(request.getParameter("endDate"));
 		eDTO.setEndDate(tempDate);
-		//System.out.println(eDTO);
+		System.out.println(eDTO);
 		dao.insert(mapper, eDTO);
 		mapper.commit();
 		mapper.close();

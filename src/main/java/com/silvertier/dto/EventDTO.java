@@ -143,7 +143,3 @@ public class EventDTO {
 	}
 	
 }
-
-
-
-

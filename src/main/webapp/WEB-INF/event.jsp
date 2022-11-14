@@ -194,13 +194,16 @@
 							name="startDate"
 							min="2000-01-01"
 							max="2050-12-31"
+							id = "startDate"
 						/>
+						<input type="button" onclick="starDateChk()">
 					</td>
 					<th class="align-middle" width="100">
 						종일 <input class="form-check-input" 
 								type="checkbox" 
 								name="isAllDay" 
 								value="yes"
+								id="isAllDay"
 							/>
 					</th>
 				</tr>
