@@ -56,3 +56,4 @@ Temporary Items
 ###etc
 build/
 classes/
+.idea/

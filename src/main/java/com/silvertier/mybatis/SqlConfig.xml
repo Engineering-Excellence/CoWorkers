@@ -5,13 +5,14 @@
 
 	<!-- 데이터베이스 연결 정보가 저장된 파일의 위치 -->
 	<properties resource="com/silvertier/mybatis/db.properties" />	<!-- DB & SQL 경로는 '/'로 구분 주의 -->
-	
+
 	<typeAliases>
 		<!-- 별명 설정 -->
 		<typeAlias type="com.silvertier.dto.BoardDTO" alias="boardDTO" />	<!-- 별명 경로는 '.'으로 구분 주의 -->
 		<typeAlias type="com.silvertier.dto.CommentDTO" alias="commentDTO" />
+		<typeAlias type="com.silvertier.dto.WorkDTO" alias="wdto" />
 	</typeAliases>
-	
+
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
@@ -28,6 +29,7 @@
 		<!-- 실행할 sql 명령이 저장된 파일의 위치 -->
 		<mapper resource="com/silvertier/mybatis/board.xml" />
 		<mapper resource="com/silvertier/mybatis/comment.xml" />
+		<mapper resource="com/silvertier/mybatis/work.xml" />
 	</mappers>
-	
+
 </configuration>
