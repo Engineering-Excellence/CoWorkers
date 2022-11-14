@@ -146,7 +146,7 @@
                     </c:if>
 
                     <!-- 글을 출력한다. -->
-                    <c:set var="list" value="${boardList.list}"/>
+                    <c:set var="list" value="${workList.list}"/>
                     <c:if test="${list.size() == 0}">
                         <tr>
                             <td colspan="10">
