@@ -2,13 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.silvertier.dto.CommentDTO">
 
+	<!-- 김태형(Terry) - userInfo(로그인, 회원가입) 관련 xml -->
+
+	<!-- 회원가입 데이터 입력 -->
 	<insert id="insert" parameterType="userInfoDTO">
 		insert into UserInfo (userID, accountID, accountPassword, userName, registerNumber, mobileNumber, gender, email)
 		values (UserInfo_userID_seq.nextval, #{accountID}, #{accountPassword}, #{userName}, #{registerNumber}, #{mobileNumber}, #{gender}, #{email})
 	</insert>
 	
-	<select id="selectByID" parameterType="int" resultType="userInfoDTO">
-		select * from UserInfo where userID = #{userID}
+	<!-- 로그인 아이디 비교 -->
+	<select id="compareID" parameterType="userInfoDTO" resultType="String">
+		select accountID from UserInfo where accountID = #{accountID}
 	</select>
 	
+	<!-- 로그인 패스워드 비교 -->
+	<select id="comparePW" parameterType="userInfoDTO" resultType="String">
+		select accountPassword from UserInfo where accountID = #{accountID}
+	</select>
+		
 </mapper>

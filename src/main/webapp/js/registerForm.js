@@ -4,6 +4,7 @@ onload = function () {
 	$('#accountID').focus();
 }
 
+// id 길이 검사
 function idCheck() {
 	
 	let ID = $('#accountID').val().trim();
@@ -20,9 +21,9 @@ function idCheck() {
 		$('#idCheckMsg').html('사용 가능한 아이디 입니다.')
 		$('#idCheckMsg').css('color', 'green')
 	}
-	
 }
  
+// PW 길이 검사 
 function pwCheck() {
 	
 	let Password = $('#accountPassword').val().trim();
@@ -46,7 +47,8 @@ function pwCheck() {
 		$('#pwCheckMsg').html('')
 	}
 }
-	
+
+// 주민등록번호 유효성 검사
 function regCheck() {
 	
 	let registerNumber = document.getElementById('registerNumber').value
@@ -64,7 +66,8 @@ function regCheck() {
 		window.alert('유효하지않은 주민등록번호 입니다.')
 	}
 }	
-	
+
+// 이름 길이 검사	
 function nameCheck() {
 	
 	let userName = $('#userName').val();
@@ -75,6 +78,7 @@ function nameCheck() {
 	}
 }
 
+// 휴대폰번호 길이 검사
 function mobileCheck() {
 	
 	let mobileNumber = $('#mobileNumber').val();
@@ -83,7 +87,8 @@ function mobileCheck() {
 		window.alert('휴대전화번호는 11자리 입니다.')
 		document.getElementById('mobileNumber').value = "";
 	}
-	
+
+// 폼 중 값이 하나라도 입력이 안되면 false 리턴	
 function joinCheck(obj) {
 	
 	if (!obj.accountID.value || obj.accountID.value.trim().length == 0) {

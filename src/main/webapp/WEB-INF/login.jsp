@@ -23,21 +23,21 @@
 				<header id="header" class="header">Silver Tier</header>
 			</div>
 			<div id="container" class="container"> 
-				<form action="mainView.sil" method="post">
+				<form action="loginOK.sil" method="post">
 					<p>CO-WORKERS</p>
 					<hr width="650">
 					<table width="650" border="2" cellpadding="5" cellspacing="0"> 
 						<tr>
 							<th id="thTag">아이디</th>
 							<td id="tdTag">
-								<input id="accountID" class="form-control" type="text" name="id"></input>
-								<input id="submit" class="btn btn-primary" type="submit" value="로그인"></input>
+								<input id="ID" class="form-control" type="text" name="ID" autocomplete="off"></input>
 							</td>
 						</tr>
 						<tr>
 							<th id="thTag">비밀번호</th>
 							<td id="tdTag">
-								<input id="accountPassword" class="form-control" type="text" name="paswword">
+								<input id="Password" class="form-control" type="password" name="Password">
+								<input id="submit" class="btn btn-primary" type="submit" value="로그인"></input>
 							</td>
 						</tr>
 						<tr>

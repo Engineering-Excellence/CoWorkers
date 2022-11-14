@@ -19,10 +19,11 @@ public class UserInfoService {
 	
 	private UserInfoDAO dao = UserInfoDAO.getInstance();
 	
+	// 회원가입 데이터 입력
 	public void insert(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("UserInfoService -> insert()");
 		SqlSession mapper = MySession.getSession();
-		
+	
 		UserInfoDTO userInfoDTO = new UserInfoDTO();
 		userInfoDTO.setAccountID(request.getParameter("accountID"));
 		userInfoDTO.setAccountPassword(request.getParameter("accountPassword"));
@@ -37,17 +38,25 @@ public class UserInfoService {
 		mapper.close();
 	}
 	
-	public void selectByID(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("UserInfoService -> selectByID()");
+	// 로그인 시 아이디 비교
+	public void compareID(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("UserInfoService -> compareID()");
 		SqlSession mapper = MySession.getSession();
 		
-		int userID = Integer.parseInt(request.getParameter("userID"));
-		String accountID = request.getParameter("accountID");
-		String accountPassword = request.getParameter("accountPassword");
-		
-		UserInfoDTO userInfoDTO = dao.selectByID(mapper, userID);
-		
+		UserInfoDTO userInfoDTO = new UserInfoDTO();
+		dao.compareID(mapper, userInfoDTO);
+		System.out.println("compareID" + userInfoDTO);
 		mapper.close();
 	}
 	
+	// 로그인 시 패스워드 비교
+	public void comparePW(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("UserInfoService -> comparePW()");
+		SqlSession mapper = MySession.getSession();
+		
+		UserInfoDTO userInfoDTO = new UserInfoDTO();
+		dao.comparePW(mapper, userInfoDTO);
+		System.out.println("comparePW" + userInfoDTO);
+		mapper.close();
+	}
 }
