@@ -73,7 +73,7 @@
                 <form class="m-" action="workInsertOK.sil" method="post">
                     <table class="table" style="width:1500px; margin-left: auto; margin-right: auto;">
                         <tr class="table-primary">
-                            <th colspan="15" style="font-size: 30px; text-align: center;">업무 작성</th>
+                            <th colspan="15" style="font-size: 30px; text-align: center;">업무 수정</th>
                         </tr>
                         <tr>
                             <th class="align-middle table-dark">제목

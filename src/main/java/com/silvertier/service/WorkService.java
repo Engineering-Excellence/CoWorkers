@@ -18,7 +18,9 @@ public class WorkService {
     private WorkService() {
 
     }
+
     private WorkDAO dao = WorkDAO.getInstance();
+
     public static WorkService getInstance() {
         return instance;
     }
@@ -45,23 +47,23 @@ public class WorkService {
     }
 
 
-
     public void selectList(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Service selectList()");
         SqlSession mapper = MySession.getSession();
 
         int currentPage = 1;
         try {
-            System.out.println("currentPage: " + request.getParameter("currentPage"));
+            System.out.println("넘어온 페이지 번호 : " + request.getParameter("currentPage"));
             currentPage = Integer.parseInt(request.getParameter("currentPage"));
+            System.out.println("넘어온 페이지 번호 : " + request.getParameter("currentPage"));
         } catch (NumberFormatException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         }
 
 
         int pageSize = 10;
         int totalCount = dao.selectCount(mapper);
-        System.out.println("totalCount: "+totalCount);
+        System.out.println("totalCount: " + totalCount);
 
         WorkList workList = new WorkList(pageSize, totalCount, currentPage);
 
@@ -79,12 +81,48 @@ public class WorkService {
     }
 
 
-    public void selectEmergency(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("service selectEmergency()");
+    public void selectPriority(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("Service selectPriority()");
         SqlSession mapper = MySession.getSession();
-        ArrayList<WorkDTO> emergency = dao.selectEmergency(mapper);
-        request.setAttribute("emergency", emergency);
-        System.out.println("emergency: " + emergency);
+
+        ArrayList<WorkDTO> priority = dao.selectPriority(mapper);
+        System.out.println("priority: " + priority);
+
+        request.setAttribute("priority", priority);
+
+        mapper.close();
+
+
+    }
+
+    public void selectByWorkID(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("Service selectByWorkID()");
+        SqlSession mapper = MySession.getSession();
+
+        int workID = Integer.parseInt(request.getParameter("workID"));
+        System.out.println("workID: " + workID);
+        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+
+        WorkDTO dto = dao.selectByWorkID(mapper, workID);
+        System.out.println("dto: " + dto);
+        request.setAttribute("dto", dto);
+        request.setAttribute("currentPage", currentPage);
+
+
+        mapper.close();
+    }
+
+
+    public void delete(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("Service delete()");
+        SqlSession mapper = MySession.getSession();
+
+        int workID = Integer.parseInt(request.getParameter("workID"));
+        System.out.println("workID: " + workID);
+
+        dao.delete(mapper, workID);
+
+        mapper.commit();
         mapper.close();
     }
 }

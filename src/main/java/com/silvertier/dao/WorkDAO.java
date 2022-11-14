@@ -37,10 +37,19 @@ public class WorkDAO {
         return (ArrayList<WorkDTO>) mapper.selectList("selectList", hmap);
     }
 
-    public ArrayList<WorkDTO> selectEmergency(SqlSession mapper) {
-        System.out.println("dao selectEmergency()");
-        return (ArrayList<WorkDTO>) mapper.selectList("selectEmergency");
+    public ArrayList<WorkDTO> selectPriority(SqlSession mapper) {
+        System.out.println("dao selectPriority()");
+        return (ArrayList<WorkDTO>) mapper.selectList("selectPriority");
     }
 
 
+    public WorkDTO selectByWorkID(SqlSession mapper, int workID) {
+        System.out.println("dao selectByWorkID()");
+        return (WorkDTO) mapper.selectOne("selectByWorkID", workID);
+    }
+
+    public void delete(SqlSession mapper, int workID) {
+        System.out.println("dao delete()");
+        mapper.delete("delete", workID);
+    }
 }

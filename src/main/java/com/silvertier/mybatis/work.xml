@@ -3,16 +3,14 @@
 <mapper namespace="com.silvertier.dto.WorkDTO">
 <!--조우철 anbin-->
     <insert id="insert" parameterType="wdto">
-        /*
-            insert into COWORK(WORKID ,ip ,userName, positionName, SUBJECT, CONTENT, PRIORITY ,
-                               currentProgress,workProgress,startDate ,DEADLINE,writeDate )
-            values (cowork_WORKID_seq.nextval, #{ip}, #{userName}, #{positionName}, #{SUBJECT}, #{CONTENT}, #{PRIORITY}
-                   , #{currentProgress}, #{workProgress},  TO_DATE(#{startDate}, 'yyyy-MM-dd')  TO_DATE(#{DEADLINE}, 'yyyy-MM-dd'), #{writeDate})
-        */
-        insert into COWORK( workID, ip, userName,  subject, content
-                          , priority, currentProgress, workProgress, startDate, deadline)
-        values ( cowork_workID_seq.nextval, #{ip}, '고길동', #{subject}, #{content}, #{priority}
-               , #{currentProgress}, #{workProgress}, #{startDate} , #{deadline})
+        insert into COWORK( workID, subject, userName, content, priority,
+                           currentProgress, workProgress,
+                           writeDate, updateDate, deleteDate,
+                           startDate, deadline, ip, isAdmin)
+        values ( cowork_workID_seq.nextval,  #{subject},'돚거', #{content}, #{priority},
+                #{currentProgress}, #{workProgress},
+                TO_DATE('11-11-11', 'yyyy-MM-dd'),  TO_DATE('11-11-11', 'yyyy-MM-dd'), TO_DATE('11-11-11', 'yyyy-MM-dd'),
+                #{startDate}, #{deadline}, #{ip}, 0)
 
     </insert>
     <select id="selectCount" resultType="int">
@@ -28,9 +26,13 @@
         WHERE rnum >= #{startNo}
         ]]>
     </select>
-    <select id="selectEmergency" resultType="wdto">
+    <select id="selectPriority" resultType="wdto">
         select * from COWORK where priority = 1 order by workID desc
     </select>
-
-
+    <select id="selectByWorkID" parameterType="int" resultType="wdto">
+        select * from COWORK where workID = #{workID}
+    </select>
+    <delete id="delete" parameterType="int">
+        delete from COWORK where workID = #{workID}
+    </delete>
 </mapper>
