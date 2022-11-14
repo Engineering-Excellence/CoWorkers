@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%-- 곽규창(Kyle) 글 목록 --%>
+<%-- Kyle 글 목록 --%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -105,7 +105,7 @@
                     <tbody>
 
                     <!-- 공지글이 있으면 출력한다. -->
-                    <c:if test="${currentPage == 1}">
+<%--                    <c:if test="${currentPage == 1}">--%>
                         <c:forEach var="boardDTO" items="${notice}">
                             <tr class="table-warning">
                                 <td align="center"><i class="bi bi-bell"></i></td>
@@ -137,7 +137,7 @@
                                 </td>
                             </tr>
                         </c:forEach>
-                    </c:if>
+<%--                    </c:if>--%>
 
                     <!-- 글을 출력한다. -->
                     <c:set var="list" value="${boardList.list}"/>

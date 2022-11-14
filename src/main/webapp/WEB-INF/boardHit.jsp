@@ -14,7 +14,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>boardHit.jsp</title>
+    <title>CoWorkers</title>
 
 </head>
 
@@ -24,7 +24,9 @@
     int postID = Integer.parseInt(request.getParameter("postID"));
     int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
-    response.sendRedirect("boardList.sil?currentPage=" + currentPage);  // 조회 수 확인용
+//    response.sendRedirect("boardList.sil?currentPage=" + currentPage);  // 조회 수 확인용
+
+    response.sendRedirect("boardView.sil?postID=" + postID + "&currentPage=" + currentPage);  // 실제 이동
 %>
 
 </body>

@@ -28,8 +28,8 @@
 	<mappers>
 		<!-- 실행할 sql 명령이 저장된 파일의 위치 -->
 		<mapper resource="com/silvertier/mybatis/board.xml" />
-		<mapper resource="com/silvertier/mybatis/comment.xml" />
-		<mapper resource="com/silvertier/mybatis/file.xml" />
+		<mapper resource="com/silvertier/mybatis/boardComment.xml" />
+		<mapper resource="com/silvertier/mybatis/boardFile.xml" />
 	</mappers>
 	
 </configuration>

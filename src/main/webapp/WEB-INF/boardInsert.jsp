@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%-- 곽규창(Kyle) 글 쓰기 --%>
+<%-- Kyle 글 쓰기 --%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -18,7 +18,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>CoWorkers</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/coWorkers.css" rel="stylesheet">
@@ -103,7 +103,7 @@
                             </td>
                         <!-- 공지글 여부 -->
                             <th class="align-middle table-dark">
-                                공지글 <input class="form-check-input" type="checkbox" name="isNotice" value="true">
+                                공지글 <input class="form-check-input" type="checkbox" name="notice" value="true">
                             </th>
                         </tr>
 
@@ -129,7 +129,6 @@
                     </table>
 
                     <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
-                    <!-- 사원번호 hidden -->
                 </form>
             </div>
         </div>

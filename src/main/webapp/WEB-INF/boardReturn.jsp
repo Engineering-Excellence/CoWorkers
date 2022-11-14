@@ -1,9 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%-- 곽규창(Kyle) --%>
+<%-- Kyle --%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -17,19 +14,21 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
-
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/coWorkers.css" rel="stylesheet">
-
+    <title>CoWorkers</title>
 </head>
 
 <body>
 
+<%
+    int currentPage = 1;
+    try {
+        currentPage = Integer.parseInt(request.getParameter("currentPage"));
+    } catch (NumberFormatException e) {
+//            throw new RuntimeException(e);
+    }
+    response.sendRedirect("boardList.sil?currentPage=" + currentPage);
+%>
 
-
-<script src="../js/jquery-3.6.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
 </body>
 
 </html>

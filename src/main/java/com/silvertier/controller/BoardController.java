@@ -7,7 +7,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-// 곽규창(Kyle)
+// Kyle
 @WebServlet(name = "BoardController", value = "*.sil")
 public class BoardController extends HttpServlet {
 
@@ -23,6 +23,17 @@ public class BoardController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("BoardController 클래스의 doGet() 메서드 실행");
+        process(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("BoardController 클래스의 doPost() 메서드 실행");
+        process(request, response);
+    }
+
+    protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("BoardController 클래스의 process() 메서드 실행");
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
@@ -44,53 +55,47 @@ public class BoardController extends HttpServlet {
                 /*
                     boardInsert.jsp에서 테이블에 저장할 데이터를 입력하고 submit 버튼을 클릭하면 폼에 입력한 정보가
                     Controller의 doPost() 메서드의 HttpServletRequest 인터페이스 타입의 객체인 request에 저장된다.
-                    doPost() 메서드는 request 객체에 저장된 데이터를 가지고 actionDo() 메서드를 실행하므로
-                    boardInsert.jsp에서 폼에 입력한 데이터는 actionDo() 메서드의 request 객체에 저장된다.
+                    doPost() 메서드는 request 객체에 저장된 데이터를 가지고 process() 메서드를 실행하므로
+                    boardInsert.jsp에서 폼에 입력한 데이터는 process() 메서드의 request 객체에 저장된다.
                  */
-                service.boardInsert(request, response);
-                service.boardSelectList(request, response);
+                service.insert(request, response);
+//                service.selectList(request, response);
 
-                viewPage += "boardList";
+                viewPage += "boardReturn";
                 break;
             case "/boardList.sil":
                 // 브라우저에 출력할 1 페이지 분량의 글과 페이징 작업에 사용할 8개의 변수가 저장된 클래스 객체를
                 // 얻어오는 메소드를 호출한다.
-                service.boardSelectList(request, response);
+                service.selectNotice(request, response);
+                service.selectList(request, response);
                 viewPage += "boardList";
                 break;
             case "/boardHit.sil":
                 // 조회수를 증가시키는 메서드를 호출한다.
-//                service.boardHit(request, response);
+                service.hit(request, response);
                 viewPage += "boardHit";
                 break;
             case "/boardView.sil":
                 // 조회수를 증가시킨 글 1건을 얻어오는 메서드를 호출한다.
-//                service.boardSelectByIdx(request, response);
+                service.selectByPostID(request, response);
                 viewPage += "boardView";
                 break;
             case "/boardUpdate.sil":
                 // 글 1건을 수정하는 메서드를 호출한다.
-//                service.boardUpdate(request, response);
+//                service.update(request, response);
                 viewPage += "boardReturn";
                 break;
             case "/boardDelete.sil":
                 // 글 1건을 삭제하는 메서드를 호출한다.
-//                service.boardDelete(request, response);
+//                service.delete(request, response);
                 viewPage += "boardReturn";
                 break;
-            case "/boardComment.sil":
-                // 답글을 입력하는 페이지에 질문글을 출력하기 위해서 질문글 1건을 얻어온 후 답글을 입력하는 페이지로 넘겨준다.
-//                service.boardSelectByIdx(request, response);
-                viewPage += "boardComment";
-                break;
-            case "/boardCommentInsert.sil":
-                // 답글이 브라우저에 표시될 위치를 정하기 위해서 조건에 만족하는 seq 값을 1씩 증가시킨 후 답글을 저장하는
-                // 메서드를 호출한다.
-//                service.boardCommentInsert(request, response);
-                viewPage += "boardReturn";
+            case "/boardCommentOK.sil":
+//                service.selectByPostID(request, response);
+                viewPage += "boardView";
                 break;
             default:
-                viewPage += "boardList";
+                viewPage += "index";
                 break;
         }
         viewPage += ".jsp";
@@ -101,11 +106,5 @@ public class BoardController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
         // 브라우저에 표시할 페이지를 호출한다.
         dispatcher.forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("HomeController 클래스의 doPost() 메서드 실행");
-        doGet(request, response);
     }
 }

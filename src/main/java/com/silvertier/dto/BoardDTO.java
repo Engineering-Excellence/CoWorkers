@@ -14,7 +14,7 @@ public class BoardDTO {
     private Date deleteDate;    // 삭제일
     private int hit;    // 조회수
     private int commentCount;   // 덧글 수
-    private String isNotice;    // 공지글 여부
+    private String notice = "false";    // 공지글 여부
     private String ip;  // IP 주소
     private int userID; // FK, 사원번호
 
@@ -90,12 +90,12 @@ public class BoardDTO {
         this.commentCount = commentCount;
     }
 
-    public String getIsNotice() {
-        return isNotice;
+    public String getNotice() {
+        return notice;
     }
 
-    public void setIsNotice(String isNotice) {
-        this.isNotice = isNotice;
+    public void setNotice(String notice) {
+        this.notice = notice;
     }
 
     public String getIp() {
