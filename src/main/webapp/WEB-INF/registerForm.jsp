@@ -20,7 +20,7 @@
 	<!-- 김태형 (Terry) - registerForm(회원가입) jsp 파일 -->
 	
 	<div id="container" class="container">
-		<form action="userInsert.sil" method="post" onsubmit="return joinCheck(this)">
+		<form action="insertOK.sil" method="post" onsubmit="return joinCheck(this)">
 			<table class="table table-hover table-bordered" style="border: 1px solid gray">
 				<thead>
 					<tr>

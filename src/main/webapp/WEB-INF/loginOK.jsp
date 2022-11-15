@@ -14,28 +14,39 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
-	String ID = request.getParameter("ID");
-	String Password = request.getParameter("Password");
-%>
+	String accountID = request.getParameter("accountID");
+	String accountPassword = request.getParameter("accountPassword");
+ %>
 	
 	<jsp:useBean id="userInfoDTO" class="com.silvertier.dto.UserInfoDTO">
 		<jsp:setProperty property="*" name="userInfoDTO"/>
 	</jsp:useBean>
 
-<%
-	if (ID != null && ID.equals(userInfoDTO.getAccountID())) {
-		if (Password != null && Password.equals(userInfoDTO.getAccountPassword())) {
+<% 	
+	UserInfoService service = UserInfoService.getInstance();
+	String originID = service.compareID(request, response);
+	String originPW = service.comparePW(request, response);
+
+	if (accountID != null && accountID.equals(originID)) {
+		if (accountPassword != null && accountPassword.equals(originPW)) {
 			out.println("<script>");
-			out.println("alert('로그인 성공!')");
+			out.println("alert('로그인 성공')");
 			out.println("location.href='mainView.sil'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('비밀번호 불일치')");
+			out.println("location.href='login.sil'");
 			out.println("</script>");
 		}
 	} else {
 		out.println("<script>");
-		out.println("alert('올바르지 않은 로그인 정보입니다.')");
+		out.println("alert('로그인 정보 불일치')");
 		out.println("location.href='login.sil'");
 		out.println("</script>");
 	}
+	
+	
 %>
 
 </body>

@@ -19,15 +19,17 @@ public class UserInfoDAO {
 	}
 	
 	// 로그인시 아이디 비교
-	public void compareID(SqlSession mapper, UserInfoDTO userInfoDTO) {
+	public String compareID(SqlSession mapper, UserInfoDTO userInfoDTO) {
 		System.out.println("UserInfoDAO -> compareID()");
-		mapper.selectOne("compareID", userInfoDTO);
+//		System.out.println("dao ID: " + userInfoDTO);
+		return (String) mapper.selectOne("compareID", userInfoDTO);
 	}
 	
 	// 로그인시 패스워드 비교
-	public void comparePW(SqlSession mapper, UserInfoDTO userInfoDTO) {
+	public String comparePW(SqlSession mapper, UserInfoDTO userInfoDTO) {
 		System.out.println("UserInfoDAO -> comparePW()");
-		mapper.selectOne("comparePW", userInfoDTO);	
+//		System.out.println("dao PW: " + userInfoDTO);
+		return (String) mapper.selectOne("comparePW", userInfoDTO);
 	}
 	
 	

@@ -19,7 +19,7 @@ public class UserInfoDTO {
 	private int positionCode; // FK, 직급코드
 	
 	public UserInfoDTO() { }
-	
+
 	public int getUserID() {
 		return userID;
 	}
@@ -115,5 +115,5 @@ public class UserInfoDTO {
 				+ ", gender=" + gender + ", email=" + email + ", joinDate=" + joinDate + ", retireDate=" + retireDate
 				+ ", positionCode=" + positionCode + "]";
 	}
-
+	
 }
