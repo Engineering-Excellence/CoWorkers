@@ -6,7 +6,7 @@ public class PositionDTO {
 	
 	private int positionCode;
 	private String positionName;
-	private String isAdmin;
+	private String admin;
 	
 	public PositionDTO() { }
 
@@ -26,17 +26,17 @@ public class PositionDTO {
 		this.positionName = positionName;
 	}
 
-	public String getIsAdmin() {
-		return isAdmin;
+	public String getAdmin() {
+		return admin;
 	}
 
-	public void setIsAdmin(String isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setAdmin(String admin) {
+		this.admin = admin;
 	}
 
 	@Override
 	public String toString() {
-		return "PositionDTO [positionCode=" + positionCode + ", positionName=" + positionName + ", isAdmin=" + isAdmin
+		return "PositionDTO [positionCode=" + positionCode + ", positionName=" + positionName + ", admin=" + admin
 				+ "]";
 	}
 	
