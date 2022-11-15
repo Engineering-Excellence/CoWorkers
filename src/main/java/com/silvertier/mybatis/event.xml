@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.silvertier.dto.EventDTO">
+
+	<!-- 일정 1건 insert -->
+	<!-- <insert id="insert" parameterType="eDTO">
+		insert into event (eventid, userid, subject, content, startdate, enddate, projectcolor, hit, commentcount, ip, isallday) 
+		values (event_idx_seq.nextval, 1234, #{subject}, #{content}, #{startDate}, #{endDate}, #{projectColor}, 0, 0, #{ip}, #{isAllDay})
+	</insert> -->
+	<insert id="insert" parameterType="eDTO">
+		insert into event (eventid, userid, subject, content, startdate, enddate, projectcolor, hit, commentcount, ip, isallday) 
+		values (event_idx_seq.nextval, 1234, #{subject}, #{content}, #{startDate}, #{endDate}, #{projectColor}, 0, 0, #{ip}, #{isAllDay})
+	</insert>
+
+</mapper>
