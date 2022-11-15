@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%-- 곽규창(Kyle) --%>
+<%-- 조우철 --%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -81,7 +81,7 @@
                         <th style="width: 100px; text-align: center;">우선순위</th>
                         <th style="width: 500px; text-align: center;">업무명</th>
                         <th style="width: 100px; text-align: center;">상태</th>
-                        <th style="width: 200px; text-align: center;">담당자(직급)</th>
+                        <th style="width: 200px; text-align: center;">담당자</th>
                         <th style="width: 200px; text-align: center;">진척도</th>
                         <th style="width: 200px; text-align: center;">작성일</th>
                         <th style="width: 200px; text-align: center;">시작일</th>

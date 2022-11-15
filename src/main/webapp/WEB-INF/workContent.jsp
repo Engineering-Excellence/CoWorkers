@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%-- 곽규창(Kyle) --%>
+<%-- 조우철 --%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -29,7 +29,6 @@
 <fmt:requestEncoding value="UTF-8"/>
 <%
     System.out.println("coWorkers.jsp");
-    //  조회수를 증가시킨 글이 위치하던 페이지 번호를 받는다.
     int workID = Integer.parseInt(request.getParameter("workID"));
     System.out.println("workID : " + workID);
     int currentPage = Integer.parseInt(request.getParameter("currentPage"));
