@@ -21,25 +21,13 @@
 
 <fmt:requestEncoding value="UTF-8"/>
 <%
-    response.sendRedirect("work.sil");
+    int currentPage = 1;
+    try {
+        currentPage = Integer.parseInt(request.getParameter("currentPage"));
+    } catch (Exception e) {
+    }
+    response.sendRedirect("work.sil?currentPage=" + currentPage);
 %>
-<h1>silverTier's 1st team project: coWorkers</h1>
-<br/>
-
-<h2>commit -m ‘FIRST COMMIT’</h2>
-
-<%
-    out.println("Hello, silverTier!");
-%>
-<br/>
-Eclipse와 IntelliJ IDE 공동으로 이용가능한 프로젝트 구성 테스트 중입니다.    - by Kyle
-<br/><br/>
-jQuery v3.6.1
-<br/>
-Bootstrap v3.4.1
-<br/>
-<a href="work.sil">Anbin</a>
-<a href="test.sil">Anbintest</a>
 </body>
 
 </html>

@@ -22,6 +22,7 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/coWorkers.css" rel="stylesheet">
 
+
 </head>
 
 <body>
@@ -58,40 +59,25 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">일정1<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">일정2</a></li>
-                <li><a href="#">일정3</a></li>
-                <li><a href="#">일정4</a></li>
+                <li><a href="workList.sil">게시판<span class="sr-only"></span></a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="">업무1</a></li>
-                <li><a href="">업무2</a></li>
-                <li><a href="">업무3</a></li>
-                <li><a href="">업무4</a></li>
+                <li><a href="work.sil">업무</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="">게시판1</a></li>
-                <li><a href="">게시판2</a></li>
-                <li><a href="">게시판3</a></li>
+                <li><a href="">캘린더</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
             <div class="table-responsive">
-                <table class="table table-striped">
-                    <%--<table class="table" width="1000" align="center" border="1" cellpadding="5" cellspacing="0">--%>
-                    <thead>
-                    <tr class="table-warning">
-                        <th style="width: 200px; text-align: center;"><a href="#">홈</a></th>
-                        <th style="width: 200px; text-align: center;"><a href="#">업무</a></th>
-                        <th style="width: 200px; text-align: center;"><a href="#">캘린더</a></th>
-                    </tr>
-                </table>
+
                 <table class="table" style="width: 1500px; margin-left: auto; margin-right: auto;">
-                    <tr class="table-primary">
+                    <tr class="bg-info">
                         <th colspan="10" style="font-size: 30px; text-align: center;">업무</th>
                     </tr>
-                    <tr class="table-success">
+                    <tr>
+                        <th style="width: 100px; text-align: center;">글번호</th>
                         <th style="width: 100px; text-align: center;">우선순위</th>
                         <th style="width: 500px; text-align: center;">업무명</th>
                         <th style="width: 100px; text-align: center;">상태</th>
@@ -104,56 +90,50 @@
                     </thead>
 
                     <tbody>
-
-                    <!-- 공지글이 있으면 출력한다. -->
-                    <c:if test="${currentPage==1}">
-                        <c:forEach var="emergency" items="${priority}">
-                            <tr class="bg-primary">
-                                <td align="center">${emergency.priority}</td>
-                                <td>
-                                    <c:set var="subject" value="${fn:replace(emergency.subject, '<', '&lt;')}"/>
-                                    <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
-                                        ${subject}
-                                </td>
-                                <td align="center">
-                                        ${emergency.currentProgress}
-                                </td>
-                                </td>
-                                <td align="center">
-                                    <c:set var="userName" value="${fn:replace(emergency.userName, '<', '&lt;')}"/>
-                                    <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
-                                        ${userName}
-                                </td>
-                                <td align="center">
-                                        ${emergency.workProgress}
-                                </td>
-                                <td align="center">
-                                    <c:if test="${emergency.writeDate.year==date.year&&emergency.writeDate.month==date.month&&emergency.writeDate.date==date.date}">
-                                        <fmt:formatDate value="${emergency.writeDate}" pattern="a h:mm:ss"/>
-                                    </c:if>
-                                    <c:if test="${emergency.writeDate.year!=date.year||emergency.writeDate.month!=date.month||emergency.writeDate.date!=date.date}">
-                                        <fmt:formatDate value="${emergency.writeDate}" pattern="MM/dd"/>
-                                    </c:if>
-                                </td>
-                                <td align="center">
-                                    <fmt:formatDate value="${emergency.startDate}" pattern="yyyy.MM.dd.(E)"/>
-                                </td>
-                                <td align="center">
-                                    <fmt:formatDate value="${emergency.deadline}" pattern="yyyy.MM.dd.(E)"/>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </c:if>
-
-                    <!-- 글을 출력한다. -->
-                    <c:set var="list" value="${workList.list}"/>
-                    <c:if test="${list.size() == 0}">
-                        <tr>
-                            <td colspan="10">
-                                <marquee>저장된 글이 없습니다.</marquee>
+                    <%--긴급 --%>
+                    <%--                    <c:if test="${currentPage==1}">--%>
+                    <c:forEach var="dto" items="${priority}">
+                        <tr class="bg-danger">
+                            <td align="center">${dto.workID}</td>
+                            <td align="center">${dto.priority}</td>
+                            <td class="subject">
+                                <c:set var="subject" value="${fn:replace(dto.subject, '<', '&lt;')}"/>
+                                <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
+                                <a href="workView.sil?workID=${dto.workID}&currentPage=${workList.currentPage}">${subject}</a>
+                            </td>
+                            <td align="center">
+                                    ${dto.currentProgress}
+                            </td>
+                            </td>
+                            <td align="center">
+                                <c:set var="userName" value="${fn:replace(dto.userName, '<', '&lt;')}"/>
+                                <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
+                                    ${dto.userName}
+                            </td>
+                            <td align="center">
+                                    ${dto.workProgress}
+                            </td>
+                            <td align="center">
+                                <c:if test="${dto.writeDate.year==date.year&&dto.writeDate.month==date.month&&dto.writeDate.date==date.date}">
+                                    <fmt:formatDate value="${dto.writeDate}" pattern="a h:mm:ss"/>
+                                </c:if>
+                                <c:if test="${dto.writeDate.year!=date.year||dto.writeDate.month!=date.month||dto.writeDate.date!=date.date}">
+                                    <fmt:formatDate value="${dto.writeDate}" pattern="MM/dd"/>
+                                </c:if>
+                            </td>
+                            <td align="center">
+                                <fmt:formatDate value="${dto.startDate}" pattern="yyyy.MM.dd.(E)"/>
+                            </td>
+                            <td align="center">
+                                <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
                             </td>
                         </tr>
-                    </c:if>
+                    </c:forEach>
+                    <%--                    </c:if>--%>
+
+
+                    <!-- 글을 출력한다. -->
+
                     <c:set var="list" value="${workList.list}"/>
                     <c:if test="${list.size() == 0}">
                         <tr>
@@ -165,11 +145,12 @@
                     <c:if test="${list.size() != 0}">
                         <c:forEach var="dto" items="${list}">
                             <tr>
+                                <td align="center">${dto.workID}</td>
                                 <td align="center">${dto.priority}</td>
-                                <td>
+                                <td class="subject">
                                     <c:set var="subject" value="${fn:replace(dto.subject, '<', '&lt;')}"/>
                                     <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
-                                        ${subject}
+                                    <a href="workView.sil?workID=${dto.workID}&currentPage=${workList.currentPage}">${dto.subject}</a>
                                 </td>
                                 <td align="center">
                                         ${dto.currentProgress}
@@ -288,6 +269,7 @@
 
 <script src="../js/jquery-3.6.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/workList.js"></script>
 </body>
 
 </html>

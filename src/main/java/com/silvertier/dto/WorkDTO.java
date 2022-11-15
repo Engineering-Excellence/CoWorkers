@@ -1,6 +1,7 @@
 package com.silvertier.dto;
 
 import java.sql.Date;
+
 //조우철 anbin
 public class WorkDTO {
     private int workID; // 글번호 // pk // not null
@@ -16,9 +17,7 @@ public class WorkDTO {
     private Date startDate; // 시작일 // not null
     private Date deadline; // 마감일 // not null
     private String ip; // ip
-    private String isAdmin; // 관리자
-//    private int userID; // 사원 번호 // fk
-
+    private String admin; // 관리자
 
     public int getWorkID() {
         return workID;
@@ -124,11 +123,11 @@ public class WorkDTO {
         this.ip = ip;
     }
 
-    public String getIsAdmin() {
-        return isAdmin;
+    public String getAdmin() {
+        return admin;
     }
 
-    public void setIsAdmin(String isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setAdmin(String admin) {
+        this.admin = admin;
     }
 }

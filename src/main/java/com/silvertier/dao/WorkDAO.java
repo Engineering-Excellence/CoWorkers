@@ -4,8 +4,6 @@ package com.silvertier.dao;
 import com.silvertier.dto.WorkDTO;
 import org.apache.ibatis.session.SqlSession;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -37,10 +35,24 @@ public class WorkDAO {
         return (ArrayList<WorkDTO>) mapper.selectList("selectList", hmap);
     }
 
-    public ArrayList<WorkDTO> selectEmergency(SqlSession mapper) {
-        System.out.println("dao selectEmergency()");
-        return (ArrayList<WorkDTO>) mapper.selectList("selectEmergency");
+    public ArrayList<WorkDTO> selectPriority(SqlSession mapper) {
+        System.out.println("dao selectPriority()");
+        return (ArrayList<WorkDTO>) mapper.selectList("selectPriority");
     }
 
 
+    public WorkDTO selectByWorkID(SqlSession mapper, int workID) {
+        System.out.println("dao selectByWorkID()");
+        return (WorkDTO) mapper.selectOne("selectByWorkID", workID);
+    }
+
+    public void delete(SqlSession mapper, int workID) {
+        System.out.println("dao delete()");
+        mapper.delete("delete", workID);
+    }
+
+    public void update(SqlSession mapper, WorkDTO dto) {
+        System.out.println("dao update()");
+        mapper.update("update", dto);
+    }
 }
