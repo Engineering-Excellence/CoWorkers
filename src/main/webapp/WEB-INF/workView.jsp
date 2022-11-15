@@ -30,7 +30,15 @@
 <fmt:requestEncoding value="UTF-8"/>
 <jsp:useBean id="date" class="java.util.Date"/>
 <%
-    System.out.println("FUCK"+pageContext.findAttribute("dto"));
+    System.out.println(pageContext.findAttribute("dto"));
+
+    Map<String, String[]> map = request.getParameterMap();
+    Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
+    while(itr.hasNext())
+    {
+        Map.Entry<String, String[]> entry = itr.next();
+        System.out.println(String.format("%s : %s", entry.getKey(),String.join(", ", entry.getValue())));
+    }
 %>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -175,15 +183,7 @@
 </div>
 </div>
 </div>
-<%
-    Map<String, String[]> map = request.getParameterMap();
-    Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
-    while(itr.hasNext())
-    {
-        Map.Entry<String, String[]> entry = itr.next();
-        System.out.println(String.format("%s : %s", entry.getKey(),String.join(", ", entry.getValue())));
-    }
-%>
+
 <script src="../js/jquery-3.6.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/worInsert.js"></script>
