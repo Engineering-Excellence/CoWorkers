@@ -39,5 +39,5 @@ public class PositionDTO {
 		return "PositionDTO [positionCode=" + positionCode + ", positionName=" + positionName + ", admin=" + admin
 				+ "]";
 	}
-	
+
 }
