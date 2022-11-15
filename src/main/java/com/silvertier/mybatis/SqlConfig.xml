@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-config.dtd">
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
 	<!-- 데이터베이스 연결 정보가 저장된 파일의 위치 -->
 	<properties resource="com/silvertier/mybatis/db.properties" />	<!-- DB & SQL 경로는 '/'로 구분 주의 -->
-	
+
 	<typeAliases>
 		<!-- 별명 설정 -->
 		<typeAlias type="com.silvertier.dto.UserInfoDTO" alias="userInfoDTO" />	<!-- 별명 경로는 '.'으로 구분 주의 -->
 		<typeAlias type="com.silvertier.dto.PositionDTO" alias="positionDTO" />
+		<typeAlias type="com.silvertier.dto.WorkDTO" alias="wdto" />
+		<typeAlias type="com.silvertier.dto.EventCommentDTO" alias="ecoDTO" />
+		<typeAlias type="com.silvertier.dto.EventDTO" alias="eDTO" />
+		<typeAlias type="com.silvertier.dto.BoardDTO" alias="boardDTO" />	<!-- 별명 경로는 '.'으로 구분 주의 -->
+		<typeAlias type="com.silvertier.dto.BoardCommentDTO" alias="commentDTO" />
+		<typeAlias type="com.silvertier.dto.BoardFileDTO" alias="fileDTO" />
 	</typeAliases>
-	
+
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
@@ -23,11 +29,17 @@
 			</dataSource>
 		</environment>
 	</environments>
-	
+
 	<mappers>
 		<!-- 실행할 sql 명령이 저장된 파일의 위치 -->
 		<mapper resource="com/silvertier/mybatis/userInfo.xml" />
 		<mapper resource="com/silvertier/mybatis/position.xml" />
+		<mapper resource="com/silvertier/mybatis/work.xml" />
+		<mapper resource="com/silvertier/mybatis/event.xml" />
+		<mapper resource="com/silvertier/mybatis/eventComment.xml" />
+		<mapper resource="com/silvertier/mybatis/board.xml" />
+		<mapper resource="com/silvertier/mybatis/boardComment.xml" />
+		<mapper resource="com/silvertier/mybatis/boardFile.xml" />
 	</mappers>
-	
+
 </configuration>
