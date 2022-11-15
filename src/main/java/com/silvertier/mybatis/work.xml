@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.silvertier.dto.WorkDTO">
-<!--조우철 anbin-->
+    <!--조우철 anbin-->
     <insert id="insert" parameterType="wdto">
-        insert into COWORK( workID, subject, userName, content, priority,
+        insert into COWORK(workID, subject, userName, content, priority,
                            currentProgress, workProgress,
-                           writeDate, updateDate, deleteDate,
-                           startDate, deadline, ip, isAdmin)
-        values ( cowork_workID_seq.nextval,  #{subject},'돚거', #{content}, #{priority},
+                           startDate, deadline, ip, admin)
+        values (cowork_workID_seq.nextval, #{subject}, '돚거', #{content}, #{priority},
                 #{currentProgress}, #{workProgress},
-                TO_DATE('11-11-11', 'yyyy-MM-dd'),  TO_DATE('11-11-11', 'yyyy-MM-dd'), TO_DATE('11-11-11', 'yyyy-MM-dd'),
                 #{startDate}, #{deadline}, #{ip}, 0)
 
     </insert>
@@ -27,12 +25,40 @@
         ]]>
     </select>
     <select id="selectPriority" resultType="wdto">
-        select * from COWORK where priority = 1 order by workID desc
+        select *
+        from COWORK
+        where priority = 1
+        order by workID desc
     </select>
     <select id="selectByWorkID" parameterType="int" resultType="wdto">
-        select * from COWORK where workID = #{workID}
+        select *
+        from COWORK
+        where workID = #{workID}
     </select>
+    <!--
     <delete id="delete" parameterType="int">
         delete from COWORK where workID = #{workID}
     </delete>
+    -->
+    <delete id="delete" parameterType="int">
+        update cowork
+        set deleteDate = sysdate
+        where workID = #{workID}
+    </delete>
+    <update id="update" parameterType="wdto">
+        begin
+        update COWORK
+        set subject         = #{subject},
+            content         = #{content},
+            priority        = #{priority},
+            currentProgress = #{currentProgress},
+            workProgress    = #{workProgress},
+            startDate       = #{startDate},
+            deadline        = #{deadline},
+            ip              = #{ip},
+            updateDate      = sysdate
+        where workID = #{workID};
+        commit;
+        end;
+    </update>
 </mapper>

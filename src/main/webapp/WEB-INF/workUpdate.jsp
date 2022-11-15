@@ -1,9 +1,13 @@
+
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="com.silvertier.dto.WorkDTO" %>
+<%@ page import="com.silvertier.dto.WorkList" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%-- 곽규창(Kyle) --%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -25,7 +29,9 @@
 </head>
 
 <body>
-
+<%
+    System.out.println("FUCK"+pageContext.findAttribute("dto"));
+%>
 <fmt:requestEncoding value="UTF-8"/>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -57,7 +63,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="workList.sil">게시판<span class="sr-only">(current)</span></a></li>
+                <li><a href="workList.sil">게시판<span class="sr-only"></span></a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="work.sil">업무</a></li>
@@ -70,7 +76,7 @@
 
             <div class="table-responsive">
 
-                <form class="m-" action="workInsertOK.sil" method="post">
+                <form class="m-" action="workUpdateOK.sil" method="post">
                     <table class="table" style="width:1500px; margin-left: auto; margin-right: auto;">
                         <tr class="table-primary">
                             <th colspan="15" style="font-size: 30px; text-align: center;">업무 수정</th>
@@ -115,16 +121,16 @@
                             <td colspan="2">
                                 <select id="workProgress" class="form-control form-control-sm" name="workProgress" size="1">
                                     <option value="0" selected>0</option>
-                                    <option value="0">1</option>
-                                    <option value="0">2</option>
-                                    <option value="0">3</option>
-                                    <option value="0">4</option>
-                                    <option value="0">5</option>
-                                    <option value="0">6</option>
-                                    <option value="0">7</option>
-                                    <option value="0">8</option>
-                                    <option value="0">9</option>
-                                    <option value="0">10</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
                                 </select>
                             </td>
                         </tr>
@@ -151,13 +157,25 @@
                             </td>
                         </tr>
                     </table>
-
+                    <td>
+                    <input type="hidden" name="workID" value="${dto.workID}"/>
+                    <input type="hidden" name="currentPage" value="${currentPage}"/>
                     <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
+                    </td>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<%
+    Map<String, String[]> map = request.getParameterMap();
+    Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
+    while(itr.hasNext())
+    {
+        Map.Entry<String, String[]> entry = itr.next();
+        System.out.println(String.format("%s : %s", entry.getKey(),String.join(", ", entry.getValue())));
+    }
+%>
 <script src="../js/jquery-3.6.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/worInsert.js"></script>

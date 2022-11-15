@@ -21,7 +21,11 @@
 
 <fmt:requestEncoding value="UTF-8"/>
 <%
-    int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+    int currentPage = 1;
+    try {
+        currentPage = Integer.parseInt(request.getParameter("currentPage"));
+    } catch (Exception e) {
+    }
     response.sendRedirect("work.sil?currentPage=" + currentPage);
 %>
 </body>

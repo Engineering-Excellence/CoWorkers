@@ -4,8 +4,6 @@ package com.silvertier.dao;
 import com.silvertier.dto.WorkDTO;
 import org.apache.ibatis.session.SqlSession;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -51,5 +49,10 @@ public class WorkDAO {
     public void delete(SqlSession mapper, int workID) {
         System.out.println("dao delete()");
         mapper.delete("delete", workID);
+    }
+
+    public void update(SqlSession mapper, WorkDTO dto) {
+        System.out.println("dao update()");
+        mapper.update("update", dto);
     }
 }

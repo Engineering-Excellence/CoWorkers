@@ -59,7 +59,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="workList.sil">게시판<span class="sr-only">(current)</span></a></li>
+                <li><a href="workList.sil">게시판<span class="sr-only"></span></a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="work.sil">업무</a></li>
@@ -96,18 +96,18 @@
                         <tr class="bg-danger">
                             <td align="center">${dto.workID}</td>
                             <td align="center">${dto.priority}</td>
-                            <td  class="subject">
-                                    <%--                            <c:set var="subject" value="${fn:replace(priority.subject, '<', '&lt;')}"/>--%>
-                                    <%--                            <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>--%>
-                                        <a href="workView.sil?workID=${dto.workID}&currentPage=${workList.currentPage}">${dto.subject}</a>
+                            <td class="subject">
+                                <c:set var="subject" value="${fn:replace(dto.subject, '<', '&lt;')}"/>
+                                <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
+                                <a href="workView.sil?workID=${dto.workID}&currentPage=${workList.currentPage}">${subject}</a>
                             </td>
                             <td align="center">
                                     ${dto.currentProgress}
                             </td>
                             </td>
                             <td align="center">
-                                    <%--                            <c:set var="userName" value="${fn:replace(dto.userName, '<', '&lt;')}"/>--%>
-                                    <%--                            <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>--%>
+                                <c:set var="userName" value="${fn:replace(dto.userName, '<', '&lt;')}"/>
+                                <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
                                     ${dto.userName}
                             </td>
                             <td align="center">

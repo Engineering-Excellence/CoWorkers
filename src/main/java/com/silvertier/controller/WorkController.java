@@ -73,7 +73,7 @@ public class WorkController extends HttpServlet {
                 viewPage += "work";
                 service.selectList(request, response);
                 service.selectPriority(request, response);
-                System.out.println("work.sil");
+                System.out.println("work");
                 break;
             case "/workInsert.sil":
                 viewPage += "workInsert";
@@ -85,12 +85,14 @@ public class WorkController extends HttpServlet {
                 System.out.println("workInsertOK");
                 break;
             case "/workUpdate.sil":
+                service.selectByWorkID(request, response);
                 viewPage += "workUpdate";
                 System.out.println("workUpdate");
                 break;
             case "/workUpdateOK.sil":
                 viewPage += "goWork";
-                System.out.println("workUpdate");
+                service.update(request, response);
+                System.out.println("workUpdateOK");
                 break;
             case "/workDelete.sil":
                 viewPage += "goWork";
