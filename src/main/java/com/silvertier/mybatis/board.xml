@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.silvertier.dto.BoardDTO">
+
+    <!-- 전체 글의 개수를 불러온다. -->
+    <select id="selectCount" resultType="int">
+        SELECT COUNT(*)
+        FROM BOARD
+    </select>
+
+    <!-- 1 페이지 분량의 글 목록을 불러온다. -->
+    <select id="selectList" parameterType="java.util.HashMap" resultType="boardDTO">
+        <![CDATA[
+        SELECT *
+        FROM (SELECT ROWNUM RNUM, AA.*
+              FROM (SELECT *
+                    FROM BOARD
+                    ORDER BY postID DESC) AA
+              WHERE ROWNUM <= #{endNo})
+        WHERE RNUM >= #{startNo}
+        ]]>
+    </select>
+
+    <!-- 새 글을 저장한다. -->
+    <insert id="insert" parameterType="boardDTO">
+        INSERT INTO BOARD (POSTID, SUBJECT, USERNAME, CONTENT, NOTICE, IP, USERID)
+        VALUES (BOARD_POSTID_SEQ.nextval, #{subject}, #{userName}, #{content}, #{notice}, #{ip}, 4)
+    </insert>
+
+    <!-- 모든 공지글을 얻어온다. -->
+    <select id="selectNotice" resultType="boardDTO">
+        SELECT * FROM BOARD WHERE notice = 'true' ORDER BY POSTID DESC
+    </select>
+
+    <!-- 조회수를 증가시킨다. -->
+    <update id="hit" parameterType="int">
+        UPDATE BOARD SET HIT = HIT + 1 WHERE POSTID = #{postID}
+    </update>
+
+    <!-- 글 1건을 얻어온다. -->
+    <select id="selectByPostID" parameterType="int" resultType="boardDTO">
+        SELECT * FROM BOARD WHERE POSTID = #{postID}
+    </select>
+
+    <!-- 글 1건을 삭제(블라인드 처리)한다. -->
+    <update id="delete" parameterType="int">
+        UPDATE BOARD SET DELETEDATE = SYSDATE WHERE POSTID = #{postID}
+    </update>
+</mapper>
