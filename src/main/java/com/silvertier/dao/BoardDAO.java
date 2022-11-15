@@ -46,9 +46,15 @@ public class BoardDAO {
     }
 
 
-    // 글 1건을
+    // 글 1건을 선택하는 SELECT SQL 명령을 실행하는 메서드
     public BoardDTO selectByPostID(SqlSession mapper, int postID) {
         System.out.println("BoardDAO 클래스의 selectByPostID() 메서드 실행");
         return (BoardDTO) mapper.selectOne("selectByPostID", postID);
+    }
+
+    // 글 1건을 삭제(블라인드 처리)하는 UPDATE SQL 명령을 실행하는 메서드
+    public void delete(SqlSession mapper, int postID) {
+        System.out.println("BoardDAO 클래스의 delete() 메서드 실행");
+        mapper.update("delete", postID);
     }
 }

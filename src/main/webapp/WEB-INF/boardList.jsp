@@ -105,39 +105,45 @@
                     <tbody>
 
                     <!-- 공지글이 있으면 출력한다. -->
-<%--                    <c:if test="${currentPage == 1}">--%>
-                        <c:forEach var="boardDTO" items="${notice}">
+                    <%--<c:if test="${currentPage == 1}">--%>
+                    <c:forEach var="boardDTO" items="${notice}">
+                        <c:if test="${boardDTO.deleteDate == null}">
                             <tr class="table-warning">
-                                <td align="center"><i class="bi bi-bell"></i></td>
-                                <td>
-                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
-                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
-                                    <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
-                                            ${subject}
-                                    </a>
-                                </td>
-                                <td align="center">
-                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '<', '&lt;')}"/>
-                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '>', '&gt;')}"/>
-                                        ${name}
-                                </td>
-                                <td align="center">
-                                    <jsp:useBean id="date" class="java.util.Date"/>
-                                    <c:if test="${date.year == boardDTO.writeDate.year && date.month == boardDTO.writeDate.month &&
+                            <td align="center"><i class="bi bi-bell"></i></td>
+                            <td>
+                                <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
+                                <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
+                                <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
+                                        ${subject}
+                                </a>
+                                <c:if test="${boardDTO.deleteDate != null}">
+                                    삭제된 글입니다.
+                                </c:if>
+
+                            </td>
+                            <td align="center">
+                                <c:set var="name" value="${fn:replace(boardDTO.userName, '<', '&lt;')}"/>
+                                <c:set var="name" value="${fn:replace(boardDTO.userName, '>', '&gt;')}"/>
+                                    ${name}
+                            </td>
+                            <td align="center">
+                                <jsp:useBean id="date" class="java.util.Date"/>
+                                <c:if test="${date.year == boardDTO.writeDate.year && date.month == boardDTO.writeDate.month &&
 						date.date == boardDTO.writeDate.date}">
-                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="a h:mm"/>
-                                    </c:if>
-                                    <c:if test="${date.year != boardDTO.writeDate.year || date.month != boardDTO.writeDate.month ||
+                                    <fmt:formatDate value="${boardDTO.writeDate}" pattern="a h:mm"/>
+                                </c:if>
+                                <c:if test="${date.year != boardDTO.writeDate.year || date.month != boardDTO.writeDate.month ||
 						date.date != boardDTO.writeDate.date}">
-                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="yyyy.MM.dd.(E)"/>
-                                    </c:if>
-                                </td>
-                                <td align="center">
-                                        ${boardDTO.hit}
-                                </td>
-                            </tr>
-                        </c:forEach>
-<%--                    </c:if>--%>
+                                    <fmt:formatDate value="${boardDTO.writeDate}" pattern="yyyy.MM.dd.(E)"/>
+                                </c:if>
+                            </td>
+                            <td align="center">
+                                    ${boardDTO.hit}
+                            </td>
+                        </c:if>
+                        </tr>
+                    </c:forEach>
+                    <%--</c:if>--%>
 
                     <!-- 글을 출력한다. -->
                     <c:set var="list" value="${boardList.list}"/>
@@ -151,33 +157,40 @@
                     <c:if test="${list.size() != 0}">
                         <c:forEach var="boardDTO" items="${list}">
                             <tr>
-                                <td align="center">${boardDTO.postID}</td>
-                                <td>
-                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
-                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
-                                    <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
-                                            ${subject}
-                                    </a>
-                                </td>
-                                <td align="center">
-                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '<', '&lt;')}"/>
-                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '>', '&gt;')}"/>
-                                        ${name}
-                                </td>
-                                <td align="center">
-                                    <%--<jsp:useBean id="date" class="java.util.Date"/>--%>
-                                    <c:if test="${date.year == boardDTO.writeDate.year && date.month == boardDTO.writeDate.month &&
+                                <%--<c:if test="${boardDTO.notice == 'false'}">--%>
+                                    <td align="center">${boardDTO.postID}</td>
+                                    <td>
+                                        <c:if test="${boardDTO.deleteDate == null}">
+                                            <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
+                                            <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
+                                            <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
+                                                    ${subject}
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${boardDTO.deleteDate != null}">
+                                            삭제된 글입니다.
+                                        </c:if>
+                                    </td>
+                                    <td align="center">
+                                        <c:set var="name" value="${fn:replace(boardDTO.userName, '<', '&lt;')}"/>
+                                        <c:set var="name" value="${fn:replace(boardDTO.userName, '>', '&gt;')}"/>
+                                            ${name}
+                                    </td>
+                                    <td align="center">
+                                            <%--<jsp:useBean id="date" class="java.util.Date"/>--%>
+                                        <c:if test="${date.year == boardDTO.writeDate.year && date.month == boardDTO.writeDate.month &&
 						date.date == boardDTO.writeDate.date}">
-                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="a h:mm"/>
-                                    </c:if>
-                                    <c:if test="${date.year != boardDTO.writeDate.year || date.month != boardDTO.writeDate.month ||
+                                            <fmt:formatDate value="${boardDTO.writeDate}" pattern="a h:mm"/>
+                                        </c:if>
+                                        <c:if test="${date.year != boardDTO.writeDate.year || date.month != boardDTO.writeDate.month ||
 						date.date != boardDTO.writeDate.date}">
-                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="yyyy.MM.dd.(E)"/>
-                                    </c:if>
-                                </td>
-                                <td align="center">
-                                        ${boardDTO.hit}
-                                </td>
+                                            <fmt:formatDate value="${boardDTO.writeDate}" pattern="yyyy.MM.dd.(E)"/>
+                                        </c:if>
+                                    </td>
+                                    <td align="center">
+                                            ${boardDTO.hit}
+                                    </td>
+                                <%--</c:if>--%>
                             </tr>
                         </c:forEach>
                     </c:if>

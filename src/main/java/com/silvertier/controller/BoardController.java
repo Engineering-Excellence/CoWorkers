@@ -52,15 +52,8 @@ public class BoardController extends HttpServlet {
                 viewPage += "boardInsert";
                 break;
             case "/boardInsertOK.sil":
-                /*
-                    boardInsert.jsp에서 테이블에 저장할 데이터를 입력하고 submit 버튼을 클릭하면 폼에 입력한 정보가
-                    Controller의 doPost() 메서드의 HttpServletRequest 인터페이스 타입의 객체인 request에 저장된다.
-                    doPost() 메서드는 request 객체에 저장된 데이터를 가지고 process() 메서드를 실행하므로
-                    boardInsert.jsp에서 폼에 입력한 데이터는 process() 메서드의 request 객체에 저장된다.
-                 */
                 service.insert(request, response);
 //                service.selectList(request, response);
-
                 viewPage += "boardReturn";
                 break;
             case "/boardList.sil":
@@ -87,7 +80,7 @@ public class BoardController extends HttpServlet {
                 break;
             case "/boardDelete.sil":
                 // 글 1건을 삭제하는 메서드를 호출한다.
-//                service.delete(request, response);
+                service.delete(request, response);
                 viewPage += "boardReturn";
                 break;
             case "/boardCommentOK.sil":
@@ -95,7 +88,7 @@ public class BoardController extends HttpServlet {
                 viewPage += "boardView";
                 break;
             default:
-                viewPage += "index";
+                viewPage += "error";
                 break;
         }
         viewPage += ".jsp";

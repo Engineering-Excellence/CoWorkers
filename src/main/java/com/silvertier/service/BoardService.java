@@ -95,7 +95,7 @@ public class BoardService {
         mapper.close();
     }
 
-    // 조회수를 증가시킨 글 1건을 SELECT 하는 SQL 명령을 실행하고  request 영역에 저장하는 메서드
+    // 조회수를 증가시킨 글 1건을 선택하는 SELECT SQL 명령을 실행하고  request 영역에 저장하는 메서드
     public BoardDTO selectByPostID(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("BoardService 클래스의 selectByPostID() 메서드 실행");
         SqlSession mapper = MySession.getSession();
@@ -105,7 +105,7 @@ public class BoardService {
 //        System.out.println(postID + "&" +  currentPage);
 
         BoardDTO dto = dao.selectByPostID(mapper, postID);
-        System.out.println(dto);
+//        System.out.println(dto);
 
         request.setAttribute("boardDTO", dto);
         request.setAttribute("currentPage", currentPage);
@@ -113,5 +113,19 @@ public class BoardService {
 
         mapper.close();
         return dto;
+    }
+
+    // 게시글을 삭제(블라인드 처리)하는 UPDATE SQL 명령을 실행하는 메서드를 호출하는 메서드
+    public void delete(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("BoardService 클래스의 delete() 메서드 실행");
+        SqlSession mapper = MySession.getSession();
+
+        int postID = Integer.parseInt(request.getParameter("postID"));
+        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+
+        dao.delete(mapper, postID);
+
+        mapper.commit();
+        mapper.close();
     }
 }
