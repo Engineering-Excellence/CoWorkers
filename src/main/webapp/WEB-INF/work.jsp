@@ -1,9 +1,10 @@
+<%@ page import="com.silvertier.dto.WorkList" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%-- 곽규창(Kyle) --%>
+<%-- 조우철 --%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -26,7 +27,6 @@
 </head>
 
 <body>
-
 <fmt:requestEncoding value="UTF-8"/>
 <jsp:useBean id="date" class="java.util.Date"/>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -78,12 +78,12 @@
                     </tr>
                     <tr>
                         <th style="width: 100px; text-align: center;">글번호</th>
-                        <th style="width: 100px; text-align: center;">우선순위</th>
+                        <th style="width: 150px; text-align: center;">우선순위</th>
                         <th style="width: 500px; text-align: center;">업무명</th>
                         <th style="width: 100px; text-align: center;">상태</th>
-                        <th style="width: 200px; text-align: center;">담당자(직급)</th>
+                        <th style="width: 200px; text-align: center;">담당자</th>
                         <th style="width: 200px; text-align: center;">진척도</th>
-                        <th style="width: 200px; text-align: center;">작성일</th>
+                        <th style="width: 250px; text-align: center;">작성(수정)일</th>
                         <th style="width: 200px; text-align: center;">시작일</th>
                         <th style="width: 200px; text-align: center;">마감일</th>
                     </tr>
@@ -93,47 +93,128 @@
                     <%--긴급 --%>
                     <%--                    <c:if test="${currentPage==1}">--%>
                     <c:forEach var="dto" items="${priority}">
-                        <tr class="bg-danger">
-                            <td align="center">${dto.workID}</td>
-                            <td align="center">${dto.priority}</td>
-                            <td class="subject">
-                                <c:set var="subject" value="${fn:replace(dto.subject, '<', '&lt;')}"/>
-                                <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
-                                <a href="workView.sil?workID=${dto.workID}&currentPage=${workList.currentPage}">${subject}</a>
-                            </td>
-                            <td align="center">
-                                    ${dto.currentProgress}
-                            </td>
-                            </td>
-                            <td align="center">
-                                <c:set var="userName" value="${fn:replace(dto.userName, '<', '&lt;')}"/>
-                                <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
-                                    ${dto.userName}
-                            </td>
-                            <td align="center">
-                                    ${dto.workProgress}
-                            </td>
-                            <td align="center">
-                                <c:if test="${dto.writeDate.year==date.year&&dto.writeDate.month==date.month&&dto.writeDate.date==date.date}">
-                                    <fmt:formatDate value="${dto.writeDate}" pattern="a h:mm:ss"/>
-                                </c:if>
-                                <c:if test="${dto.writeDate.year!=date.year||dto.writeDate.month!=date.month||dto.writeDate.date!=date.date}">
-                                    <fmt:formatDate value="${dto.writeDate}" pattern="MM/dd"/>
-                                </c:if>
-                            </td>
-                            <td align="center">
-                                <fmt:formatDate value="${dto.startDate}" pattern="yyyy.MM.dd.(E)"/>
-                            </td>
-                            <td align="center">
-                                <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
-                            </td>
-                        </tr>
+                        <c:if test="${dto.deleteDate!=null}">
+                        </c:if>
+                        <c:if test="${dto.deleteDate==null}">
+                            <tr class="bg-danger">
+                                <td align="center">${dto.workID}</td>
+                                <td align="center">
+                                    <c:if test="${dto.deleteDate!=null}"></c:if>
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <c:if test="${dto.priority==1}">
+                                            <b style="color: crimson">긴급</b>
+                                        </c:if>
+                                        <c:if test="${dto.priority==2}">
+                                            <b style="color: violet">높음</b>
+                                        </c:if>
+                                        <c:if test="${dto.priority==3}">
+                                            <b style="color: limegreen">보통</b>
+                                        </c:if>
+                                        <c:if test="${dto.priority==4}">
+                                            <b style="color: darkgray">낮음</b>
+                                        </c:if>
+                                    </c:if>
+                                </td>
+                                <td class="subject" align="center">
+                                    <c:if test="${dto.deleteDate == null}">
+                                        <c:set var="subject" value="${fn:replace(dto.subject, '<', '&lt;')}"/>
+                                        <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
+                                        <a href="workView.sil?workID=${dto.workID}&currentPage=${workList.currentPage}">${subject}</a>
+                                    </c:if>
+                                </td>
+                                <td align="center">
+                                    <c:if test="${dto.deleteDate!=null}"></c:if>
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <c:if test="${dto.currentProgress==1}">
+                                            요청중
+                                        </c:if>
+                                        <c:if test="${dto.currentProgress==2}">
+                                            진행중
+                                        </c:if>
+                                        <c:if test="${dto.currentProgress==3}">
+                                            완료됨
+                                        </c:if>
+                                    </c:if>
+                                </td>
+                                </td>
+                                <td align="center">
+                                    <c:if test="${dto.deleteDate!=null}"></c:if>
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <c:set var="userName" value="${fn:replace(dto.userName, '<', '&lt;')}"/>
+                                        <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
+                                        ${dto.userName}
+                                    </c:if>
+                                </td>
+                                <td align="left">
+                                    <c:if test="${dto.deleteDate!=null}"></c:if>
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <c:if test="${dto.workProgress!=10}">
+                                            <c:if test="${dto.workProgress<5}">
+                                                <div style="height: 5px;width:${dto.workProgress*10}px;background-color:red;"></div>
+                                            </c:if>
+                                        </c:if>
+                                        <c:if test="${dto.workProgress!=10}">
+                                            <c:if test="${dto.workProgress>=5}">
+                                                <div style="height: 5px;width:${dto.workProgress*10}px;background-color:orange;"></div>
+                                            </c:if>
+                                        </c:if>
+                                        <c:if test="${dto.workProgress==10}">
+                                            <div style="height: 5px;width: ${dto.workProgress*10}px;background-color:springgreen;"></div>
+                                        </c:if>
+                                        ${dto.workProgress*10}%
+                                    </c:if>
+                                </td>
+                                <td align="center">
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <c:if test="${dto.updateDate == null}">
+                                            <c:if test="${dto.writeDate.year==date.year&&dto.writeDate.month==date.month&&dto.writeDate.date==date.date}">
+                                                <fmt:formatDate value="${dto.writeDate}" pattern="a h:mm:ss"/>
+                                            </c:if>
+                                            <c:if test="${dto.writeDate.year!=date.year||dto.writeDate.month!=date.month||dto.writeDate.date!=date.date}">
+                                                <fmt:formatDate value="${dto.writeDate}" pattern="MM/dd"/>
+                                            </c:if>
+                                        </c:if>
+                                        <c:if test="${dto.updateDate != null}">
+                                            <c:if test="${dto.updateDate.year==date.year&&dto.updateDate.month==date.month&&dto.updateDate.date==date.date}">
+                                                (수정됨)
+                                                <fmt:formatDate value="${dto.updateDate}" pattern="a h:mm:ss"/>
+                                            </c:if>
+                                            <c:if test="${dto.updateDate.year!=date.year||dto.updateDate.month!=date.month||dto.updateDate.date!=date.date}">
+                                                (수정됨)
+                                                <fmt:formatDate value="${dto.updateDate}" pattern="MM/dd"/>
+                                            </c:if>
+                                        </c:if>
+                                    </c:if>
+                                    <c:if test="${dto.deleteDate!=null}">
+                                        <c:if test="${dto.deleteDate.year==date.year&&dto.deleteDate.month==date.month&&dto.deleteDate.date==date.date}">
+                                            (삭제됨)
+                                            <fmt:formatDate value="${dto.deleteDate}" pattern="a h:mm:ss"/>
+                                        </c:if>
+                                        <c:if test="${dto.updateDate.year!=date.year||dto.deleteDate.month!=date.month||dto.deleteDate.date!=date.date}">
+                                            (삭제됨)
+                                            <fmt:formatDate value="${dto.deleteDate}" pattern="MM/dd"/>
+                                        </c:if>
+                                    </c:if>
+                                </td>
+                                <td align="center">
+                                    <c:if test="${dto.deleteDate!=null}"></c:if>
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <fmt:formatDate value="${dto.startDate}" pattern="yyyy.MM.dd.(E)"/>
+                                    </c:if>
+                                </td>
+                                <td align="center">
+                                    <c:if test="${dto.deleteDate!=null}"></c:if>
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:if>
                     </c:forEach>
                     <%--                    </c:if>--%>
 
 
                     <!-- 글을 출력한다. -->
-
                     <c:set var="list" value="${workList.list}"/>
                     <c:if test="${list.size() == 0}">
                         <tr>
@@ -146,37 +227,118 @@
                         <c:forEach var="dto" items="${list}">
                             <tr>
                                 <td align="center">${dto.workID}</td>
-                                <td align="center">${dto.priority}</td>
-                                <td class="subject">
-                                    <c:set var="subject" value="${fn:replace(dto.subject, '<', '&lt;')}"/>
-                                    <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
-                                    <a href="workView.sil?workID=${dto.workID}&currentPage=${workList.currentPage}">${dto.subject}</a>
+                                <td align="center">
+                                    <c:if test="${dto.deleteDate!=null}"></c:if>
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <c:if test="${dto.priority==1}">
+                                            <b style="color: crimson">긴급</b>
+                                        </c:if>
+                                        <c:if test="${dto.priority==2}">
+                                            <b style="color: violet">높음</b>
+                                        </c:if>
+                                        <c:if test="${dto.priority==3}">
+                                            <b style="color: limegreen">보통</b>
+                                        </c:if>
+                                        <c:if test="${dto.priority==4}">
+                                            <b style="color: darkgray">낮음</b>
+                                        </c:if>
+                                    </c:if>
+                                </td>
+                                <td class="subject" align="center">
+                                    <c:if test="${dto.deleteDate!=null}">
+                                        삭제된 글입니다.
+                                    </c:if>
+                                    <c:if test="${dto.deleteDate == null}">
+                                        <c:set var="subject" value="${fn:replace(dto.subject, '<', '&lt;')}"/>
+                                        <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
+                                        <a href="workView.sil?workID=${dto.workID}&currentPage=${workList.currentPage}">${subject}</a>
+                                    </c:if>
                                 </td>
                                 <td align="center">
-                                        ${dto.currentProgress}
+                                    <c:if test="${dto.deleteDate!=null}"></c:if>
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <c:if test="${dto.currentProgress==1}">
+                                            요청중
+                                        </c:if>
+                                        <c:if test="${dto.currentProgress==2}">
+                                            진행중
+                                        </c:if>
+                                        <c:if test="${dto.currentProgress==3}">
+                                            완료됨
+                                        </c:if>
+                                    </c:if>
                                 </td>
                                 </td>
                                 <td align="center">
-                                    <c:set var="userName" value="${fn:replace(dto.userName, '<', '&lt;')}"/>
-                                    <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
+                                    <c:if test="${dto.deleteDate!=null}"></c:if>
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <c:set var="userName" value="${fn:replace(dto.userName, '<', '&lt;')}"/>
+                                        <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
                                         ${userName}
-                                </td>
-                                <td align="center">
-                                        ${dto.workProgress}
-                                </td>
-                                <td align="center">
-                                    <c:if test="${dto.writeDate.year==date.year&&dto.writeDate.month==date.month&&dto.writeDate.date==date.date}">
-                                        <fmt:formatDate value="${dto.writeDate}" pattern="a h:mm:ss"/>
-                                    </c:if>
-                                    <c:if test="${dto.writeDate.year!=date.year||dto.writeDate.month!=date.month||dto.writeDate.date!=date.date}">
-                                        <fmt:formatDate value="${dto.writeDate}" pattern="MM/dd"/>
                                     </c:if>
                                 </td>
-                                <td align="center">
-                                    <fmt:formatDate value="${dto.startDate}" pattern="yyyy.MM.dd.(E)"/>
+                                <td align="left">
+                                    <c:if test="${dto.deleteDate!=null}"></c:if>
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <c:if test="${dto.workProgress!=10}">
+                                            <c:if test="${dto.workProgress<5}">
+                                                <div style="height: 5px;width:${dto.workProgress*10}px;background-color:red;"></div>
+                                            </c:if>
+                                        </c:if>
+                                        <c:if test="${dto.workProgress!=10}">
+                                            <c:if test="${dto.workProgress>=5}">
+                                                <div style="height: 5px;width:${dto.workProgress*10}px;background-color:orange;"></div>
+                                            </c:if>
+                                        </c:if>
+                                        <c:if test="${dto.workProgress==10}">
+                                            <div style="height: 5px;width: ${dto.workProgress*10}px;background-color:springgreen;"></div>
+                                        </c:if>
+                                        ${dto.workProgress*10}%
+                                    </c:if>
                                 </td>
                                 <td align="center">
-                                    <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <c:if test="${dto.updateDate == null}">
+                                            <c:if test="${dto.writeDate.year==date.year&&dto.writeDate.month==date.month&&dto.writeDate.date==date.date}">
+                                                <fmt:formatDate value="${dto.writeDate}" pattern="a h:mm:ss"/>
+                                            </c:if>
+                                            <c:if test="${dto.writeDate.year!=date.year||dto.writeDate.month!=date.month||dto.writeDate.date!=date.date}">
+                                                <fmt:formatDate value="${dto.writeDate}" pattern="MM/dd"/>
+                                            </c:if>
+                                        </c:if>
+                                        <c:if test="${dto.updateDate != null}">
+                                            <c:if test="${dto.updateDate.year==date.year&&dto.updateDate.month==date.month&&dto.updateDate.date==date.date}">
+                                                (수정됨)
+                                                <fmt:formatDate value="${dto.updateDate}" pattern="a h:mm:ss"/>
+                                            </c:if>
+                                            <c:if test="${dto.updateDate.year!=date.year||dto.updateDate.month!=date.month||dto.updateDate.date!=date.date}">
+                                                (수정됨)
+                                                <fmt:formatDate value="${dto.updateDate}" pattern="MM/dd"/>
+                                            </c:if>
+                                        </c:if>
+                                    </c:if>
+                                    <c:if test="${dto.deleteDate!=null}">
+                                        <c:if test="${dto.deleteDate.year==date.year&&dto.deleteDate.month==date.month&&dto.deleteDate.date==date.date}">
+                                            (삭제됨)
+                                            <fmt:formatDate value="${dto.deleteDate}" pattern="a h:mm:ss"/>
+                                        </c:if>
+                                        <c:if test="${dto.updateDate.year!=date.year||dto.deleteDate.month!=date.month||dto.deleteDate.date!=date.date}">
+                                            (삭제됨)
+                                            <fmt:formatDate value="${dto.deleteDate}" pattern="MM/dd"/>
+                                        </c:if>
+                                    </c:if>
+                                </td>
+                                <td align="center">
+                                    <c:if test="${dto.deleteDate!=null}"></c:if>
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <fmt:formatDate value="${dto.startDate}" pattern="yyyy.MM.dd.(E)"/>
+                                    </c:if>
+                                </td>
+                                <td align="center">
+                                    <c:if test="${dto.deleteDate!=null}"></c:if>
+                                    <c:if test="${dto.deleteDate==null}">
+                                        <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>

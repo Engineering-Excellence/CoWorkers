@@ -2,7 +2,7 @@ package com.silvertier.dto;
 
 import java.sql.Date;
 
-//조우철 anbin
+//조우철
 public class WorkDTO {
     private int workID; // 글번호 // pk // not null
     private String subject; // 제목 // not null
@@ -18,9 +18,18 @@ public class WorkDTO {
     private Date deadline; // 마감일 // not null
     private String ip; // ip
     private String admin; // 관리자
+    private int userID; // 작성자(담당자) // fk // not null
 
     public int getWorkID() {
         return workID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public void setWorkID(int workID) {

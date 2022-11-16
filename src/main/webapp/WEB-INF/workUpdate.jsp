@@ -1,4 +1,3 @@
-
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="com.silvertier.dto.WorkDTO" %>
@@ -7,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%--조우철--%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -34,10 +33,9 @@
 
     Map<String, String[]> map = request.getParameterMap();
     Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
-    while(itr.hasNext())
-    {
+    while (itr.hasNext()) {
         Map.Entry<String, String[]> entry = itr.next();
-        System.out.println(String.format("%s : %s", entry.getKey(),String.join(", ", entry.getValue())));
+        System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
     }
 %>
 <fmt:requestEncoding value="UTF-8"/>
@@ -93,7 +91,8 @@
                             <th class="align-middle table-dark">제목
                             </th>
                             <td colspan="2">
-                                <input id="subject" type="text" class="form-control form-control-sm" name="subject"/>
+                                <input id="subject" type="text" class="form-control form-control-sm"
+                                       value="${dto.subject}" name="subject"/>
                             </td>
                         </tr>
                         <tr>
@@ -101,44 +100,85 @@
                             </th>
                             <td colspan="2">
                 <textarea id="content" class="form-control form-control-sm" rows="10" name="content"
-                          style="resize: none"></textarea>
+                          style="resize: none">${dto.content}</textarea>
                             </td>
                         </tr>
                         <tr>
                             <th class="align-middle table-dark">우선순위
                             </th>
                             <td colspan="2">
-                                <input name="priority" type="radio" value="1" checked/>긴급
-                                <input name="priority" type="radio" value="2"/>높음
-                                <input name="priority" type="radio" value="3"/>보통
-                                <input name="priority" type="radio" value="4"/>낮음
+                                <c:if test="${dto.priority == 1}">
+                                    <input name="priority" type="radio" checked
+                                           value="<c:out value="${dto.currentProgress}"/>"/>긴급
+                                    <input name="priority" type="radio" value="2"/>높음
+                                    <input name="priority" type="radio" value="3"/>보통
+                                    <input name="priority" type="radio" value="4"/>낮음
+                                </c:if>
+                                <c:if test="${dto.priority == 2}">
+                                    <input name="priority" type="radio" value="1"/>긴급
+                                    <input name="priority" type="radio" checked
+                                           value="<c:out value="${dto.currentProgress}"/>"/>높음
+                                    <input name="priority" type="radio" value="3"/>보통
+                                    <input name="priority" type="radio" value="4"/>낮읍
+                                </c:if>
+                                <c:if test="${dto.priority == 3}">
+                                    <input name="priority" type="radio" value="1"/>긴급
+                                    <input name="priority" type="radio" value="2"/>높음
+                                    <input name="priority" type="radio" checked
+                                           value="<c:out value="${dto.currentProgress}"/>"/>보통
+                                    <input name="priority" type="radio" value="4"/>낮음
+                                </c:if>
+                                <c:if test="${dto.priority == 4}">
+                                    <input name="priority" type="radio" value="1"/>긴급
+                                    <input name="priority" type="radio" value="2"/>높음
+                                    <input name="priority" type="radio" value="3"/>보통
+                                    <input name="priority" type="radio" checked
+                                           value="<c:out value="${dto.currentProgress}"/>"/>낮음
+                                </c:if>
                             </td>
                         </tr>
                         <tr>
-                            <th class="align-middle table-dark">업무상태
+                            <th class="align-middle table-dark">업무상태${dto.currentProgress}
                             </th>
                             <td colspan="2">
-                                <input name="currentProgress" type="radio" value="1" checked/>요청
-                                <input name="currentProgress" type="radio" value="2"/>진행
-                                <input name="currentProgress" type="radio" value="3"/>완료
+                                <c:if test="${dto.currentProgress == 1}">
+                                    <input name="currentProgress" type="radio" checked
+                                           value="<c:out value="${dto.currentProgress}"/>"/>요청
+                                    <input name="currentProgress" type="radio" value="2"/>진행
+                                    <input name="currentProgress" type="radio" value="3"/>완료
+                                </c:if>
+                                <c:if test="${dto.currentProgress == 2}">
+                                    <input name="currentProgress" type="radio" value="1"/>요청
+                                    <input name="currentProgress" type="radio" checked
+                                           value="<c:out value="${dto.currentProgress}"/>"/>진행
+                                    <input name="currentProgress" type="radio" value="3"/>완료
+                                </c:if>
+                                <c:if test="${dto.currentProgress == 3}">
+                                    <input name="currentProgress" type="radio" value="1"/>요청
+                                    <input name="currentProgress" type="radio" value="2"/>진행
+                                    <input name="currentProgress" type="radio" checked
+                                           value="<c:out value="${dto.currentProgress}"/>"/>완료
+                                </c:if>
                             </td>
                         </tr>
                         <tr>
-                            <th class="align-middle table-dark">업무진척도
+                            <th class="align-middle table-dark">업무진척도${dto.workProgress}
                             </th>
                             <td colspan="2">
-                                <select id="workProgress" class="form-control form-control-sm" name="workProgress" size="1">
-                                    <option value="0" selected>0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
+                                <select id="workProgress" class="form-control form-control-sm" name="workProgress"
+                                        size="1">
+                                    <option value="${dto.workProgress}">${dto.workProgress*10}%</option>
+                                    <option value="0">0%</option>
+                                    <option value="1">10%</option>
+                                    <option value="2">20%</option>
+                                    <option value="3">30%</option>
+                                    <option value="4">40%</option>
+                                    <option value="5">50%</option>
+                                    <option value="6">60%</option>
+                                    <option value="7">70%</option>
+                                    <option value="8">80%</option>
+                                    <option value="9">90%</option>
+                                    <option value="10">100%</option>
                                 </select>
                             </td>
                         </tr>
@@ -146,19 +186,22 @@
                             <th class="align-middle table-dark">시작일
                             </th>
                             <td colspan="2">
-                                <input id="startDate" type="date" class="form-control form-control-sm" name="startDate"/>
+                                <input id="startDate" type="date" class="form-control form-control-sm" name="startDate"
+                                       value="${dto.startDate}"/>
                             </td>
                         </tr>
                         <tr>
                             <th class="align-middle table-dark">마감일
                             </th>
                             <td colspan="2">
-                                <input id="deadline" type="date" class="form-control form-control-sm" name="deadline"/>
+                                <input id="deadline" type="date" class="form-control form-control-sm" name="deadline"
+                                       value="${dto.deadline}"/>
                             </td>
                         </tr>
                         <tr class="table-secondary">
                             <td colspan="3" align="center">
-                                <input class="btn btn-primary btn-sm" type="submit" value="저장하기" style="font-size: 13px"/>
+                                <input class="btn btn-primary btn-sm" type="submit" value="저장하기"
+                                       style="font-size: 13px"/>
                                 <input class="btn btn-danger btn-sm" type="reset" value="다시쓰기" style="font-size: 13px"/>
                                 <input class="btn btn-info btn-sm" type="button" value="돌아가기" style="font-size: 13px"
                                        onclick="history.back()"/>
@@ -166,9 +209,9 @@
                         </tr>
                     </table>
                     <td>
-                    <input type="hidden" name="workID" value="${dto.workID}"/>
-                    <input type="hidden" name="currentPage" value="${currentPage}"/>
-                    <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
+                        <input type="hidden" name="workID" value="${dto.workID}"/>
+                        <input type="hidden" name="currentPage" value="${currentPage}"/>
+                        <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
                     </td>
                 </form>
             </div>
@@ -178,7 +221,6 @@
 
 <script src="../js/jquery-3.6.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
-<script src="../js/worInsert.js"></script>
 </body>
 
 </html>

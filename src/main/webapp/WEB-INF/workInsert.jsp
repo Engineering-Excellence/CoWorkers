@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%-- 곽규창(Kyle) --%>
+<%-- 조우철 --%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -94,10 +94,10 @@
                             <th class="align-middle table-dark">우선순위
                             </th>
                             <td colspan="2">
-                                <input name="priority" type="radio" value="1" checked/>긴급
+                                <input name="priority" type="radio" value="1"/>긴급
                                 <input name="priority" type="radio" value="2"/>높음
                                 <input name="priority" type="radio" value="3"/>보통
-                                <input name="priority" type="radio" value="4"/>낮음
+                                <input name="priority" type="radio" value="4" checked/>낮음
                             </td>
                         </tr>
                         <tr>
@@ -114,17 +114,17 @@
                             </th>
                             <td colspan="2">
                                 <select id="workProgress" class="form-control form-control-sm" name="workProgress" size="1">
-                                    <option value="0" selected>0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
+                                    <option value="0" selected>0%</option>
+                                    <option value="1">10%</option>
+                                    <option value="2">20%</option>
+                                    <option value="3">30%</option>
+                                    <option value="4">40%</option>
+                                    <option value="5">50%</option>
+                                    <option value="6">60%</option>
+                                    <option value="7">70%</option>
+                                    <option value="8">80%</option>
+                                    <option value="9">90%</option>
+                                    <option value="10">100%</option>
                                 </select>
                             </td>
                         </tr>
@@ -151,7 +151,6 @@
                             </td>
                         </tr>
                     </table>
-
                     <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
                 </form>
             </div>
