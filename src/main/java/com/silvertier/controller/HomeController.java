@@ -86,10 +86,6 @@ public class HomeController extends HttpServlet {
                 viewPage += "board";
                 break;
 
-            /*case "/work.sil":
-                viewPage += "work";
-                break;*/
-
             case "/file.sil":
                 viewPage += "file";
                 break;
@@ -108,7 +104,7 @@ public class HomeController extends HttpServlet {
                 viewPage += "event";
                 break;
 
-            // Anbin
+            // 조우철
             case "/work.sil":
                 viewPage += "work";
                 WorkService.getInstance().workSelectList(request, response);
