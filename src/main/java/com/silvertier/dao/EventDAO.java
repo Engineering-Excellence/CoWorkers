@@ -12,9 +12,9 @@ public class EventDAO {
 		return instance;
 	}
 	
-	public void insert(SqlSession mapper, EventDTO eDTO) {
+	public void eventInsert(SqlSession mapper, EventDTO eDTO) {
 		System.out.println("insert() Method of EventDAO Class");
-		mapper.insert("insert", eDTO);
+		mapper.insert("eventInsert", eDTO);
 	}
 	
 

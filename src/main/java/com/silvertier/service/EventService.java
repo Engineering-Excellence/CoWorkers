@@ -19,7 +19,7 @@ public class EventService {
 	private EventDAO dao = EventDAO.getInstance();
 	private EventDTO eDTO = new EventDTO();
 	
-	public void insert(HttpServletRequest request, HttpServletResponse response) {
+	public void eventInsert(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("insert() Method of EventService Class");
 		SqlSession mapper = MySession.getSession();
 		
@@ -38,7 +38,7 @@ public class EventService {
 		tempDate = Date.valueOf(request.getParameter("endDate"));
 		eDTO.setEndDate(tempDate);
 		System.out.println(eDTO);
-		dao.insert(mapper, eDTO);
+		dao.eventInsert(mapper, eDTO);
 		mapper.commit();
 		mapper.close();
 	}

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.silvertier.dto.WorkDTO">
     <!--조우철 anbin-->
-    <insert id="insert" parameterType="wdto">
+    <insert id="workInsert" parameterType="wdto">
         insert into COWORK(workID, subject, userName, content, priority,
                            currentProgress, workProgress,
                            startDate, deadline, ip, admin)
@@ -11,11 +11,11 @@
                 #{startDate}, #{deadline}, #{ip}, 0)
 
     </insert>
-    <select id="selectCount" resultType="int">
+    <select id="workSelectCount" resultType="int">
         select count(*)
         from COWORK
     </select>
-    <select id="selectList" parameterType="java.util.HashMap" resultType="wdto">
+    <select id="workSelectList" parameterType="java.util.HashMap" resultType="wdto">
         <![CDATA[
         SELECT *
         FROM (SELECT rownum rnum, AA.*
@@ -24,13 +24,13 @@
         WHERE rnum >= #{startNo}
         ]]>
     </select>
-    <select id="selectPriority" resultType="wdto">
+    <select id="workSelectPriority" resultType="wdto">
         select *
         from COWORK
         where priority = 1
         order by workID desc
     </select>
-    <select id="selectByWorkID" parameterType="int" resultType="wdto">
+    <select id="workSelectByWorkID" parameterType="int" resultType="wdto">
         select *
         from COWORK
         where workID = #{workID}
@@ -40,12 +40,12 @@
         delete from COWORK where workID = #{workID}
     </delete>
     -->
-    <delete id="delete" parameterType="int">
+    <delete id="workDelete" parameterType="int">
         update cowork
         set deleteDate = sysdate
         where workID = #{workID}
     </delete>
-    <update id="update" parameterType="wdto">
+    <update id="workUpdate" parameterType="wdto">
         begin
         update COWORK
         set subject         = #{subject},

@@ -7,7 +7,7 @@
 		insert into event (eventid, userid, subject, content, startdate, enddate, projectcolor, hit, commentcount, ip, isallday) 
 		values (event_idx_seq.nextval, 1234, #{subject}, #{content}, #{startDate}, #{endDate}, #{projectColor}, 0, 0, #{ip}, #{isAllDay})
 	</insert> -->
-	<insert id="insert" parameterType="eDTO">
+	<insert id="eventInsert" parameterType="eDTO">
 		insert into event (eventid, userid, subject, content, startdate, enddate, projectcolor, hit, commentcount, ip, isallday) 
 		values (event_idx_seq.nextval, 1234, #{subject}, #{content}, #{startDate}, #{endDate}, #{projectColor}, 0, 0, #{ip}, #{isAllDay})
 	</insert>

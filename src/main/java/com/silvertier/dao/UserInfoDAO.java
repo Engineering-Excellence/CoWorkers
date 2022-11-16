@@ -13,23 +13,23 @@ public class UserInfoDAO {
 	}
 	
 	// 회원가입 데이터 입력
-	public void insert(SqlSession mapper, UserInfoDTO userInfoDTO) {
+	public void userInfoInsert(SqlSession mapper, UserInfoDTO userInfoDTO) {
 		System.out.println("UserInfoDAO -> insert()");
-		mapper.insert("insert", userInfoDTO);
+		mapper.insert("userInfoInsert", userInfoDTO);
 	}
 	
 	// 로그인시 아이디 비교
-	public String compareID(SqlSession mapper, UserInfoDTO userInfoDTO) {
+	public String userInfoCompareID(SqlSession mapper, UserInfoDTO userInfoDTO) {
 		System.out.println("UserInfoDAO -> compareID()");
 //		System.out.println("dao ID: " + userInfoDTO);
-		return (String) mapper.selectOne("compareID", userInfoDTO);
+		return (String) mapper.selectOne("userInfoCompareID", userInfoDTO);
 	}
 	
 	// 로그인시 패스워드 비교
-	public String comparePW(SqlSession mapper, UserInfoDTO userInfoDTO) {
+	public String userInfoComparePW(SqlSession mapper, UserInfoDTO userInfoDTO) {
 		System.out.println("UserInfoDAO -> comparePW()");
 //		System.out.println("dao PW: " + userInfoDTO);
-		return (String) mapper.selectOne("comparePW", userInfoDTO);
+		return (String) mapper.selectOne("userInfoComparePW", userInfoDTO);
 	}
 	
 	

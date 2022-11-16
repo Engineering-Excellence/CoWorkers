@@ -23,7 +23,7 @@ public class BoardService {
     private final BoardDAO dao = BoardDAO.getInstance();
 
     // 페이징을 위한 클래스 객체를 생성하여 request 영역에 저장하는 메서드를 호출하는 메서드
-    public void selectList(HttpServletRequest request, HttpServletResponse response) {
+    public void boardSelectList(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("BoardService 클래스의 selectList() 메서드 실행");
         SqlSession mapper = MySession.getSession();
 
@@ -31,11 +31,10 @@ public class BoardService {
         try {
             currentPage = Integer.parseInt(request.getParameter("currentPage"));
         } catch (NumberFormatException e) {
-//            throw new RuntimeException(e);
         }
 
         int pageSize = 10;
-        int totalCount = dao.selectCount(mapper);
+        int totalCount = dao.boardSelectCount(mapper);
 //        System.out.println(totalCount);
 
         BoardList boardList = new BoardList(pageSize, totalCount, currentPage);
@@ -44,7 +43,7 @@ public class BoardService {
         hashMap.put("startNo", boardList.getStartNo());
         hashMap.put("endNo", boardList.getEndNo());
 
-        boardList.setList(dao.selectList(mapper, hashMap));
+        boardList.setList(dao.boardSelectList(mapper, hashMap));
 //        System.out.println(boardList);
 
         request.setAttribute("boardList", boardList);
@@ -53,7 +52,7 @@ public class BoardService {
     }
 
     // 게시판에 새 글을 저장하는 메서드를 호출하는 메서드
-    public void insert(HttpServletRequest request, HttpServletResponse response) {
+    public void boardInsert(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("BoardService 클래스의 insert() 메서드 실행");
         SqlSession mapper = MySession.getSession();
 
@@ -65,18 +64,18 @@ public class BoardService {
         if (request.getParameter("notice") != null) {
             dto.setNotice(request.getParameter("notice"));
         }
-        dao.insert(mapper, dto);
+        dao.boardInsert(mapper, dto);
 
         mapper.commit();
         mapper.close();
     }
 
     // 모든 공지글을 얻어오는 SELECT SQL 명령을 실행하는 메서드를 호출하는 메서드
-    public void selectNotice(HttpServletRequest request, HttpServletResponse response) {
+    public void boardSelectNotice(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("BoardService 클래스의 selectNotice() 메서드 실행");
         SqlSession mapper = MySession.getSession();
 
-        ArrayList<BoardDTO> notice = dao.selectNotice(mapper);
+        ArrayList<BoardDTO> notice = dao.boardSelectNotice(mapper);
 //        System.out.println("notice: " + notice);
         request.setAttribute("notice", notice);
 
@@ -84,19 +83,19 @@ public class BoardService {
     }
 
     // 조회수를 증가시키는 UPDATE SQL 명령을 실행하는 메서드를 호출하는 메서드
-    public void hit(HttpServletRequest request, HttpServletResponse response) {
+    public void boardHit(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("BoardService 클래스의 hit() 메서드 실행");
         SqlSession mapper = MySession.getSession();
 
         int postID = Integer.parseInt(request.getParameter("postID"));
-        dao.hit(mapper, postID);
+        dao.boardHit(mapper, postID);
 
         mapper.commit();
         mapper.close();
     }
 
     // 조회수를 증가시킨 글 1건을 선택하는 SELECT SQL 명령을 실행하고  request 영역에 저장하는 메서드
-    public BoardDTO selectByPostID(HttpServletRequest request, HttpServletResponse response) {
+    public BoardDTO boardSelectByPostID(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("BoardService 클래스의 selectByPostID() 메서드 실행");
         SqlSession mapper = MySession.getSession();
 
@@ -104,7 +103,7 @@ public class BoardService {
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 //        System.out.println(postID + "&" +  currentPage);
 
-        BoardDTO dto = dao.selectByPostID(mapper, postID);
+        BoardDTO dto = dao.boardSelectByPostID(mapper, postID);
 //        System.out.println(dto);
 
         request.setAttribute("boardDTO", dto);
@@ -116,14 +115,14 @@ public class BoardService {
     }
 
     // 게시글을 삭제(블라인드 처리)하는 UPDATE SQL 명령을 실행하는 메서드를 호출하는 메서드
-    public void delete(HttpServletRequest request, HttpServletResponse response) {
+    public void boardDelete(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("BoardService 클래스의 delete() 메서드 실행");
         SqlSession mapper = MySession.getSession();
 
         int postID = Integer.parseInt(request.getParameter("postID"));
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
-        dao.delete(mapper, postID);
+        dao.boardDelete(mapper, postID);
 
         mapper.commit();
         mapper.close();

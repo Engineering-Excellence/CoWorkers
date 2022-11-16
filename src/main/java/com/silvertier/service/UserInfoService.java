@@ -20,7 +20,7 @@ public class UserInfoService {
 	private UserInfoDAO dao = UserInfoDAO.getInstance();
 	
 	// 회원가입 데이터 입력
-	public void insert(HttpServletRequest request, HttpServletResponse response) {
+	public void userInfoInsert(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("UserInfoService -> insert()");
 		SqlSession mapper = MySession.getSession();
 	
@@ -33,13 +33,13 @@ public class UserInfoService {
 		userInfoDTO.setGender(request.getParameter("gender"));
 		userInfoDTO.setEmail(request.getParameter("email"));
 		
-		dao.insert(mapper, userInfoDTO);
+		dao.userInfoInsert(mapper, userInfoDTO);
 		mapper.commit();
 		mapper.close();
 	}
 	
 	// 로그인 시 아이디 비교
-	public String compareID(HttpServletRequest request, HttpServletResponse response) {
+	public String userInfoCompareID(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("UserInfoService -> compareID()");
 		SqlSession mapper = MySession.getSession();
 		
@@ -47,14 +47,14 @@ public class UserInfoService {
 		userInfoDTO.setAccountID(request.getParameter("accountID"));
 		userInfoDTO.setAccountPassword(request.getParameter("accountPassword"));
 		System.out.println("Service ID: " + userInfoDTO);
-		String originID = dao.compareID(mapper, userInfoDTO);
+		String originID = dao.userInfoCompareID(mapper, userInfoDTO);
 		mapper.close();
 		return originID;
 //		return compareID(request, response); // 에러: 무한재귀
 	}
 	
 	// 로그인 시 패스워드 비교
-	public String comparePW(HttpServletRequest request, HttpServletResponse response) {
+	public String userInfoComparePW(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("UserInfoService -> comparePW()");
 		SqlSession mapper = MySession.getSession();
 		
@@ -62,7 +62,7 @@ public class UserInfoService {
 		userInfoDTO.setAccountID(request.getParameter("accountID"));
 		userInfoDTO.setAccountPassword(request.getParameter("accountPassword"));
 		System.out.println("Service PW: " + userInfoDTO);
-		String originPW = dao.comparePW(mapper, userInfoDTO);
+		String originPW = dao.userInfoComparePW(mapper, userInfoDTO);
 		mapper.close();
 		return originPW;
 //		return comparePW(request, response); // 에러: 무한재귀

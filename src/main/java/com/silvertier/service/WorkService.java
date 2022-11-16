@@ -28,7 +28,7 @@ public class WorkService {
     }
 
 
-    public void insert(HttpServletRequest request, HttpServletResponse response) {
+    public void workInsert(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("service insert()");
         SqlSession mapper = MySession.getSession();
         WorkDTO dto = new WorkDTO();
@@ -52,7 +52,7 @@ public class WorkService {
 //        dto.setUserName(request.getParameter("userName"));
 //        System.out.println("userName: " + request.getParameter("userName"));
 
-        dao.insert(mapper, dto);
+        dao.workInsert(mapper, dto);
 
 
         mapper.commit();
@@ -60,7 +60,7 @@ public class WorkService {
     }
 
 
-    public void selectList(HttpServletRequest request, HttpServletResponse response) {
+    public void workSelectList(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Service selectList()");
         SqlSession mapper = MySession.getSession();
 
@@ -75,7 +75,7 @@ public class WorkService {
 
 
         int pageSize = 10;
-        int totalCount = dao.selectCount(mapper);
+        int totalCount = dao.workSelectCount(mapper);
 //        System.out.println("totalCount: " + totalCount);
 
         WorkList workList = new WorkList(pageSize, totalCount, currentPage);
@@ -84,7 +84,7 @@ public class WorkService {
         hmap.put("startNo", workList.getStartNo());
         hmap.put("endNo", workList.getEndNo());
 
-        workList.setList(dao.selectList(mapper, hmap));
+        workList.setList(dao.workSelectList(mapper, hmap));
 //        System.out.println("list: " + workList.getList());
 
         request.setAttribute("workList", workList);
@@ -94,11 +94,11 @@ public class WorkService {
     }
 
 
-    public void selectPriority(HttpServletRequest request, HttpServletResponse response) {
+    public void workSelectPriority(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Service selectPriority()");
         SqlSession mapper = MySession.getSession();
 
-        ArrayList<WorkDTO> priority = dao.selectPriority(mapper);
+        ArrayList<WorkDTO> priority = dao.workSelectPriority(mapper);
 //        System.out.println("priority: " + priority);
 
         request.setAttribute("priority", priority);
@@ -108,7 +108,7 @@ public class WorkService {
 
     }
 
-    public void selectByWorkID(HttpServletRequest request, HttpServletResponse response) {
+    public void workSelectByWorkID(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Service selectByWorkID()");
         SqlSession mapper = MySession.getSession();
 
@@ -116,7 +116,7 @@ public class WorkService {
 //        System.out.println("workID: " + workID);
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
-        WorkDTO dto = dao.selectByWorkID(mapper, workID);
+        WorkDTO dto = dao.workSelectByWorkID(mapper, workID);
         request.setAttribute("dto", dto);
         request.setAttribute("currentPage", currentPage);
 
@@ -125,20 +125,20 @@ public class WorkService {
     }
 
 
-    public void delete(HttpServletRequest request, HttpServletResponse response) {
+    public void workDelete(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Service delete()");
         SqlSession mapper = MySession.getSession();
 
         int workID = Integer.parseInt(request.getParameter("workID"));
 //        System.out.println("workID: " + workID);
 
-        dao.delete(mapper, workID);
+        dao.workDelete(mapper, workID);
 
         mapper.commit();
         mapper.close();
     }
 
-    public void update(HttpServletRequest request, HttpServletResponse response) {
+    public void workUpdate(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Service update()");
         System.out.println(request.getMethod());
 
@@ -166,7 +166,7 @@ public class WorkService {
         dto.setWorkID(Integer.parseInt(request.getParameter("workID")));
 
 
-        dao.update(mapper, dto);
+        dao.workUpdate(mapper, dto);
 
     }
 }

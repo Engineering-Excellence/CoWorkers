@@ -19,40 +19,40 @@ public class WorkDAO {
     public static WorkDAO getInstance() {
         return instance;
     }
-    public void insert(SqlSession mapper, WorkDTO dto) {
+    public void workInsert(SqlSession mapper, WorkDTO dto) {
         System.out.println("dao insert()");
-        mapper.insert("insert", dto);
+        mapper.insert("workInsert", dto);
     }
 
 
-    public int selectCount(SqlSession mapper) {
+    public int workSelectCount(SqlSession mapper) {
         System.out.println("dao selectCount()");
-        return (int) mapper.selectOne("selectCount");
+        return (int) mapper.selectOne("workSelectCount");
     }
 
-    public ArrayList<WorkDTO> selectList(SqlSession mapper, HashMap<String, Integer> hmap) {
+    public ArrayList<WorkDTO> workSelectList(SqlSession mapper, HashMap<String, Integer> hmap) {
         System.out.println("dao selectList()");
-        return (ArrayList<WorkDTO>) mapper.selectList("selectList", hmap);
+        return (ArrayList<WorkDTO>) mapper.selectList("workSelectList", hmap);
     }
 
-    public ArrayList<WorkDTO> selectPriority(SqlSession mapper) {
+    public ArrayList<WorkDTO> workSelectPriority(SqlSession mapper) {
         System.out.println("dao selectPriority()");
-        return (ArrayList<WorkDTO>) mapper.selectList("selectPriority");
+        return (ArrayList<WorkDTO>) mapper.selectList("workSelectPriority");
     }
 
 
-    public WorkDTO selectByWorkID(SqlSession mapper, int workID) {
+    public WorkDTO workSelectByWorkID(SqlSession mapper, int workID) {
         System.out.println("dao selectByWorkID()");
-        return (WorkDTO) mapper.selectOne("selectByWorkID", workID);
+        return (WorkDTO) mapper.selectOne("workSelectByWorkID", workID);
     }
 
-    public void delete(SqlSession mapper, int workID) {
+    public void workDelete(SqlSession mapper, int workID) {
         System.out.println("dao delete()");
-        mapper.delete("delete", workID);
+        mapper.delete("workDelete", workID);
     }
 
-    public void update(SqlSession mapper, WorkDTO dto) {
+    public void workUpdate(SqlSession mapper, WorkDTO dto) {
         System.out.println("dao update()");
-        mapper.update("update", dto);
+        mapper.update("workUpdate", dto);
     }
 }
