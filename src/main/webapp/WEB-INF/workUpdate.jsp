@@ -109,7 +109,7 @@
                             <td colspan="2">
                                 <c:if test="${dto.priority == 1}">
                                     <input name="priority" type="radio" checked
-                                           value="<c:out value="${dto.currentProgress}"/>"/>긴급
+                                           value="${dto.currentProgress}"/>긴급
                                     <input name="priority" type="radio" value="2"/>높음
                                     <input name="priority" type="radio" value="3"/>보통
                                     <input name="priority" type="radio" value="4"/>낮음
@@ -117,7 +117,7 @@
                                 <c:if test="${dto.priority == 2}">
                                     <input name="priority" type="radio" value="1"/>긴급
                                     <input name="priority" type="radio" checked
-                                           value="<c:out value="${dto.currentProgress}"/>"/>높음
+                                           value="${dto.currentProgress}"/>높음
                                     <input name="priority" type="radio" value="3"/>보통
                                     <input name="priority" type="radio" value="4"/>낮읍
                                 </c:if>
@@ -125,7 +125,7 @@
                                     <input name="priority" type="radio" value="1"/>긴급
                                     <input name="priority" type="radio" value="2"/>높음
                                     <input name="priority" type="radio" checked
-                                           value="<c:out value="${dto.currentProgress}"/>"/>보통
+                                           value="${dto.currentProgress}"/>보통
                                     <input name="priority" type="radio" value="4"/>낮음
                                 </c:if>
                                 <c:if test="${dto.priority == 4}">
@@ -133,7 +133,7 @@
                                     <input name="priority" type="radio" value="2"/>높음
                                     <input name="priority" type="radio" value="3"/>보통
                                     <input name="priority" type="radio" checked
-                                           value="<c:out value="${dto.currentProgress}"/>"/>낮음
+                                           value="${dto.currentProgress}"/>낮음
                                 </c:if>
                             </td>
                         </tr>
@@ -143,21 +143,21 @@
                             <td colspan="2">
                                 <c:if test="${dto.currentProgress == 1}">
                                     <input name="currentProgress" type="radio" checked
-                                           value="<c:out value="${dto.currentProgress}"/>"/>요청
+                                           value="${dto.currentProgress}"/>요청
                                     <input name="currentProgress" type="radio" value="2"/>진행
                                     <input name="currentProgress" type="radio" value="3"/>완료
                                 </c:if>
                                 <c:if test="${dto.currentProgress == 2}">
                                     <input name="currentProgress" type="radio" value="1"/>요청
                                     <input name="currentProgress" type="radio" checked
-                                           value="<c:out value="${dto.currentProgress}"/>"/>진행
+                                           value="${dto.currentProgress}"/>진행
                                     <input name="currentProgress" type="radio" value="3"/>완료
                                 </c:if>
                                 <c:if test="${dto.currentProgress == 3}">
                                     <input name="currentProgress" type="radio" value="1"/>요청
                                     <input name="currentProgress" type="radio" value="2"/>진행
                                     <input name="currentProgress" type="radio" checked
-                                           value="<c:out value="${dto.currentProgress}"/>"/>완료
+                                           value="${dto.currentProgress}"/>완료
                                 </c:if>
                             </td>
                         </tr>
