@@ -55,9 +55,9 @@ public class HomeController extends HttpServlet {
                 viewPage += "index";
                 break;
 
-            case "/login.sil":
+            /*case "/login.sil":
                 viewPage += "login";
-                break;
+                break;*/
 
             case "/loginOK.sil":
                 UserInfoService.getInstance().userInfoCompareID(request, response);
@@ -186,6 +186,7 @@ public class HomeController extends HttpServlet {
 //                BoardService.getInstance().selectByPostID(request, response);
                 viewPage += "boardView";
                 break;
+
             default:
                 viewPage += "error";
                 break;

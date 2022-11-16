@@ -24,8 +24,8 @@
 
 <% 	
 	UserInfoService service = UserInfoService.getInstance();
-	String originID = service.compareID(request, response);
-	String originPW = service.comparePW(request, response);
+	String originID = service.userInfoCompareID(request, response);
+	String originPW = service.userInfoComparePW(request, response);
 
 	if (accountID != null && accountID.equals(originID)) {
 		if (accountPassword != null && accountPassword.equals(originPW)) {

@@ -19,7 +19,7 @@
 <%
 	System.out.println(userInfoDTO);
 	
-	UserInfoService.getInstance().insert(request, response);
+	UserInfoService.getInstance().userInfoInsert(request, response);
 	response.sendRedirect("login.sil");
 %>
 
