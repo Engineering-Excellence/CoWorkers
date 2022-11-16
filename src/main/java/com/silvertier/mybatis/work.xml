@@ -9,7 +9,6 @@
         values (work_workID_seq.nextval, #{subject}, '돚거', #{content}, #{priority},
                 #{currentProgress}, #{workProgress},
                 #{startDate}, #{deadline}, #{ip}, 0)
-
     </insert>
     <select id="workSelectCount" resultType="int">
         select count(*)

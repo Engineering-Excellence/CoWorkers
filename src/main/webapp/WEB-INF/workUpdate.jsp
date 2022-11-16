@@ -158,7 +158,6 @@
                                     <input name="currentProgress" type="radio" value="2"/>진행
                                     <input name="currentProgress" type="radio" checked
                                            value="<c:out value="${dto.currentProgress}"/>"/>완료
-                                </c:if>
                             </td>
                         </tr>
                         <tr>

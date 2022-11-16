@@ -25,7 +25,6 @@
 </head>
 
 <body>
-
 <fmt:requestEncoding value="UTF-8"/>
 <%
     System.out.println("coWorkers.jsp");

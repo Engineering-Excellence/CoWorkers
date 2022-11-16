@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 public class WorkDAO {
     Logger logger = Logger.getLogger(this.getClass().getName());
     private static WorkDAO instance = new WorkDAO();
-
     private WorkDAO() {
 
     }

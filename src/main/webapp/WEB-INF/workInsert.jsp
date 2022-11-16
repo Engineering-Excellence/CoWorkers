@@ -25,7 +25,6 @@
 </head>
 
 <body>
-
 <fmt:requestEncoding value="UTF-8"/>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
