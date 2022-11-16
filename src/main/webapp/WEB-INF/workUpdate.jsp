@@ -135,10 +135,6 @@
                                     <input name="priority" type="radio" checked
                                            value="<c:out value="${dto.currentProgress}"/>"/>낮음
                                 </c:if>
-<%--                                <input name="priority" type="radio" value="1"/>긴급--%>
-<%--                                <input name="priority" type="radio" value="2"/>높음--%>
-<%--                                <input name="priority" type="radio" value="3"/>보통--%>
-<%--                                <input name="priority" type="radio" value="4"/>낮음--%>
                             </td>
                         </tr>
                         <tr>
@@ -162,10 +158,6 @@
                                     <input name="currentProgress" type="radio" value="2"/>진행
                                     <input name="currentProgress" type="radio" checked
                                            value="<c:out value="${dto.currentProgress}"/>"/>완료
-                                </c:if>
-                                <%--                                <input name="currentProgress" type="radio" value="1"/>요청--%>
-                                <%--                                <input name="currentProgress" type="radio" value="2"/>진행--%>
-                                <%--                                <input name="currentProgress" type="radio" value="3"/>완료--%>
                             </td>
                         </tr>
                         <tr>

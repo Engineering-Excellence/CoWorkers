@@ -2,7 +2,7 @@ package com.silvertier.dto;
 
 import java.sql.Date;
 
-//조우철 anbin
+//조우철
 public class WorkDTO {
     private int workID; // 글번호 // pk // not null
     private String subject; // 제목 // not null

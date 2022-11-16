@@ -92,8 +92,6 @@
                     <tbody>
                     <%--긴급 --%>
                     <%--                    <c:if test="${currentPage==1}">--%>
-
-
                     <c:forEach var="dto" items="${priority}">
                         <c:if test="${dto.deleteDate!=null}">
                         </c:if>

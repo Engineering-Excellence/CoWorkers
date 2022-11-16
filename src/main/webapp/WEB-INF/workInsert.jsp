@@ -151,7 +151,6 @@
                             </td>
                         </tr>
                     </table>
-
                     <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
                 </form>
             </div>
