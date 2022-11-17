@@ -39,7 +39,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CoWorkers</a>
+            <a class="navbar-brand" href="mainView.sil">CoWorkers</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -54,17 +54,20 @@
         </div>
     </div>
 </nav>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="workList.sil">게시판<span class="sr-only"></span></a></li>
+                <li><a href="boardList.sil">게시판<span class="sr-only"></span></a></li>
             </ul>
+
             <ul class="nav nav-sidebar">
                 <li><a href="work.sil">업무</a></li>
             </ul>
+
             <ul class="nav nav-sidebar">
-                <li><a href="">캘린더</a></li>
+                <li><a href="event.sil">캘린더</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -75,11 +78,12 @@
                     <tr class="bg-info">
                         <th colspan="10" style="font-size: 30px; text-align: center;">업무</th>
                     </tr>
-                    <tr>
+
+                    <tr class="bg-primary">
                         <th style="width: 100px; text-align: center;">글번호</th>
                         <th style="width: 150px; text-align: center;">우선순위</th>
                         <th style="width: 500px; text-align: center;">업무명</th>
-                        <th style="width: 100px; text-align: center;">상태</th>
+                        <th style="width: 150px; text-align: center;">상태</th>
                         <th style="width: 200px; text-align: center;">담당자</th>
                         <th style="width: 200px; text-align: center;">진척도</th>
                         <th style="width: 250px; text-align: center;">작성(수정)일</th>
@@ -97,6 +101,7 @@
                         <c:if test="${dto.deleteDate==null}">
                             <tr class="bg-danger">
                                 <td align="center">${dto.workID}</td>
+
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
@@ -114,6 +119,7 @@
                                         </c:if>
                                     </c:if>
                                 </td>
+
                                 <td class="subject" align="center">
                                     <c:if test="${dto.deleteDate == null}">
                                         <c:set var="subject" value="${fn:replace(dto.subject, '<', '&lt;')}"/>
@@ -121,21 +127,22 @@
                                         <a href="workView.sil?workID=${dto.workID}&currentPage=${workList.currentPage}">${subject}</a>
                                     </c:if>
                                 </td>
+
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
                                         <c:if test="${dto.currentProgress==1}">
-                                            요청중
+                                            <img width="15" src="images/sug.png"> 요청중
                                         </c:if>
                                         <c:if test="${dto.currentProgress==2}">
-                                            진행중
+                                            <img width="15" src="images/on.png"> 진행중
                                         </c:if>
                                         <c:if test="${dto.currentProgress==3}">
-                                            완료됨
+                                            <img width="15" src="images/fin.png"> 완료됨
                                         </c:if>
                                     </c:if>
                                 </td>
-                                </td>
+
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
@@ -144,12 +151,16 @@
                                         ${dto.userName}
                                     </c:if>
                                 </td>
+
                                 <td align="left">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
                                         <c:if test="${dto.workProgress!=10}">
                                             <c:if test="${dto.workProgress<5}">
                                                 <div style="height: 5px;width:${dto.workProgress*10}px;background-color:red;"></div>
+                                                <c:if test="${dto.workProgress==0}">
+                                                    <img width="20" src="images/thief.png">
+                                                </c:if>
                                             </c:if>
                                         </c:if>
                                         <c:if test="${dto.workProgress!=10}">
@@ -163,6 +174,7 @@
                                         ${dto.workProgress*10}%
                                     </c:if>
                                 </td>
+
                                 <td align="center">
                                     <c:if test="${dto.deleteDate==null}">
                                         <c:if test="${dto.updateDate == null}">
@@ -195,12 +207,14 @@
                                         </c:if>
                                     </c:if>
                                 </td>
+
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
                                         <fmt:formatDate value="${dto.startDate}" pattern="yyyy.MM.dd.(E)"/>
                                     </c:if>
                                 </td>
+
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
@@ -218,7 +232,7 @@
                     <c:if test="${list.size() == 0}">
                         <tr>
                             <td colspan="10" align="center">
-                                <img style="width: 350px" src="images/thief.jpg">
+                                <img style="width: 350px" src="images/thief.png">
                             </td>
                         </tr>
                     </c:if>
@@ -226,6 +240,7 @@
                         <c:forEach var="dto" items="${list}">
                             <tr>
                                 <td align="center">${dto.workID}</td>
+
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
@@ -243,6 +258,7 @@
                                         </c:if>
                                     </c:if>
                                 </td>
+
                                 <td class="subject" align="center">
                                     <c:if test="${dto.deleteDate!=null}">
                                         삭제된 글입니다.
@@ -253,20 +269,22 @@
                                         <a href="workView.sil?workID=${dto.workID}&currentPage=${workList.currentPage}">${subject}</a>
                                     </c:if>
                                 </td>
+
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
                                         <c:if test="${dto.currentProgress==1}">
-                                            요청중
+                                            <img width="15" src="images/sug.png"> 요청중
                                         </c:if>
                                         <c:if test="${dto.currentProgress==2}">
-                                            진행중
+                                            <img width="15" src="images/on.png"> 진행중
                                         </c:if>
                                         <c:if test="${dto.currentProgress==3}">
-                                            완료됨
+                                            <img width="15" src="images/fin.png"> 완료됨
                                         </c:if>
                                     </c:if>
                                 </td>
+
                                 </td>
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
@@ -276,12 +294,16 @@
                                         ${userName}
                                     </c:if>
                                 </td>
+
                                 <td align="left">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
                                         <c:if test="${dto.workProgress!=10}">
                                             <c:if test="${dto.workProgress<5}">
                                                 <div style="height: 5px;width:${dto.workProgress*10}px;background-color:red;"></div>
+                                                <c:if test="${dto.workProgress==0}">
+                                                    <img width="20" src="images/thief.png">
+                                                </c:if>
                                             </c:if>
                                         </c:if>
                                         <c:if test="${dto.workProgress!=10}">
@@ -295,6 +317,7 @@
                                         ${dto.workProgress*10}%
                                     </c:if>
                                 </td>
+
                                 <td align="center">
                                     <c:if test="${dto.deleteDate==null}">
                                         <c:if test="${dto.updateDate == null}">
@@ -321,18 +344,20 @@
                                             (삭제됨)
                                             <fmt:formatDate value="${dto.deleteDate}" pattern="a h:mm:ss"/>
                                         </c:if>
-                                        <c:if test="${dto.updateDate.year!=date.year||dto.deleteDate.month!=date.month||dto.deleteDate.date!=date.date}">
+                                        <c:if test="${dto.deleteDate.year!=date.year||dto.deleteDate.month!=date.month||dto.deleteDate.date!=date.date}">
                                             (삭제됨)
                                             <fmt:formatDate value="${dto.deleteDate}" pattern="MM/dd"/>
                                         </c:if>
                                     </c:if>
                                 </td>
+
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
                                         <fmt:formatDate value="${dto.startDate}" pattern="yyyy.MM.dd.(E)"/>
                                     </c:if>
                                 </td>
+
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
@@ -430,7 +455,6 @@
 
 <script src="../js/jquery-3.6.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
-<script src="../js/workList.js"></script>
 </body>
 
 </html>

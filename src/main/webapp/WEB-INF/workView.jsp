@@ -49,7 +49,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CoWorkers</a>
+            <a class="navbar-brand" href="mainView.sil">CoWorkers</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -74,7 +74,7 @@
                 <li><a href="work.sil">업무</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="#">캘린더</a></li>
+                <li><a href="event.sil">캘린더</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -82,10 +82,16 @@
             <div class="table-responsive">
                 <form action="workUpdate.sil" method="post">
                     <table class="table" style="width:1500px; margin-left: auto; margin-right: auto;">
+                        <c:if test="${dto.deleteDate!=null}">
+                            <b style="font-size: 50px; color: crimson">삭제된 글입니다.</b>
+                            </br>
+                            <img src="images/thief.png" alt="thief" style="width: 600px">
+                        </c:if>
+                        <c:if test="${dto.deleteDate==null}">
                         <tr class="bg-info">
                             <th colspan="15" style="font-size: 30px; text-align: center;">업무</th>
                         </tr>
-                        <tr class="table-success">
+                        <tr class="bg-primary">
                             <th class="align-middle table-dark" style="width: 100px; text-align: center;">글번호</th>
                             <th class="align-middle table-dark" style="width: 100px; text-align: center;">우선순위</th>
                             <th class="align-middle table-dark" style="width: 100px; text-align: center;">상태</th>
@@ -96,6 +102,7 @@
                             <th class="align-middle table-dark" style="width: 200px; text-align: center;">마감일</th>
                         </tr>
                         <c:set var="list" value="${workList.list}"/>
+
                         <tr>
                             <td align="center">${dto.workID}</td>
                             <td align="center">
@@ -114,13 +121,13 @@
                             </td>
                             <td align="center">
                                 <c:if test="${dto.currentProgress==1}">
-                                    요청됨
+                                    <img width="15" src="images/sug.png">요청됨
                                 </c:if>
                                 <c:if test="${dto.currentProgress==2}">
-                                    진행중
+                                    <img width="15" src="images/on.png">진행중
                                 </c:if>
                                 <c:if test="${dto.currentProgress==3}">
-                                    완료됨
+                                    <img width="15" src="images/fin.png">완료됨
                                 </c:if>
                             </td>
                             </td>
@@ -128,7 +135,7 @@
                             <td align="center">
                                 <c:set var="userName" value="${fn:replace(dto.userName, '<', '&lt;')}"/>
                                 <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
-                                ${userName}
+                                    ${userName}
                             </td>
                             <td align="center">
                                 <c:if test="${dto.workProgress!=10}">
@@ -144,7 +151,7 @@
                                 <c:if test="${dto.workProgress==10}">
                                     <div style="height: 5px;width: ${dto.workProgress*10}px;background-color:springgreen;"></div>
                                 </c:if>
-                                ${dto.workProgress*10}%
+                                    ${dto.workProgress*10}%
                             </td>
                             </td>
                             <td align="center">
@@ -183,7 +190,7 @@
                             <td colspan="9">
                                 <c:set var="subject" value="${fn:replace(dto.subject, '<', '&lt;')}"/>
                                 <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
-                                ${subject}
+                                    ${subject}
                             </td>
                         </tr>
                         <tr>
@@ -192,11 +199,13 @@
                             <td colspan="9">
                                 <c:set var="content" value="${fn:replace(dto.content, '<', '&lt;')}"/>
                                 <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
-                                ${content}
+                                    ${content}
                             </td>
                         </tr>
+
                     </table>
-                    <table width="600" align="center" cellpadding="5" cellspacing="0">
+
+                    <table class="table" width="600" align="center" cellpadding="5" cellspacing="0">
                         <tr class="table-secondary">
                             <td align="center">
                                 <input class="btn btn-primary btn-sm" type="submit" value="수정"
@@ -204,10 +213,10 @@
                                 <input class="btn btn-danger btn-sm" type="button" value="삭제"
                                        style="font-size: 13px; width: 80px"
                                        onclick="location.href='workDelete.sil?workID=${dto.workID}&currentPage=${currentPage}'"/>
+                                </c:if>
                                 <input class="btn btn-info btn-sm" type="button" value="돌아가기"
                                        style="font-size: 13px; width: 80px"
                                        onclick="history.back()"/>
-
                                 <input type="hidden" name="workID" value="${dto.workID}"/>
                                 <input type="hidden" name="currentPage" value="${currentPage}"/>
                                 <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
@@ -224,7 +233,6 @@
 
 <script src="../js/jquery-3.6.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
-<script src="../js/worInsert.js"></script>
 </body>
 
 </html>
