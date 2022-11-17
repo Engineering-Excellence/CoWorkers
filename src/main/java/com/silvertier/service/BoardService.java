@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 // Kyle
 public class BoardService {
@@ -123,6 +125,36 @@ public class BoardService {
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
         dao.boardDelete(mapper, postID);
+
+        mapper.commit();
+        mapper.close();
+    }
+
+    // 게시글을 수정하는 UPDATE SQL 명령을 실행하는 메서드를 호출하는 메서드
+    public void boardUpdate(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("BoardService 클래스의 update() 메서드 실행");
+        System.out.println(request.getMethod());
+        SqlSession mapper = MySession.getSession();
+
+        System.out.println(request.getParameterMap());
+        Map<String, String[]> map = request.getParameterMap();
+        Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
+        while(itr.hasNext())
+        {
+            Map.Entry<String, String[]> entry = itr.next();
+            System.out.println(String.format("%s : %s", entry.getKey(),String.join(", ", entry.getValue())));
+        }
+
+        BoardDTO dto = new BoardDTO();
+        dto.setPostID(Integer.parseInt(request.getParameter("postID")));
+        dto.setSubject(request.getParameter("subject"));
+        dto.setUserName(request.getParameter("userName"));
+        dto.setContent(request.getParameter("content"));
+        dto.setIp(request.getParameter("ip"));
+        if (request.getParameter("notice") != null) {
+            dto.setNotice(request.getParameter("notice"));
+        }
+        dao.boardUpdate(mapper, dto);
 
         mapper.commit();
         mapper.close();

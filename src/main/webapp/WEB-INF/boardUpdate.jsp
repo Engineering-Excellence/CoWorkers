@@ -1,5 +1,6 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Iterator" %>
+<%@ page import="com.silvertier.dto.BoardDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -95,18 +96,19 @@
 
             <div class="table-responsive">
 
-                <!-- 글 작성 부분 -->
-                <form class="m-" action="boardInsertOK.sil" method="post">
+                <form class="m-" action="boardUpdateOK.sil" method="post">
                     <table class="table table-striped" style="width:1500px; margin-left: auto; margin-right: auto;">
+
                         <tr class="table-primary">
-                            <th colspan="15" style="font-size: 30px; text-align: center;">글 작성</th>
+                            <th colspan="15" style="font-size: 30px; text-align: center;">글 수정</th>
                         </tr>
 
                         <tr>
                             <th class="align-middle table-dark">제목
                             </th>
                             <td colspan="2">
-                                <input id="subject" type="text" class="form-control form-control-sm" name="subject"/>
+                                <input id="subject" type="text" class="form-control form-control-sm" name="subject"
+                                       value="${boardDTO.subject}"/>
                             </td>
                         </tr>
 
@@ -115,27 +117,34 @@
                             </th>
                             <td>
                                 <input id="userName" type="text" class="form-control form-control-sm" name="userName"
-                                       style="width: 80%"/>
+                                       value="${boardDTO.userName}" readonly="readonly"/>
                             </td>
 
                             <!-- 공지글 여부 -->
-                            <th class="align-left table-dark">
-                                공지글 <input class="form-check-input" type="checkbox" name="notice" value="true">
+                            <th class="align-middle table-dark">
+                                <c:if test="${boardDTO.notice == 'true'}">
+                                    공지글 <input class="form-check-input" type="checkbox" name="notice" value="true"
+                                               checked="checked">
+                                </c:if>
+                                <c:if test="${boardDTO.notice != 'true'}">
+                                    공지글 <input class="form-check-input" type="checkbox" name="notice" value="true">
+                                </c:if>
                             </th>
                         </tr>
+
 
                         <tr>
                             <th class="align-middle table-dark">내용
                             </th>
                             <td colspan="2">
                 <textarea id="content" class="form-control form-control-sm" rows="10" name="content"
-                          style="resize: none"></textarea>
+                          style="resize: none">${boardDTO.content}</textarea>
                             </td>
                         </tr>
 
                         <tr class="table-secondary">
                             <td colspan="3" align="center">
-                                <input class="btn btn-primary btn-sm" type="submit" value="저장하기"
+                                <input class="btn btn-primary btn-sm" type="submit" value="수정하기"
                                        style="font-size: 13px"/>
                                 <input class="btn btn-danger btn-sm" type="reset" value="다시쓰기" style="font-size: 13px"/>
                                 <input class="btn btn-info btn-sm" type="button" value="돌아가기" style="font-size: 13px"
@@ -145,6 +154,7 @@
                     </table>
 
                     <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
+                    <input type="hidden" name="postID" value="${boardDTO.postID}"/>
                 </form>
             </div>
         </div>
@@ -153,6 +163,7 @@
 
 <script src="../js/jquery-3.6.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/board.js"></script>
 </body>
 <!-- body 끝 -->
 

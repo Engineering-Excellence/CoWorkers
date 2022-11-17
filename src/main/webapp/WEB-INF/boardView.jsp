@@ -1,3 +1,5 @@
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.Iterator" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -26,7 +28,17 @@
 
 <body>
 
-<fmt:requestEncoding value="UTF-8"/>
+<%
+    request.setCharacterEncoding("UTF-8");
+    System.out.println(pageContext.findAttribute("boardDTO"));
+
+    Map<String, String[]> map = request.getParameterMap();
+    Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
+    while (itr.hasNext()) {
+        Map.Entry<String, String[]> entry = itr.next();
+        System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
+    }
+%>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -141,7 +153,8 @@
                                     type="button"
                                     value="수정하기"
                                     style="font-size: 13px;"
-                                    onclick="location.href='selectByPostID.sil?postID=${boardDTO.postID}&currentPage=${currentPage}&job=update'"/>
+                                    <%--onclick="location.href='selectByPostID.sil?postID=${boardDTO.postID}&currentPage=${currentPage}&job=update'"/>--%>
+                                    onclick="location.href='boardUpdate.sil?postID=${boardDTO.postID}&currentPage=${currentPage}'"/>
                             <input
                                     class="btn btn-outline-danger btn-sm"
                                     type="button"

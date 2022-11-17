@@ -2,7 +2,8 @@
 
 function delete_check(url) {
     let answer = confirm('정말로 삭제하시겠습니까?')
-    if (answer == true) {
+    if (answer === true) {
+        alert('삭제 완료')
         location = url
     }
 }

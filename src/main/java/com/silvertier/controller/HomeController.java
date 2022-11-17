@@ -144,11 +144,12 @@ public class HomeController extends HttpServlet {
 
             // Kyle
             case "/boardInsert.sil":
+                // 글 작성 페이지를 호출한다.
                 viewPage += "boardInsert";
                 break;
             case "/boardInsertOK.sil":
+                // 글 작성 메서드 호출 후 첫 페이지로 복귀한다.
                 BoardService.getInstance().boardInsert(request, response);
-//                service.selectList(request, response);
                 viewPage += "boardReturn";
                 break;
             case "/boardList.sil":
@@ -169,8 +170,14 @@ public class HomeController extends HttpServlet {
                 viewPage += "boardView";
                 break;
             case "/boardUpdate.sil":
-                // 글 1건을 수정하는 메서드를 호출한다.
-//                BoardService.getInstance().update(request, response);
+                // 글 수정 페이지를 호출한다.
+                BoardService.getInstance().boardSelectByPostID(request, response);
+                viewPage += "boardUpdate";
+                break;
+            case "/boardUpdateOK.sil":
+                // 글 1건을 수정하는 메서드를 호출 후 원래 페이지로 복귀한다.
+                BoardService.getInstance().boardUpdate(request, response);
+                BoardService.getInstance().boardSelectList(request, response);
                 viewPage += "boardReturn";
                 break;
             case "/boardDelete.sil":

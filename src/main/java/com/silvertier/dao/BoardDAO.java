@@ -57,4 +57,9 @@ public class BoardDAO {
         System.out.println("BoardDAO 클래스의 delete() 메서드 실행");
         mapper.update("boardDelete", postID);
     }
+
+    public void boardUpdate(SqlSession mapper, BoardDTO dto) {
+        System.out.println("BoardDAO 클래스의 update() 메서드 실행");
+        mapper.update("boardUpdate", dto);
+    }
 }
