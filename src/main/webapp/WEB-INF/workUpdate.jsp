@@ -49,7 +49,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CoWorkers</a>
+            <a class="navbar-brand" href="mainView.sil">CoWorkers</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -64,18 +64,17 @@
         </div>
     </div>
 </nav>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="workList.sil">게시판<span class="sr-only"></span></a></li>
+                <li><a href="boardList.sil">게시판<span class="sr-only"></span></a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="work.sil">업무</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="">캘린더</a></li>
+                <li><a href="event.sil">캘린더</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -109,31 +108,33 @@
                             <td colspan="2">
                                 <c:if test="${dto.priority == 1}">
                                     <input name="priority" type="radio" checked
-                                           value="${dto.currentProgress}"/>긴급
-                                    <input name="priority" type="radio" value="2"/>높음
-                                    <input name="priority" type="radio" value="3"/>보통
-                                    <input name="priority" type="radio" value="4"/>낮음
+                                           value="${dto.currentProgress}"/><b style="color: crimson">긴급</b>
+                                    <%--<input name="priority" type="radio" checked
+                                           value="<c:out value="${dto.currentProgress}"/>"/>긴급--%>
+                                    <input name="priority" type="radio" value="2"/><b style="color: violet">높음</b>
+                                    <input name="priority" type="radio" value="3"/><b style="color: limegreen">보통</b>
+                                    <input name="priority" type="radio" value="4"/><b style="color: darkgray">낮음</b>
                                 </c:if>
                                 <c:if test="${dto.priority == 2}">
-                                    <input name="priority" type="radio" value="1"/>긴급
+                                    <input name="priority" type="radio" value="1"/><b style="color: crimson">긴급</b>
                                     <input name="priority" type="radio" checked
-                                           value="${dto.currentProgress}"/>높음
-                                    <input name="priority" type="radio" value="3"/>보통
-                                    <input name="priority" type="radio" value="4"/>낮읍
+                                           value="${dto.currentProgress}"/><b style="color: violet">높음</b>
+                                    <input name="priority" type="radio" value="3"/><b style="color: limegreen">보통</b>
+                                    <input name="priority" type="radio" value="4"/><b style="color: darkgray">낮음</b>
                                 </c:if>
                                 <c:if test="${dto.priority == 3}">
-                                    <input name="priority" type="radio" value="1"/>긴급
-                                    <input name="priority" type="radio" value="2"/>높음
+                                    <input name="priority" type="radio" value="1"/><b style="color: crimson">긴급</b>
+                                    <input name="priority" type="radio" value="2"/><b style="color: violet">높음</b>
                                     <input name="priority" type="radio" checked
-                                           value="${dto.currentProgress}"/>보통
-                                    <input name="priority" type="radio" value="4"/>낮음
+                                           value="${dto.currentProgress}"/><b style="color: limegreen">보통</b>
+                                    <input name="priority" type="radio" value="4"/><b style="color: darkgray">낮음</b>
                                 </c:if>
                                 <c:if test="${dto.priority == 4}">
-                                    <input name="priority" type="radio" value="1"/>긴급
-                                    <input name="priority" type="radio" value="2"/>높음
-                                    <input name="priority" type="radio" value="3"/>보통
+                                    <input name="priority" type="radio" value="1"/><b style="color: crimson">긴급</b>
+                                    <input name="priority" type="radio" value="2"/><b style="color: violet">높음</b>
+                                    <input name="priority" type="radio" value="3"/><b style="color: limegreen">보통</b>
                                     <input name="priority" type="radio" checked
-                                           value="${dto.currentProgress}"/>낮음
+                                           value="${dto.currentProgress}"/><b style="color: darkgray">낮음</b>
                                 </c:if>
                             </td>
                         </tr>
@@ -143,26 +144,26 @@
                             <td colspan="2">
                                 <c:if test="${dto.currentProgress == 1}">
                                     <input name="currentProgress" type="radio" checked
-                                           value="${dto.currentProgress}"/>요청
-                                    <input name="currentProgress" type="radio" value="2"/>진행
-                                    <input name="currentProgress" type="radio" value="3"/>완료
+                                           value="${dto.currentProgress}"/><img width="15" src="images/sug.png"> 요청
+                                    <input name="currentProgress" type="radio" value="2"/><img width="15" src="images/on.png"> 진행
+                                    <input name="currentProgress" type="radio" value="3"/><img width="15" src="images/fin.png"> 완료
                                 </c:if>
                                 <c:if test="${dto.currentProgress == 2}">
-                                    <input name="currentProgress" type="radio" value="1"/>요청
+                                    <input name="currentProgress" type="radio" value="1"/><img width="15" src="images/sug.png"> 요청
                                     <input name="currentProgress" type="radio" checked
-                                           value="${dto.currentProgress}"/>진행
-                                    <input name="currentProgress" type="radio" value="3"/>완료
+                                           value="${dto.currentProgress}"/><img width="15" src="images/on.png"> 진행
+                                    <input name="currentProgress" type="radio" value="3"/><img width="15" src="images/fin.png"> 완료
                                 </c:if>
                                 <c:if test="${dto.currentProgress == 3}">
-                                    <input name="currentProgress" type="radio" value="1"/>요청
-                                    <input name="currentProgress" type="radio" value="2"/>진행
+                                    <input name="currentProgress" type="radio" value="1"/><img width="15" src="images/sug.png"> 요청
+                                    <input name="currentProgress" type="radio" value="2"/><img width="15" src="images/on.png"> 진행
                                     <input name="currentProgress" type="radio" checked
-                                           value="${dto.currentProgress}"/>완료
+                                           value="${dto.currentProgress}"/><img width="15" src="images/fin.png"> 완료
                                 </c:if>
                             </td>
                         </tr>
                         <tr>
-                            <th class="align-middle table-dark">업무진척도${dto.workProgress}
+                            <th class="align-middle table-dark">업무진척도
                             </th>
                             <td colspan="2">
                                 <select id="workProgress" class="form-control form-control-sm" name="workProgress"

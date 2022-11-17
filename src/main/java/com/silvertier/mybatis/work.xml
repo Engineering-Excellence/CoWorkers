@@ -4,8 +4,8 @@
     <!--조우철 -->
     <insert id="workInsert" parameterType="wdto">
         insert into work(workID, subject, userName, content, priority,
-                           currentProgress, workProgress,
-                           startDate, deadline, ip, admin)
+                         currentProgress, workProgress,
+                         startDate, deadline, ip, admin)
         values (work_workID_seq.nextval, #{subject}, '돚거', #{content}, #{priority},
                 #{currentProgress}, #{workProgress},
                 #{startDate}, #{deadline}, #{ip}, 0)

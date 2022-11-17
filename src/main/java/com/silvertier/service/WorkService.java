@@ -166,6 +166,7 @@ public class WorkService {
 
 
         dao.workUpdate(mapper, dto);
-
+        mapper.commit();
+        mapper.close();
     }
 }

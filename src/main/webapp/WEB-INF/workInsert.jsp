@@ -25,6 +25,7 @@
 </head>
 
 <body>
+
 <fmt:requestEncoding value="UTF-8"/>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -36,7 +37,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CoWorkers</a>
+            <a class="navbar-brand" href="mainView.sil">CoWorkers</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -51,18 +52,17 @@
         </div>
     </div>
 </nav>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="workList.sil">게시판<span class="sr-only">(current)</span></a></li>
+                <li><a href="boardList.sil">게시판<span class="sr-only"></span></a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="work.sil">업무</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="">캘린더</a></li>
+                <li><a href="event.sil">캘린더</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -93,26 +93,31 @@
                             <th class="align-middle table-dark">우선순위
                             </th>
                             <td colspan="2">
-                                <input name="priority" type="radio" value="1"/>긴급
-                                <input name="priority" type="radio" value="2"/>높음
-                                <input name="priority" type="radio" value="3"/>보통
-                                <input name="priority" type="radio" value="4" checked/>낮음
+                                <input name="priority" type="radio" value="1"/><b style="color: crimson">긴급</b>
+                                <input name="priority" type="radio" value="2"/><b style="color: violet">높음</b>
+                                <input name="priority" type="radio" value="3"/><b style="color: limegreen">보통</b>
+                                <input name="priority" type="radio" value="4" checked/><b style="color: darkgray">낮음</b>
                             </td>
                         </tr>
                         <tr>
                             <th class="align-middle table-dark">업무상태
                             </th>
                             <td colspan="2">
-                                <input name="currentProgress" type="radio" value="1" checked/>요청
-                                <input name="currentProgress" type="radio" value="2"/>진행
-                                <input name="currentProgress" type="radio" value="3"/>완료
+                                <input name="currentProgress" type="radio" value="1" checked/><img width="15"
+                                                                                                   src="images/sug.png">
+                                요청
+                                <input name="currentProgress" type="radio" value="2"/><img width="15"
+                                                                                           src="images/on.png"> 진행
+                                <input name="currentProgress" type="radio" value="3"/><img width="15"
+                                                                                           src="images/fin.png"> 완료
                             </td>
                         </tr>
                         <tr>
                             <th class="align-middle table-dark">업무진척도
                             </th>
                             <td colspan="2">
-                                <select id="workProgress" class="form-control form-control-sm" name="workProgress" size="1">
+                                <select id="workProgress" class="form-control form-control-sm" name="workProgress"
+                                        size="1">
                                     <option value="0" selected>0%</option>
                                     <option value="1">10%</option>
                                     <option value="2">20%</option>
@@ -131,7 +136,8 @@
                             <th class="align-middle table-dark">시작일
                             </th>
                             <td colspan="2">
-                                <input id="startDate" type="date" class="form-control form-control-sm" name="startDate"/>
+                                <input id="startDate" type="date" class="form-control form-control-sm"
+                                       name="startDate"/>
                             </td>
                         </tr>
                         <tr>
@@ -143,7 +149,8 @@
                         </tr>
                         <tr class="table-secondary">
                             <td colspan="3" align="center">
-                                <input class="btn btn-primary btn-sm" type="submit" value="저장하기" style="font-size: 13px"/>
+                                <input class="btn btn-primary btn-sm" type="submit" value="저장하기"
+                                       style="font-size: 13px"/>
                                 <input class="btn btn-danger btn-sm" type="reset" value="다시쓰기" style="font-size: 13px"/>
                                 <input class="btn btn-info btn-sm" type="button" value="돌아가기" style="font-size: 13px"
                                        onclick="history.back()"/>
@@ -151,6 +158,7 @@
                         </tr>
                     </table>
                     <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
+                    <%--                    <input type="hidden" name="userName" value="${dto.userName}"/>--%>
                 </form>
             </div>
         </div>
