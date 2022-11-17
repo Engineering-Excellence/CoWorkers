@@ -52,7 +52,7 @@ public class HomeController extends HttpServlet {
 
             // Terry
             case "/index.sil":
-                viewPage += "index";
+                viewPage += "login";
                 break;
 
             /*case "/login.sil":
@@ -73,7 +73,7 @@ public class HomeController extends HttpServlet {
                 viewPage += "registerForm";
                 break;
 
-            case "/insertOK.sil":
+            case "/registerOK.sil":
                 UserInfoService.getInstance().userInfoInsert(request, response);
                 viewPage += "index";
                 break;
