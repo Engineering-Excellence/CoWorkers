@@ -1,53 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.silvertier.dto.WorkDTO">
-    <!--조우철 anbin-->
+    <!--조우철 -->
     <insert id="workInsert" parameterType="wdto">
-        insert into WORK(workID, subject, userName, content, priority,
+        insert into work(workID, subject, userName, content, priority,
                            currentProgress, workProgress,
                            startDate, deadline, ip, admin)
         values (work_workID_seq.nextval, #{subject}, '돚거', #{content}, #{priority},
                 #{currentProgress}, #{workProgress},
                 #{startDate}, #{deadline}, #{ip}, 0)
-
     </insert>
     <select id="workSelectCount" resultType="int">
         select count(*)
-        from WORK
+        from work
     </select>
     <select id="workSelectList" parameterType="java.util.HashMap" resultType="wdto">
         <![CDATA[
         SELECT *
         FROM (SELECT rownum rnum, AA.*
-              FROM (SELECT * FROM WORK ORDER BY workID DESC) AA
+              FROM (SELECT * FROM work ORDER BY workID DESC) AA
               WHERE rownum <= #{endNo})
         WHERE rnum >= #{startNo}
         ]]>
     </select>
     <select id="workSelectPriority" resultType="wdto">
         select *
-        from WORK
+        from work
         where priority = 1
         order by workID desc
     </select>
     <select id="workSelectByWorkID" parameterType="int" resultType="wdto">
         select *
-        from WORK
+        from work
         where workID = #{workID}
     </select>
     <!--
     <delete id="delete" parameterType="int">
-        delete from WORK where workID = #{workID}
+        delete from work where workID = #{workID}
     </delete>
     -->
     <delete id="workDelete" parameterType="int">
-        update WORK
+        begin
+        update work
         set deleteDate = sysdate
-        where workID = #{workID}
+        where workID = #{workID};
+        commit;
+        end;
     </delete>
     <update id="workUpdate" parameterType="wdto">
         begin
-        update WORK
+        update work
         set subject         = #{subject},
             content         = #{content},
             priority        = #{priority},
