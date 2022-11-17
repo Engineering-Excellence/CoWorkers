@@ -51,37 +51,65 @@ public class HomeController extends HttpServlet {
         switch (context) {
 
             // Terry
+         	// 초기 index화면 => 바로 login.sil로 진입
             case "/index.sil":
-                viewPage += "index";
-                break;
-
-            /*case "/login.sil":
                 viewPage += "login";
-                break;*/
-
+                break;
+                
+            // 로그인 화면
+            case "/login.sil":
+                viewPage += "login";
+                break;
+                
+            // 로그인 정보 비교 페이지 => ID / PW 비교 후 mainView로 로그인 실행
             case "/loginOK.sil":
                 UserInfoService.getInstance().userInfoCompareID(request, response);
                 UserInfoService.getInstance().userInfoComparePW(request, response);
                 viewPage += "loginOK";
                 break;
+               
+            // 로그아웃 과정 진행 페이지 => 세션 제거 후 index.sil로 이동
+            case "/logout.sil":
+                viewPage += "logout";
+                break;
 
+            // 회원가입 페이지
+            case "/registerForm.sil":
+                viewPage += "registerForm";
+                break;
+            
+            // 회원가입 완료 페이지
+            case "/registerOK.sil":
+                UserInfoService.getInstance().userInfoInsert(request, response);
+                viewPage += "login";
+                break;
+                
+            // coWorkers 메인 페이지    
             case "/mainView.sil":
                 viewPage += "mainView";
                 break;
 
-            case "/registerForm.sil":
-                viewPage += "registerForm";
-                break;
-
-            case "/insertOK.sil":
-                UserInfoService.getInstance().userInfoInsert(request, response);
-                viewPage += "index";
-                break;
-
+            
+             /* -- Terry, ID/PW 찾기 (추후 업데이트 - 스프링 학습 이후)
             case "/idPwFind.sil":
                 viewPage += "idPwFind";
                 break;
-
+			
+                -- Terry, ID 찾기 (추후 업데이트 - 스프링 학습 이후)
+			 case "/idFindOK.sil":
+			 UserInfoService.getInstance().userInfoSelectList(request, response);
+			 UserInfoService.getInstance().userInfoSelectUser(request, response);
+			 UserInfoService.getInstance().userInfoCompareName(request, response);
+			 UserInfoService.getInstance().userInfoCompareID(request, response);
+			 UserInfoService.getInstance().userInfoCompareEmail(request, response);
+			 viewPage += "idFindView"; break;
+			 
+                -- Terry, pw 찾기 (추후 업데이트 - 스프링 학습 이후) 
+            case "/pwFindOK.sil":
+            	viewPage += "pwFindView";
+            	break;
+			*/
+                
             case "/board.sil":
                 viewPage += "board";
                 break;

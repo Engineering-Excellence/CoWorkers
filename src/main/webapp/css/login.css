@@ -20,13 +20,13 @@ hr {
 	border: 0.2px solid black;
 }
 
-#thTag {
+.thTag {
 	width: 100px;
 	height: 55px;
 	text-align: center;
 }
 
-#tdTag {
+.tdTag {
 	width: 350px;
 	font-size: 15px;	
 }
@@ -39,10 +39,6 @@ hr {
 
 #tdTag2 {
 	height: 50px;
-}
-
-#tdIn {
-	width: 120px;
 }
 
 #submit {
