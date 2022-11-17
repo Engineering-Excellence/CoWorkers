@@ -51,40 +51,72 @@ public class HomeController extends HttpServlet {
         switch (context) {
 
             // Terry
+         	// 초기 index화면 => 바로 login.sil로 진입
             case "/index.sil":
                 viewPage += "login";
                 break;
-
+                
+            // 로그인 화면
             case "/login.sil":
                 viewPage += "login";
                 break;
-
+                
+            // 로그인 정보 비교 페이지 => ID / PW 비교 후 mainView로 로그인 실행
             case "/loginOK.sil":
                 UserInfoService.getInstance().userInfoCompareID(request, response);
                 UserInfoService.getInstance().userInfoComparePW(request, response);
                 viewPage += "loginOK";
                 break;
+               
+            // 로그아웃 과정 진행 페이지 => 세션 제거 후 index.sil로 이동
+            case "/logout.sil":
+                viewPage += "logout";
+                break;
 
+            // 회원가입 페이지
+            case "/registerForm.sil":
+                viewPage += "registerForm";
+                break;
+            
+            // 회원가입 완료 페이지
+            case "/registerOK.sil":
+                UserInfoService.getInstance().userInfoInsert(request, response);
+                viewPage += "login";
+                break;
+                
+            // coWorkers 메인 페이지    
             case "/mainView.sil":
                 viewPage += "mainView";
                 break;
 
-            case "/registerForm.sil":
-                viewPage += "registerForm";
-                break;
-
-            case "/registerOK.sil":
-                UserInfoService.getInstance().userInfoInsert(request, response);
-                viewPage += "index";
-                break;
-
+            
+             /* -- Terry, ID/PW 찾기 (추후 업데이트 - 스프링 학습 이후)
             case "/idPwFind.sil":
                 viewPage += "idPwFind";
                 break;
-
+			
+                -- Terry, ID 찾기 (추후 업데이트 - 스프링 학습 이후)
+			 case "/idFindOK.sil":
+			 UserInfoService.getInstance().userInfoSelectList(request, response);
+			 UserInfoService.getInstance().userInfoSelectUser(request, response);
+			 UserInfoService.getInstance().userInfoCompareName(request, response);
+			 UserInfoService.getInstance().userInfoCompareID(request, response);
+			 UserInfoService.getInstance().userInfoCompareEmail(request, response);
+			 viewPage += "idFindView"; break;
+			 
+                -- Terry, pw 찾기 (추후 업데이트 - 스프링 학습 이후) 
+            case "/pwFindOK.sil":
+            	viewPage += "pwFindView";
+            	break;
+			*/
+                
             case "/board.sil":
                 viewPage += "board";
                 break;
+
+            /*case "/work.sil":
+                viewPage += "work";
+                break;*/
 
             case "/file.sil":
                 viewPage += "file";
@@ -104,7 +136,7 @@ public class HomeController extends HttpServlet {
                 viewPage += "event";
                 break;
 
-            // 조우철
+            // Anbin
             case "/work.sil":
                 viewPage += "work";
                 WorkService.getInstance().workSelectList(request, response);
@@ -144,12 +176,11 @@ public class HomeController extends HttpServlet {
 
             // Kyle
             case "/boardInsert.sil":
-                // 글 작성 페이지를 호출한다.
                 viewPage += "boardInsert";
                 break;
             case "/boardInsertOK.sil":
-                // 글 작성 메서드 호출 후 첫 페이지로 복귀한다.
                 BoardService.getInstance().boardInsert(request, response);
+//                service.selectList(request, response);
                 viewPage += "boardReturn";
                 break;
             case "/boardList.sil":
@@ -170,14 +201,8 @@ public class HomeController extends HttpServlet {
                 viewPage += "boardView";
                 break;
             case "/boardUpdate.sil":
-                // 글 수정 페이지를 호출한다.
-                BoardService.getInstance().boardSelectByPostID(request, response);
-                viewPage += "boardUpdate";
-                break;
-            case "/boardUpdateOK.sil":
-                // 글 1건을 수정하는 메서드를 호출 후 원래 페이지로 복귀한다.
-                BoardService.getInstance().boardUpdate(request, response);
-                BoardService.getInstance().boardSelectList(request, response);
+                // 글 1건을 수정하는 메서드를 호출한다.
+//                BoardService.getInstance().update(request, response);
                 viewPage += "boardReturn";
                 break;
             case "/boardDelete.sil":
@@ -189,6 +214,7 @@ public class HomeController extends HttpServlet {
 //                BoardService.getInstance().selectByPostID(request, response);
                 viewPage += "boardView";
                 break;
+
             default:
                 viewPage += "error";
                 break;

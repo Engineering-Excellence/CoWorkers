@@ -20,4 +20,25 @@
 		select accountPassword from UserInfo where accountID = #{accountID}
 	</select>
 		
+	<!-- (ID/PW 찾기 / 추후 업데이트)		
+	ID찾기 이름 비교
+	<select id="userInfoCompareName" parameterType="userInfoDTO" resultType="String">
+		select userName from UserInfo where mobileNumber = #{mobileNumber}
+	</select>
+		
+	ID찾기 이메일 비교
+	<select id="userInfoCompareEmail" parameterType="userInfoDTO" resultType="String">
+		select email from UserInfo where mobileNumber = #{mobileNumber}
+	</select>
+		
+	ID찾기 아이디 가져오기
+	<select id="userInfoSelectUser" parameterType="String" resultType="userInfoDTO">
+		select * from userinfo where userName=#{userName} and email=#{email}
+	</select>
+		
+	PW찾기 비밀번호 가져오기
+	<select id="userInfoSelectUser" parameterType="userInfoDTO" resultType="String">
+		select * from userinfo where accountID=#{accountID} and email=#{email}
+	</select>
+	 -->	
 </mapper>

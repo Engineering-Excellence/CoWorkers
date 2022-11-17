@@ -16,7 +16,7 @@
 </head>
 <body>
 	<fmt:requestEncoding value="UTF-8"/>
-	<!-- 김태형 (Terry) - index(로그인) jsp 파일 -->
+	<!-- 김태형 (Terry) - login(로그인) jsp 파일 -->
 	
 		<div id="wrap" class="wrap">
 			<div class="main-top">
@@ -43,7 +43,7 @@
 						<tr>
 							<td id="tdTag2" colspan="2" width="500" align="center">
 								<input class="btn btn-success" type="button" value="회원가입" width="120" onclick="location.href='registerForm.sil'"></input>
-								<!-- <input class="btn btn-warning" type="button" value="ID/PW 찾기" width="120" onclick="location.href='idPwFind.sil'"></input> --> <!-- ID/PW찾기 추후 업데이트 -->
+								<!-- <input class="btn btn-warning" type="button" value="ID/PW 찾기" width="120" onclick="location.href='idPwFind.sil'"></input> --> <!-- Terry, ID/PW 찾기 추후 업데이트 -->
 							</td>
 						</tr>
 					</table>

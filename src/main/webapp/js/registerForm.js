@@ -4,6 +4,48 @@ onload = function () {
 	$('#accountID').focus();
 }
 
+// 폼 중 값이 하나라도 입력이 안되면 false 리턴	
+function joinCheck(obj) {
+	
+	if (!obj.accountID.value || obj.accountID.value.trim().length == 0) {
+		window.alert('아이디가 입력되지 않았습니다.')
+		obj.accountID.focus();
+		return false;
+	}
+	
+	if (!obj.accountPassword.value || obj.accountPassword.value.trim().length == 0) {
+		window.alert('패스워드가 입력되지 않았습니다.')
+		obj.accountPassword.focus();
+		return false;
+	}
+	
+	if (!obj.userName.value || obj.userName.value.trim().length == 0) {
+		window.alert('이름이 입력되지 않았습니다.')
+		obj.userName.focus();
+		return false;
+	}
+	
+	if (!obj.registerNumber.value || obj.registerNumber.value.trim().length == 0) {
+		window.alert('주민등록번호가 입력되지 않았습니다.')
+		obj.registerNumber.focus();
+		return false;
+	}
+	
+	if (!obj.mobileNumber.value || obj.mobileNumber.value.trim().length == 0) {
+		window.alert('전화번호가 입력되지 않았습니다.')
+		obj.mobileNumber.focus();
+		return false;
+	}
+	
+	if (!obj.email.value || obj.email.value.trim().length == 0) {
+		window.alert('이메일이 입력되지 않았습니다.')
+		obj.email.focus();
+		return false;
+	}
+
+return true;
+}
+
 // id 길이 검사
 function idCheck() {
 	
@@ -33,8 +75,13 @@ function pwCheck() {
 		if (Password == Password2) {
 			$('#pwCheckMsg').html('비밀번호가 일치합니다.')
 			$('#pwCheckMsg').css('color', 'green')
-		} else if (Password.length < 6 || Password.length > 18) {
-			window.alert('비밀번호는 6자 이상, 18자 이하만 이용 가능합니다.');
+		} else if (Password.length < 6) {
+			window.alert('비밀번호는 6자 이상 입력해야합니다.');
+			document.getElementById('accountPassword').value = '';
+			document.getElementById('accountPassword2').value = '';
+			$('#accountPassword').focus();
+		} else if (Password.length > 20) {
+			window.alert('비밀번호는 20자 이하로 입력해야합니다.');
 			document.getElementById('accountPassword').value = '';
 			document.getElementById('accountPassword2').value = '';
 			$('#accountPassword').focus();
@@ -87,49 +134,7 @@ function mobileCheck() {
 		window.alert('휴대전화번호는 11자리 입니다.')
 		document.getElementById('mobileNumber').value = "";
 	}
-
-// 폼 중 값이 하나라도 입력이 안되면 false 리턴	
-function joinCheck(obj) {
-	
-	if (!obj.accountID.value || obj.accountID.value.trim().length == 0) {
-		window.alert('아이디가 입력되지 않았습니다.')
-		obj.accountID.focus();
-		return false;
-	}
-	
-	if (!obj.accountPassword.value || obj.accountPassword.value.trim().length == 0) {
-		window.alert('패스워드가 입력되지 않았습니다.')
-		obj.accountPassword.focus();
-		return false;
-	}
-	
-	if (!obj.userName.value || obj.userName.value.trim().length == 0) {
-		window.alert('이름이 입력되지 않았습니다.')
-		obj.userName.focus();
-		return false;
-	}
-	
-	if (!obj.registerNumber.value || obj.registerNumber.value.trim().length == 0) {
-		window.alert('주민등록번호가 입력되지 않았습니다.')
-		obj.registerNumber.focus();
-		return false;
-	}
-	
-	if (!obj.mobileNumber.value || obj.mobileNumber.value.trim().length == 0) {
-		window.alert('전화번호가 입력되지 않았습니다.')
-		obj.mobileNumber.focus();
-		return false;
-	}
-	
-	if (!obj.email.value || obj.email.value.trim().length == 0) {
-		window.alert('이메일이 입력되지 않았습니다.')
-		obj.email.focus();
-		return false;
-	}
 }	
-	
-	
-}
 	
 
 	

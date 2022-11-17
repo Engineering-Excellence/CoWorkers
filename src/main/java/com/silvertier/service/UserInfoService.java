@@ -1,5 +1,6 @@
 package com.silvertier.service;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +18,7 @@ public class UserInfoService {
 		return instance;
 	}
 	
-	private UserInfoDAO dao = UserInfoDAO.getInstance();
+	private UserInfoDAO userInfoDAO = UserInfoDAO.getInstance();
 	
 	// 회원가입 데이터 입력
 	public void userInfoInsert(HttpServletRequest request, HttpServletResponse response) {
@@ -33,21 +34,21 @@ public class UserInfoService {
 		userInfoDTO.setGender(request.getParameter("gender"));
 		userInfoDTO.setEmail(request.getParameter("email"));
 		
-		dao.userInfoInsert(mapper, userInfoDTO);
+		userInfoDAO.userInfoInsert(mapper, userInfoDTO);
 		mapper.commit();
 		mapper.close();
 	}
 	
 	// 로그인 시 아이디 비교
 	public String userInfoCompareID(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("UserInfoService -> compareID()");
+		System.out.println("UserInfoService -> userInfoCompareID()");
 		SqlSession mapper = MySession.getSession();
 		
 		UserInfoDTO userInfoDTO = new UserInfoDTO();
 		userInfoDTO.setAccountID(request.getParameter("accountID"));
 		userInfoDTO.setAccountPassword(request.getParameter("accountPassword"));
-		System.out.println("Service ID: " + userInfoDTO);
-		String originID = dao.userInfoCompareID(mapper, userInfoDTO);
+		System.out.println("userInfoCompareID: " + userInfoDTO);
+		String originID = userInfoDAO.userInfoCompareID(mapper, userInfoDTO);
 		mapper.close();
 		return originID;
 //		return compareID(request, response); // 에러: 무한재귀
@@ -55,16 +56,73 @@ public class UserInfoService {
 	
 	// 로그인 시 패스워드 비교
 	public String userInfoComparePW(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("UserInfoService -> comparePW()");
+		System.out.println("UserInfoService -> userInfoComparePW()");
 		SqlSession mapper = MySession.getSession();
 		
 		UserInfoDTO userInfoDTO = new UserInfoDTO();
 		userInfoDTO.setAccountID(request.getParameter("accountID"));
 		userInfoDTO.setAccountPassword(request.getParameter("accountPassword"));
-		System.out.println("Service PW: " + userInfoDTO);
-		String originPW = dao.userInfoComparePW(mapper, userInfoDTO);
+		System.out.println("userInfoComparePW: " + userInfoDTO);
+		String originPW = userInfoDAO.userInfoComparePW(mapper, userInfoDTO);
 		mapper.close();
 		return originPW;
 //		return comparePW(request, response); // 에러: 무한재귀
 	}
+	
+/*	Terry, 스프링 학습 이후 ID/PW 찾기 업데이트
+ 
+	// ID 찾기용 이름 비교
+	public String userInfoCompareName(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("UserInfoService -> userInfoCompareName()");
+		SqlSession mapper = MySession.getSession();
+		
+		UserInfoDTO userInfoDTO = new UserInfoDTO();
+		userInfoDTO.setUserName(request.getParameter("userName"));
+		userInfoDTO.setEmail(request.getParameter("email"));
+		userInfoDTO.setMobileNumber(request.getParameter("mobileNumber"));
+		System.out.println("userInfoCompareName: " + userInfoDTO);
+		String originName = userInfoDAO.userInfoCompareName(mapper, userInfoDTO);
+		System.out.println(originName);
+		mapper.close();
+		return originName;
+	}
+	
+	// ID 찾기용 이메일 비교
+	public String userInfoCompareEmail(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("UserInfoService -> userInfoCompareEmail()");
+		SqlSession mapper = MySession.getSession();
+		
+		UserInfoDTO userInfoDTO = new UserInfoDTO();
+		userInfoDTO.setUserName(request.getParameter("userName"));
+		userInfoDTO.setEmail(request.getParameter("email"));
+		userInfoDTO.setMobileNumber(request.getParameter("mobileNumber"));
+		System.out.println("userInfoCompareName: " + userInfoDTO);
+		String originEmail = userInfoDAO.userInfoCompareEmail(mapper, userInfoDTO);
+		System.out.println(originEmail);
+		mapper.close();
+		return originEmail;
+	}
+	
+	// ID 찾기용 유저 정보 리스트 뽑아오기
+	public void userInfoSelectList(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("UserInfoService -> userInfoSelectUser()");
+		SqlSession mapper = MySession.getSession();
+		
+		String userName = request.getParameter("userName");
+		String email = request.getParameter("email");
+		
+	}
+	
+	// ID 찾기용 유저리스트에서 특정 유저 뽑아오기
+	public void userInfoSelectUser(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("UserInfoService -> userInfoSelectUser()");
+		SqlSession mapper = MySession.getSession();
+		
+		String userName = request.getParameter("userName");
+		String email = request.getParameter("email");
+		UserInfoDTO userInfoDTO = userInfoDAO.userInfoSelectUser(mapper, "email"); 
+		System.out.println("userInfoSelectUser: " + userInfoDTO);
+		mapper.close();
+	}
+*/	
 }

@@ -32,8 +32,8 @@ public class UserInfoDTO {
 		return accountID;
 	}
 
-	public void setAccountID(String accountID) {
-		this.accountID = accountID;
+	public String setAccountID(String accountID) {
+		return this.accountID = accountID;
 	}
 
 	public String getAccountPassword() {
