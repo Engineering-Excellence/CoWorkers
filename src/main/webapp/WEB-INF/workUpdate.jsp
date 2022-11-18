@@ -87,9 +87,9 @@
                             <th colspan="15" style="font-size: 30px; text-align: center;">업무 수정</th>
                         </tr>
                         <tr>
-                            <th class="align-middle table-dark">제목
+                            <th style="width: 10%" class="align-middle table-dark">제목
                             </th>
-                            <td colspan="2">
+                            <td  >
                                 <input id="subject" type="text" class="form-control form-control-sm"
                                        value="${dto.subject}" name="subject"/>
                             </td>
@@ -97,7 +97,7 @@
                         <tr>
                             <th class="align-middle table-dark">내용
                             </th>
-                            <td colspan="2">
+                            <td  >
                 <textarea id="content" class="form-control form-control-sm" rows="10" name="content"
                           style="resize: none">${dto.content}</textarea>
                             </td>
@@ -105,7 +105,7 @@
                         <tr>
                             <th class="align-middle table-dark">우선순위
                             </th>
-                            <td colspan="2">
+                            <td  >
                                 <c:if test="${dto.priority == 1}">
                                     <input name="priority" type="radio" checked
                                            value="${dto.currentProgress}"/><b style="color: crimson">긴급</b>
@@ -141,7 +141,7 @@
                         <tr>
                             <th class="align-middle table-dark">업무상태${dto.currentProgress}
                             </th>
-                            <td colspan="2">
+                            <td  >
                                 <c:if test="${dto.currentProgress == 1}">
                                     <input name="currentProgress" type="radio" checked
                                            value="${dto.currentProgress}"/><img width="15" src="images/sug.png"> 요청
@@ -165,7 +165,7 @@
                         <tr>
                             <th class="align-middle table-dark">업무진척도
                             </th>
-                            <td colspan="2">
+                            <td  >
                                 <select id="workProgress" class="form-control form-control-sm" name="workProgress"
                                         size="1">
                                     <option value="${dto.workProgress}">${dto.workProgress*10}%</option>
@@ -186,7 +186,7 @@
                         <tr>
                             <th class="align-middle table-dark">시작일
                             </th>
-                            <td colspan="2">
+                            <td  >
                                 <input id="startDate" type="date" class="form-control form-control-sm" name="startDate"
                                        value="${dto.startDate}"/>
                             </td>
@@ -194,7 +194,7 @@
                         <tr>
                             <th class="align-middle table-dark">마감일
                             </th>
-                            <td colspan="2">
+                            <td  >
                                 <input id="deadline" type="date" class="form-control form-control-sm" name="deadline"
                                        value="${dto.deadline}"/>
                             </td>

@@ -5,10 +5,10 @@
     <insert id="workInsert" parameterType="wdto">
         insert into work(workID, subject, userName, content, priority,
                          currentProgress, workProgress,
-                         startDate, deadline, ip, admin)
+                         startDate, deadline, ip, admin, userID)
         values (work_workID_seq.nextval, #{subject}, #{userName}, #{content}, #{priority},
                 #{currentProgress}, #{workProgress},
-                #{startDate}, #{deadline}, #{ip}, 0)
+                #{startDate}, #{deadline}, #{ip}, 0, 0)
     </insert>
     <select id="workSelectCount" resultType="int">
         select count(*)

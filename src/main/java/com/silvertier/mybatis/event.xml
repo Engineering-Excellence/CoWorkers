@@ -31,7 +31,7 @@
 	
 	<!-- 페이징이 필요없는 리스트 dto로 얻어온다. -->
 	<select id="workSelectArrayList" resultType="com.silvertier.dto.WorkDTO">
-		select * from cowork order by workID desc, deadline asc
+		select * from work order by workID desc, deadline asc
 	</select>
 
 
