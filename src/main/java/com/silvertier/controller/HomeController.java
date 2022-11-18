@@ -149,7 +149,7 @@ public class HomeController extends HttpServlet {
                 break;
             case "/workInsertOK.sil":
                 WorkService.getInstance().workInsert(request, response);
-                viewPage += "goWork";
+                viewPage += "goWork2";
                 System.out.println("workInsertOK");
                 break;
             case "/workUpdate.sil":
@@ -158,12 +158,12 @@ public class HomeController extends HttpServlet {
                 System.out.println("workUpdate");
                 break;
             case "/workUpdateOK.sil":
-                viewPage += "goWork";
+                viewPage += "goWork2";
                 WorkService.getInstance().workUpdate(request, response);
                 System.out.println("workUpdateOK");
                 break;
             case "/workDelete.sil":
-                viewPage += "goWork";
+                viewPage += "goWork2";
                 WorkService.getInstance().workDelete(request, response);
                 System.out.println("workDelete");
                 break;

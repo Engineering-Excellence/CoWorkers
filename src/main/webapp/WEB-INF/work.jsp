@@ -9,19 +9,19 @@
 <html lang="ko">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="../images/favicon-16x16.png">
 
     <title>CoWorkers</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/coWorkers.css" rel="stylesheet">
+
 
 
 </head>
@@ -59,11 +59,10 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="boardList.sil">게시판<span class="sr-only"></span></a></li>
+                <li><a href="board.sil">게시판<span class="sr-only"></span></a></li>
             </ul>
-
             <ul class="nav nav-sidebar">
-                <li><a href="work.sil">업무</a></li>
+                <li><a href="goWork.sil">업무</a></li>
             </ul>
 
             <ul class="nav nav-sidebar">
@@ -86,7 +85,7 @@
                         <th style="width: 150px; text-align: center;">상태</th>
                         <th style="width: 200px; text-align: center;">담당자</th>
                         <th style="width: 200px; text-align: center;">진척도</th>
-                        <th style="width: 250px; text-align: center;">작성(수정)일</th>
+                        <th style="width: 300px; text-align: center;">작성(수정)일</th>
                         <th style="width: 200px; text-align: center;">시작일</th>
                         <th style="width: 200px; text-align: center;">마감일</th>
                     </tr>
@@ -359,9 +358,16 @@
                                 </td>
 
                                 <td align="center">
+                                    <c:if test="${dto.deadline<=date}"></c:if>
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
-                                        <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
+                                        <c:if test="${dto.deadline>=date}">
+                                            <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
+                                        </c:if>
+                                        <%--마감일 초과--%>
+                                        <c:if test="${dto.deadline<date}">
+                                            <b style="color: crimson"><fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/></b>
+                                        </c:if>
                                     </c:if>
                                 </td>
                             </tr>
