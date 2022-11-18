@@ -14,7 +14,7 @@ import com.silvertier.service.BoardService;
 import com.silvertier.service.EventService;
 import com.silvertier.service.UserInfoService;
 import com.silvertier.service.WorkService;
-
+//pulling
 @WebServlet("*.sil")
 public class HomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -136,6 +136,12 @@ public class HomeController extends HttpServlet {
                 viewPage += "event";
                 break;
 
+            case "/eventList.sil":
+            	EventService.getInstance().eventSelectArrayList(request, response);
+            	EventService.getInstance().workSelectArrayList(request, response);
+    			viewPage += "eventList";
+    			break;
+                
             // Anbin
             case "/work.sil":
                 viewPage += "work";
