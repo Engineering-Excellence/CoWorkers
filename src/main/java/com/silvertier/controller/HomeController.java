@@ -75,6 +75,7 @@ public class HomeController extends HttpServlet {
 
             // 회원가입 페이지
             case "/registerForm.sil":
+            	UserInfoService.getInstance().userInfoSelectList(request, response);
                 viewPage += "registerForm";
                 break;
             

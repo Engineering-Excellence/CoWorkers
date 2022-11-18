@@ -19,6 +19,11 @@
 	<select id="userInfoComparePW" parameterType="userInfoDTO" resultType="String">
 		select accountPassword from UserInfo where accountID = #{accountID}
 	</select>
+	
+	<!-- 회원가입시 아이디 / 주민등록번호 중복체크용 유저 리스트 뽑아오기 -->
+	<select id="userInfoSelectList" resultType="userInfoDTO">
+		select * from userInfo
+	</select>	
 		
 	<!-- (ID/PW 찾기 / 추후 업데이트)		
 	ID찾기 이름 비교

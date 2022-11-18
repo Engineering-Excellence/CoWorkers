@@ -46,13 +46,41 @@ function joinCheck(obj) {
 return true;
 }
 
+// id 중복 검사
+function idDuplicateCheck(obj) {
+	let ID = obj.accountID.value;
+	var userList = new userList();
+	console.log(userList);
+	
+	if (userList.accountID.value == ID) {
+		window.alert('중복된 아이디 입니다.')
+		document.getElementById('accountID').value = '';
+		$('#accountID').focus();
+		return false;
+	} else if (ID.length == 0 || ID.length > 20) {
+		window.alert('아이디는 6자 이상 20자 이내로 작성해야 합니다.')
+		document.getElementById('accountID').value = '';
+		$('#idCheckMsg').html('아이디는 영문자, 숫자 포함 20자 이내로 작성하여야 합니다.')
+		$('#idCheckMsg').css('color', 'red')
+		return false;
+	} else if(ID.length >=1 && ID.length < 6) {	
+		alert('아이디는 6자 이상 20자 이내로 작성해야 합니다.')
+		document.getElementById('accountID').value = '';
+		return false;
+	} else {
+		window.alert('사용가능한 아이디 입니다.')
+	}
+return true;
+}	
+	
+/*	
 // id 길이 검사
 function idCheck() {
 	
 	let ID = $('#accountID').val().trim();
-	
+
 	if (ID.length == 0 || ID.length > 20) {
-		alert('아이디는 6자 이상 20자 이내로 작성해야 합니다.')
+		window.alert('아이디는 6자 이상 20자 이내로 작성해야 합니다.')
 		document.getElementById('accountID').value = '';
 		$('#idCheckMsg').html('아이디는 영문자, 숫자 포함 20자 이내로 작성하여야 합니다.')
 		$('#idCheckMsg').css('color', 'red')
@@ -64,6 +92,7 @@ function idCheck() {
 		$('#idCheckMsg').css('color', 'green')
 	}
 }
+*/
  
 // PW 길이 검사 
 function pwCheck() {
