@@ -3,13 +3,36 @@
 <mapper namespace="com.silvertier.dto.EventDTO">
 
 	<!-- 일정 1건 insert -->
-	<!-- <insert id="insert" parameterType="eDTO">
-		insert into event (eventid, userid, subject, content, startdate, enddate, projectcolor, hit, commentcount, ip, isallday) 
-		values (event_idx_seq.nextval, 1234, #{subject}, #{content}, #{startDate}, #{endDate}, #{projectColor}, 0, 0, #{ip}, #{isAllDay})
-	</insert> -->
 	<insert id="eventInsert" parameterType="eDTO">
-		insert into event (eventid, userid, subject, content, startdate, enddate, projectcolor, hit, commentcount, ip, isallday) 
-		values (event_idx_seq.nextval, 1234, #{subject}, #{content}, #{startDate}, #{endDate}, #{projectColor}, 0, 0, #{ip}, #{isAllDay})
+		insert into event (eventid, username, userid, subject, content, startdate, enddate, eventcolor, hit, ip, allday) 
+		values (event_idx_seq.nextval, 'hong', 1234, #{subject}, #{content}, #{startDate}, #{endDate}, #{eventColor}, 0, #{ip}, #{allDay})
 	</insert>
+
+	<!-- 전체 글의 개수를 얻어온다. -->
+	<select id="eventSelectCount" resultType="int">
+		select count(*) from event
+	</select>
+	
+	<!-- 리스트 dto로 얻어온다. -->
+	<select id="eventSelectList" parameterType="java.util.HashMap" resultType="eDTO">
+		<![CDATA[
+		select * from (
+			select rownum rnum, GG.* from (
+				select * from event order by eventid desc
+			) GG where rownum <= #{endNo}
+		) where rnum >= #{startNo}
+		]]>
+	</select>
+	
+	<!-- 페이징이 필요없는 리스트 dto로 얻어온다. -->
+	<select id="eventSelectArrayList" resultType="eDTO">
+		select * from event order by eventid desc, endDate asc
+	</select>
+	
+	<!-- 페이징이 필요없는 리스트 dto로 얻어온다. -->
+	<select id="workSelectArrayList" resultType="com.silvertier.dto.WorkDTO">
+		select * from cowork order by workID desc, deadline asc
+	</select>
+
 
 </mapper>

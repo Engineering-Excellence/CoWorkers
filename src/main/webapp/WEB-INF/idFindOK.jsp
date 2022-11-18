@@ -1,4 +1,3 @@
-<%@page import="com.silvertier.dto.UserInfoList"%>
 <%@page import="java.util.List"%>
 <%@page import="com.silvertier.dto.UserInfoDTO"%>
 <%@page import="java.io.PrintWriter"%>
