@@ -1,3 +1,4 @@
+<%@page import="java.util.Date" %>
 <%@page import="com.silvertier.calendar.MyCalendar"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
@@ -15,7 +16,7 @@
 <title>Event</title>
 
     <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/dashboard.css" rel="stylesheet">
+    <link href="./css/mainView.css" rel="stylesheet">
 	<script type="text/javascript" src="./js/event/event.js"></script>
 
 </head>
@@ -30,7 +31,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">coWorkers</a>
+          <a class="navbar-brand" href="mainView.sil">CoWorkers</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -70,73 +71,71 @@
 			</div>
 			
 			
-			
 			<!-- 리스트 제목 -->
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<!-- 업무_긴급 일정 테이블 -->
 				<h1 class="page-header">일정리스트</h1>
-				<!-- 리스트 -->
-				<h2 class="sub-header"></h2>
-		          <div class="table-responsive">
-		            <table class="table table-striped">
-		              <thead>
-		                <tr>
-		                  <th align="center">제목</th>
-		                  <th align="center">색상</th>
-		                  <th align="center">작성자</th>
-		                  <th align="center">#</th>
-		                  <th align="center">시작일</th>
-		                  <th align="center">종료일</th>
-		                  <th align="center">작성일</th>
-		                </tr>
-		              </thead>
-		              <tbody>
-		                
+				<h3 class="sub-header">긴급 일정</h3>
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th style="text-align: center;">업무No.</th>
+								<th style="text-align: center;">제목</th>
+								<th style="text-align: center;">색상</th>
+								<th style="text-align: center;">작성자</th>
+								<th style="text-align: center;">구분</th>
+								<th style="text-align: center;">시작일</th>
+								<th style="text-align: center;">종료일</th>
+							</tr>
+						</thead>
+						<tbody>
 						<!-- 테이블이 비어있는 경우 -->
-		                <c:if test="${wList.size() == 0}">
-		                <tr>
-		                	<td colspan="7">
-		                		<marquee>일정이 없습니다.</marquee>
-		                	</td>
-		                </tr>
-		                </c:if>
-		                
-		                
+						<c:if test="${wList.size() == 0}">
+						<tr>
+							<td colspan="7">
+								<marquee>일정이 없습니다.</marquee>
+							</td>
+						</tr>
+						</c:if>
 		                <!-- 업무 글 출력. -->
 		                <c:if test="${wList.size() != 0}">
-		                <jsp:useBean id="today" class="java.util.Date"/>
 		                
-		                <fmt:formatDate value="${today}" pattern="yyyy-MM-dd"  var="now"/>
-		                <fmt:formatDate value="${wDTO.deadline}" pattern="yyyy-MM-dd" var="deadline"/>
-						<c:forEach var="wDTO" items="${wList}">
+		                
+		                <!-- 110행 실행을 위해 107행 어제날짜를 구한다. (오늘 날짜로 대입하면 deadline이 오늘 날짜인 것도 표시하지 않기 때문. -->
+		                <c:set var ="yesterday" value ="<%= new Date(new Date().getTime() - 60*60*24*1000) %>" />
+						<c:forEach var="wDTO" items="${wList}" varStatus="status" >
 		                <c:if test="${wDTO.priority == 1}">
-						
-							<tr>
+						<c:if test="${wDTO.deadline.after(yesterday)}">
+						<tr>
 							<td>
+								<c:out value="${status.count}"/>
+							</td>
+							<td >
 							<c:set var="wSubject" value="${fn:replace(wDTO.subject, '<', '&lt;')}" />
 							<c:set var="wSubject" value="${fn:replace(wSubject, '>', '&gt;')}" />
 								${wSubject}
 							</td>
 							<td align="center">
 							<c:if test="${wDTO.priority == 1}">
-								<span style="color: tomato">[긴급]</span><img name="#E0573E" alt="red" src="./images/impt_E0573E.png" width="15px">
+								<span style="color: tomato">[긴급]</span><img name="#DC143C" alt="red" src="./images/impt_DC143C.png" width="15px">
 							</c:if>
 							<c:if test="${wDTO.priority == 2}">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img name="#FAFFCD" alt="yellow" src="./images/yellow_FAFFCD.png" width="15px">
 							</c:if>
 							<c:if test="${wDTO.priority == 3}">
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img name="#CDFFBE" alt="green" src="./imag
-								es/green_CDFFBE.png" width="15px">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img name="#CDFFBE" alt="green" src="./images/green_CDFFBE.png" width="15px">
 							</c:if>
 							<c:if test="${wDTO.priority == 4}">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img name="#E1E1E0" alt="gray" src="./images/gray_E1E1E0.png" width="15px">
 							</c:if>
 							</td>
-			                  	
-		                  	<td align="center">
-		                  		<c:set var="userName" value="${fn:replace(wDTO.userName, '<', '&lt;')}" />
-								<c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}" />
+								              	
+							<td align="center">
+							<c:set var="userName" value="${fn:replace(wDTO.userName, '<', '&lt;')}" />
+							<c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}" />
 								${userName}
-		                  	</td>
+							</td>
 							<td align="center">
 							<c:if test="${wDTO.priority == 1}">
 								업무
@@ -150,17 +149,37 @@
 							<fmt:formatDate value="${wDTO.deadline}"	pattern="MM.dd(E)" />
 								${deadline}
 							</td>
-		                  	<td align="center">
-								<fmt:formatDate value="${wDTO.writeDate}"	pattern="yyyy.MM.dd(E)" />
-							</td>
-			                </tr>
-		                	</c:if>
-		                	</c:forEach>
-							
-							<!-- 일정 글 출력. -->
-							
-							<c:forEach var="eDTO" items="${eList}">
+						</tr>
+						</c:if>
+						</c:if>
+						</c:forEach>
+						</c:if>
+						</tbody>
+					</table>
+				</div>
+
+				<br/>
+				<!-- 일정 리스트 테이블. -->
+				<h3 class="sub-header">일정 리스트</h3>
+		          <div class="table-responsive">
+					<table class="table table-striped">
+		              <thead>
+		                <tr>
+		                  <th style="text-align: center;">#</th>
+		                  <th style="text-align: center;">제목</th>
+		                  <th style="text-align: center;">색상</th>
+		                  <th style="text-align: center;">작성자</th>
+		                  <th style="text-align: center;">구분</th>
+		                  <th style="text-align: center;">시작일</th>
+		                  <th style="text-align: center;">종료일</th>
+		                </tr>
+		              </thead>
+		              <tbody>
+							<c:forEach var="eDTO" items="${eList}" varStatus="status">
 							<tr>
+								<td>
+									${status.count}
+								</td>
 								<td>
 								<c:set var="eSubject" value="${fn:replace(eDTO.subject, '<', '&lt;')}" />
 								<c:set var="eSubject" value="${fn:replace(eSubject, '>', '&gt;')}" />
@@ -168,16 +187,16 @@
 								</td>
 								<td align="center">
 								<c:if test="${eDTO.eventColor.equals('#E1E1E0')}">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img name="#E1E1E0" alt="gray" src="./images/gray_E1E1E0.png" width="15px">
+									<img name="#E1E1E0" alt="gray" src="./images/gray_E1E1E0.png" width="15px">
 								</c:if>
 								<c:if test="${eDTO.eventColor.equals('#CDFFBE')}">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img name="#CDFFBE" alt="green" src="./images/green_CDFFBE.png" width="15px">
+									<img name="#CDFFBE" alt="green" src="./images/green_CDFFBE.png" width="15px">
 								</c:if>
 								<c:if test="${eDTO.eventColor.equals('#FFCDCD')}">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img name="#FFCDCD" alt="red" src="./images/red_FFCDCD.png" width="15px">
+									<img name="#FFCDCD" alt="red" src="./images/red_FFCDCD.png" width="15px">
 								</c:if>
 								<c:if test="${eDTO.eventColor.equals('#FAFFCD')}">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img name="#FAFFCD" alt="yellow" src="./images/yellow_FAFFCD.png" width="15px">
+									<img name="#FAFFCD" alt="yellow" src="./images/yellow_FAFFCD.png" width="15px">
 								</c:if>
 								</td>
 	              	
@@ -200,14 +219,11 @@
 								<fmt:formatDate value="${eDTO.endDate}"	pattern="MM.dd(E)" />
 									${endDate}
 								</td>
-								<td align="center">
-									<fmt:formatDate value="${eDTO.writeDate}"	pattern="yyyy.MM.dd(E)" />
-								</td>
 							</tr>
 							</c:forEach>
-		                	</c:if>
-						</tbody>
+						</tbody>	
 					</table>
+					<br/>
 				</div>
 			</div>
 		</div>
