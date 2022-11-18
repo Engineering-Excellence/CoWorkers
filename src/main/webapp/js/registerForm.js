@@ -49,8 +49,8 @@ return true;
 // id 중복 검사
 function idDuplicateCheck(obj) {
 	let ID = obj.accountID.value;
-	var userList = new userList();
-	console.log(userList);
+	let userList = new userInfoSelectList();
+	console.log('userList' + userList);
 	
 	if (userList.accountID.value == ID) {
 		window.alert('중복된 아이디 입니다.')
@@ -72,8 +72,7 @@ function idDuplicateCheck(obj) {
 	}
 return true;
 }	
-	
-/*	
+
 // id 길이 검사
 function idCheck() {
 	
@@ -92,7 +91,6 @@ function idCheck() {
 		$('#idCheckMsg').css('color', 'green')
 	}
 }
-*/
  
 // PW 길이 검사 
 function pwCheck() {
