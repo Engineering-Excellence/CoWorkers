@@ -103,7 +103,7 @@ public class BoardService {
 
         int postID = Integer.parseInt(request.getParameter("postID"));
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-//        System.out.println(postID + "&" +  currentPage);
+        System.out.println(postID + "&" +  currentPage);
 
         BoardDTO dto = dao.boardSelectByPostID(mapper, postID);
 //        System.out.println(dto);
@@ -133,18 +133,23 @@ public class BoardService {
     // 게시글을 수정하는 UPDATE SQL 명령을 실행하는 메서드를 호출하는 메서드
     public void boardUpdate(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("BoardService 클래스의 update() 메서드 실행");
-        System.out.println(request.getMethod());
         SqlSession mapper = MySession.getSession();
 
+        /*System.out.println(request.getMethod());
         System.out.println(request.getParameterMap());
         Map<String, String[]> map = request.getParameterMap();
         Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
-        while(itr.hasNext())
-        {
+        while (itr.hasNext()) {
             Map.Entry<String, String[]> entry = itr.next();
-            System.out.println(String.format("%s : %s", entry.getKey(),String.join(", ", entry.getValue())));
-        }
+            System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
+        }*/
 
+//        int postID = Integer.parseInt(request.getParameter("postID"));
+        int currentPage = 1;
+        try {
+            currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        } catch (NumberFormatException e) {
+        }
         BoardDTO dto = new BoardDTO();
         dto.setPostID(Integer.parseInt(request.getParameter("postID")));
         dto.setSubject(request.getParameter("subject"));

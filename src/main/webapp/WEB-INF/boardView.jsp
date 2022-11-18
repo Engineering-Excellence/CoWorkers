@@ -171,7 +171,7 @@
                                     type="button"
                                     value="돌아가기"
                                     style="font-size: 13px;"
-                                    onclick="location.href='boardList.sil?currentPage=${currentPage}'"
+                                    onclick="location.href='board.sil?currentPage=${currentPage}'"
                             />
                         </td>
                     </tr>

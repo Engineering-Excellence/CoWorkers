@@ -155,6 +155,7 @@
 
                     <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
                     <input type="hidden" name="postID" value="${boardDTO.postID}"/>
+                    <input type="hidden" name="currentPage" value="${currentPage}"/>
                 </form>
             </div>
         </div>

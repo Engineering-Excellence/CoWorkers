@@ -37,7 +37,7 @@
     } catch (NumberFormatException e) {
 //            throw new RuntimeException(e);
     }
-    response.sendRedirect("boardList.sil?currentPage=" + currentPage);
+    response.sendRedirect("board.sil?currentPage=" + currentPage);
 %>
 
 </body>

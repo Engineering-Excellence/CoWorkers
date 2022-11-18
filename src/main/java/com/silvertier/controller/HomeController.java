@@ -110,9 +110,9 @@ public class HomeController extends HttpServlet {
             	break;
 			*/
                 
-            case "/board.sil":
+            /*case "/board.sil":
                 viewPage += "board";
-                break;
+                break;*/
 
             /*case "/work.sil":
                 viewPage += "work";
@@ -180,15 +180,14 @@ public class HomeController extends HttpServlet {
                 break;
             case "/boardInsertOK.sil":
                 BoardService.getInstance().boardInsert(request, response);
-//                service.selectList(request, response);
                 viewPage += "boardReturn";
                 break;
-            case "/boardList.sil":
+            case "/board.sil":
                 // 브라우저에 출력할 1 페이지 분량의 글과 페이징 작업에 사용할 8개의 변수가 저장된 클래스 객체를
                 // 얻어오는 메소드를 호출한다.
                 BoardService.getInstance().boardSelectNotice(request, response);
                 BoardService.getInstance().boardSelectList(request, response);
-                viewPage += "boardList";
+                viewPage += "board";
                 break;
             case "/boardHit.sil":
                 // 조회수를 증가시키는 메서드를 호출한다.
@@ -201,8 +200,15 @@ public class HomeController extends HttpServlet {
                 viewPage += "boardView";
                 break;
             case "/boardUpdate.sil":
+                // 글 수정 페이지를 호출한다.
+                BoardService.getInstance().boardSelectByPostID(request, response);
+                viewPage += "boardUpdate";
+                break;
+            case "/boardUpdateOK.sil":
                 // 글 1건을 수정하는 메서드를 호출한다.
-//                BoardService.getInstance().update(request, response);
+//                BoardService.getInstance().boardSelectByPostID(request, response);
+                BoardService.getInstance().boardUpdate(request, response);
+                BoardService.getInstance().boardSelectList(request, response);
                 viewPage += "boardReturn";
                 break;
             case "/boardDelete.sil":
