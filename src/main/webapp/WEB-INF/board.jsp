@@ -32,7 +32,6 @@
 <fmt:requestEncoding value="UTF-8"/>
 <%
     System.out.println(pageContext.findAttribute("boardDTO"));
-    System.out.println(pageContext.findAttribute("commentDTO"));
 
     Map<String, String[]> map = request.getParameterMap();
     Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();

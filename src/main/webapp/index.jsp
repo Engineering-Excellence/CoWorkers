@@ -26,7 +26,7 @@
 				<form action="loginOK.sil" method="post">
 					<p>CO-WORKERS</p>
 					<hr width="650">
-					<table width="650" border="2" cellpadding="5" cellspacing="0"> 
+					<table width="650" border="2" cellpadding="5" cellspacing="0">
 						<tr>
 							<th class="thTag">아이디</th>
 							<td class="tdTag">
@@ -50,9 +50,9 @@
 				</form>
 			</div>
 		</div>
-	
-	
-	
+
+
+
 
 </body>
 </html>

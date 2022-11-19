@@ -108,7 +108,7 @@
                             </th>
                             <td colspan="2">
                                 <input id="subject" type="text" class="form-control form-control-sm" name="subject"
-                                       value="${boardDTO.subject}"/>
+                                       value="${boardDTO.subject}" autocomplete="off"/>
                             </td>
                         </tr>
 

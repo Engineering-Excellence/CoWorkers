@@ -59,8 +59,7 @@
     <!-- 글 1건을 수정한다. -->
     <update id="boardUpdate" parameterType="boardDTO">
         UPDATE BOARD
-        SET USERNAME   = #{userName}
-          , SUBJECT    = #{subject}
+        SET SUBJECT    = #{subject}
           , CONTENT    = #{content}
           , NOTICE     = #{notice}
           , IP         = #{ip}

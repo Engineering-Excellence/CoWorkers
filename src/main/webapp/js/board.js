@@ -13,7 +13,7 @@ function setting(commentID, mode, title, name, content) {
     frm.commentID.value = commentID;
     frm.mode.value = mode;
     frm.commentBtn.value = title;
-    frm.name.value = name;
+    frm.userName.value = name;
     while (content.indexOf('<br/>') != -1) {
         content = content.replace('<br/>', '\r\n');
     }

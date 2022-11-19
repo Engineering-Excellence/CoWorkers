@@ -14,7 +14,7 @@
 <title>Event</title>
 
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/mainView.css" rel="stylesheet">
+    <link href="./css/dashboard.css" rel="stylesheet">
 	<script type="text/javascript" src="./js/event/event.js"></script>
 
 </head>

@@ -166,7 +166,7 @@
 </div>
 <script src="../js/jquery-3.6.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
-<script src="../js/worInsert.js"></script>
+<script src="../js/workInsert.js"></script>
 </body>
 
 </html>

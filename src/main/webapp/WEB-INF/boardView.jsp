@@ -31,7 +31,6 @@
 <%
     request.setCharacterEncoding("UTF-8");
     System.out.println(pageContext.findAttribute("boardDTO"));
-    System.out.println(pageContext.findAttribute("commentDTO"));
 
     Map<String, String[]> map = request.getParameterMap();
     for (Map.Entry<String, String[]> entry : map.entrySet()) {
@@ -171,7 +170,7 @@
                 </table>
             </div>
 
-            <hr style="color: red; width: 700px; margin-left: auto; margin-right: auto;"/>
+            <hr style="margin-left: auto; margin-right: auto;"/>
 
             <!-- 댓글 폼 -->
             <form class="m-3" action="boardCommentOK.sil" method="post" name="commentForm">
@@ -181,8 +180,8 @@
                     </tr>
 
                     <!-- 이 줄은 원래 보이면 안되는 줄로 작업이 완료되면 화면에 표시되지 않게 한다. -->
-                    <tr>
-                    <%--<tr style="display: none;">--%>
+                    <%--<tr>--%>
+                    <tr style="display: none;">
                         <td colspan="4">
                             <!-- 수정 또는 삭제할 댓글의 글번호를 넘겨준다. -->
                             commentID: <input type="text" name="commentID" value="${commentDTO.commentID}" size="4"/>
@@ -203,14 +202,15 @@
                             <label for="userName">이름</label>
                         </th>
                         <th style="width: 250px;">
-                            <input id="userName" class="form-control form-control-sm" type="text" name="userName"/>
+                            <input autocomplete="off" id="userName" class="form-control form-control-sm" type="text"
+                                   name="userName" <%--readonly="readonly"--%>/>
                         </th>
-                        <th class="align-middle" style="width: 100px; text-align: center;">
+                        <%--<th class="align-middle" style="width: 100px; text-align: center;">
                             <label for="password">비밀번호</label>
                         </th>
                         <th style="width: 250px;">
                             <input id="password" class="form-control form-control-sm" type="password" name="password"/>
-                        </th>
+                        </th>--%>
                     </tr>
                     <tr>
                         <th class="align-middle" style="width: 100px; text-align: center;">
@@ -231,7 +231,7 @@
                             <input
                                     class="btn btn-outline-primary btn-sm"
                                     type="submit"
-                                    value="댓글저장"
+                                    value="댓글작성"
                                     style="font-size: 13px;"
                                     name="commentBtn"
                             />
@@ -240,16 +240,16 @@
                                     type="button"
                                     value="다시쓰기"
                                     style="font-size: 13px;"
-                                    onclick="setting(0, 1, '댓글저장', '', '')"
+                                    onclick="setting(0, 1, '댓글작성', '', '')"
                             />
                         </td>
                     </tr>
 
                     <!-- 댓글을 출력한다. -->
-                    <c:set var="comment" value="${boardCommentList.list}"></c:set>
+                    <c:set var="boardCommentList" value="${boardCommentList.list}"></c:set>
 
                     <!-- 댓글이 없는 경우 -->
-                    <c:if test="${comment.size() == 0}">
+                    <c:if test="${boardCommentList.size() == 0}">
                         <tr>
                             <td colspan="4">
                                 <marquee>댓글이 존재하지 않습니다.</marquee>
@@ -258,37 +258,45 @@
                     </c:if>
 
                     <!-- 댓글이 있는 경우 -->
-                    <c:if test="${comment.size() != 0}">
-                        <c:forEach var="commentDTO" items="${comment}">
+                    <c:if test="${boardCommentList.size() != 0}">
+                        <c:forEach var="commentDTO" items="${boardCommentList}">
                             <tr class="table-dark">
-                                <td colspan="4">
-                                        ${commentDTO.commentID}.
-                                    <c:set var="userName" value="${fn:replace(commentDTO.userName, '<', '&lt;')}"/>
-                                    <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
-                                        ${userName} 님이
-                                    <fmt:formatDate value="${commentDTO.writeDate}" pattern="yyyy.MM.dd(E) HH:mm:ss"/>에
-                                    남긴글<br/>
-                                    <c:set var="content" value="${fn:replace(commentDTO.content, '<', '&lt;')}"/>
-                                    <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
-                                    <c:set var="content" value="${fn:replace(content, enter, '<br/>')}"/>
-                                        ${content}<br/>
-                                    <div align="right">
-                                        <input
-                                                class="btn btn-outline-primary btn-sm"
-                                                type="button"
-                                                value="수정"
-                                                style="font-size: 13px;"
-                                                onclick="setting(${commentDTO.commentID}, 2, '댓글수정', '${userName}', '${content}')"
-                                        />
-                                        <input
-                                                class="btn btn-outline-danger btn-sm"
-                                                type="button"
-                                                value="삭제"
-                                                style="font-size: 13px;"
-                                                onclick="setting(${commentDTO.commentID}, 3, '댓글삭제', '${userName}', '${content}')"
-                                        />
-                                    </div>
-                                </td>
+                                <c:if test="${commentDTO.deleteDate == null}">
+                                    <td colspan="4" style="vertical-align: middle">
+                                            ${commentDTO.commentID}.
+                                        <c:set var="userName" value="${fn:replace(commentDTO.userName, '<', '&lt;')}"/>
+                                        <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
+                                            ${userName} 님이
+                                        <fmt:formatDate value="${commentDTO.writeDate}"
+                                                        pattern="yyyy.MM.dd(E) HH:mm:ss"/>에
+                                        남긴 댓글<br/>
+                                        <c:set var="content" value="${fn:replace(commentDTO.content, '<', '&lt;')}"/>
+                                        <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
+                                        <c:set var="content" value="${fn:replace(content, enter, '<br/>')}"/>
+                                            ${content}<br/>
+                                        <div align="right">
+                                            <input
+                                                    class="btn btn-outline-primary btn-sm"
+                                                    type="button"
+                                                    value="수정"
+                                                    style="font-size: 13px;"
+                                                    onclick="setting(${commentDTO.commentID}, 2, '댓글수정', '${commentDTO.userName}', '${commentDTO.content}')"
+                                            />
+                                            <input
+                                                    class="btn btn-outline-danger btn-sm"
+                                                    type="button"
+                                                    value="삭제"
+                                                    style="font-size: 13px;"
+                                                    onclick="setting(${commentDTO.commentID}, 3, '댓글삭제', '${commentDTO.userName}', '${commentDTO.content}')"
+                                            />
+                                        </div>
+                                    </td>
+                                </c:if>
+                                <c:if test="${commentDTO.deleteDate != null}">
+                                    <td colspan="4" height="85" style="vertical-align: middle">
+                                        삭제된 댓글입니다.
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                     </c:if>

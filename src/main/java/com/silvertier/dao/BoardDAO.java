@@ -1,5 +1,6 @@
 package com.silvertier.dao;
 
+import com.silvertier.dto.BoardCommentDTO;
 import com.silvertier.dto.BoardDTO;
 import org.apache.ibatis.session.SqlSession;
 
@@ -28,9 +29,9 @@ public class BoardDAO {
     }
 
     // 게시판에 새 글을 저장하는 INSERT SQL 명령을 실행하는 메서드
-    public void boardInsert(SqlSession mapper, BoardDTO dto) {
+    public void boardInsert(SqlSession mapper, BoardDTO boardDTO) {
         System.out.println("BoardDAO 클래스의 insert() 메서드 실행");
-        mapper.insert("boardInsert", dto);
+        mapper.insert("boardInsert", boardDTO);
     }
 
     // 모든 공지글을 얻어오는 명령을 실행하는 메서드
@@ -58,8 +59,33 @@ public class BoardDAO {
         mapper.update("boardDelete", postID);
     }
 
-    public void boardUpdate(SqlSession mapper, BoardDTO dto) {
+    // 글 1건을 수정하는 UPDATE SQL 명령을 실행하는 메서드
+    public void boardUpdate(SqlSession mapper, BoardDTO boardDTO) {
         System.out.println("BoardDAO 클래스의 update() 메서드 실행");
-        mapper.update("boardUpdate", dto);
+        mapper.update("boardUpdate", boardDTO);
+    }
+
+    // 댓글 목록을 얻어오는 SELECT SQL 명령을 실행하는 메서드
+    public ArrayList<BoardCommentDTO> boardSelectCommentList(SqlSession mapper, int postID) {
+        System.out.println("BoardDAO 클래스의 selectCommentList() 메서드 실행");
+        return (ArrayList<BoardCommentDTO>) mapper.selectList("boardSelectCommentList", postID);
+    }
+
+    // 새 덧글을 저장하는 INSERT SQL 명령을 실행하는 메서드
+    public void boardCommentInsert(SqlSession mapper, BoardCommentDTO commentDTO) {
+        System.out.println("BoardDAO 클래스의 commentInsert() 메서드 실행");
+        mapper.insert("boardCommentInsert", commentDTO);
+    }
+
+    // 덧글을 삭제(블라인드 처리)하는 UPDATE SQL 명령을 실행하는 메서드
+    public void boardCommentDelete(SqlSession mapper, int commentID) {
+        System.out.println("BoardDAO 클래스의 commentDelete() 메서드 실행");
+        mapper.update("boardCommentDelete", commentID);
+    }
+
+    // 덧글을 수정하는 UPDATE SQL 명령을 실행하는 메서드
+    public void boardCommentUpdate(SqlSession mapper, BoardCommentDTO commentDTO) {
+        System.out.println("BoardDAO 클래스의 commentUpdate() 메서드 실행");
+        mapper.update("boardCommentUpdate", commentDTO);
     }
 }

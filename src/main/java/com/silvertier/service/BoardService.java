@@ -1,6 +1,8 @@
 package com.silvertier.service;
 
 import com.silvertier.dao.BoardDAO;
+import com.silvertier.dto.BoardCommentDTO;
+import com.silvertier.dto.BoardCommentList;
 import com.silvertier.dto.BoardDTO;
 import com.silvertier.dto.BoardList;
 import com.silvertier.mybatis.MySession;
@@ -10,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 // Kyle
 public class BoardService {
@@ -37,7 +37,6 @@ public class BoardService {
 
         int pageSize = 10;
         int totalCount = dao.boardSelectCount(mapper);
-//        System.out.println(totalCount);
 
         BoardList boardList = new BoardList(pageSize, totalCount, currentPage);
 
@@ -46,7 +45,6 @@ public class BoardService {
         hashMap.put("endNo", boardList.getEndNo());
 
         boardList.setList(dao.boardSelectList(mapper, hashMap));
-//        System.out.println(boardList);
 
         request.setAttribute("boardList", boardList);
 
@@ -58,15 +56,15 @@ public class BoardService {
         System.out.println("BoardService 클래스의 insert() 메서드 실행");
         SqlSession mapper = MySession.getSession();
 
-        BoardDTO dto = new BoardDTO();
-        dto.setSubject(request.getParameter("subject"));
-        dto.setUserName(request.getParameter("userName"));
-        dto.setContent(request.getParameter("content"));
-        dto.setIp(request.getParameter("ip"));
+        BoardDTO boardDTO = new BoardDTO();
+        boardDTO.setSubject(request.getParameter("subject"));
+        boardDTO.setUserName(request.getParameter("userName"));
+        boardDTO.setContent(request.getParameter("content"));
+        boardDTO.setIp(request.getParameter("ip"));
         if (request.getParameter("notice") != null) {
-            dto.setNotice(request.getParameter("notice"));
+            boardDTO.setNotice(request.getParameter("notice"));
         }
-        dao.boardInsert(mapper, dto);
+        dao.boardInsert(mapper, boardDTO);
 
         mapper.commit();
         mapper.close();
@@ -78,7 +76,6 @@ public class BoardService {
         SqlSession mapper = MySession.getSession();
 
         ArrayList<BoardDTO> notice = dao.boardSelectNotice(mapper);
-//        System.out.println("notice: " + notice);
         request.setAttribute("notice", notice);
 
         mapper.close();
@@ -97,22 +94,21 @@ public class BoardService {
     }
 
     // 조회수를 증가시킨 글 1건을 선택하는 SELECT SQL 명령을 실행하고  request 영역에 저장하는 메서드
-    public BoardDTO boardSelectByPostID(HttpServletRequest request, HttpServletResponse response) {
+    public void boardSelectByPostID(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("BoardService 클래스의 selectByPostID() 메서드 실행");
         SqlSession mapper = MySession.getSession();
 
         int postID = Integer.parseInt(request.getParameter("postID"));
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
-        BoardDTO dto = dao.boardSelectByPostID(mapper, postID);
-//        System.out.println(dto);
+        BoardDTO boardDTO = dao.boardSelectByPostID(mapper, postID);
 
-        request.setAttribute("boardDTO", dto);
+        request.setAttribute("boardDTO", boardDTO);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("enter", "\r\n");
 
         mapper.close();
-        return dto;
+//        return boardDTO;
     }
 
     // 게시글을 삭제(블라인드 처리)하는 UPDATE SQL 명령을 실행하는 메서드를 호출하는 메서드
@@ -121,7 +117,6 @@ public class BoardService {
         SqlSession mapper = MySession.getSession();
 
         int postID = Integer.parseInt(request.getParameter("postID"));
-        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
         dao.boardDelete(mapper, postID);
 
@@ -134,31 +129,84 @@ public class BoardService {
         System.out.println("BoardService 클래스의 update() 메서드 실행");
         SqlSession mapper = MySession.getSession();
 
-        /*System.out.println(request.getMethod());
-        System.out.println(request.getParameterMap());
-        Map<String, String[]> map = request.getParameterMap();
-        Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
-        while (itr.hasNext()) {
-            Map.Entry<String, String[]> entry = itr.next();
-            System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
-        }*/
-
-//        int postID = Integer.parseInt(request.getParameter("postID"));
-        int currentPage = 1;
-        try {
-            currentPage = Integer.parseInt(request.getParameter("currentPage"));
-        } catch (NumberFormatException e) {
-        }
-        BoardDTO dto = new BoardDTO();
-        dto.setPostID(Integer.parseInt(request.getParameter("postID")));
-        dto.setSubject(request.getParameter("subject"));
-        dto.setUserName(request.getParameter("userName"));
-        dto.setContent(request.getParameter("content"));
-        dto.setIp(request.getParameter("ip"));
+        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        BoardDTO boardDTO = new BoardDTO();
+        boardDTO.setPostID(Integer.parseInt(request.getParameter("postID")));
+        boardDTO.setSubject(request.getParameter("subject"));
+//        boardDTO.setUserName(request.getParameter("userName"));
+        boardDTO.setContent(request.getParameter("content"));
+        boardDTO.setIp(request.getParameter("ip"));
         if (request.getParameter("notice") != null) {
-            dto.setNotice(request.getParameter("notice"));
+            boardDTO.setNotice(request.getParameter("notice"));
         }
-        dao.boardUpdate(mapper, dto);
+        dao.boardUpdate(mapper, boardDTO);
+
+        mapper.commit();
+        mapper.close();
+    }
+
+    // 덧글 목록을 불러오는 SELECT SQL 명령을 실행하는 메서드를 호출하는 메서드
+    public void boardSelectCommentList(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("BoardService 클래스의 selectCommentList() 메서드 실행");
+        SqlSession mapper = MySession.getSession();
+
+        int postID = Integer.parseInt(request.getParameter("postID"));
+        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+
+        BoardCommentList boardCommentList = new BoardCommentList();
+        boardCommentList.setList(BoardDAO.getInstance().boardSelectCommentList(mapper, postID));
+
+        request.setAttribute("boardCommentList", boardCommentList);
+
+        mapper.close();
+    }
+
+    // 새 덧글을 저장하는 INSERT SQL 명령을 실행하는 메서들르 호출하는 메서드
+    public void boardCommentInsert(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("BoardService 클래스의 commentInsert() 메서드 실행");
+        SqlSession mapper = MySession.getSession();
+
+        BoardCommentDTO commentDTO = new BoardCommentDTO();
+        commentDTO.setPostID(Integer.parseInt(request.getParameter("postID")));
+        commentDTO.setUserName(request.getParameter("userName"));
+        commentDTO.setContent(request.getParameter("content"));
+        commentDTO.setIp(request.getParameter("ip"));
+        dao.boardCommentInsert(mapper, commentDTO);
+
+        mapper.commit();
+        mapper.close();
+    }
+
+    // 덧글을 삭제(블라인드 처리)하는 UPDATE SQL 명령을 실행하는 메서드를 호출하는 메서드
+    public void boardCommentDelete(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("BoardService 클래스의 commentDelete() 메서드 실행");
+        SqlSession mapper = MySession.getSession();
+
+        int commentID = Integer.parseInt(request.getParameter("commentID"));
+        int postID = Integer.parseInt(request.getParameter("postID"));
+        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+
+        dao.boardCommentDelete(mapper, commentID);
+
+        mapper.commit();
+        mapper.close();
+    }
+
+    // 덧글을 수정하는 UPDATE SQL 명령을 실행하는 메서드를 호출하는 메서드
+    public void boardCommentUpdate(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("BoardService 클래스의 commentUpdate() 메서드 실행");
+        SqlSession mapper = MySession.getSession();
+
+        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+
+        BoardCommentDTO commentDTO = new BoardCommentDTO();
+        commentDTO.setCommentID(Integer.parseInt(request.getParameter("commentID")));
+//        commentDTO.setUserName(request.getParameter("userName"));
+        commentDTO.setContent(request.getParameter("content"));
+        commentDTO.setIp(request.getParameter("ip"));
+        commentDTO.setPostID(Integer.parseInt(request.getParameter("postID")));
+
+        dao.boardCommentUpdate(mapper, commentDTO);
 
         mapper.commit();
         mapper.close();

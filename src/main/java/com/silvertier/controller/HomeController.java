@@ -9,19 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.silvertier.dto.UserInfoDTO;
 import com.silvertier.service.BoardService;
 import com.silvertier.service.EventService;
 import com.silvertier.service.UserInfoService;
 import com.silvertier.service.WorkService;
-//pulling
+
 @WebServlet("*.sil")
 public class HomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     // 김태형 (Terry) - 로그인, 홈 화면 분기 컨트롤러
-
-    UserInfoService service = UserInfoService.getInstance();
 
     public HomeController() {
         super();
@@ -51,23 +48,23 @@ public class HomeController extends HttpServlet {
         switch (context) {
 
             // Terry
-         	// 초기 index화면 => 바로 login.sil로 진입
+            // 초기 index화면 => 바로 login.sil로 진입
             case "/index.sil":
                 viewPage += "login";
                 break;
-                
+
             // 로그인 화면
             case "/login.sil":
                 viewPage += "login";
                 break;
-                
+
             // 로그인 정보 비교 페이지 => ID / PW 비교 후 mainView로 로그인 실행
             case "/loginOK.sil":
                 UserInfoService.getInstance().userInfoCompareID(request, response);
                 UserInfoService.getInstance().userInfoComparePW(request, response);
                 viewPage += "loginOK";
                 break;
-               
+
             // 로그아웃 과정 진행 페이지 => 세션 제거 후 index.sil로 이동
             case "/logout.sil":
                 viewPage += "logout";
@@ -77,13 +74,13 @@ public class HomeController extends HttpServlet {
             case "/registerForm.sil":
                 viewPage += "registerForm";
                 break;
-            
+
             // 회원가입 완료 페이지
             case "/registerOK.sil":
                 UserInfoService.getInstance().userInfoInsert(request, response);
                 viewPage += "login";
                 break;
-                
+
             // coWorkers 메인 페이지    
             case "/mainView.sil":
                 viewPage += "mainView";
@@ -109,22 +106,10 @@ public class HomeController extends HttpServlet {
             	viewPage += "pwFindView";
             	break;
 			*/
-                
-            /*case "/board.sil":
-                viewPage += "board";
-                break;*/
-
-            /*case "/work.sil":
-                viewPage += "work";
-                break;*/
 
             case "/file.sil":
                 viewPage += "file";
                 break;
-
-            /*case "/event.sil":
-                viewPage += "event";
-                break;*/
 
             // Emma
             case "/event.sil":
@@ -137,11 +122,11 @@ public class HomeController extends HttpServlet {
                 break;
 
             case "/eventList.sil":
-            	EventService.getInstance().eventSelectArrayList(request, response);
-            	EventService.getInstance().workSelectArrayList(request, response);
-    			viewPage += "eventList";
-    			break;
-                
+                EventService.getInstance().eventSelectArrayList(request, response);
+                EventService.getInstance().workSelectArrayList(request, response);
+                viewPage += "eventList";
+                break;
+
             // Anbin
             case "/work.sil":
                 viewPage += "work";
@@ -182,9 +167,11 @@ public class HomeController extends HttpServlet {
 
             // Kyle
             case "/boardInsert.sil":
+                // 글 수정 페이지를 호출한다.
                 viewPage += "boardInsert";
                 break;
             case "/boardInsertOK.sil":
+                // 글을 수정하는 메서드를 호출한다.
                 BoardService.getInstance().boardInsert(request, response);
                 viewPage += "boardReturn";
                 break;
@@ -203,6 +190,7 @@ public class HomeController extends HttpServlet {
             case "/boardView.sil":
                 // 조회수를 증가시킨 글 1건을 얻어오는 메서드를 호출한다.
                 BoardService.getInstance().boardSelectByPostID(request, response);
+                BoardService.getInstance().boardSelectCommentList(request, response);
                 viewPage += "boardView";
                 break;
             case "/boardUpdate.sil":
@@ -213,9 +201,7 @@ public class HomeController extends HttpServlet {
             case "/boardUpdateOK.sil":
                 // 글 1건을 수정하는 메서드를 호출한다.
                 BoardService.getInstance().boardUpdate(request, response);
-//                BoardService.getInstance().boardSelectByPostID(request, response);
-                BoardService.getInstance().boardSelectList(request, response);
-                viewPage += "boardReturn";
+                viewPage += "boardViewReturn";
                 break;
             case "/boardDelete.sil":
                 // 글 1건을 삭제하는 메서드를 호출한다.
@@ -223,8 +209,20 @@ public class HomeController extends HttpServlet {
                 viewPage += "boardReturn";
                 break;
             case "/boardCommentOK.sil":
-//                BoardService.getInstance().selectByPostID(request, response);
-                viewPage += "boardView";
+                // 댓글을 조작하는 메서드를 호출한다.
+                int mode = Integer.parseInt(request.getParameter("mode"));
+                switch (mode) {
+                    case 1: // 댓글 삽입
+                        BoardService.getInstance().boardCommentInsert(request, response);
+                        break;
+                    case 2: // 댓글 수정
+                        BoardService.getInstance().boardCommentUpdate(request, response);
+                        break;
+                    case 3: // 댓글 삭제
+                        BoardService.getInstance().boardCommentDelete(request, response);
+                        break;
+                }
+                viewPage += "boardViewReturn";
                 break;
 
             default:
