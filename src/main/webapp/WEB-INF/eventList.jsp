@@ -16,7 +16,7 @@
 <title>Event</title>
 
     <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/mainView.css" rel="stylesheet">
+    <link href="./css/dashboard.css" rel="stylesheet">
 	<script type="text/javascript" src="./js/event/event.js"></script>
 
 </head>
@@ -31,7 +31,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="mainView.sil">CoWorkers</a>
+          <a class="navbar-brand" href="#">coWorkers</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -74,7 +74,12 @@
 			<!-- 리스트 제목 -->
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<!-- 업무_긴급 일정 테이블 -->
+				<br/>
+				<div style="float: right">
+					<button type="button" class="btn btn-default"onclick="location.href='event.sil'">캘린더</button>
+				</div>
 				<h1 class="page-header">일정리스트</h1>
+				<br/>
 				<h3 class="sub-header">긴급 일정</h3>
 				<div class="table-responsive">
 					<table class="table table-striped">
@@ -205,7 +210,7 @@
 								<c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}" />
 									${userName}
 								</td>
-								<td>
+								<td align="center">
 								<c:if test="${ eDTO.allDay == 'true'}">
 									종일
 								</c:if>
