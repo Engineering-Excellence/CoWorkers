@@ -6,7 +6,7 @@ import java.sql.Date;
 public class BoardCommentDTO {
 
     private int commentID;    // PK, 댓글번호
-    private String userName;    // 성명
+    private String userName;    // 이름
     private String content;  // 덧글 내용
     private Date writeDate; // 입력일
     private Date updateDate;    // 수정일

@@ -35,7 +35,6 @@
     try {
         currentPage = Integer.parseInt(request.getParameter("currentPage"));
     } catch (NumberFormatException e) {
-//            throw new RuntimeException(e);
     }
     response.sendRedirect("board.sil?currentPage=" + currentPage);
 %>

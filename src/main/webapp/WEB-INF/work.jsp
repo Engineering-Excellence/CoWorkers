@@ -59,7 +59,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="boardList.sil">게시판<span class="sr-only"></span></a></li>
+                <li><a href="board.sil">게시판<span class="sr-only"></span></a></li>
             </ul>
 
             <ul class="nav nav-sidebar">

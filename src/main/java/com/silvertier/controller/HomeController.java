@@ -212,8 +212,8 @@ public class HomeController extends HttpServlet {
                 break;
             case "/boardUpdateOK.sil":
                 // 글 1건을 수정하는 메서드를 호출한다.
-//                BoardService.getInstance().boardSelectByPostID(request, response);
                 BoardService.getInstance().boardUpdate(request, response);
+//                BoardService.getInstance().boardSelectByPostID(request, response);
                 BoardService.getInstance().boardSelectList(request, response);
                 viewPage += "boardReturn";
                 break;

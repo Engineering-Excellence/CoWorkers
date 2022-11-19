@@ -7,7 +7,7 @@ public class BoardDTO {
 
     private int postID; // PK, 글번호
     private String subject; // 제목
-    private String userName;    // 성명
+    private String userName;    // 이름
     private String content; // 내용
     private Date writeDate; // 입력일
     private Date updateDate;    // 수정일

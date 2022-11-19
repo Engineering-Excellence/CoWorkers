@@ -31,12 +31,11 @@
 <%
     request.setCharacterEncoding("UTF-8");
     System.out.println(pageContext.findAttribute("boardDTO"));
+    System.out.println(pageContext.findAttribute("commentDTO"));
 
     Map<String, String[]> map = request.getParameterMap();
-    Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
-    while (itr.hasNext()) {
-        Map.Entry<String, String[]> entry = itr.next();
-        System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
+    for (Map.Entry<String, String[]> entry : map.entrySet()) {
+        System.out.printf("%s : %s%n", entry.getKey(), String.join(", ", entry.getValue()));
     }
 %>
 
@@ -153,19 +152,13 @@
                                     type="button"
                                     value="수정하기"
                                     style="font-size: 13px;"
-                                    <%--onclick="location.href='selectByPostID.sil?postID=${boardDTO.postID}&currentPage=${currentPage}&job=update'"/>--%>
-                                    onclick="location.href='boardUpdate.sil?postID=${boardDTO.postID}&currentPage=${currentPage}'"/>
+                                    onclick="location.href=('boardUpdate.sil?postID=${boardDTO.postID}&currentPage=${currentPage}')"/>
                             <input
                                     class="btn btn-outline-danger btn-sm"
                                     type="button"
                                     value="삭제하기"
                                     style="font-size: 13px;"
-                            <%--onclick="location.href='selectByPostID.sil?postID=${boardDTO.postID}&currentPage=${currentPage}&job=delete'"/>--%>
-                                    onclick="delete_check('boardDelete.sil?postID=${boardDTO.postID}&currentPage=${currentPage}')"/>
-                            <!--
-                                history.back(), history.go(-1)을 사용하면 단순히 전 화면으로 돌아가서 증가된 조회수가
-                                반영되지 않는다.
-                            -->
+                                    onclick="deleteCheck('boardDelete.sil?postID=${boardDTO.postID}&currentPage=${currentPage}')"/>
                             <input
                                     class="btn btn-outline-warning btn-sm"
                                     type="button"
@@ -188,17 +181,17 @@
                     </tr>
 
                     <!-- 이 줄은 원래 보이면 안되는 줄로 작업이 완료되면 화면에 표시되지 않게 한다. -->
-                    <!-- <tr style="display: none;"> -->
-                    <tr style="display: none;">
+                    <tr>
+                    <%--<tr style="display: none;">--%>
                         <td colspan="4">
                             <!-- 수정 또는 삭제할 댓글의 글번호를 넘겨준다. -->
-                            postID: <input type="text" name="postID" value="${boardDTO.postID}" size="1"/>
+                            commentID: <input type="text" name="commentID" value="${commentDTO.commentID}" size="4"/>
                             <!-- 현재 댓글이 어떤 메인글의 댓글인가 넘겨준다. -->
-                            gup: <input type="text" name="gup" value="${boardDTO.postID}" size="1"/>
+                            postID: <input type="text" name="postID" value="${boardDTO.postID}" size="4"/>
                             <!-- 작업 모드, 1 => 댓글 저장, 2 => 댓글 수정, 3 => 댓글 삭제 -->
                             mode: <input type="text" name="mode" value="1" size="1"/>
                             <!-- 메인글이 표시되던 페이지 번호를 넘겨준다. -->
-                            currentPage: <input type="text" name="currentPage" value="${currentPage}" size="1"/>
+                            currentPage: <input type="text" name="currentPage" value="${currentPage}" size="4"/>
                             <!-- 댓글 작성자의 ip 주소를 넘겨준다. -->
                             ip: <input type="text" name="ip" value="${pageContext.request.remoteAddr}" size="10"/>
                         </td>
@@ -259,7 +252,7 @@
                     <c:if test="${comment.size() == 0}">
                         <tr>
                             <td colspan="4">
-                                <marquee>댓글이 하나도 없네요~~~~~</marquee>
+                                <marquee>댓글이 존재하지 않습니다.</marquee>
                             </td>
                         </tr>
                     </c:if>

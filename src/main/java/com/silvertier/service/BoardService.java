@@ -103,7 +103,6 @@ public class BoardService {
 
         int postID = Integer.parseInt(request.getParameter("postID"));
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-        System.out.println(postID + "&" +  currentPage);
 
         BoardDTO dto = dao.boardSelectByPostID(mapper, postID);
 //        System.out.println(dto);

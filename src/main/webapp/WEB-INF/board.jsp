@@ -32,6 +32,7 @@
 <fmt:requestEncoding value="UTF-8"/>
 <%
     System.out.println(pageContext.findAttribute("boardDTO"));
+    System.out.println(pageContext.findAttribute("commentDTO"));
 
     Map<String, String[]> map = request.getParameterMap();
     Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
@@ -97,9 +98,9 @@
                     <%--<table class="table" width="1000" align="center" border="1" cellpadding="5" cellspacing="0">--%>
 
                     <thead>
-                    <tr class="table-primary">
-                        <th colspan="5">게시판 보기</th>
-                    </tr>
+                    <%--<tr class="table-primary">
+                        <th colspan="5">게시판</th>
+                    </tr>--%>
                     <tr>
                         <td colspan="5" align="right">
                             ${boardList.totalCount}개 (${boardList.currentPage} / ${boardList.totalPage} 페이지)
