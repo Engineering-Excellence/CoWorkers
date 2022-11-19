@@ -1,4 +1,5 @@
 <%@ page import="com.silvertier.dto.WorkList" %>
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -23,12 +24,12 @@
     <link href="../css/coWorkers.css" rel="stylesheet">
 
 
-
 </head>
 
 <body>
 <fmt:requestEncoding value="UTF-8"/>
-<jsp:useBean id="date" class="java.util.Date"/>
+<c:set var="date" value="${Date(Date().getTime()-60*60*24*1000)}"/>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -73,7 +74,7 @@
 
             <div class="table-responsive">
 
-                <table class="table" style="width: 1500px; margin-left: auto; margin-right: auto;">
+                <table class="table" style="margin-left: auto; margin-right: auto;">
                     <tr class="bg-info">
                         <th colspan="10" style="font-size: 30px; text-align: center;">업무</th>
                     </tr>
@@ -81,13 +82,13 @@
                     <tr class="bg-primary">
                         <th style="width: 100px; text-align: center;">글번호</th>
                         <th style="width: 150px; text-align: center;">우선순위</th>
-                        <th style="width: 500px; text-align: center;">업무명</th>
-                        <th style="width: 150px; text-align: center;">상태</th>
-                        <th style="width: 200px; text-align: center;">담당자</th>
-                        <th style="width: 200px; text-align: center;">진척도</th>
+                        <th style="width: 400px; text-align: center;">업무명</th>
+                        <th style="width: 250px; text-align: center;">상태</th>
+                        <th style="width: 100px; text-align: center;">담당자</th>
+                        <th style="width: 100px; text-align: center;">진척도</th>
                         <th style="width: 300px; text-align: center;">작성(수정)일</th>
-                        <th style="width: 200px; text-align: center;">시작일</th>
-                        <th style="width: 200px; text-align: center;">마감일</th>
+                        <th style="width: 150px; text-align: center;">시작일</th>
+                        <th style="width: 150px; text-align: center;">마감일</th>
                     </tr>
                     </thead>
 
@@ -217,7 +218,17 @@
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
-                                        <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
+                                        <%--                                        <c:if test="${dto.deadline>=date}">--%>
+
+                                        <c:if test="${dto.deadline.after(date)}">
+                                            <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
+                                        </c:if>
+                                        <%--마감일 초과--%>
+                                        <%--                                        <c:if test="${dto.deadline<date}">--%>
+                                        <c:if test="${dto.deadline.before(date)}">
+                                            <b style="color: crimson"><fmt:formatDate value="${dto.deadline}"
+                                                                                      pattern="yyyy.MM.dd.(E)"/></b>
+                                        </c:if>
                                     </c:if>
                                 </td>
                             </tr>
@@ -356,16 +367,14 @@
                                         <fmt:formatDate value="${dto.startDate}" pattern="yyyy.MM.dd.(E)"/>
                                     </c:if>
                                 </td>
-
                                 <td align="center">
-                                    <c:if test="${dto.deadline<=date}"></c:if>
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
-                                        <c:if test="${dto.deadline>=date}">
+                                        <c:if test="${dto.deadline.after(date)}">
                                             <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
                                         </c:if>
                                         <%--마감일 초과--%>
-                                        <c:if test="${dto.deadline<date}">
+                                        <c:if test="${dto.deadline.before(date)}">
                                             <b style="color: crimson"><fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/></b>
                                         </c:if>
                                     </c:if>
