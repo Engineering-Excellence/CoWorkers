@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<link rel="icon" href="../../favicon.ico">
 
-<title>Event</title>
+<title>The list of events</title>
 
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/dashboard.css" rel="stylesheet">
@@ -109,17 +109,19 @@
 		                
 		                <!-- 110행 실행을 위해 107행 어제날짜를 구한다. (오늘 날짜로 대입하면 deadline이 오늘 날짜인 것도 표시하지 않기 때문. -->
 		                <c:set var ="yesterday" value ="<%= new Date(new Date().getTime() - 60*60*24*1000) %>" />
-						<c:forEach var="wDTO" items="${wList}" varStatus="status" >
-		                <c:if test="${wDTO.priority == 1}">
+						<c:forEach var="wDTO" items="${wList}"  >
+						<c:if test="${dto.deleteDate!=null}">
+                        </c:if>
+		                <c:if test="${wDTO.priority == 1 && wDTO.deleteDate ==null}">
 						<c:if test="${wDTO.deadline.after(yesterday)}">
 						<tr>
-							<td>
-								<c:out value="${status.count}"/>
+							<td align="center">
+								<c:out value="${wDTO.workID}"/>
 							</td>
 							<td >
 							<c:set var="wSubject" value="${fn:replace(wDTO.subject, '<', '&lt;')}" />
 							<c:set var="wSubject" value="${fn:replace(wSubject, '>', '&gt;')}" />
-								${wSubject}
+								<a href="workView.sil?workID=${wDTO.workID}&currentPage=1">${wSubject}</a>
 							</td>
 							<td align="center">
 							<c:if test="${wDTO.priority == 1}">
@@ -181,50 +183,71 @@
 		              </thead>
 		              <tbody>
 							<c:forEach var="eDTO" items="${eList}" varStatus="status">
+							<c:if test="${eDTO.deleteDate!=null}">
+                        	</c:if>
+							<c:if test="${eDTO.deleteDate==null}">
 							<tr>
-								<td>
+								<td align="center">
 									${status.count}
 								</td>
 								<td>
+								<c:if test="${eDTO.deleteDate!=null}"></c:if>
+                                <c:if test="${eDTO.deleteDate==null}">
 								<c:set var="eSubject" value="${fn:replace(eDTO.subject, '<', '&lt;')}" />
 								<c:set var="eSubject" value="${fn:replace(eSubject, '>', '&gt;')}" />
-									${eSubject}
+									<a href="eventView.sil?eventID=${eDTO.eventID}">${eSubject}</a>
+								</c:if>
 								</td>
 								<td align="center">
+								<c:if test="${eDTO.deleteDate!=null}"></c:if>
+                                <c:if test="${eDTO.deleteDate==null}">
 								<c:if test="${eDTO.eventColor.equals('#E1E1E0')}">
-									<img name="#E1E1E0" alt="gray" src="./images/gray_E1E1E0.png" width="15px">
+									<span style="color: darkgray; ">[낮음]</span> <img name="#E1E1E0" alt="gray" src="./images/gray_E1E1E0.png" width="15px">
 								</c:if>
 								<c:if test="${eDTO.eventColor.equals('#CDFFBE')}">
-									<img name="#CDFFBE" alt="green" src="./images/green_CDFFBE.png" width="15px">
+									<span style="color: #CDFFBE; ">[보통]</span> <img name="#CDFFBE" alt="green" src="./images/green_CDFFBE.png" width="15px">
 								</c:if>
 								<c:if test="${eDTO.eventColor.equals('#FFCDCD')}">
-									<img name="#FFCDCD" alt="red" src="./images/red_FFCDCD.png" width="15px">
+									<span style="color: #FFCDCD; font-weight: bold;">[긴급]</span> <img name="#FFCDCD" alt="red" src="./images/red_FFCDCD.png" width="15px">
 								</c:if>
 								<c:if test="${eDTO.eventColor.equals('#FAFFCD')}">
-									<img name="#FAFFCD" alt="yellow" src="./images/yellow_FAFFCD.png" width="15px">
+									<span style="color: yellow; ">[높음]</span> <img name="#FAFFCD" alt="yellow" src="./images/yellow_FAFFCD.png" width="15px">
+								</c:if>
 								</c:if>
 								</td>
 	              	
 								<td align="center">
+								<c:if test="${eDTO.deleteDate!=null}"></c:if>
+                                <c:if test="${eDTO.deleteDate==null}">
 								<c:set var="userName" value="${fn:replace(eDTO.userName, '<', '&lt;')}" />
 								<c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}" />
 									${userName}
+								</c:if>
 								</td>
 								<td align="center">
+								<c:if test="${eDTO.deleteDate!=null}"></c:if>
+                                <c:if test="${eDTO.deleteDate==null}">
 								<c:if test="${ eDTO.allDay == 'true'}">
 									종일
 								</c:if>
+								</c:if>
 								</td>
-	
 								<td align="center">
+								<c:if test="${eDTO.deleteDate!=null}"></c:if>
+                                <c:if test="${eDTO.deleteDate==null}">
 								<fmt:formatDate value="${eDTO.startDate}"	pattern="MM.dd(E)" />
 									${startDate}
+								</c:if>
 								</td>
 								<td align="center">
+								<c:if test="${eDTO.deleteDate!=null}"></c:if>
+                                <c:if test="${eDTO.deleteDate==null}">
 								<fmt:formatDate value="${eDTO.endDate}"	pattern="MM.dd(E)" />
 									${endDate}
+								</c:if>
 								</td>
 							</tr>
+							</c:if>
 							</c:forEach>
 						</tbody>	
 					</table>

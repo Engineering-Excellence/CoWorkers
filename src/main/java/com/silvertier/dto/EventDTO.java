@@ -10,7 +10,7 @@ public class EventDTO {
 	private String userName;
 	private String content;	// 일정 내용
 	private String eventColor;	//	일정(스케줄) 별 색(16진수rbc값)
-	private String allDay; // all day 일정 이벤트 여부 => 값 : y/n
+	private String allDay = "false"; // all day 일정 이벤트 여부 => 값 : y/n
 	private Date startDate;	// 일정 시작하는 날짜
 	private Date endDate;	// 일정 끝나는 날짜
 	private Date writeDate;	//작성일

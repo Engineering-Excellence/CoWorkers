@@ -4,8 +4,29 @@
 
 	<!-- 일정 1건 insert -->
 	<insert id="eventInsert" parameterType="eDTO">
-		insert into event (eventid, username, userid, subject, content, startdate, enddate, eventcolor, hit, ip, allday) 
-		values (event_idx_seq.nextval, 'hong', 1234, #{subject}, #{content}, #{startDate}, #{endDate}, #{eventColor}, 0, #{ip}, #{allDay})
+		insert into 
+		event (eventid, 
+		username, 
+		userid, 
+		subject, 
+		content, 
+		startdate, 
+		enddate, 
+		eventcolor, 
+		hit, 
+		ip, 
+		allday)
+			values (event_idx_seq.nextval, 
+			'hong', 
+			1234, 
+			#{subject}, 
+			#{content}, 
+			#{startDate}, 
+			#{endDate}, 
+			#{eventColor}, 
+			0, 
+			#{ip}, 
+			#{allDay})
 	</insert>
 
 	<!-- 전체 글의 개수를 얻어온다. -->
@@ -34,5 +55,27 @@
 		select * from work order by workID desc, deadline asc
 	</select>
 
+	<!-- eventSelectByEventID -->
+	<select id="eventSelectByEventID" parameterType="int" resultType="eDTO">
+		select * from event where eventid = #{eventID}
+	</select>
+
+	<!-- 1건의 일정을 수정한다. -->
+	<update id="eventUpdate" parameterType="eDTO">
+		update event 
+			set subject		= #{subject},
+			content			= #{content},
+			startdate		= #{startDate},
+			enddate			= #{endDate}, 
+			eventcolor		= #{eventColor},
+			ip				= #{ip},
+			allday			= #{allDay},
+			updateDate		= sysdate 
+		where eventID = #{eventID}
+	</update>
+
+	<delete id="eventDelete" parameterType="int">
+		update event set deletedate = sysdate where eventID = #{eventID}
+	</delete>
 
 </mapper>

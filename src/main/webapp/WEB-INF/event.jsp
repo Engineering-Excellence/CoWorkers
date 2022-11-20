@@ -13,13 +13,15 @@
 
 <title>Event</title>
 
+    <link href="./css/event.css" rel="stylesheet">
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="./css/dashboard.css" rel="stylesheet">
 	<script type="text/javascript" src="./js/event/event.js"></script>
 
 </head>
 <body>
-
 	<!-- 상단 네비게이션 -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -67,15 +69,11 @@
 	            <li><a href="">Another nav item</a></li>
 	          </ul>
         	</div>
+        	
         	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
          		<h1 class="page-header">일정 관리</h1>
 
 	<!-- 캘린더 -->
-<!-- <table id="fc-content-skeleton" width="1000" align="center" border="1" cellpadding="5"	cellspacing="0">
-	테이블 내용 반복문으로 생성 (칸생성_background for a day)
-	class="fc-day-top date-date
-	a태그 안에 날짜 생성
-</table>	 -->
 <%
 	Calendar calendar = Calendar.getInstance();
 	int year = request.getParameter("year") == null ? calendar.get(Calendar.YEAR) : Integer.parseInt(request.getParameter("year"));
@@ -109,8 +107,7 @@
 			<br/>
 		
 			<div class="table-responsive">
-				<table class="table table-striped"
-					style="border: 1; border-color: darkgrqy; border-radius: 15px"			>
+				<table class="table table-striped">
 					<tr>
 						<th id="sunday" width="100" height="40"><sapn>일</sapn></th>
 						<th width="100px"><span>월</span></th>
@@ -191,132 +188,141 @@
 					</table>
 				</div>
          	</div>
+         	
+         	
 		</div>
 	</div>
-<!-- <table width="700" border="1" align="center" cellpadding="5" cellspacing="0"> -->
 <br/><br/>
 
 
 
 
-<!-- 모달창 내용(insert) -->
-<div>
-	<form action="eventInsertOK.sil" method="post">
-		<table class="table" >
-			<tr class="table-primary">
-				<th colspan="3" style="font-size: 30px; text-align: center;">일정 작성</th>
-			</tr>
-			
-			<tr>
-				<td width="700" colspan="2">
-					<input id="subject" type="text" 
-						class="form-control"
-						name="subject" autocomplete="none" 
-						placeholder="제목을 입력하세요."/>
-				</td>
-				<td colspan="1">
-				</td>
-			</tr>
-			<tr>
-				<th class="align-middle table-dark" width="50px">
-					<label for="eventColor">색상</label>
-				</th>
-				<td class="align-middle" width="550px" colspan="2">
-					<select id="eventColor" name="eventColor" 
-						width="200"
-						onchange="selectBoxChgColor(value);">
-						<option value="#E1E1E0">
-							gray<img name="#E1E1E0" alt="gray" src="./images/gray_E1E1E0.png" width="15px">
-						</option>
-						<option value="#CDFFBE">
-							green<img name="#CDFFBE" alt="green" src="./images/green_CDFFBE.png" width="15px">
-						</option>
-						<option value="#FFCDCD">
-							red<img name="#FFCDCD" alt="red" src="./images/red_FFCDCD.png" width="15px">
-						</option>
-						<option value="#FAFFCD">
-							yellow<img name="#FAFFCD" alt="yellow" src="./images/yellow_FAFFCD.png" width="15px">
-						</option>
-					</select>
-				
-						<img alt="gray" src="./images/gray_E1E1E0.png" width="15px">
-						<img alt="green" src="./images/green_CDFFBE.png" width="15px">
-						<img alt="red" src="./images/red_FFCDCD.png" width="15px">
-						<img alt="yellow" src="./images/yellow_FAFFCD.png" width="15px">
-					<!-- <input class="form-check-input" 
-							type="checkbox" 
-							name="isAllDay" 
-							value="yes"
-					/> -->
-				</td>
-			</tr>
-			<tr>
-				<td >
-					<input	class="form-check-input" 
-						width="500"
-						type="date" 
-						name="startDate"
-						min="2000-01-01"
-						max="2050-12-31"
-						id = "startDate"
-					/>
-					<!-- <input type="button" onclick="starDateChk()"> -->
-				</td>
-				<td >
-					<input id="endDate" 
-						type="date" 
-						name="endDate"
-						min="2000-01-01"
-						max="2050-12-31"
-					/>
-				</td>
-				<th class="align-middle" width="100">
-					종일 <input class="form-check-input" 
-							type="checkbox" 
-							name="allDay" 
-							value="true"
-							id="allDay"
-						/>
-				</th>
-			</tr>
-			<tr>
-			</tr>
-			<tr>
-				<td colspan="3">
-					<textarea 
-						id="content" 
-						class="form-control form-control-sm" 
-						rows="10" 
-						name="content" 
-						style="resize: none;"
-						placeholder="내용을 입력하세요."
-					></textarea>
-					<!-- <input type="button" onclick="checkConent()"> -->
-				</td>
-				
-			</tr>
-			<tr class="table-secondary">
-				<td colspan="3" align="center">
-					<input 
-						class="btn btn-outline-primary btn-sm" 
-						type="submit" 
-						value="등록하기"
-						style="font-size: 13px;"
-					/>
-					<input 
-						class="btn btn-outline-warning btn-sm" 
-						type="button" 
-						value="돌아가기" 
-						style="font-size: 13px;" onclick=""
-					/>
-				</td>
-			</tr>
-		</table>
-		<!-- 접속자 ip 주소는 hidden으로 insertOK.jsp로 넘긴다. -->
-		<%-- ${pageContext.request.remoteAddr} => EL을 사용해서 접속자 ip 주소를 받는다. --%>
-		<input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
-	</form>
+<!-- Modal_insert -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title"></h4>
+		</div>
+		<div class="modal-body">
+			<form action="eventInsertOK.sil" method="post">
+				<table class="table" >
+					<tr class="table-primary">
+						<th colspan="3" style="font-size: 30px; text-align: center;">일정 작성</th>
+					</tr>
+					
+					<tr>
+						<td colspan="2">
+							<input id="subject" type="text" 
+								class="form-control"
+								width="80%"
+								name="subject" autocomplete="none" 
+								placeholder="제목을 입력하세요."/>
+						</td>
+					</tr>
+					<tr>
+						<th class="align-middle table-dark" width="30px">
+							<label for="eventColor">색상</label>
+						</th>
+						<td class="align-middle" colspan="2">
+							<select id="eventColor" name="eventColor" 
+								onchange="selectBoxChgColor(value);">
+								<option value="#E1E1E0">
+									낮음<img name="#E1E1E0" alt="gray" src="./images/gray_E1E1E0.png" width="15px">
+								</option>
+								<option value="#CDFFBE">
+									보통<img name="#CDFFBE" alt="green" src="./images/green_CDFFBE.png" width="15px">
+								</option>
+								<option value="#FFCDCD">
+									긴급<img name="#FFCDCD" alt="red" src="./images/red_FFCDCD.png" width="15px">
+								</option>
+								<option value="#FAFFCD">
+									높음<img name="#FAFFCD" alt="yellow" src="./images/yellow_FAFFCD.png" width="15px">
+								</option>
+							</select>
+						
+								<img alt="gray" src="./images/gray_E1E1E0.png" width="15px">
+								<img alt="green" src="./images/green_CDFFBE.png" width="15px">
+								<img alt="red" src="./images/red_FFCDCD.png" width="15px">
+								<img alt="yellow" src="./images/yellow_FAFFCD.png" width="15px">
+							<!-- <input class="form-check-input" 
+									type="checkbox" 
+									name="isAllDay" 
+									value="yes"
+							/> -->
+						</td>
+					</tr>
+					<tr>
+						<td >
+							<input	class="form-check-input" 
+								type="date" 
+								name="startDate"
+								min="2000-01-01"
+								max="2050-12-31"
+								id = "startDate"
+							/>
+							<!-- <input type="button" onclick="starDateChk()"> -->
+						</td>
+						<td >
+							<input id="endDate" 
+								type="date" 
+								name="endDate"
+								min="2000-01-01"
+								max="2050-12-31"
+							/>
+							&nbsp;&nbsp;&nbsp;
+							종일 <input class="form-check-input" 
+									type="checkbox" 
+									name="allDay" 
+									value="true"
+									id="allDay"
+								/>
+						</td>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<textarea 
+								id="content" 
+								class="form-control form-control-sm" 
+								rows="10" 
+								name="content" 
+								style="resize: none;"
+								placeholder="내용을 입력하세요."
+							></textarea>
+							<!-- <input type="button" onclick="checkConent()"> -->
+						</td>
+						
+					</tr>
+					<tr class="table-secondary">
+						<td colspan="3" align="center">
+							<input 
+								class="btn btn-outline-primary btn-sm" 
+								type="submit" 
+								value="등록하기"
+								style="font-size: 13px;"
+							/>
+						</td>
+					</tr>
+				</table>
+				<input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+	</div>
+	
+	</div>
 </div>
+
+
+
+
 
 </body>
 </html>

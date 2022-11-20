@@ -32,8 +32,10 @@ public class EventService {
 		eDTO.setEventColor (request.getParameter("eventColor"));
 		eDTO.setContent(request.getParameter("content"));
 		eDTO.setIp(request.getParameter("ip"));
+		System.out.println(eDTO);
 		//isAllDay의 값이 "yes"일 경우에만 값을 받아와서 EventDTO 클래스 객체에 저장한다. 
-		if(request.getParameter("allDay").equals("yes")) {
+		if(request.getParameter("allDay")==null) {
+		} else if(request.getParameter("allDay").equals("true")) {
 			eDTO.setAllDay(request.getParameter("allDay"));
 		}
 		//날짜 데이터 (string) => java.sql.Date 타입으로 변환 작업
@@ -80,6 +82,8 @@ public class EventService {
 	public void eventSelectArrayList(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("eventSelectArrayList() Method of EventService Class");
 		SqlSession mapper = MySession.getSession();
+		
+		System.out.println(mapper);
 		ArrayList<EventDTO> eList = new ArrayList<>();
 		
 		eList = eDAO.eventSelectArrayList(mapper);
@@ -100,6 +104,73 @@ public class EventService {
 		request.setAttribute("wList", wList);
 		mapper.close();
 	}
+	public void eventSelectByEventID(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("eventSelectByEventID() Method of EventService Class");
+		SqlSession mapper = MySession.getSession();
+		
+		int eventID = Integer.parseInt(request.getParameter("eventID"));
+		System.out.println(eventID);
+		eDTO = eDAO.eventSelectByEventID(mapper, eventID);
+		System.out.println(eDTO);
+		request.setAttribute("eDTO", eDTO);
+		request.setAttribute("enter", "\r\n");
+		
+		mapper.close();
+	}
+	
+	public void eventUpdate(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("eventUpdate() Method of EventService Class");
+		SqlSession mapper = MySession.getSession();
+		
+//		eventUpdate.jsp에서 입력한 request 객체에 저장되어 넘어오는 데이터를 받아서 EventDTO 클래스 객체에 저장한다.
+		eDTO.setSubject(request.getParameter("subject"));
+		eDTO.setEventColor (request.getParameter("eventColor"));
+		eDTO.setContent(request.getParameter("content"));
+		eDTO.setIp(request.getParameter("ip"));
+		System.out.println(eDTO);		
+		//isAllDay의 값이 "yes"일 경우에만 값을 받아와서 EventDTO 클래스 객체에 저장한다. 
+		if(request.getParameter("allDay")==null) {
+		} else if(request.getParameter("allDay").equals("true")) {
+			eDTO.setAllDay(request.getParameter("allDay"));
+		}
+		//날짜 데이터 (string) => java.sql.Date 타입으로 변환 작업
+		Date tempDate = Date.valueOf(request.getParameter("startDate"));
+		eDTO.setStartDate(tempDate);
+		tempDate = Date.valueOf(request.getParameter("endDate"));
+		eDTO.setEndDate(tempDate);
+		System.out.println(eDTO);
+		eDAO.eventUpdate(mapper, eDTO);
+		mapper.commit();
+		mapper.close();
+	}
+	public void eventDelete(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("eventDelete() Method of EventService Class");
+		SqlSession mapper = MySession.getSession();
+		
+		int eventID = Integer.parseInt(request.getParameter("eventID"));
+		System.out.println(eventID);
+		
+		eDAO.eventDelete(mapper, eventID);
+		
+		mapper.commit();
+		mapper.close();
+		
+	}
 
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

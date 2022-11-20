@@ -111,21 +111,57 @@ public class HomeController extends HttpServlet {
                 viewPage += "file";
                 break;
 
-            // Emma
-            case "/event.sil":
-                viewPage += "event";
-                break;
+                // Emma
+                case "/event.sil":
+                	System.out.println("event");
+                	EventService.getInstance().eventSelectArrayList(request, response);
+                	EventService.getInstance().workSelectArrayList(request, response);
+                    viewPage += "event";
+                    break;
 
-            case "/eventInsertOK.sil":
-                EventService.getInstance().eventInsert(request, response);
-                viewPage += "event";
-                break;
+                case "/eventInsertOK.sil":
+                	System.out.println("eventInsertOK");
+                    EventService.getInstance().eventInsert(request, response);
+                    EventService.getInstance().eventSelectArrayList(request, response);
+                    EventService.getInstance().workSelectArrayList(request, response);
+                    viewPage += "event";
+                    break;
 
-            case "/eventList.sil":
-                EventService.getInstance().eventSelectArrayList(request, response);
-                EventService.getInstance().workSelectArrayList(request, response);
-                viewPage += "eventList";
-                break;
+                case "/eventList.sil":
+                	System.out.println("eventList");
+                	EventService.getInstance().eventSelectArrayList(request, response);
+                	EventService.getInstance().workSelectArrayList(request, response);
+        			viewPage += "eventList";
+        			break;
+        			
+                case "/eventView.sil":
+                	System.out.println("eventView");
+                	EventService.getInstance().eventSelectArrayList(request, response);
+                	EventService.getInstance().eventSelectByEventID(request, response);
+                	viewPage += "eventView";
+                	break;
+                	
+                case "/eventUpdate.sil":
+                	System.out.println("eventUpdate");
+                	EventService.getInstance().eventSelectByEventID(request, response);
+                	viewPage += "eventUpdate";
+                	break;
+                	
+                case "/eventUpdateOK.sil":
+                	System.out.println("eventUpdateOK");
+                	EventService.getInstance().eventUpdate(request, response);
+                	EventService.getInstance().eventSelectArrayList(request, response);
+                	EventService.getInstance().workSelectArrayList(request, response);
+                	viewPage += "eventList";
+                	break;
+                
+                case "/eventDelete.sil":
+                	System.out.println("eventDelete");
+                	EventService.getInstance().eventDelete(request, response);
+                	EventService.getInstance().eventSelectArrayList(request, response);
+                	EventService.getInstance().workSelectArrayList(request, response);
+                	viewPage += "eventList";
+                	break;
 
             // Anbin
             case "/work.sil":
