@@ -47,9 +47,7 @@ public class WorkService {
 
         dto.setDeadline(Date.valueOf(request.getParameter("deadline")));
 
-
-//        dto.setUserName(request.getParameter("userName"));
-//        System.out.println("userName: " + request.getParameter("userName"));
+        dto.setUserName(request.getParameter("userName"));
 
         dao.workInsert(mapper, dto);
 

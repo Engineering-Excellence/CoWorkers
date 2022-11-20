@@ -1,4 +1,6 @@
 <%@ page import="com.silvertier.dto.WorkList" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.Iterator" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -21,13 +23,26 @@
 <body>
 
 <fmt:requestEncoding value="UTF-8"/>
+<%--    request.setCharacterEncoding("UTF-8")--%>
 <%
-    int currentPage = 1;
-    try {
-        currentPage = Integer.parseInt(request.getParameter("currentPage"));
-    } catch (Exception e) {
+    System.out.println(pageContext.findAttribute("dto"));
+
+    Map<String, String[]> map = request.getParameterMap();
+    Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
+    while (itr.hasNext()) {
+        Map.Entry<String, String[]> entry = itr.next();
+        System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
     }
-    response.sendRedirect("work.sil?currentPage=" + currentPage);
+
+    int currentPage = 1;
+
+    String userName ="";
+    try{
+        request.getParameter("userName");
+    }catch (Exception e) {
+        userName="돚거";
+    }
+    response.sendRedirect("work.sil?currentPage=" + currentPage+"&userName?="+userName);
 %>
 </body>
 

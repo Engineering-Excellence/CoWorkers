@@ -68,10 +68,10 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="boardList.sil">게시판<span class="sr-only"></span></a></li>
+                <li><a href="board.sil">게시판<span class="sr-only"></span></a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="work.sil">업무</a></li>
+                <li><a href="goWork.sil">업무</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="event.sil">캘린더</a></li>
@@ -181,7 +181,16 @@
                                 <fmt:formatDate value="${dto.startDate}" pattern="yyyy.MM.dd.(E)"/>
                             </td>
                             <td align="center">
-                                <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
+                                <c:if test="${dto.deleteDate!=null}"></c:if>
+                                <c:if test="${dto.deleteDate==null}">
+                                    <c:if test="${dto.deadline>=date}">
+                                        <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
+                                    </c:if>
+                                    <%--마감일 초과--%>
+                                    <c:if test="${dto.deadline<date}">
+                                        <b style="color: crimson"><fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/></b>
+                                    </c:if>
+                                </c:if>
                             </td>
                         </tr>
                         <tr>
