@@ -60,6 +60,7 @@ public class HomeController extends HttpServlet {
 
             // 로그인 정보 비교 페이지 => ID / PW 비교 후 mainView로 로그인 실행
             case "/loginOK.sil":
+//            	UserInfoService.getInstance().userInfoSelectUser(request, response);
                 UserInfoService.getInstance().userInfoCompareID(request, response);
                 UserInfoService.getInstance().userInfoComparePW(request, response);
                 viewPage += "loginOK";
@@ -72,6 +73,7 @@ public class HomeController extends HttpServlet {
 
             // 회원가입 페이지
             case "/registerForm.sil":
+            	UserInfoService.getInstance().userInfoSelectList(request, response);
                 viewPage += "registerForm";
                 break;
 

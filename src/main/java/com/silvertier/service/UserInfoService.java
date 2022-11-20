@@ -1,6 +1,8 @@
 package com.silvertier.service;
 
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -67,6 +69,33 @@ public class UserInfoService {
 		mapper.close();
 		return originPW;
 //		return comparePW(request, response); // 에러: 무한재귀
+	}
+	
+	// 유저 리스트 뽑아오기
+	public ArrayList<UserInfoDTO> userInfoSelectList(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("UserInfoService -> userInfoSelectList()");
+		SqlSession mapper = MySession.getSession();
+		
+		ArrayList<UserInfoDTO> userList = new ArrayList<>();
+		userList = userInfoDAO.userInfoSelectList(mapper);
+		
+		request.setAttribute("userList", userList);
+		System.out.println("UserInfoSelectList: " + userList);
+		mapper.close();
+		return userList;
+	}
+	
+	// 로그인 유저 정보 가져오기
+	public void userInfoSelectUser(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("UserInfoService -> userInfoSelectUser()");
+		SqlSession mapper = MySession.getSession();
+		
+		UserInfoDTO userInfoDTO = new UserInfoDTO();
+		UserInfoDAO.getInstance().userInfoSelectUser(mapper, userInfoDTO);
+		System.out.println("userInfoSelectUser: " + userInfoDTO);
+
+		request.setAttribute("userInfoDTO", userInfoDTO);
+		mapper.close();
 	}
 	
 /*	Terry, 스프링 학습 이후 ID/PW 찾기 업데이트
