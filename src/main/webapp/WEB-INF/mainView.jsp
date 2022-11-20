@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="./images/favicon_16.png">
 
     <title>메인화면</title>
     
@@ -49,43 +49,55 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">보고서</a></li>
-            <li><a href="#">분석자료</a></li>
-            <li><a href="#">수출입현황</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
             <li><a href="board.sil">게시글</a></li>
             <li><a href="work.sil">업무관리</a></li>
-            <li><a href="file.sil">파일관리</a></li>
             <li><a href="event.sil">일정관리</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Team Silver_Tier</h1>
-
+          <h1 class="page-header">Silver Tier Members</h1>
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>허은성</h4>
-              <span class="text-muted">팀장</span>
+              <img src="./images/SilverTier_Logo.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Emma Heo</h4>
+              <span class="text-muted">Team Leader</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>곽규창</h4>
-              <span class="text-muted">팀원</span>
+              <img src="./images/SilverTier_Logo.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Kyle Kwak</h4>
+              <span class="text-muted">Team Memeber</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>조우철</h4>
-              <span class="text-muted">팀원</span>
+              <img src="./images/SilverTier_Logo.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Anbin Cho</h4>
+              <span class="text-muted">Team Memeber</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>김태형</h4>
-              <span class="text-muted">팀원</span>
+              <img src="./images/SilverTier_Logo.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Terry Kim</h4>
+              <span class="text-muted">Team Memeber</span>
             </div>
           </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        	<h1 class="page-header">Who are the Silver Tier?</h1>
+        	<div>
+        		<h4>
+        			Silver Tier is the Programming Team which make better ideas for user.<br><br>
+        			We always waiting your special request about make some own website or firm's program.<br><br>
+        			If you are interested with our Team, Please contact +82 10 8990 2845 or email to silverTier@google.com
+        		</h4> 
+        	</div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        	<h1 class="page-header">What is coWorkers?</h1>
+        	<div>
+        		<h4>
+        			coWorkes는 스타트업 Silver Tier가 기업의 KPI 분석 및 업무 생산성 증대를 목적으로 만든 협업툴입니다.<br><br>
+        			현재는 제한적인 기능으로 여러분께 소개되었지만 향후 빠른 업데이트를 통해 고객분들께 다가가고자 합니다.<br><br>
+        			저희 Silver Tier 팀은 사용자 여러분과의 원활한 의사소통을 통해 최고의 고객경험을 제공하겠습니다.
+     		   	</h4> 
+        	</div>
         </div>
       </div>
     </div>

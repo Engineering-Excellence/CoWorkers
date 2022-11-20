@@ -37,12 +37,12 @@
 							<th class="thTag">비밀번호</th>
 							<td class="tdTag">
 								<input id="accountPassword" class="form-control" type="password" name="accountPassword">
-								<input id="submit" class="btn btn-primary" type="submit" value="로그인"></input>
 							</td>
 						</tr>
 						<tr>
 							<td id="tdTag2" colspan="2" width="500" align="center">
-								<input class="btn btn-success" type="button" value="회원가입" width="120" onclick="location.href='registerForm.sil'"></input>
+								<input id="submit" class="btn btn-primary" type="submit" value="로그인"></input>
+								<input class="btn btn-success" type="button" value="회원가입" width="82" onclick="location.href='registerForm.sil'"></input>
 								<!-- <input class="btn btn-warning" type="button" value="ID/PW 찾기" width="120" onclick="location.href='idPwFind.sil'"></input> --> <!-- Terry, ID/PW 찾기 추후 업데이트 -->
 							</td>
 						</tr>
