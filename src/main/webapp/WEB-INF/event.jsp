@@ -68,7 +68,7 @@
 	          </ul>
         	</div>
         	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-         		<h1 class="page-header">일정</h1>
+         		<h1 class="page-header">일정 관리</h1>
 
 	<!-- 캘린더 -->
 <!-- <table id="fc-content-skeleton" width="1000" align="center" border="1" cellpadding="5"	cellspacing="0">
@@ -78,38 +78,39 @@
 </table>	 -->
 <%
 	Calendar calendar = Calendar.getInstance();
-	int year = calendar.get(Calendar.YEAR);
-	int month = calendar.get(Calendar.MONTH) + 1;
+	int year = request.getParameter("year") == null ? calendar.get(Calendar.YEAR) : Integer.parseInt(request.getParameter("year"));
+	int month = request.getParameter("month") == null ? calendar.get(Calendar.MONTH)+1 : Integer.parseInt(request.getParameter("month"));
+	if( month == 13){
+	    year++;
+	    month=1;
+	} else if (month == 0){
+	    year--;
+	    month=12;
+	}
 //	out.println(year + "년 " + month + "월");
 %>
-			<div class="row placeholders">
-				<div class="row placeholders">
-					<table width="700px" border="1" align="center" cellpadding="5" cellspacing="0">
-						<tr>
-							<td colspan="1" width="70px">
-								<button type="button">지난달</button>
-							</td>
-							
-							<td colspan="1" width="70px">
-								<button type="button">다음달</button>
-							</td>
-							<th id="title" width="360px">
-								<%=year%>년 <%=month%>월
-							</th>
-							
-							<td colspan="2" width="200px">
-								<!-- 모달 실행 버튼 -->
-								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">일정추가</button>
-								<button type="button" onclick="location.href='eventList.sil'">리스트보기</button>
-								<button type="button" onclick="">오늘</button>
-							</td>
-						</tr>
-					</table>
+			<div class="table-reponsive">
+				<div style="display: inline;">
+					<a title="지난달" href="event.sil?year=<%=year%>&month=<%=month-1%>"><img width="30px" alt="지난달" src="./images/arrow_left.png"></a>
+				</div>
+				<div style="display: inline; font-size: 30px">
+					&nbsp;&nbsp;<%=year%>년 <%=month%>월&nbsp;&nbsp;
+				</div>
+				<div style="display: inline;">
+					<a title="지난달" href="event.sil?year=<%=year%>&month=<%=month+1%>"><img width="30px" alt="다음달" src="./images/arrow_right.png"></a>
+				</div>
+				<div style="float: right ">
+					<!-- 모달 실행 버튼 -->
+					<button type="button" class="btn btn-default" onclick="">오늘</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">일정추가</button>
+					<button type="button" class="btn btn-primary"onclick="location.href='eventList.sil'">리스트보기</button>
 				</div>
 			</div>
+			<br/>
 		
 			<div class="table-responsive">
-				<table width="700px" border="1" align="center" cellpadding="5" cellspacing="0">
+				<table class="table table-striped"
+					style="border: 1; border-color: darkgrqy; border-radius: 15px"			>
 					<tr>
 						<th id="sunday" width="100" height="40"><sapn>일</sapn></th>
 						<th width="100px"><span>월</span></th>
@@ -138,9 +139,9 @@
 		//	1일이 출력될 위치(요일)을 맞추기 위해 달력을 출력할 달 1일의 요일만큼 반복하며 전달 날짜를 출력한다.
 			for (int i=0; i<MyCalendar.weekDay(year, month, 1); i++) {
 				if (i == 0) {
-					out.println("<td  id='beforesun' style='vertical-align:top; height:100px' >" + (month == 1 ? 12 : month - 1) + "/" + ++start + "</td>");
+					out.println("<td  id='beforesun' style='vertical-align:top; height:100px; color : darkgray;' >" + (month == 1 ? 12 : month - 1) + "/" + ++start + "</td>");
 				} else {
-					out.println("<td class='before' style='vertical-align:top; height:100px'>" + (month == 1 ? 12 : month - 1) + "/" + ++start + "</td>");
+					out.println("<td class='before' style='vertical-align:top; height:100px; color : darkgray;'>" + (month == 1 ? 12 : month - 1) + "/" + ++start + "</td>");
 				}
 			}
 		
@@ -178,9 +179,9 @@
 				start = 0;
 				for (int i=week; i<=6; i++) {
 					if (i == 6) {
-						out.println("<td id='aftersat' style='vertical-align:top; height:100px'>" + (month == 12 ? 1 : month + 1) + "/" + ++start + "</td>");
+						out.println("<td id='aftersat' style='vertical-align:top; height:100px; color : darkgray;'>" + (month == 12 ? 1 : month + 1) + "/" + ++start + "</td>");
 					} else {
-						out.println("<td class='after' style='vertical-align:top; height:100px'>" + (month == 12 ? 1 : month + 1) + "/" + ++start + "</td>");
+						out.println("<td class='after' style='vertical-align:top; height:100px; color : darkgray;'>" + (month == 12 ? 1 : month + 1) + "/" + ++start + "</td>");
 					}
 				}
 			}
@@ -199,123 +200,123 @@
 
 
 <!-- 모달창 내용(insert) -->
-
-<form action="eventInsertOK.sil" method="post">
-	<table class="table" style="width: 700px; margin-left: auto; margin-right: auto;">
-		<tr class="table-primary">
-			<th colspan="3" style="font-size: 30px; text-align: center;">일정 작성</th>
-		</tr>
-		
-		<tr>
-			<td width="700" colspan="2">
-				<input id="subject" type="text" 
-					class="form-control"
-					name="subject" autocomplete="none" 
-					placeholder="제목을 입력하세요."/>
-			</td>
-			<td colspan="1">
-			</td>
-		</tr>
-		<tr>
-			<th class="align-middle table-dark" width="50px">
-				<label for="eventColor">색상</label>
-			</th>
-			<td class="align-middle" width="550px" colspan="2">
-				<select id="eventColor" name="eventColor" 
-					width="200"
-					onchange="selectBoxChgColor(value);">
-					<option value="#E1E1E0">
-						gray<img name="#E1E1E0" alt="gray" src="./images/gray_E1E1E0.png" width="15px">
-					</option>
-					<option value="#CDFFBE">
-						green<img name="#CDFFBE" alt="green" src="./images/green_CDFFBE.png" width="15px">
-					</option>
-					<option value="#FFCDCD">
-						red<img name="#FFCDCD" alt="red" src="./images/red_FFCDCD.png" width="15px">
-					</option>
-					<option value="#FAFFCD">
-						yellow<img name="#FAFFCD" alt="yellow" src="./images/yellow_FAFFCD.png" width="15px">
-					</option>
-				</select>
+<div>
+	<form action="eventInsertOK.sil" method="post">
+		<table class="table" >
+			<tr class="table-primary">
+				<th colspan="3" style="font-size: 30px; text-align: center;">일정 작성</th>
+			</tr>
 			
-					<img alt="gray" src="./images/gray_E1E1E0.png" width="15px">
-					<img alt="green" src="./images/green_CDFFBE.png" width="15px">
-					<img alt="red" src="./images/red_FFCDCD.png" width="15px">
-					<img alt="yellow" src="./images/yellow_FAFFCD.png" width="15px">
-				<!-- <input class="form-check-input" 
-						type="checkbox" 
-						name="isAllDay" 
-						value="yes"
-				/> -->
-			</td>
-		</tr>
-		<tr>
-			<td >
-				<input	class="form-check-input" 
-					width="500"
-					type="date" 
-					name="startDate"
-					min="2000-01-01"
-					max="2050-12-31"
-					id = "startDate"
-				/>
-				<!-- <input type="button" onclick="starDateChk()"> -->
-			</td>
-			<td >
-				<input id="endDate" 
-					type="date" 
-					name="endDate"
-					min="2000-01-01"
-					max="2050-12-31"
-				/>
-			</td>
-			<th class="align-middle" width="100">
-				종일 <input class="form-check-input" 
-						type="checkbox" 
-						name="allDay" 
-						value="true"
-						id="allDay"
+			<tr>
+				<td width="700" colspan="2">
+					<input id="subject" type="text" 
+						class="form-control"
+						name="subject" autocomplete="none" 
+						placeholder="제목을 입력하세요."/>
+				</td>
+				<td colspan="1">
+				</td>
+			</tr>
+			<tr>
+				<th class="align-middle table-dark" width="50px">
+					<label for="eventColor">색상</label>
+				</th>
+				<td class="align-middle" width="550px" colspan="2">
+					<select id="eventColor" name="eventColor" 
+						width="200"
+						onchange="selectBoxChgColor(value);">
+						<option value="#E1E1E0">
+							gray<img name="#E1E1E0" alt="gray" src="./images/gray_E1E1E0.png" width="15px">
+						</option>
+						<option value="#CDFFBE">
+							green<img name="#CDFFBE" alt="green" src="./images/green_CDFFBE.png" width="15px">
+						</option>
+						<option value="#FFCDCD">
+							red<img name="#FFCDCD" alt="red" src="./images/red_FFCDCD.png" width="15px">
+						</option>
+						<option value="#FAFFCD">
+							yellow<img name="#FAFFCD" alt="yellow" src="./images/yellow_FAFFCD.png" width="15px">
+						</option>
+					</select>
+				
+						<img alt="gray" src="./images/gray_E1E1E0.png" width="15px">
+						<img alt="green" src="./images/green_CDFFBE.png" width="15px">
+						<img alt="red" src="./images/red_FFCDCD.png" width="15px">
+						<img alt="yellow" src="./images/yellow_FAFFCD.png" width="15px">
+					<!-- <input class="form-check-input" 
+							type="checkbox" 
+							name="isAllDay" 
+							value="yes"
+					/> -->
+				</td>
+			</tr>
+			<tr>
+				<td >
+					<input	class="form-check-input" 
+						width="500"
+						type="date" 
+						name="startDate"
+						min="2000-01-01"
+						max="2050-12-31"
+						id = "startDate"
 					/>
-			</th>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-			<td colspan="3">
-				<textarea 
-					id="content" 
-					class="form-control form-control-sm" 
-					rows="10" 
-					name="content" 
-					style="resize: none;"
-					placeholder="내용을 입력하세요."
-				></textarea>
-				<!-- <input type="button" onclick="checkConent()"> -->
-			</td>
-			
-		</tr>
-		<tr class="table-secondary">
-			<td colspan="3" align="center">
-				<input 
-					class="btn btn-outline-primary btn-sm" 
-					type="submit" 
-					value="등록하기"
-					style="font-size: 13px;"
-				/>
-				<input 
-					class="btn btn-outline-warning btn-sm" 
-					type="button" 
-					value="돌아가기" 
-					style="font-size: 13px;" onclick=""
-				/>
-			</td>
-		</tr>
-	</table>
-	<!-- 접속자 ip 주소는 hidden으로 insertOK.jsp로 넘긴다. -->
-	<%-- ${pageContext.request.remoteAddr} => EL을 사용해서 접속자 ip 주소를 받는다. --%>
-	<input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
-</form>
-
+					<!-- <input type="button" onclick="starDateChk()"> -->
+				</td>
+				<td >
+					<input id="endDate" 
+						type="date" 
+						name="endDate"
+						min="2000-01-01"
+						max="2050-12-31"
+					/>
+				</td>
+				<th class="align-middle" width="100">
+					종일 <input class="form-check-input" 
+							type="checkbox" 
+							name="allDay" 
+							value="true"
+							id="allDay"
+						/>
+				</th>
+			</tr>
+			<tr>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<textarea 
+						id="content" 
+						class="form-control form-control-sm" 
+						rows="10" 
+						name="content" 
+						style="resize: none;"
+						placeholder="내용을 입력하세요."
+					></textarea>
+					<!-- <input type="button" onclick="checkConent()"> -->
+				</td>
+				
+			</tr>
+			<tr class="table-secondary">
+				<td colspan="3" align="center">
+					<input 
+						class="btn btn-outline-primary btn-sm" 
+						type="submit" 
+						value="등록하기"
+						style="font-size: 13px;"
+					/>
+					<input 
+						class="btn btn-outline-warning btn-sm" 
+						type="button" 
+						value="돌아가기" 
+						style="font-size: 13px;" onclick=""
+					/>
+				</td>
+			</tr>
+		</table>
+		<!-- 접속자 ip 주소는 hidden으로 insertOK.jsp로 넘긴다. -->
+		<%-- ${pageContext.request.remoteAddr} => EL을 사용해서 접속자 ip 주소를 받는다. --%>
+		<input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
+	</form>
+</div>
 
 </body>
 </html>
