@@ -21,19 +21,14 @@
 	</select>
 	
 	<!-- 회원가입시 아이디 / 주민등록번호 중복체크용 유저 리스트 뽑아오기 -->
-	<select id="userInfoSelectList" resultType="userInfoDTO">
-<<<<<<< HEAD
+	<!-- <select id="userInfoSelectList" resultType="userInfoDTO">
 		select * from UserInfo order by userID desc
-	</select>	
+	</select> -->	
 	
 	<!-- 로그인 시 유저정보 가져오기 -->
-	<select id="userInfoSelectUser" parameterType="userInfoDTO" resultType="userInfoDTO">
+	<!-- <select id="userInfoSelectUser" parameterType="userInfoDTO" resultType="userInfoDTO">
 		select * from UserInfo where accountID = #{accountID}
-	</select>
-=======
-		select * from userInfo
-	</select>	
->>>>>>> d0a1c53537b352fca75fd31a8c46d2f095984928
+	</select> -->
 		
 	<!-- (ID/PW 찾기 / 추후 업데이트)		
 	ID찾기 이름 비교

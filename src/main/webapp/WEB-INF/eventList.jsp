@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-	<link rel="icon" href="../../favicon.ico">
+	<link rel="icon" href="./images/favicon_16.png">
 
 <title>The list of events</title>
 
@@ -31,14 +31,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">coWorkers</a>
+          <a class="navbar-brand" href="mainView.sil">coWorkers</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">대시보드</a></li>
-            <li><a href="#">세팅</a></li>
             <li><a href="#">프로필</a></li>
-            <li><a href="#">도움말</a></li>
+            <li><a href="#">환경설정</a></li>
+            <li><a href="logout.sil">로그아웃</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -48,27 +47,15 @@
     </nav>
     
 	<div class="container-fluid">
-		<div class="row">
+      <div class="row">
 		    <!-- 좌측 사이드 -->
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-				  <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-				  <li><a href="#">보고서</a></li>
-				  <li><a href="#">분석자료</a></li>
-				  <li><a href="#">수출입현황</a></li>
-				</ul>
-				<ul class="nav nav-sidebar">
-				  <li><a href="board.sil">게시글</a></li>
-				  <li><a href="work.sil">업무관리</a></li>
-				  <li><a href="file.sil">파일관리</a></li>
-				  <li><a href="event.sil">일정관리</a></li>
-				</ul>
-				<ul class="nav nav-sidebar">
-				  <li><a href="">Nav item again</a></li>
-				  <li><a href="">One more nav</a></li>
-				  <li><a href="">Another nav item</a></li>
-				</ul>
-			</div>
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="board.sil">게시글</a></li>
+            <li><a href="work.sil">업무관리</a></li>
+            <li><a href="event.sil">일정관리</a></li>
+          </ul>
+        </div>
 			
 			
 			<!-- 리스트 제목 -->

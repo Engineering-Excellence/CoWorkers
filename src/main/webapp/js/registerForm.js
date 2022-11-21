@@ -52,7 +52,6 @@ function joinCheck(obj) {
 return true;
 }
 
-<<<<<<< HEAD
 // id 검사
 function idCheck() {
 	
@@ -60,8 +59,28 @@ function idCheck() {
 	let chkID = /[^a-z|^A-Z|^0-9]/g;
 
 	if (ID.length == 0 || ID.length > 20) {
+		window.alert('아이디는 6자 이상 20자 이내로 작성해야 합니다.')
+		document.getElementById('accountID').value = '';
+		$('#idCheckMsg').html('아이디는 영문자, 숫자 포함 20자 이내로 작성하여야 합니다.')
+		$('#idCheckMsg').css('color', 'red')
+		$('#accountID').focus();
+	} else if (ID.length >=1 && ID.length < 6) {
+		alert('아이디는 6자 이상 20자 이내로 작성해야 합니다.')
+		document.getElementById('accountID').value = '';
+		$('#accountID').focus();
+	} else if (ID.search(chkID) != -1) {
 		window.alert('아이디는 영문자, 숫자 포함 20자 이내로 작성하여야 합니다.')
-=======
+		document.getElementById('accountID').value = '';
+		$('#idCheckMsg').html('아이디는 영문자, 숫자 포함 20자 이내로 작성하여야 합니다.')
+		$('#idCheckMsg').css('color', 'red')
+		$('#accountID').focus();
+	} else {
+		$('#idCheckMsg').html('사용 가능한 아이디 입니다.')
+		$('#idCheckMsg').css('color', 'green')
+	}
+}
+
+/*		
 // id 중복 검사
 function idDuplicateCheck(obj) {
 	let ID = obj.accountID.value;
@@ -88,34 +107,8 @@ function idDuplicateCheck(obj) {
 	}
 return true;
 }	
+*/
 
-// id 길이 검사
-function idCheck() {
-	
-	let ID = $('#accountID').val().trim();
-
-	if (ID.length == 0 || ID.length > 20) {
-		window.alert('아이디는 6자 이상 20자 이내로 작성해야 합니다.')
->>>>>>> d0a1c53537b352fca75fd31a8c46d2f095984928
-		document.getElementById('accountID').value = '';
-		$('#idCheckMsg').html('아이디는 영문자, 숫자 포함 20자 이내로 작성하여야 합니다.')
-		$('#idCheckMsg').css('color', 'red')
-		$('#accountID').focus();
-	} else if (ID.length >=1 && ID.length < 6) {
-		alert('아이디는 6자 이상 20자 이내로 작성해야 합니다.')
-		document.getElementById('accountID').value = '';
-		$('#accountID').focus();
-	} else if (ID.search(chkID) != -1) {
-		window.alert('아이디는 영문자, 숫자 포함 20자 이내로 작성하여야 합니다.')
-		document.getElementById('accountID').value = '';
-		$('#idCheckMsg').html('아이디는 영문자, 숫자 포함 20자 이내로 작성하여야 합니다.')
-		$('#idCheckMsg').css('color', 'red')
-		$('#accountID').focus();
-	} else {
-		$('#idCheckMsg').html('사용 가능한 아이디 입니다.')
-		$('#idCheckMsg').css('color', 'green')
-	}
-}
  
 // PW 검사 
 function pwCheck() {

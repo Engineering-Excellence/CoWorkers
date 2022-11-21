@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-
+	<link rel="icon" href="./images/favicon_16.png">
 <title>The event</title>
 
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
@@ -43,27 +43,15 @@
     </nav>
     
     <!-- 좌측 사이드 -->
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-	          <ul class="nav nav-sidebar">
-	            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-	            <li><a href="#">보고서</a></li>
-	            <li><a href="#">분석자료</a></li>
-	            <li><a href="#">수출입현황</a></li>
-	          </ul>
-	          <ul class="nav nav-sidebar">
-	            <li><a href="board.sil">게시글</a></li>
-	            <li><a href="work.sil">업무관리</a></li>
-	            <li><a href="file.sil">파일관리</a></li>
-	            <li><a href="event.sil">일정관리</a></li>
-	          </ul>
-	          <ul class="nav nav-sidebar">
-	            <li><a href="">Nav item again</a></li>
-	            <li><a href="">One more nav</a></li>
-	            <li><a href="">Another nav item</a></li>
-	          </ul>
-        	</div>
+   <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="board.sil">게시글</a></li>
+            <li><a href="work.sil">업무관리</a></li>
+            <li><a href="event.sil">일정관리</a></li>
+          </ul>
+        </div>
         	
         	<c:set var="eList" value="${eList}" />
         	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

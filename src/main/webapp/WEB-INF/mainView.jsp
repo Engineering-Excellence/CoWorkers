@@ -20,7 +20,6 @@
   </head>
 
   <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -59,44 +58,66 @@
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="./images/SilverTier_Logo.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Emma Heo</h4>
+              <h4>Emma Heo (허은성)</h4>
               <span class="text-muted">Team Leader</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="./images/SilverTier_Logo.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Kyle Kwak</h4>
-              <span class="text-muted">Team Memeber</span>
+              <h4>Kyle Kwak (곽규창)</h4>
+              <span class="text-muted">Team Member</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="./images/SilverTier_Logo.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Anbin Cho</h4>
-              <span class="text-muted">Team Memeber</span>
+              <h4>Anbin Cho (조우철)</h4>
+              <span class="text-muted">Team Member</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="./images/SilverTier_Logo.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Terry Kim</h4>
-              <span class="text-muted">Team Memeber</span>
+              <h4>Terry Kim (김태형)</h4>
+              <span class="text-muted">Team Member</span>
             </div>
           </div>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        	<h1 class="page-header">Who are the Silver Tier?</h1>
+        	<h1 class="page-header">Silver Tier 업무 분장표</h1>
         	<div>
-        		<h4>
-        			Silver Tier is the Programming Team which make better ideas for user.<br><br>
-        			We always waiting your special request about make some own website or firm's program.<br><br>
-        			If you are interested with our Team, Please contact +82 10 8990 2845 or email to silverTier@google.com
-        		</h4> 
-        	</div>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        	<h1 class="page-header">What is coWorkers?</h1>
-        	<div>
-        		<h4>
-        			coWorkes는 스타트업 Silver Tier가 기업의 KPI 분석 및 업무 생산성 증대를 목적으로 만든 협업툴입니다.<br><br>
-        			현재는 제한적인 기능으로 여러분께 소개되었지만 향후 빠른 업데이트를 통해 고객분들께 다가가고자 합니다.<br><br>
-        			저희 Silver Tier 팀은 사용자 여러분과의 원활한 의사소통을 통해 최고의 고객경험을 제공하겠습니다.
-     		   	</h4> 
+        		<table class="table table-hover table-bordered" style="border: 1px solid black;">
+        			<tbody align="center">
+        				<tr style="background-color: lavender;">
+        					<th width="140" style="text-align: center; vertical-align: middle;">coWorkers Name</th>
+        					<th width="140" style="text-align: center; vertical-align: middle;"">Emma Heo (허은성)</th>
+        					<th width="140" style="text-align: center; vertical-align: middle;"">Kyle Kwak (곽규창)</th>
+        					<th width="140" style="text-align: center; vertical-align: middle;"">Anbin Cho (조우철)</th>
+        					<th width="140" style="text-align: center; vertical-align: middle;"">Terry Kim (김태형)</th>
+        				</tr>
+        				<tr>
+        					<td>주요 업무</td>
+        					<td>일정(Calendar)</td>
+        					<td>프로젝트 설계, 게시글(Board)</td>
+        					<td>업무(Work)</td>
+        					<td>로그인(Login), 회원가입(Register)</td>
+        				</tr>
+        				<tr>
+        					<td rowspan="4" style="vertical-align: middle;">1차 프로젝트 주요 구현사항</td>
+        					<td>일정확인용 달력 구현</td>	
+        					<td>공지사항 및 목록 호출 구현</td>	
+        					<td>업무 리스트 호출 구현</td>	
+        					<td>로그인/로그아웃 구현</td>	
+        				</tr>	
+        				<tr>
+        					<td>일정 입력/수정/삭제</td>	
+        					<td>게시글 작성/수정/삭제</td>	
+        					<td>업무 작성/수정/삭제</td>	
+        					<td>회원가입 기능 구현</td>	
+        				</tr>	
+        				<tr>
+        					<td>일정/긴급업무별 리스트 호출</td>	
+        					<td>게시글 덧글</td>	
+        					<td>삭제된 업무 블라인드 처리</td>	
+        					<td>메인 페이지 구성</td>	
+        				</tr>	
+        			</tbody>
+        		</table>
         	</div>
         </div>
       </div>

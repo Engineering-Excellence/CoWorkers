@@ -6,8 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<link rel="icon" href="./images/favicon_16.png">
+	<title>Insert title here</title>
 </head>
 <body>
 
