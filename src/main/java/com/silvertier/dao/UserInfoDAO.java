@@ -1,5 +1,11 @@
 package com.silvertier.dao;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.mapper.Mapper;
 import org.apache.ibatis.session.SqlSession;
 
 import com.silvertier.dto.UserInfoDTO;
@@ -30,6 +36,12 @@ public class UserInfoDAO {
 		System.out.println("UserInfoDAO -> userInfoComparePW()");
 //		System.out.println("dao PW: " + userInfoDTO);
 		return (String) mapper.selectOne("userInfoComparePW", userInfoDTO);
+	}
+	
+	// 유저 전체 리스트 뽑아오기
+	public ArrayList<UserInfoDTO> userInfoSelectList(SqlSession mapper) {
+		System.out.println("UserInfoDAO -> userInfoSelectList()");
+		return (ArrayList<UserInfoDTO>) mapper.selectList("userInfoSelectList", mapper);
 	}
 
 /*	Terry -- 스프링 학습 이후 ID/PW 찾기 업데이트
