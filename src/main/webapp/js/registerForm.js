@@ -4,10 +4,6 @@ onload = function () {
 	$('#accountID').focus();
 }
 
-document.getElementById('btnId').onclick = function() {
-	
-}
-
 // 폼 중 값이 하나라도 입력이 안되면 false 리턴	
 function joinCheck(obj) {
 	

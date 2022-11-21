@@ -21,8 +21,8 @@
 
     <title>CoWorkers</title>
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/coWorkers.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/coWorkers.css" rel="stylesheet">
 
 </head>
 
@@ -174,7 +174,7 @@
                             <!-- 현재 댓글이 어떤 메인글의 댓글인가 넘겨준다. -->
                             postID: <input type="text" name="postID" value="${boardDTO.postID}" size="4"/>
                             <!-- 작업 모드, 1 => 댓글 저장, 2 => 댓글 수정, 3 => 댓글 삭제 -->
-                            mode: <input type="text" name="mode" value="1" size="1"/>
+                            mode: <input type="text" name="mode" value="insert" size="1"/>
                             <!-- 메인글이 표시되던 페이지 번호를 넘겨준다. -->
                             currentPage: <input type="text" name="currentPage" value="${currentPage}" size="4"/>
                             <!-- 댓글 작성자의 ip 주소를 넘겨준다. -->
@@ -226,7 +226,7 @@
                                     type="button"
                                     value="다시쓰기"
                                     style="font-size: 13px;"
-                                    onclick="setting(0, 1, '댓글작성', '', '')"
+                                    onclick="setting(0, insert, '댓글 작성', '', '')"
                             />
                         </td>
                     </tr>
@@ -249,13 +249,13 @@
                             <tr class="table-dark">
                                 <c:if test="${commentDTO.deleteDate == null}">
                                     <td colspan="4" style="vertical-align: middle">
-                                            ${commentDTO.commentID}.
+                                            <%--${commentDTO.commentID}.--%>
                                         <c:set var="userName" value="${fn:replace(commentDTO.userName, '<', '&lt;')}"/>
                                         <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
-                                            ${userName} 님이
+                                            ${userName}님이
                                         <fmt:formatDate value="${commentDTO.writeDate}"
                                                         pattern="yyyy.MM.dd(E) HH:mm:ss"/>에
-                                        남긴 댓글<br/>
+                                        남긴 댓글:<br/>
                                         <c:set var="content" value="${fn:replace(commentDTO.content, '<', '&lt;')}"/>
                                         <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
                                         <c:set var="content" value="${fn:replace(content, enter, '<br/>')}"/>
@@ -266,21 +266,21 @@
                                                     type="button"
                                                     value="수정"
                                                     style="font-size: 13px;"
-                                                    onclick="setting(${commentDTO.commentID}, 2, '댓글수정', '${commentDTO.userName}', '${commentDTO.content}')"
+                                                    onclick="setting(${commentDTO.commentID}, 'update', '댓글 수정', '${commentDTO.userName}', '${commentDTO.content}')"
                                             />
                                             <input
                                                     class="btn btn-outline-danger btn-sm"
                                                     type="button"
                                                     value="삭제"
                                                     style="font-size: 13px;"
-                                                    onclick="setting(${commentDTO.commentID}, 3, '댓글삭제', '${commentDTO.userName}', '${commentDTO.content}')"
+                                                    onclick="setting(${commentDTO.commentID}, 'delete', '댓글 삭제', '${commentDTO.userName}', '${commentDTO.content}')"
                                             />
                                         </div>
                                     </td>
                                 </c:if>
                                 <c:if test="${commentDTO.deleteDate != null}">
                                     <td colspan="4" height="85" style="vertical-align: middle">
-                                        삭제된 댓글입니다.
+                                        <p>삭제된 댓글입니다.</p>
                                     </td>
                                 </c:if>
                             </tr>

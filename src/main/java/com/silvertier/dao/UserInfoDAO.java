@@ -1,9 +1,6 @@
 package com.silvertier.dao;
 
-import java.util.ArrayList;
-
 import org.apache.ibatis.session.SqlSession;
-
 import com.silvertier.dto.UserInfoDTO;
 
 public class UserInfoDAO {
@@ -34,12 +31,13 @@ public class UserInfoDAO {
 		return (String) mapper.selectOne("userInfoComparePW", userInfoDTO);
 	}
 	
-	// 유저 전체 리스트 뽑아오기
-	public ArrayList<UserInfoDTO> userInfoSelectList(SqlSession mapper) {
-		System.out.println("UserInfoDAO -> userInfoSelectList()");
-		return (ArrayList<UserInfoDTO>) mapper.selectList("userInfoSelectList", mapper);
-	}
-
+/*
+	 // 유저 전체 리스트 뽑아오기 
+	 public ArrayList<UserInfoDTO> userInfoSelectList(SqlSession mapper) { 
+	   	System.out.println("UserInfoDAO -> userInfoSelectList()"); 
+	   	return (ArrayList<UserInfoDTO>) mapper.selectList("userInfoSelectList", mapper); }
+*/
+	
 /*	Terry -- 스프링 학습 이후 ID/PW 찾기 업데이트
 	
 	// ID 찾기용 이름 비교
@@ -62,7 +60,5 @@ public class UserInfoDAO {
 		return (UserInfoDTO) mapper.selectOne("userInfoSelectUser", string);
 	}
 */	
-	
-	
-	
+
 }

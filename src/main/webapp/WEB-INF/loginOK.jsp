@@ -17,6 +17,7 @@
 
 	String accountID = request.getParameter("accountID");
 	String accountPassword = request.getParameter("accountPassword");
+	
  %>
 	
 	<jsp:useBean id="userInfoDTO" class="com.silvertier.dto.UserInfoDTO">
@@ -24,6 +25,8 @@
 	</jsp:useBean>
 
 <% 	
+	System.out.println("login: " + userInfoDTO);
+
 	UserInfoService service = UserInfoService.getInstance();
 	String originID = service.userInfoCompareID(request, response);
 	String originPW = service.userInfoComparePW(request, response);
@@ -46,8 +49,6 @@
 		out.println("location.href='login.sil'");
 		out.println("</script>");
 	}
-	
-	
 %>
 
 </body>
