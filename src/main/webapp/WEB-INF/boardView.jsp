@@ -226,7 +226,7 @@
                                     type="button"
                                     value="다시쓰기"
                                     style="font-size: 13px;"
-                                    onclick="setting(0, insert, '댓글 작성', '', '')"
+                                    onclick="setting(0, 'insert', '댓글 작성', '', '')"
                             />
                         </td>
                     </tr>
