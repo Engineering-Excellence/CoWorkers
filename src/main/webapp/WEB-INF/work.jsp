@@ -20,8 +20,8 @@
 
     <title>CoWorkers</title>
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/coWorkers.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/coWorkers.css" rel="stylesheet">
 
 
 </head>

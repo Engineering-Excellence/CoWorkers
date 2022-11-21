@@ -35,7 +35,7 @@
 						<th id="th1">아이디</th>
 						<td>
 							<input id="accountID" class="form-control" type="text" name="accountID" placeholder="가입할 ID를 입력해주세요." autocomplete="off">
-							<button id="btnId" class="btn btn-primary" type="button" onclick="idDuplicateCheck()">ID 체크</button>
+							<button id="btnId" class="btn btn-primary" type="button" onclick="idCheck()">ID 체크</button>
 						</td>
 					</tr>
 					<tr>

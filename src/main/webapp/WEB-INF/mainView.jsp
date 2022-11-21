@@ -85,10 +85,10 @@
         			<tbody align="center">
         				<tr style="background-color: lavender;">
         					<th width="140" style="text-align: center; vertical-align: middle;">coWorkers Name</th>
-        					<th width="140" style="text-align: center; vertical-align: middle;"">Emma Heo (허은성)</th>
-        					<th width="140" style="text-align: center; vertical-align: middle;"">Kyle Kwak (곽규창)</th>
-        					<th width="140" style="text-align: center; vertical-align: middle;"">Anbin Cho (조우철)</th>
-        					<th width="140" style="text-align: center; vertical-align: middle;"">Terry Kim (김태형)</th>
+        					<th width="140" style="text-align: center; vertical-align: middle;">Emma Heo (허은성)</th>
+        					<th width="140" style="text-align: center; vertical-align: middle;">Kyle Kwak (곽규창)</th>
+        					<th width="140" style="text-align: center; vertical-align: middle;">Anbin Cho (조우철)</th>
+        					<th width="140" style="text-align: center; vertical-align: middle;">Terry Kim (김태형)</th>
         				</tr>
         				<tr>
         					<td>주요 업무</td>
