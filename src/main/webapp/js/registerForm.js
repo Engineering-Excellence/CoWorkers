@@ -52,6 +52,7 @@ function joinCheck(obj) {
 return true;
 }
 
+<<<<<<< HEAD
 // id 검사
 function idCheck() {
 	
@@ -60,6 +61,42 @@ function idCheck() {
 
 	if (ID.length == 0 || ID.length > 20) {
 		window.alert('아이디는 영문자, 숫자 포함 20자 이내로 작성하여야 합니다.')
+=======
+// id 중복 검사
+function idDuplicateCheck(obj) {
+	let ID = obj.accountID.value;
+	let userList = new userInfoSelectList();
+	console.log('userList' + userList);
+	
+	if (userList.accountID.value == ID) {
+		window.alert('중복된 아이디 입니다.')
+		document.getElementById('accountID').value = '';
+		$('#accountID').focus();
+		return false;
+	} else if (ID.length == 0 || ID.length > 20) {
+		window.alert('아이디는 6자 이상 20자 이내로 작성해야 합니다.')
+		document.getElementById('accountID').value = '';
+		$('#idCheckMsg').html('아이디는 영문자, 숫자 포함 20자 이내로 작성하여야 합니다.')
+		$('#idCheckMsg').css('color', 'red')
+		return false;
+	} else if(ID.length >=1 && ID.length < 6) {	
+		alert('아이디는 6자 이상 20자 이내로 작성해야 합니다.')
+		document.getElementById('accountID').value = '';
+		return false;
+	} else {
+		window.alert('사용가능한 아이디 입니다.')
+	}
+return true;
+}	
+
+// id 길이 검사
+function idCheck() {
+	
+	let ID = $('#accountID').val().trim();
+
+	if (ID.length == 0 || ID.length > 20) {
+		window.alert('아이디는 6자 이상 20자 이내로 작성해야 합니다.')
+>>>>>>> d0a1c53537b352fca75fd31a8c46d2f095984928
 		document.getElementById('accountID').value = '';
 		$('#idCheckMsg').html('아이디는 영문자, 숫자 포함 20자 이내로 작성하여야 합니다.')
 		$('#idCheckMsg').css('color', 'red')

@@ -43,12 +43,6 @@ public class UserInfoDAO {
 		System.out.println("UserInfoDAO -> userInfoSelectList()");
 		return (ArrayList<UserInfoDTO>) mapper.selectList("userInfoSelectList", mapper);
 	}
-	
-	// 유저 정보 가져오기
-	public void userInfoSelectUser(SqlSession mapper, UserInfoDTO userInfoDTO) {
-		System.out.println("UserInfoDAO -> userInfoSelectUser()");
-		mapper.selectOne("userInfoSelectUser", userInfoDTO);
-	}
 
 /*	Terry -- 스프링 학습 이후 ID/PW 찾기 업데이트
 	
