@@ -42,37 +42,38 @@
 %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
+    <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="mainView.sil">coWorkers</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="mainView.sil">coWorkers</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">프로필</a></li>
-            <li><a href="#">환경설정</a></li>
-            <li><a href="logout.sil">로그아웃</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">프로필</a></li>
+                <li><a href="#">환경설정</a></li>
+                <li><a href="logout.sil">로그아웃</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
         </div>
-      </div>
-    </nav>
+    </div>
+</nav>
 
-    <div class="container-fluid">
-      <div class="row">
+<div class="container-fluid">
+    <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li><a href="board.sil">게시글</a></li>
-            <li><a href="work.sil">업무관리</a></li>
-            <li><a href="event.sil">일정관리</a></li>
-          </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="board.sil">게시글</a></li>
+                <li><a href="work.sil">업무관리</a></li>
+                <li><a href="event.sil">일정관리</a></li>
+            </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">게시판</h1>
@@ -112,7 +113,7 @@
                                 <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
                                 <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
                                 <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
-                                        ${subject}
+                                        ${subject}(${boardDTO.commentCount})
                                 </a>
                                 <c:if test="${boardDTO.deleteDate != null}">
                                     삭제된 글입니다.
@@ -148,47 +149,48 @@
                     <c:if test="${list.size() == 0}">
                         <tr>
                             <td colspan="5">
-                                <marquee>저장된 글이 없습니다.</marquee>
+                                <p>저장된 글이 없습니다.</p>
                             </td>
                         </tr>
                     </c:if>
                     <c:if test="${list.size() != 0}">
                         <c:forEach var="boardDTO" items="${list}">
                             <tr>
-                                <%--<c:if test="${boardDTO.notice == 'false'}">--%>
-                                    <td align="center">${boardDTO.postID}</td>
-                                    <td>
-                                        <c:if test="${boardDTO.deleteDate == null}">
-                                            <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
-                                            <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
-                                            <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
-                                                    ${subject}
-                                            </a>
-                                        </c:if>
-                                        <c:if test="${boardDTO.deleteDate != null}">
-                                            삭제된 글입니다.
-                                        </c:if>
-                                    </td>
-                                    <td align="center">
-                                        <c:set var="name" value="${fn:replace(boardDTO.userName, '<', '&lt;')}"/>
-                                        <c:set var="name" value="${fn:replace(boardDTO.userName, '>', '&gt;')}"/>
-                                            ${name}
-                                    </td>
-                                    <td align="center">
-                                            <%--<jsp:useBean id="date" class="java.util.Date"/>--%>
-                                        <c:if test="${date.year == boardDTO.writeDate.year && date.month == boardDTO.writeDate.month &&
+                                    <%--<c:if test="${boardDTO.notice == 'false'}">--%>
+                                <td align="center">${boardDTO.postID}</td>
+                                <td>
+                                    <c:if test="${boardDTO.deleteDate == null}">
+                                        <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
+                                        <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
+                                        <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
+                                                ${subject}
+                                                <c:if test="${boardDTO.commentCount != 0}">(${boardDTO.commentCount})</c:if>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${boardDTO.deleteDate != null}">
+                                        삭제된 글입니다.
+                                    </c:if>
+                                </td>
+                                <td align="center">
+                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '<', '&lt;')}"/>
+                                    <c:set var="name" value="${fn:replace(boardDTO.userName, '>', '&gt;')}"/>
+                                        ${name}
+                                </td>
+                                <td align="center">
+                                        <%--<jsp:useBean id="date" class="java.util.Date"/>--%>
+                                    <c:if test="${date.year == boardDTO.writeDate.year && date.month == boardDTO.writeDate.month &&
 						date.date == boardDTO.writeDate.date}">
-                                            <fmt:formatDate value="${boardDTO.writeDate}" pattern="a h:mm"/>
-                                        </c:if>
-                                        <c:if test="${date.year != boardDTO.writeDate.year || date.month != boardDTO.writeDate.month ||
+                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="a h:mm"/>
+                                    </c:if>
+                                    <c:if test="${date.year != boardDTO.writeDate.year || date.month != boardDTO.writeDate.month ||
 						date.date != boardDTO.writeDate.date}">
-                                            <fmt:formatDate value="${boardDTO.writeDate}" pattern="yyyy.MM.dd.(E)"/>
-                                        </c:if>
-                                    </td>
-                                    <td align="center">
-                                            ${boardDTO.hit}
-                                    </td>
-                                <%--</c:if>--%>
+                                        <fmt:formatDate value="${boardDTO.writeDate}" pattern="yyyy.MM.dd.(E)"/>
+                                    </c:if>
+                                </td>
+                                <td align="center">
+                                        ${boardDTO.hit}
+                                </td>
+                                    <%--</c:if>--%>
                             </tr>
                         </c:forEach>
                     </c:if>

@@ -162,7 +162,7 @@
             <form class="m-3" action="boardCommentOK.sil" method="post" name="commentForm">
                 <table class="table table-striped" style="width: 100%; margin-left: auto; margin-right: auto;">
                     <tr class="table-success">
-                        <th colspan="4" style="font-size: 30px; text-align: center;">댓글 보기</th>
+                        <th colspan="4" style="font-size: 30px; text-align: center;">댓글 보기(${boardDTO.commentCount}개)</th>
                     </tr>
 
                     <!-- 이 줄은 원래 보이면 안되는 줄로 작업이 완료되면 화면에 표시되지 않게 한다. -->
@@ -237,8 +237,8 @@
                     <!-- 댓글이 없는 경우 -->
                     <c:if test="${boardCommentList.size() == 0}">
                         <tr>
-                            <td colspan="4">
-                                <marquee>댓글이 존재하지 않습니다.</marquee>
+                            <td colspan="4" height="85" style="vertical-align: middle">
+                                <p align="center">댓글이 존재하지 않습니다.</p>
                             </td>
                         </tr>
                     </c:if>

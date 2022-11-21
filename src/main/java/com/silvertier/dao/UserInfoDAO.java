@@ -2,10 +2,6 @@ package com.silvertier.dao;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.catalina.mapper.Mapper;
 import org.apache.ibatis.session.SqlSession;
 
 import com.silvertier.dto.UserInfoDTO;

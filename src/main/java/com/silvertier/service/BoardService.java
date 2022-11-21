@@ -38,17 +38,35 @@ public class BoardService {
         int pageSize = 10;
         int totalCount = dao.boardSelectCount(mapper);
 
+        ArrayList<BoardDTO> notice = dao.boardSelectNotice(mapper);
         BoardList boardList = new BoardList(pageSize, totalCount, currentPage);
 
         HashMap<String, Integer> hashMap = new HashMap<>();
         hashMap.put("startNo", boardList.getStartNo());
         hashMap.put("endNo", boardList.getEndNo());
-
         boardList.setList(dao.boardSelectList(mapper, hashMap));
 
+        for (BoardDTO boardDTO : notice) {
+            boardDTO.setCommentCount(BoardService.getInstance().boardCommentCount(boardDTO.getPostID()));
+        }
+        for (BoardDTO boardDTO : boardList.getList()) {
+            boardDTO.setCommentCount(BoardService.getInstance().boardCommentCount(boardDTO.getPostID()));
+        }
+
+        request.setAttribute("notice", notice);
         request.setAttribute("boardList", boardList);
 
         mapper.close();
+    }
+
+    private int boardCommentCount(int postID) {
+        System.out.println("BoardService 클래스의 commentCount() 메서드 실행");
+        SqlSession mapper = MySession.getSession();
+
+        int commentCount = BoardDAO.getInstance().boardCommentCount(mapper, postID);
+
+        mapper.close();
+        return commentCount;
     }
 
     // 게시판에 새 글을 저장하는 메서드를 호출하는 메서드
@@ -67,17 +85,6 @@ public class BoardService {
         dao.boardInsert(mapper, boardDTO);
 
         mapper.commit();
-        mapper.close();
-    }
-
-    // 모든 공지글을 얻어오는 SELECT SQL 명령을 실행하는 메서드를 호출하는 메서드
-    public void boardSelectNotice(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("BoardService 클래스의 selectNotice() 메서드 실행");
-        SqlSession mapper = MySession.getSession();
-
-        ArrayList<BoardDTO> notice = dao.boardSelectNotice(mapper);
-        request.setAttribute("notice", notice);
-
         mapper.close();
     }
 
@@ -102,13 +109,17 @@ public class BoardService {
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
         BoardDTO boardDTO = dao.boardSelectByPostID(mapper, postID);
+        BoardCommentList boardCommentList = new BoardCommentList();
+        boardCommentList.setList(BoardDAO.getInstance().boardSelectCommentList(mapper, postID));
 
         request.setAttribute("boardDTO", boardDTO);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("enter", "\r\n");
+        request.setAttribute("boardCommentList", boardCommentList);
+        boardDTO.setCommentCount(BoardService.getInstance().boardCommentCount(boardDTO.getPostID()));
+
 
         mapper.close();
-//        return boardDTO;
     }
 
     // 게시글을 삭제(블라인드 처리)하는 UPDATE SQL 명령을 실행하는 메서드를 호출하는 메서드
@@ -142,22 +153,6 @@ public class BoardService {
         dao.boardUpdate(mapper, boardDTO);
 
         mapper.commit();
-        mapper.close();
-    }
-
-    // 덧글 목록을 불러오는 SELECT SQL 명령을 실행하는 메서드를 호출하는 메서드
-    public void boardSelectCommentList(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("BoardService 클래스의 selectCommentList() 메서드 실행");
-        SqlSession mapper = MySession.getSession();
-
-        int postID = Integer.parseInt(request.getParameter("postID"));
-        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-
-        BoardCommentList boardCommentList = new BoardCommentList();
-        boardCommentList.setList(BoardDAO.getInstance().boardSelectCommentList(mapper, postID));
-
-        request.setAttribute("boardCommentList", boardCommentList);
-
         mapper.close();
     }
 
@@ -211,4 +206,5 @@ public class BoardService {
         mapper.commit();
         mapper.close();
     }
+
 }

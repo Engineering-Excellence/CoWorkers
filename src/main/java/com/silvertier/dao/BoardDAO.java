@@ -88,4 +88,10 @@ public class BoardDAO {
         System.out.println("BoardDAO 클래스의 commentUpdate() 메서드 실행");
         mapper.update("boardCommentUpdate", commentDTO);
     }
+
+    // 댓글 수를 얻어오는 SQL 명령을 실행하는 메서드
+    public int boardCommentCount(SqlSession mapper, int postID) {
+        System.out.println("BoardDAO 클래스의 commentCount() 메서드 실행");
+        return (int) mapper.selectOne("boardCommentCount", postID);
+    }
 }

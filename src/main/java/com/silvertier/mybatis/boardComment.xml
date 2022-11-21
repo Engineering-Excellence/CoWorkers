@@ -32,4 +32,11 @@
         WHERE COMMENTID = #{commentID}
     </update>
 
+    <!-- 댓글 수를 얻어온다. -->
+    <select id="boardCommentCount" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+        FROM BOARDCOMMENT
+        WHERE POSTID = #{postID} AND DELETEDATE IS NULL
+    </select>
+
 </mapper>

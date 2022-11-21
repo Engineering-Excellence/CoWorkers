@@ -12,8 +12,8 @@ public class BoardDTO {
     private Date writeDate; // 입력일
     private Date updateDate;    // 수정일
     private Date deleteDate;    // 삭제일
-    private int hit;    // 조회수
-    private int commentCount;   // 덧글 수
+    private int hit = 0;    // 조회수
+    private int commentCount = 0;   // 덧글 수
     private String notice = "false";    // 공지글 여부
     private String ip;  // IP 주소
     private int userID; // FK, 사원번호

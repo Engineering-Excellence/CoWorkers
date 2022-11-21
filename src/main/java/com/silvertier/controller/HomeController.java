@@ -205,18 +205,17 @@ public class HomeController extends HttpServlet {
 
             // Kyle
             case "/boardInsert.sil":
-                // 글 수정 페이지를 호출한다.
+                // 글 작성 페이지를 호출한다.
                 viewPage += "boardInsert";
                 break;
             case "/boardInsertOK.sil":
-                // 글을 수정하는 메서드를 호출한다.
+                // 글을 작성하는 메서드를 호출한다.
                 BoardService.getInstance().boardInsert(request, response);
                 viewPage += "boardReturn";
                 break;
             case "/board.sil":
                 // 브라우저에 출력할 1 페이지 분량의 글과 페이징 작업에 사용할 8개의 변수가 저장된 클래스 객체를
                 // 얻어오는 메소드를 호출한다.
-                BoardService.getInstance().boardSelectNotice(request, response);
                 BoardService.getInstance().boardSelectList(request, response);
                 viewPage += "board";
                 break;
@@ -228,7 +227,6 @@ public class HomeController extends HttpServlet {
             case "/boardView.sil":
                 // 조회수를 증가시킨 글 1건을 얻어오는 메서드를 호출한다.
                 BoardService.getInstance().boardSelectByPostID(request, response);
-                BoardService.getInstance().boardSelectCommentList(request, response);
                 viewPage += "boardView";
                 break;
             case "/boardUpdate.sil":
