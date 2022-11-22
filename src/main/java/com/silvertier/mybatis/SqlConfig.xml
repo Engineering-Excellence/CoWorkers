@@ -15,7 +15,6 @@
 		<typeAlias type="com.silvertier.dto.EventDTO" alias="eDTO" />
 		<typeAlias type="com.silvertier.dto.BoardDTO" alias="boardDTO" />	<!-- 별명 경로는 '.'으로 구분 주의 -->
 		<typeAlias type="com.silvertier.dto.BoardCommentDTO" alias="commentDTO" />
-		<typeAlias type="com.silvertier.dto.BoardFileDTO" alias="fileDTO" />
 	</typeAliases>
 
 	<environments default="development">
@@ -39,7 +38,6 @@
 		<mapper resource="com/silvertier/mybatis/eventComment.xml" />
 		<mapper resource="com/silvertier/mybatis/board.xml" />
 		<mapper resource="com/silvertier/mybatis/boardComment.xml" />
-		<mapper resource="com/silvertier/mybatis/boardFile.xml" />
 	</mappers>
 
 </configuration>

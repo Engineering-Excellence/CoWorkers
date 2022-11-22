@@ -93,26 +93,26 @@
         				<tr>
         					<td>주요 업무</td>
         					<td>일정(Calendar)</td>
-        					<td>프로젝트 설계, 게시글(Board)</td>
+        					<td>프로젝트 설계, <br/>게시글(Board)</td>
         					<td>업무(Work)</td>
-        					<td>로그인(Login), 회원가입(Register)</td>
+        					<td>로그인(Login), <br/>회원가입(Register)</td>
         				</tr>
         				<tr>
         					<td rowspan="4" style="vertical-align: middle;">1차 프로젝트 주요 구현사항</td>
         					<td>일정확인용 달력 구현</td>	
-        					<td>공지사항 및 목록 호출 구현</td>	
+        					<td>DB 모델링, MVC 패턴</td>
         					<td>업무 리스트 호출 구현</td>	
         					<td>로그인/로그아웃 구현</td>	
         				</tr>	
         				<tr>
         					<td>일정 입력/수정/삭제</td>	
-        					<td>게시글 작성/수정/삭제</td>	
+        					<td>게시판 기능 구현</td>
         					<td>업무 작성/수정/삭제</td>	
         					<td>회원가입 기능 구현</td>	
         				</tr>	
         				<tr>
         					<td>일정/긴급업무별 리스트 호출</td>	
-        					<td>게시글 덧글</td>	
+        					<td>팀 업무 및 GitHub 관리</td>
         					<td>삭제된 업무 블라인드 처리</td>	
         					<td>메인 페이지 구성</td>	
         				</tr>	
