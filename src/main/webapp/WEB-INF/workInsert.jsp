@@ -176,6 +176,7 @@
                         </tr>
                     </table>
                     <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
+                    <input type="hidden" name="userID" value="${userInfo.get(0).getUserID()}"/>
                     <%--                    <input type="hidden" name="userName" value="${dto.userName}"/>--%>
                 </form>
             </div>

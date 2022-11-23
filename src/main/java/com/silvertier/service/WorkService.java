@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +49,10 @@ public class WorkService {
         dto.setDeadline(Date.valueOf(request.getParameter("deadline")));
 
         dto.setUserName(request.getParameter("userName"));
+
+        dto.setUserID(Integer.parseInt(request.getParameter("userID")));
+
+        System.out.println("userID : " + request.getParameter("userID"));
 
         dao.workInsert(mapper, dto);
 
@@ -128,7 +133,6 @@ public class WorkService {
 
         int workID = Integer.parseInt(request.getParameter("workID"));
 //        System.out.println("workID: " + workID);
-
         dao.workDelete(mapper, workID);
 
         mapper.commit();

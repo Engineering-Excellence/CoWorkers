@@ -1,5 +1,5 @@
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.Iterator" %>
+<%@ page import="com.silvertier.dto.WorkList" %>
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -28,7 +28,7 @@
 <body>
 
 <fmt:requestEncoding value="UTF-8"/>
-<jsp:useBean id="date" class="java.util.Date"/>
+<c:set var="date" value="${Date(Date().getTime()-60*60*24*1000)}"/>
 <%
     //    System.out.println(pageContext.findAttribute("dto"));
 //
@@ -222,7 +222,7 @@
                                            style="font-size: 13px; width: 80px"/>
                                     <input class="btn btn-danger btn-sm" type="button" value="삭제"
                                            style="font-size: 13px; width: 80px"
-                                           onclick="deleteCheck('workDelete.sil?workID=${dto.workID}&currentPage=${currentPage}','${userInfo.get(0).getUserName()==dto.userName}')"/>
+                                           onclick="deleteCheck('workDelete.sil?workID=${dto.workID}&currentPage=${currentPage}','${userInfo.get(0).getUserID()==dto.userID}')"/>
                                 </c:if>
                                 <input class="btn btn-info btn-sm" type="button" value="돌아가기"
                                        style="font-size: 13px; width: 80px"
