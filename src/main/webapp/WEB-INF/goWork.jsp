@@ -24,26 +24,23 @@
 <body>
 
 <fmt:requestEncoding value="UTF-8"/>
-<%--    request.setCharacterEncoding("UTF-8")--%>
 <%
-    System.out.println(pageContext.findAttribute("dto"));
-
-    Map<String, String[]> map = request.getParameterMap();
-    Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
-    while (itr.hasNext()) {
-        Map.Entry<String, String[]> entry = itr.next();
-        System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
-    }
+//    System.out.println(pageContext.findAttribute("dto"));
+//
+//    Map<String, String[]> map = request.getParameterMap();
+//    Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
+//    while (itr.hasNext()) {
+//        Map.Entry<String, String[]> entry = itr.next();
+//        System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
+//    }
 
     int currentPage = 1;
-
-    String userName ="";
-    try{
-        request.getParameter("userName");
-    }catch (Exception e) {
-        userName="돚거";
+    try {
+        currentPage = Integer.parseInt(request.getParameter("currentPage"));
+    } catch (Exception e) {
     }
-    response.sendRedirect("work.sil?currentPage=" + currentPage+"&userName?="+userName);
+
+    response.sendRedirect("work.sil?currentPage=" + currentPage);
 %>
 </body>
 

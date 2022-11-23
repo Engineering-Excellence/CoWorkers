@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -166,6 +167,7 @@ public class BoardService {
         commentDTO.setUserName(request.getParameter("userName"));
         commentDTO.setContent(request.getParameter("content"));
         commentDTO.setIp(request.getParameter("ip"));
+
         dao.boardCommentInsert(mapper, commentDTO);
 
         mapper.commit();

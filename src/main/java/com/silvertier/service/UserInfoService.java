@@ -3,12 +3,17 @@ package com.silvertier.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.silvertier.dao.UserInfoDAO;
 import com.silvertier.dto.UserInfoDTO;
 import com.silvertier.mybatis.MySession;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 public class UserInfoService {
 
@@ -46,12 +51,12 @@ public class UserInfoService {
 		
 		UserInfoDTO userInfoDTO = new UserInfoDTO();
 		userInfoDTO.setAccountID(request.getParameter("accountID"));
-		userInfoDTO.setAccountPassword(request.getParameter("accountPassword"));
-		System.out.println("userInfoCompareID: " + userInfoDTO);
+		System.out.println("UserInfoService -> userInfoCompareID() accountID "+request.getParameter("accountID"));
+//		System.out.println("userInfoCompareID: " + userInfoDTO.getAccountID());
 		String originID = userInfoDAO.userInfoCompareID(mapper, userInfoDTO);
+		System.out.println("UserInfoService -> userInfoCompareID() originID "+originID);
 		mapper.close();
 		return originID;
-//		return compareID(request, response); // 에러: 무한재귀
 	}
 	
 	// 로그인 시 패스워드 비교
@@ -60,15 +65,31 @@ public class UserInfoService {
 		SqlSession mapper = MySession.getSession();
 		
 		UserInfoDTO userInfoDTO = new UserInfoDTO();
-		userInfoDTO.setAccountID(request.getParameter("accountID"));
+		userInfoDTO.setAccountID(userInfoCompareID(request, response));
 		userInfoDTO.setAccountPassword(request.getParameter("accountPassword"));
-		System.out.println("userInfoComparePW: " + userInfoDTO);
+//		System.out.println("userInfoComparePW: " + userInfoDTO.getAccountPassword());
+		System.out.println("UserInfoService -> userInfoComparePW() accountPassword "+request.getParameter("accountPassword"));
 		String originPW = userInfoDAO.userInfoComparePW(mapper, userInfoDTO);
+		System.out.println("UserInfoService -> userInfoComparePW() originPW "+originPW);
 		mapper.close();
 		return originPW;
-//		return comparePW(request, response); // 에러: 무한재귀
 	}
-	
+	public void userInfoSelect(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("UserInfoService -> userInfoSelect()");
+		SqlSession mapper = MySession.getSession();
+
+		System.out.println("UserInfoService -> userInfoSelect() accountID "+request.getParameter("accountID"));
+		UserInfoDTO userInfoDTO = new UserInfoDTO();
+		userInfoDTO.setAccountID(userInfoCompareID(request, response));
+
+		ArrayList<UserInfoDTO> userInfo = userInfoDAO.userInfoSelect(mapper, userInfoDTO);
+
+		System.out.println("INFO: " + userInfo);
+		HttpSession session = request.getSession();
+		session.setAttribute("userInfo", userInfo);
+		mapper.close();
+	}
+
 /*
 	 // 전체 유저 리스트 뽑아오기 
 	 public ArrayList<UserInfoDTO> userInfoSelectList(HttpServletRequest request, HttpServletResponse response) { 

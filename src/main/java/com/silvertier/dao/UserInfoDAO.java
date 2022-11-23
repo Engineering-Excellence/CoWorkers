@@ -3,6 +3,8 @@ package com.silvertier.dao;
 import org.apache.ibatis.session.SqlSession;
 import com.silvertier.dto.UserInfoDTO;
 
+import java.util.ArrayList;
+
 public class UserInfoDAO {
 
 	private static UserInfoDAO instance = new UserInfoDAO();
@@ -20,15 +22,17 @@ public class UserInfoDAO {
 	// 로그인시 아이디 비교
 	public String userInfoCompareID(SqlSession mapper, UserInfoDTO userInfoDTO) {
 		System.out.println("UserInfoDAO -> userInfoCompareID()");
-//		System.out.println("dao ID: " + userInfoDTO);
 		return (String) mapper.selectOne("userInfoCompareID", userInfoDTO);
 	}
 	
 	// 로그인시 패스워드 비교
 	public String userInfoComparePW(SqlSession mapper, UserInfoDTO userInfoDTO) {
 		System.out.println("UserInfoDAO -> userInfoComparePW()");
-//		System.out.println("dao PW: " + userInfoDTO);
 		return (String) mapper.selectOne("userInfoComparePW", userInfoDTO);
+	}
+	public ArrayList<UserInfoDTO> userInfoSelect(SqlSession mapper, UserInfoDTO userInfoDTO) {
+		System.out.println("UserInfoDAO -> userInfoSelect()");
+		return (ArrayList<UserInfoDTO>) mapper.selectList("userInfoSelect", userInfoDTO);
 	}
 	
 /*

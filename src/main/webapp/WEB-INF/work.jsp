@@ -87,28 +87,17 @@
 
                     <tbody>
                     <%--긴급 --%>
-                    <%--                    <c:if test="${currentPage==1}">--%>
                     <c:forEach var="dto" items="${priority}">
                         <c:if test="${dto.deleteDate!=null}">
                         </c:if>
                         <c:if test="${dto.deleteDate==null}">
                             <tr class="bg-danger">
                                 <td align="center">${dto.workID}</td>
-
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
                                         <c:if test="${dto.priority==1}">
                                             <b style="color: crimson">긴급</b>
-                                        </c:if>
-                                        <c:if test="${dto.priority==2}">
-                                            <b style="color: violet">높음</b>
-                                        </c:if>
-                                        <c:if test="${dto.priority==3}">
-                                            <b style="color: limegreen">보통</b>
-                                        </c:if>
-                                        <c:if test="${dto.priority==4}">
-                                            <b style="color: darkgray">낮음</b>
                                         </c:if>
                                     </c:if>
                                 </td>

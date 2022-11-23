@@ -41,6 +41,7 @@
         Map.Entry<String, String[]> entry = itr.next();
         System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
     }
+
 %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -97,11 +98,11 @@
                         </tr>
 
                         <tr>
-                            <th class="align-middle table-dark">성명
+                            <th class="align-middle table-dark">이름
                             </th>
                             <td>
                                 <input id="userName" type="text" class="form-control form-control-sm" name="userName"
-                                       style="width: 80%"/>
+                                       style="width: 80%" value="${userInfo.get(0).getUserName()}" readonly/>
                             </td>
 
                             <!-- 공지글 여부 -->

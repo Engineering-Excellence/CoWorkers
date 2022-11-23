@@ -1,5 +1,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Iterator" %>
+<%@ page import="com.silvertier.dto.UserInfoDTO" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -36,6 +38,8 @@
         Map.Entry<String, String[]> entry = itr.next();
         System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
     }
+//    ArrayList<UserInfoDTO> userInfo = (ArrayList<UserInfoDTO>)session.getAttribute("userInfo");
+//    System.out.println(userInfo.get(0).getUserName());
 %>
 
 <fmt:requestEncoding value="UTF-8"/>
@@ -92,7 +96,7 @@
                             <th class="align-middle table-dark">이름
                             </th>
                             <td>
-                                <input id="userName" type="text" class="form-control form-control-sm" name="userName"/>
+                                <input id="userName" type="text" class="form-control form-control-sm" name="userName" value="${userInfo.get(0).getUserName()}" readonly/>
                             </td>
                         </tr>
                         <tr>
@@ -118,12 +122,12 @@
                             </th>
                             <td>
                                 <input name="currentProgress" type="radio" value="1" checked/><img width="15"
-                                                                                                   src="images/sug.png">
+                                                                                                   src="images/sug.png"/>
                                 요청
                                 <input name="currentProgress" type="radio" value="2"/><img width="15"
-                                                                                           src="images/on.png"> 진행
+                                                                                           src="images/on.png"/> 진행
                                 <input name="currentProgress" type="radio" value="3"/><img width="15"
-                                                                                           src="images/fin.png"> 완료
+                                                                                           src="images/fin.png"/> 완료
                             </td>
                         </tr>
                         <tr>

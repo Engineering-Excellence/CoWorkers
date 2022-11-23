@@ -298,6 +298,7 @@
 					</tr>
 				</table>
 				<input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
+				<input type="hidden" name="userName" value="${userInfo.get(0).getUserName()}"/>
 			</form>
 		</div>
 		<div class="modal-footer">

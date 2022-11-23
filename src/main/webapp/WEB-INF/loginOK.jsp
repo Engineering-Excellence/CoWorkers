@@ -15,8 +15,8 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
-	String accountID = request.getParameter("accountID");
-	String accountPassword = request.getParameter("accountPassword");
+	String id = request.getParameter("accountID");
+	String pw = request.getParameter("accountPassword");
 	
  %>
 	
@@ -25,14 +25,14 @@
 	</jsp:useBean>
 
 <% 	
-	System.out.println("login: " + userInfoDTO);
+//	System.out.println("login: " + userInfoDTO);
 
 	UserInfoService service = UserInfoService.getInstance();
 	String originID = service.userInfoCompareID(request, response);
 	String originPW = service.userInfoComparePW(request, response);
 
-	if (accountID != null && accountID.equals(originID)) {
-		if (accountPassword != null && accountPassword.equals(originPW)) {
+	if (id != null && id.equals(originID)) {
+		if (pw != null && pw.equals(originPW)) {
 			out.println("<script>");
 			out.println("alert('로그인 성공')");
 			out.println("location.href='mainView.sil'");
@@ -49,6 +49,7 @@
 		out.println("location.href='login.sil'");
 		out.println("</script>");
 	}
+
 %>
 
 </body>

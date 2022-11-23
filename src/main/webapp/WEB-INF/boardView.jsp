@@ -188,8 +188,8 @@
                             <label for="userName">이름</label>
                         </th>
                         <th style="width: 250px;">
-                            <input autocomplete="off" id="userName" class="form-control form-control-sm" type="text"
-                                   name="userName" <%--readonly="readonly"--%>/>
+                            <input autocomplete="off" id="userName" class="form-control form-control-sm" type="text" value="${userInfo.get(0).getUserName()}"
+                                   name="userName" readonly />
                         </th>
                         <%--<th class="align-middle" style="width: 100px; text-align: center;">
                             <label for="password">비밀번호</label>

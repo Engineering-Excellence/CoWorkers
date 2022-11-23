@@ -60,6 +60,7 @@ public class HomeController extends HttpServlet {
             case "/loginOK.sil" -> {
                 UserInfoService.getInstance().userInfoCompareID(request, response);
                 UserInfoService.getInstance().userInfoComparePW(request, response);
+                UserInfoService.getInstance().userInfoSelect(request, response);
 //              UserInfoService.getInstance().userInfoSelectList(request, response);
                 viewPage += "loginOK";
             }
@@ -79,7 +80,11 @@ public class HomeController extends HttpServlet {
             }
 
             // coWorkers 메인 페이지
-            case "/mainView.sil" -> viewPage += "mainView";
+            case "/mainView.sil" ->  {
+                UserInfoService.getInstance().userInfoCompareID(request, response);
+//                UserInfoService.getInstance().userInfoSelect(request, response);
+                viewPage += "mainView";
+            }
             /*case "/idPwFind.sil" -> viewPage += "idPwFind";
             case "/idFindOK.sil" -> {
                 UserInfoService.getInstance().userInfoSelectList(request, response);
@@ -152,7 +157,7 @@ public class HomeController extends HttpServlet {
             }
             case "/workInsertOK.sil" -> {
                 WorkService.getInstance().workInsert(request, response);
-                viewPage += "goWork2";
+                viewPage += "goWork";
                 System.out.println("workInsertOK");
             }
             case "/workUpdate.sil" -> {
@@ -161,12 +166,12 @@ public class HomeController extends HttpServlet {
                 System.out.println("workUpdate");
             }
             case "/workUpdateOK.sil" -> {
-                viewPage += "goWork2";
+                viewPage += "goWork";
                 WorkService.getInstance().workUpdate(request, response);
                 System.out.println("workUpdateOK");
             }
             case "/workDelete.sil" -> {
-                viewPage += "goWork2";
+                viewPage += "goWork";
                 WorkService.getInstance().workDelete(request, response);
                 System.out.println("workDelete");
             }

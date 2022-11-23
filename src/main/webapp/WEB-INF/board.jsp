@@ -39,6 +39,7 @@
         Map.Entry<String, String[]> entry = itr.next();
         System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
     }
+
 %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">

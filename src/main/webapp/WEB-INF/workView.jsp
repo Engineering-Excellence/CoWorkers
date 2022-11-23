@@ -30,47 +30,49 @@
 <fmt:requestEncoding value="UTF-8"/>
 <jsp:useBean id="date" class="java.util.Date"/>
 <%
-    System.out.println(pageContext.findAttribute("dto"));
-
-    Map<String, String[]> map = request.getParameterMap();
-    Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
-    while (itr.hasNext()) {
-        Map.Entry<String, String[]> entry = itr.next();
-        System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
-    }
+//    System.out.println(pageContext.findAttribute("dto"));
+//
+//    Map<String, String[]> map = request.getParameterMap();
+//    Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
+//    while (itr.hasNext()) {
+//        Map.Entry<String, String[]> entry = itr.next();
+//        System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
+//    }
+    pageContext.setAttribute("enter", "\r\n");
 %>
 <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
+    <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="mainView.sil">coWorkers</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="mainView.sil">coWorkers</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">프로필</a></li>
-            <li><a href="#">환경설정</a></li>
-            <li><a href="logout.sil">로그아웃</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">프로필</a></li>
+                <li><a href="#">환경설정</a></li>
+                <li><a href="logout.sil">로그아웃</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
         </div>
-      </div>
-    </nav>
+    </div>
+</nav>
 
-    <div class="container-fluid">
-      <div class="row">
+<div class="container-fluid">
+    <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li><a href="board.sil">게시글</a></li>
-            <li><a href="work.sil">업무관리</a></li>
-            <li><a href="event.sil">일정관리</a></li>
-          </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="board.sil">게시글</a></li>
+                <li><a href="work.sil">업무관리</a></li>
+                <li><a href="event.sil">일정관리</a></li>
+            </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
@@ -183,8 +185,10 @@
                                     </c:if>
                                     <%--마감일 초과--%>
                                     <c:if test="${dto.deadline<date}">
-                                        <b style="color: crimson"><fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/></b>
+                                        <b style="color: crimson"><fmt:formatDate value="${dto.deadline}"
+                                                                                  pattern="yyyy.MM.dd.(E)"/></b>
                                     </c:if>
+                                </c:if>
                                 </c:if>
                             </td>
                         </tr>
@@ -194,7 +198,7 @@
                             <td colspan="9">
                                 <c:set var="subject" value="${fn:replace(dto.subject, '<', '&lt;')}"/>
                                 <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
-                                    ${subject}
+                                ${subject}
                             </td>
                         </tr>
                         <tr>
@@ -203,7 +207,8 @@
                             <td colspan="9">
                                 <c:set var="content" value="${fn:replace(dto.content, '<', '&lt;')}"/>
                                 <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
-                                    ${content}
+                                <c:set var="content" value="${fn:replace(content, enter, '<br/>')}"/>
+                                ${content}
                             </td>
                         </tr>
 
@@ -212,11 +217,12 @@
                     <table class="table" width="600" align="center" cellpadding="5" cellspacing="0">
                         <tr class="table-secondary">
                             <td align="center">
+                                <c:if test="${userInfo.get(0).getUserName()==dto.userName}">
                                 <input class="btn btn-primary btn-sm" type="submit" value="수정"
                                        style="font-size: 13px; width: 80px"/>
                                 <input class="btn btn-danger btn-sm" type="button" value="삭제"
                                        style="font-size: 13px; width: 80px"
-                                       onclick="location.href='workDelete.sil?workID=${dto.workID}&currentPage=${currentPage}'"/>
+                                       onclick="deleteCheck('workDelete.sil?workID=${dto.workID}&currentPage=${currentPage}','${userInfo.get(0).getUserName()==dto.userName}')"/>
                                 </c:if>
                                 <input class="btn btn-info btn-sm" type="button" value="돌아가기"
                                        style="font-size: 13px; width: 80px"
@@ -237,6 +243,7 @@
 
 <script src="../js/jquery-3.6.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/workDelete.js"></script>
 </body>
 
 </html>
