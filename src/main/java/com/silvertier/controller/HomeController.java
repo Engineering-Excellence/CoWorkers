@@ -18,8 +18,6 @@ import com.silvertier.service.WorkService;
 public class HomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // 김태형 (Terry) - 로그인, 홈 화면 분기 컨트롤러
-
     public HomeController() {
         super();
     }
@@ -80,7 +78,7 @@ public class HomeController extends HttpServlet {
             }
 
             // coWorkers 메인 페이지
-            case "/mainView.sil" ->  {
+            case "/mainView.sil" -> {
                 UserInfoService.getInstance().userInfoCompareID(request, response);
 //                UserInfoService.getInstance().userInfoSelect(request, response);
                 viewPage += "mainView";
@@ -230,11 +228,13 @@ public class HomeController extends HttpServlet {
                             BoardService.getInstance().boardCommentInsert(request, response);
                     case "update" -> // 댓글 수정
                             BoardService.getInstance().boardCommentUpdate(request, response);
-                    case "delete" -> // 댓글 삭제
-                            BoardService.getInstance().boardCommentDelete(request, response);
                     default -> {
                     }
                 }
+                viewPage += "boardViewReturn";
+            }
+            case "/boardCommentDelete.sil" -> {
+                BoardService.getInstance().boardCommentDelete(request, response);
                 viewPage += "boardViewReturn";
             }
             default -> viewPage += "error";

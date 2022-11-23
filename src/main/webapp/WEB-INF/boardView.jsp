@@ -1,5 +1,4 @@
 <%@ page import="java.util.Map" %>
-<%@ page import="java.util.Iterator" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -145,7 +144,7 @@
                                         type="button"
                                         value="삭제하기"
                                         style="font-size: 13px;"
-                                        onclick="deleteCheck('boardDelete.sil?postID=${boardDTO.postID}&currentPage=${currentPage}')"/>
+                                        onclick="deleteCheck('boardDelete.sil?postID=${boardDTO.postID}&currentPage=${currentPage}&userID=${userInfo.get(0).getUserID()}')"/>
                             </c:if>
                             <input
                                     class="btn btn-outline-warning btn-sm"
@@ -177,7 +176,7 @@
                             commentID: <input type="text" name="commentID" value="${commentDTO.commentID}" size="4"/>
                             <!-- 현재 댓글이 어떤 메인글의 댓글인가 넘겨준다. -->
                             postID: <input type="text" name="postID" value="${boardDTO.postID}" size="4"/>
-                            <!-- 작업 모드, 1 => 댓글 저장, 2 => 댓글 수정, 3 => 댓글 삭제 -->
+                            <!-- 작업 모드, 1 => 댓글 저장, 2 => 댓글 수정 -->
                             mode: <input type="text" name="mode" value="insert" size="1"/>
                             <!-- 메인글이 표시되던 페이지 번호를 넘겨준다. -->
                             currentPage: <input type="text" name="currentPage" value="${currentPage}" size="4"/>
@@ -266,7 +265,7 @@
                                         <c:set var="content" value="${fn:replace(content, enter, '<br/>')}"/>
                                             ${content}<br/>
                                         <div align="right">
-                                            <c:if test="${userInfo.get(0).getUserID() == boardDTO.userID}">
+                                            <c:if test="${userInfo.get(0).getUserID() == commentDTO.userID}">
                                                 <input
                                                         class="btn btn-outline-primary btn-sm"
                                                         type="button"
@@ -279,7 +278,7 @@
                                                         type="button"
                                                         value="삭제"
                                                         style="font-size: 13px;"
-                                                        onclick="setting(${commentDTO.commentID}, 'delete', '댓글 삭제', '${commentDTO.userName}', '${commentDTO.content}')"
+                                                        onclick="deleteCheck('boardCommentDelete.sil?commentID=${commentDTO.commentID}&postID=${boardDTO.postID}&currentPage=${currentPage}&userID=${userInfo.get(0).getUserID()}')"
                                                 />
                                             </c:if>
                                         </div>
@@ -295,7 +294,7 @@
                     </c:if>
 
                 </table>
-                <input type="hidden" name="userID" value="${userInfo.get(0).getUserName()}">
+                <input type="hidden" id="userID" name="userID" value="${userInfo.get(0).getUserID()}">
             </form>
         </div>
     </div>

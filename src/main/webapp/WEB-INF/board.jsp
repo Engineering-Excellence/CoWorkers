@@ -114,7 +114,8 @@
                                 <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
                                 <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
                                 <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
-                                        ${subject}(${boardDTO.commentCount})
+                                        ${subject}
+                                        <c:if test="${boardDTO.commentCount > 0}">(${boardDTO.commentCount})</c:if>
                                 </a>
                                 <c:if test="${boardDTO.deleteDate != null}">
                                     삭제된 글입니다.
@@ -165,7 +166,7 @@
                                         <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
                                         <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
                                                 ${subject}
-                                                <c:if test="${boardDTO.commentCount != 0}">(${boardDTO.commentCount})</c:if>
+                                            <c:if test="${boardDTO.commentCount > 0}">(${boardDTO.commentCount})</c:if>
                                         </a>
                                     </c:if>
                                     <c:if test="${boardDTO.deleteDate != null}">
