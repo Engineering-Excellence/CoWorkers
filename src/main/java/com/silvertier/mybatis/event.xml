@@ -4,30 +4,31 @@
 
 	<!-- 일정 1건 insert -->
 	<insert id="eventInsert" parameterType="eDTO">
-		insert into 
-		event (eventid, 
-		username, 
-		userid, 
-		subject, 
-		content, 
-		startdate, 
-		enddate, 
-		eventcolor, 
-		hit, 
-		ip, 
-		allday)
-			values (event_idx_seq.nextval, 
-			'hong', 
-			1234, 
-			#{subject}, 
-			#{content}, 
-			#{startDate}, 
-			#{endDate}, 
-			#{eventColor}, 
-			0, 
-			#{ip}, 
-			#{allDay})
-	</insert>
+        insert into event (eventid,
+                           username,
+                           userid,
+                           subject,
+                           content,
+                           startdate,
+                           enddate,
+                           eventcolor,
+                           hit,
+                           ip,
+                           allday,
+                           commentcount)
+        values (event_idx_seq.nextval,
+                #{userName},
+                #{userID},
+                #{subject},
+                #{content},
+                #{startDate},
+                #{endDate},
+                #{eventColor},
+                0,
+                #{ip},
+                #{allDay},
+                0)
+    </insert>
 
 	<!-- 전체 글의 개수를 얻어온다. -->
 	<select id="eventSelectCount" resultType="int">
@@ -74,8 +75,8 @@
 		where eventID = #{eventID}
 	</update>
 
-	<delete id="eventDelete" parameterType="int">
+	<update id="eventDelete" parameterType="int">
 		update event set deletedate = sysdate where eventID = #{eventID}
-	</delete>
+	</update>
 
 </mapper>

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.apache.ibatis.session.SqlSession;
 
 import com.silvertier.dto.EventDTO;
+import com.silvertier.dto.WorkDTO;
 
 public class EventDAO {
 //	싱글톤 디자인 패턴
@@ -36,9 +37,9 @@ public class EventDAO {
 		return (ArrayList<EventDTO>) mapper.selectList("eventSelectArrayList");
 	}
 
-	public ArrayList<EventDTO> workSelectArrayList(SqlSession mapper) {
+	public ArrayList<WorkDTO> workSelectArrayList(SqlSession mapper) {
 		System.out.println("workSelectArrayList() Method of EventDAO Class");
-		return (ArrayList<EventDTO>) mapper.selectList("workSelectArrayList");
+		return (ArrayList<WorkDTO>) mapper.selectList("workSelectArrayList");
 	}
 
 	public EventDTO eventSelectByEventID(SqlSession mapper, int eventID) {
