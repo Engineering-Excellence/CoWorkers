@@ -7,26 +7,35 @@ onload = function () {
 // 폼 중 값이 하나라도 입력이 안되면 false 리턴	
 function joinCheck(obj) {
 	
+	// 아이디 폼 체크	
 	if (!obj.accountID.value || obj.accountID.value.trim().length == 0) {
 		window.alert('아이디가 입력되지 않았습니다.')
 		obj.accountID.focus();
 		return false;
 	} 
+	
+	// 패스워드 폼 체크
 	if (!obj.accountPassword.value || obj.accountPassword.value.trim().length == 0) {
 		window.alert('패스워드가 입력되지 않았습니다.')
 		obj.accountPassword.focus();
 		return false;
 	}
+	
+	//	이름 폼 체크
 	if (!obj.userName.value || obj.userName.value.trim().length == 0) {
 		window.alert('이름이 입력되지 않았습니다.')
 		obj.userName.focus();
 		return false;
 	}
+	
+	// 주민등록번호 폼 체크
 	if (!obj.registerNumber.value || obj.registerNumber.value.trim().length == 0) {
 		window.alert('주민등록번호가 입력되지 않았습니다.')
 		obj.registerNumber.focus();
 		return false;
 	}
+	
+	// 전화번호 폼 체크
 	if (!obj.mobileNumber.value || obj.mobileNumber.value.trim().length == 0) {
 		window.alert('전화번호가 입력되지 않았습니다.')
 		obj.mobileNumber.focus();
@@ -36,6 +45,8 @@ function joinCheck(obj) {
 		obj.mobileNumber.focus();
 		return false;
 	}
+	
+	// 이메일 폼 체크
 	if (!obj.email.value || obj.email.value.trim().length == 0) {
 		window.alert('이메일이 입력되지 않았습니다.')
 		obj.email.focus();
@@ -44,7 +55,13 @@ function joinCheck(obj) {
 		window.alert('이메일은 반드시 "@" 을 사용해야 합니다.')
 		obj.email.focus();
 		return false;
+	} else if (!(obj.email.value.includes('.com') || obj.email.value.includes('.net') || obj.email.value.includes('.co.kr') || obj.email.value.includes('.ac.kr'))) {
+		window.alert('이메일 형식이 올바르지 않습니다.')
+		obj.email.focus();
+		return false;
 	}
+	
+window.alert('회원가입이 완료되었습니다.');
 return true;
 }
 
@@ -148,10 +165,11 @@ function regCheck() {
 		sum += registerNumber.charAt(i) * check.charAt(i)
 	}
 	
+	// 앞 부분 월 / 일 체크 / 윤년평년
+	// 유효한 주민등록번호여도 월, 일 안맞으면 false
+	
 	let form = (11 - (sum % 11)) % 10;
-	if (form == registerNumber.substring(12)) {
-		window.alert('유효한 주민등록번호 입니다.')
-	} else if (registerNumber.substring(2, 4) > 12) {
+	if (registerNumber.substring(2, 4) > 12) {
 		window.alert('주민등록번호상 월은 12월을 넘어갈 수 없습니다.')
 		document.getElementById('registerNumber').value = "";
 		$('#registerNumber').focus();
@@ -167,10 +185,12 @@ function regCheck() {
 		window.alert('주민번호에는 숫자만 기입해주세요')
 		document.getElementById('registerNumber').value = "";
 		$('#registerNumber').focus();
-	} else { 
+	} else if (form != registerNumber.substring(12, 13)) {
 		window.alert('유효하지않은 주민등록번호 입니다.')
 		document.getElementById('registerNumber').value = "";
 		$('#registerNumber').focus();
+	} else { 
+		window.alert('유효한 주민등록번호 입니다.')
 	}
 }	
 
@@ -204,7 +224,7 @@ function mobileCheck() {
 		window.alert('휴대전화번호는 숫자만 입력해주세요.')
 		document.getElementById('mobileNumber').value = "";
 		$('#mobileNumber').focus();
-	}
+	} 
 }	
 	
 
