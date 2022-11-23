@@ -266,7 +266,7 @@
                                         <c:set var="content" value="${fn:replace(content, enter, '<br/>')}"/>
                                             ${content}<br/>
                                         <div align="right">
-                                            <c:if test="${userInfo.get(0).getUserID() == boardDTO.userID}">
+                                            <c:if test="${userInfo.get(0).getUserID() == commentDTO.userID}">
                                                 <input
                                                         class="btn btn-outline-primary btn-sm"
                                                         type="button"
@@ -295,7 +295,7 @@
                     </c:if>
 
                 </table>
-                <input type="hidden" name="userID" value="${userInfo.get(0).getUserName()}">
+                <input type="hidden" name="userID" value="${userInfo.get(0).getUserID()}">
             </form>
         </div>
     </div>
