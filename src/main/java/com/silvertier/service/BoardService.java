@@ -80,6 +80,7 @@ public class BoardService {
         boardDTO.setUserName(request.getParameter("userName"));
         boardDTO.setContent(request.getParameter("content"));
         boardDTO.setIp(request.getParameter("ip"));
+        boardDTO.setUserID(Integer.parseInt(request.getParameter("userID")));
         if (request.getParameter("notice") != null) {
             boardDTO.setNotice(request.getParameter("notice"));
         }
@@ -167,6 +168,7 @@ public class BoardService {
         commentDTO.setUserName(request.getParameter("userName"));
         commentDTO.setContent(request.getParameter("content"));
         commentDTO.setIp(request.getParameter("ip"));
+        commentDTO.setUserID(Integer.parseInt(request.getParameter("userID")));
 
         dao.boardCommentInsert(mapper, commentDTO);
 

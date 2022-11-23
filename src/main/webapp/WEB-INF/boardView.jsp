@@ -39,37 +39,38 @@
 %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
+    <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="mainView.sil">coWorkers</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="mainView.sil">coWorkers</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">프로필</a></li>
-            <li><a href="#">환경설정</a></li>
-            <li><a href="logout.sil">로그아웃</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">프로필</a></li>
+                <li><a href="#">환경설정</a></li>
+                <li><a href="logout.sil">로그아웃</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
         </div>
-      </div>
-    </nav>
+    </div>
+</nav>
 
-    <div class="container-fluid">
-      <div class="row">
+<div class="container-fluid">
+    <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li><a href="board.sil">게시글</a></li>
-            <li><a href="work.sil">업무관리</a></li>
-            <li><a href="event.sil">일정관리</a></li>
-          </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="board.sil">게시글</a></li>
+                <li><a href="work.sil">업무관리</a></li>
+                <li><a href="event.sil">일정관리</a></li>
+            </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">게시판</h1>
@@ -132,18 +133,20 @@
                     </tr>
                     <tr class="table-secondary">
                         <td colspan="4" align="center">
-                            <input
-                                    class="btn btn-outline-primary btn-sm"
-                                    type="button"
-                                    value="수정하기"
-                                    style="font-size: 13px;"
-                                    onclick="location.href=('boardUpdate.sil?postID=${boardDTO.postID}&currentPage=${currentPage}')"/>
-                            <input
-                                    class="btn btn-outline-danger btn-sm"
-                                    type="button"
-                                    value="삭제하기"
-                                    style="font-size: 13px;"
-                                    onclick="deleteCheck('boardDelete.sil?postID=${boardDTO.postID}&currentPage=${currentPage}')"/>
+                            <c:if test="${userInfo.get(0).getUserID() == boardDTO.userID}">
+                                <input
+                                        class="btn btn-outline-primary btn-sm"
+                                        type="button"
+                                        value="수정하기"
+                                        style="font-size: 13px;"
+                                        onclick="location.href=('boardUpdate.sil?postID=${boardDTO.postID}&currentPage=${currentPage}')"/>
+                                <input
+                                        class="btn btn-outline-danger btn-sm"
+                                        type="button"
+                                        value="삭제하기"
+                                        style="font-size: 13px;"
+                                        onclick="deleteCheck('boardDelete.sil?postID=${boardDTO.postID}&currentPage=${currentPage}')"/>
+                            </c:if>
                             <input
                                     class="btn btn-outline-warning btn-sm"
                                     type="button"
@@ -162,7 +165,8 @@
             <form class="m-3" action="boardCommentOK.sil" method="post" name="commentForm">
                 <table class="table table-striped" style="width: 100%; margin-left: auto; margin-right: auto;">
                     <tr class="table-success">
-                        <th colspan="4" style="font-size: 30px; text-align: center;">댓글 보기(${boardDTO.commentCount}개)</th>
+                        <th colspan="4" style="font-size: 30px; text-align: center;">댓글 보기(${boardDTO.commentCount}개)
+                        </th>
                     </tr>
 
                     <!-- 이 줄은 원래 보이면 안되는 줄로 작업이 완료되면 화면에 표시되지 않게 한다. -->
@@ -188,8 +192,9 @@
                             <label for="userName">이름</label>
                         </th>
                         <th style="width: 250px;">
-                            <input autocomplete="off" id="userName" class="form-control form-control-sm" type="text" value="${userInfo.get(0).getUserName()}"
-                                   name="userName" readonly />
+                            <input autocomplete="off" id="userName" class="form-control form-control-sm" type="text"
+                                   value="${userInfo.get(0).getUserName()}"
+                                   name="userName" readonly/>
                         </th>
                         <%--<th class="align-middle" style="width: 100px; text-align: center;">
                             <label for="password">비밀번호</label>
@@ -261,25 +266,27 @@
                                         <c:set var="content" value="${fn:replace(content, enter, '<br/>')}"/>
                                             ${content}<br/>
                                         <div align="right">
-                                            <input
-                                                    class="btn btn-outline-primary btn-sm"
-                                                    type="button"
-                                                    value="수정"
-                                                    style="font-size: 13px;"
-                                                    onclick="setting(${commentDTO.commentID}, 'update', '댓글 수정', '${commentDTO.userName}', '${commentDTO.content}')"
-                                            />
-                                            <input
-                                                    class="btn btn-outline-danger btn-sm"
-                                                    type="button"
-                                                    value="삭제"
-                                                    style="font-size: 13px;"
-                                                    onclick="setting(${commentDTO.commentID}, 'delete', '댓글 삭제', '${commentDTO.userName}', '${commentDTO.content}')"
-                                            />
+                                            <c:if test="${userInfo.get(0).getUserID() == boardDTO.userID}">
+                                                <input
+                                                        class="btn btn-outline-primary btn-sm"
+                                                        type="button"
+                                                        value="수정"
+                                                        style="font-size: 13px;"
+                                                        onclick="setting(${commentDTO.commentID}, 'update', '댓글 수정', '${commentDTO.userName}', '${commentDTO.content}')"
+                                                />
+                                                <input
+                                                        class="btn btn-outline-danger btn-sm"
+                                                        type="button"
+                                                        value="삭제"
+                                                        style="font-size: 13px;"
+                                                        onclick="setting(${commentDTO.commentID}, 'delete', '댓글 삭제', '${commentDTO.userName}', '${commentDTO.content}')"
+                                                />
+                                            </c:if>
                                         </div>
                                     </td>
                                 </c:if>
                                 <c:if test="${commentDTO.deleteDate != null}">
-                                    <td colspan="4" height="85" style="vertical-align: middle">
+                                    <td colspan="4" height="60" style="vertical-align: middle">
                                         <p>삭제된 댓글입니다.</p>
                                     </td>
                                 </c:if>
@@ -288,6 +295,7 @@
                     </c:if>
 
                 </table>
+                <input type="hidden" name="userID" value="${userInfo.get(0).getUserName()}">
             </form>
         </div>
     </div>

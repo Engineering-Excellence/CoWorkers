@@ -13,7 +13,7 @@
     <!-- 새 댓글을 저장한다. -->
     <insert id="boardCommentInsert" parameterType="commentDTO">
         INSERT INTO BOARDCOMMENT (COMMENTID, USERNAME, CONTENT, IP, POSTID, USERID)
-        VALUES (BOARDCOMMENT_COMMENTID_SEQ.nextval, #{userName}, #{content}, #{ip}, #{postID}, 0)
+        VALUES (BOARDCOMMENT_COMMENTID_SEQ.nextval, #{userName}, #{content}, #{ip}, #{postID}, #{userID})
     </insert>
 
     <!-- 댓글을 삭제(블라인드 처리)한다. -->

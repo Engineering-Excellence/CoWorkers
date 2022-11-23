@@ -24,7 +24,7 @@
     <!-- 새 글을 저장한다. -->
     <insert id="boardInsert" parameterType="boardDTO">
         INSERT INTO BOARD (POSTID, SUBJECT, USERNAME, CONTENT, NOTICE, IP, USERID)
-        VALUES (BOARD_POSTID_SEQ.nextval, #{subject}, #{userName}, #{content}, #{notice}, #{ip}, 0)
+        VALUES (BOARD_POSTID_SEQ.nextval, #{subject}, #{userName}, #{content}, #{notice}, #{ip}, #{userID})
     </insert>
 
     <!-- 모든 공지글을 얻어온다. -->
