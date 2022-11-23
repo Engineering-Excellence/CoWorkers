@@ -104,7 +104,7 @@
         				<tr>
         					<td rowspan="4" style="vertical-align: middle;">1차 프로젝트 주요 구현사항</td>
         					<td>일정확인용 달력 구현</td>	
-        					<td>DB 모델링, MVC 패턴</td>
+        					<td>MVC 패턴, DB 모델링</td>
         					<td>업무 리스트 호출 구현</td>	
         					<td>로그인/로그아웃 구현</td>	
         				</tr>	
@@ -116,7 +116,7 @@
         				</tr>	
         				<tr>
         					<td>일정/긴급업무별 리스트 호출</td>	
-        					<td>팀 업무 및 GitHub 관리</td>
+        					<td>GitHub 관리, 배포</td>
         					<td>삭제된 업무 블라인드 처리</td>	
         					<td>메인 페이지 구성</td>	
         				</tr>	
