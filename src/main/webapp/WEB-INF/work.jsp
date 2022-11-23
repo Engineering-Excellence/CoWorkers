@@ -103,6 +103,7 @@
                                 </td>
 
                                 <td class="subject" align="center">
+                                    <c:if test="${dto.deleteDate != null}"></c:if>
                                     <c:if test="${dto.deleteDate == null}">
                                         <c:set var="subject" value="${fn:replace(dto.subject, '<', '&lt;')}"/>
                                         <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>

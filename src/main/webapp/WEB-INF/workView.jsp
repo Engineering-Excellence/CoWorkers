@@ -30,7 +30,7 @@
 <fmt:requestEncoding value="UTF-8"/>
 <jsp:useBean id="date" class="java.util.Date"/>
 <%
-//    System.out.println(pageContext.findAttribute("dto"));
+    //    System.out.println(pageContext.findAttribute("dto"));
 //
 //    Map<String, String[]> map = request.getParameterMap();
 //    Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
@@ -189,7 +189,6 @@
                                                                                   pattern="yyyy.MM.dd.(E)"/></b>
                                     </c:if>
                                 </c:if>
-                                </c:if>
                             </td>
                         </tr>
                         <tr>
@@ -198,7 +197,7 @@
                             <td colspan="9">
                                 <c:set var="subject" value="${fn:replace(dto.subject, '<', '&lt;')}"/>
                                 <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
-                                ${subject}
+                                    ${subject}
                             </td>
                         </tr>
                         <tr>
@@ -208,21 +207,22 @@
                                 <c:set var="content" value="${fn:replace(dto.content, '<', '&lt;')}"/>
                                 <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
                                 <c:set var="content" value="${fn:replace(content, enter, '<br/>')}"/>
-                                ${content}
+                                    ${content}
                             </td>
                         </tr>
 
                     </table>
+                    </c:if>
 
                     <table class="table" width="600" align="center" cellpadding="5" cellspacing="0">
                         <tr class="table-secondary">
                             <td align="center">
                                 <c:if test="${userInfo.get(0).getUserName()==dto.userName}">
-                                <input class="btn btn-primary btn-sm" type="submit" value="수정"
-                                       style="font-size: 13px; width: 80px"/>
-                                <input class="btn btn-danger btn-sm" type="button" value="삭제"
-                                       style="font-size: 13px; width: 80px"
-                                       onclick="deleteCheck('workDelete.sil?workID=${dto.workID}&currentPage=${currentPage}','${userInfo.get(0).getUserName()==dto.userName}')"/>
+                                    <input class="btn btn-primary btn-sm" type="submit" value="수정"
+                                           style="font-size: 13px; width: 80px"/>
+                                    <input class="btn btn-danger btn-sm" type="button" value="삭제"
+                                           style="font-size: 13px; width: 80px"
+                                           onclick="deleteCheck('workDelete.sil?workID=${dto.workID}&currentPage=${currentPage}','${userInfo.get(0).getUserName()==dto.userName}')"/>
                                 </c:if>
                                 <input class="btn btn-info btn-sm" type="button" value="돌아가기"
                                        style="font-size: 13px; width: 80px"
