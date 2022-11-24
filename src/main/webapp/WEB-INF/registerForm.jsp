@@ -66,7 +66,7 @@
 					<tr>
 						<th id="th1">휴대전화 번호</th>
 						<td colspan="2">
-							<input id="mobileNumber" class="form-control" type="text" name="mobileNumber" placeholder="' - ' 을 제외한 휴대전화 번호를 입력해주세요." autocomplete="off" onkeydown="mobileCheck()">
+							<input id="mobileNumber" class="form-control" type="text" name="mobileNumber" placeholder="' - ' 을 제외한 휴대전화 번호를 입력해주세요." autocomplete="off" onkeyup="mobileCheck()">
 						</td>
 					</tr>
 					<tr>

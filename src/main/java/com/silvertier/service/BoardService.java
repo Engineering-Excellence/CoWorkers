@@ -130,6 +130,8 @@ public class BoardService {
         SqlSession mapper = MySession.getSession();
 
         int postID = Integer.parseInt(request.getParameter("postID"));
+        int userID = Integer.parseInt(request.getParameter("userID"));
+        System.out.println(userID);
 
         dao.boardDelete(mapper, postID);
 
