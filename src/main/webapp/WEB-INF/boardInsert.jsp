@@ -18,7 +18,7 @@
 
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="./images/favicon_16.png">
+    <link rel="icon" href="./images/doker.ico">
 
     <title>CoWorkers</title>
 

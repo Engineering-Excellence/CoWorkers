@@ -9,7 +9,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="icon" href="./images/favicon_16.png">
+	<link rel="icon" href="./images/doker.ico">
 	<script src="js/jquery-3.6.1.js"></script>
 <title>Insert title here</title>
 </head>

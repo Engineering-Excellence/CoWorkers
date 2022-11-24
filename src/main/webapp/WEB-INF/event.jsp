@@ -16,6 +16,7 @@
 <meta charset="UTF-8">
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<link href="./images/doker.ico" rel="icon">
 
 <title>Event</title>
 

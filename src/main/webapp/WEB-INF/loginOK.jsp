@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="icon" href="./images/favicon_16.png">
+	<link rel="icon" href="./images/doker.ico">
 	<title>Insert title here</title>
 </head>
 <body>

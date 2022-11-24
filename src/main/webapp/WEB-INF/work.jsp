@@ -16,7 +16,7 @@
 
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="./images/favicon_16.png">
+    <link rel="icon" href="./images/doker.ico">
 
     <title>CoWorkers</title>
 
@@ -28,7 +28,8 @@
 
 <body>
 <fmt:requestEncoding value="UTF-8"/>
-<c:set var="date" value="${Date(Date().getTime()-60*60*24*1000)}"/>
+<c:set var="date" value="<%=new java.util.Date()%>"/>
+<c:set var="today" value="${Date(Date().getTime()-60*60*24*1000)}"/>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -165,7 +166,7 @@
                                                 <fmt:formatDate value="${dto.writeDate}" pattern="a h:mm:ss"/>
                                             </c:if>
                                             <c:if test="${dto.writeDate.year!=date.year||dto.writeDate.month!=date.month||dto.writeDate.date!=date.date}">
-                                                <fmt:formatDate value="${dto.writeDate}" pattern="MM/dd"/>
+                                                <fmt:formatDate value="${dto.writeDate}" pattern="yyyy.MM.dd.(E)"/>
                                             </c:if>
                                         </c:if>
                                         <c:if test="${dto.updateDate != null}">
@@ -175,7 +176,7 @@
                                             </c:if>
                                             <c:if test="${dto.updateDate.year!=date.year||dto.updateDate.month!=date.month||dto.updateDate.date!=date.date}">
                                                 (수정됨)
-                                                <fmt:formatDate value="${dto.updateDate}" pattern="MM/dd"/>
+                                                <fmt:formatDate value="${dto.updateDate}" pattern="yyyy.MM.dd.(E)"/>
                                             </c:if>
                                         </c:if>
                                     </c:if>
@@ -186,7 +187,7 @@
                                         </c:if>
                                         <c:if test="${dto.updateDate.year!=date.year||dto.deleteDate.month!=date.month||dto.deleteDate.date!=date.date}">
                                             (삭제됨)
-                                            <fmt:formatDate value="${dto.deleteDate}" pattern="MM/dd"/>
+                                            <fmt:formatDate value="${dto.deleteDate}" pattern="yyyy.MM.dd.(E)"/>
                                         </c:if>
                                     </c:if>
                                 </td>
@@ -203,12 +204,12 @@
                                     <c:if test="${dto.deleteDate==null}">
                                         <%--                                        <c:if test="${dto.deadline>=date}">--%>
 
-                                        <c:if test="${dto.deadline.after(date)}">
+                                        <c:if test="${dto.deadline.after(today)}">
                                             <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
                                         </c:if>
                                         <%--마감일 초과--%>
                                         <%--                                        <c:if test="${dto.deadline<date}">--%>
-                                        <c:if test="${dto.deadline.before(date)}">
+                                        <c:if test="${dto.deadline.before(today)}">
                                             <b style="color: crimson"><fmt:formatDate value="${dto.deadline}"
                                                                                       pattern="yyyy.MM.dd.(E)"/></b>
                                         </c:if>
@@ -318,7 +319,7 @@
                                                 <fmt:formatDate value="${dto.writeDate}" pattern="a h:mm:ss"/>
                                             </c:if>
                                             <c:if test="${dto.writeDate.year!=date.year||dto.writeDate.month!=date.month||dto.writeDate.date!=date.date}">
-                                                <fmt:formatDate value="${dto.writeDate}" pattern="MM/dd"/>
+                                                <fmt:formatDate value="${dto.writeDate}" pattern="yyyy.MM.dd.(E)"/>
                                             </c:if>
                                         </c:if>
                                         <c:if test="${dto.updateDate != null}">
@@ -328,7 +329,7 @@
                                             </c:if>
                                             <c:if test="${dto.updateDate.year!=date.year||dto.updateDate.month!=date.month||dto.updateDate.date!=date.date}">
                                                 (수정됨)
-                                                <fmt:formatDate value="${dto.updateDate}" pattern="MM/dd"/>
+                                                <fmt:formatDate value="${dto.updateDate}" pattern="yyyy.MM.dd.(E)"/>
                                             </c:if>
                                         </c:if>
                                     </c:if>
@@ -339,7 +340,7 @@
                                         </c:if>
                                         <c:if test="${dto.deleteDate.year!=date.year||dto.deleteDate.month!=date.month||dto.deleteDate.date!=date.date}">
                                             (삭제됨)
-                                            <fmt:formatDate value="${dto.deleteDate}" pattern="MM/dd"/>
+                                            <fmt:formatDate value="${dto.deleteDate}" pattern="yyyy.MM.dd.(E)"/>
                                         </c:if>
                                     </c:if>
                                 </td>
@@ -353,11 +354,11 @@
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
-                                        <c:if test="${dto.deadline.after(date)}">
+                                        <c:if test="${dto.deadline.after(today)}">
                                             <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
                                         </c:if>
                                         <%--마감일 초과--%>
-                                        <c:if test="${dto.deadline.before(date)}">
+                                        <c:if test="${dto.deadline.before(today)}">
                                             <b style="color: crimson"><fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/></b>
                                         </c:if>
                                     </c:if>

@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, height=device-height initial-scale=1">
-	<link rel="icon" href="./images/favicon_16.png">
+	<link rel="icon" href="./images/doker.ico">
 	<title>에러 페이지</title>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
@@ -17,7 +17,7 @@
 	
 	<div id="wrap" class="wrap">
 			<div class="main-top">
-				<header id="header" class="header">Silver Tier</header>
+				<header id="header" class="header">Crunch Mode</header>
 			</div>
 			<div id="container" class="container"> 
 				<form action="index.sil" method="post">

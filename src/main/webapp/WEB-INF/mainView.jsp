@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="./images/favicon_16.png">
+    <link rel="icon" href="./images/doker.ico">
 
     <title>메인화면</title>
     
@@ -58,32 +58,32 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Silver Tier Members</h1>
+          <h1 class="page-header">Crunch Mode Members</h1>
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="./images/SilverTier_Logo.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <img src="./images/crunchMode.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Emma Heo (허은성)</h4>
-              <span class="text-muted">Team Leader</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="./images/SilverTier_Logo.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Kyle Kwak (곽규창)</h4>
               <span class="text-muted">Team Member</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="./images/SilverTier_Logo.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <img src="./images/crunchMode.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Kyle Kwak (곽규창)</h4>
+              <span class="text-muted">Team Leader</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="./images/crunchMode.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Anbin Cho (조우철)</h4>
               <span class="text-muted">Team Member</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="./images/SilverTier_Logo.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <img src="./images/crunchMode.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Terry Kim (김태형)</h4>
               <span class="text-muted">Team Member</span>
             </div>
           </div>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        	<h1 class="page-header">Silver Tier 업무 분장표</h1>
+        	<h1 class="page-header">Crunch Mode 업무 분장표</h1>
         	<div>
         		<table class="table table-hover table-bordered" style="border: 1px solid black;">
         			<tbody align="center">
@@ -95,11 +95,11 @@
         					<th width="140" style="text-align: center; vertical-align: middle;">Terry Kim (김태형)</th>
         				</tr>
         				<tr>
-        					<td>주요 업무</td>
-        					<td>일정(Calendar)</td>
-        					<td>프로젝트 설계, <br/>게시글(Board)</td>
-        					<td>업무(Work)</td>
-        					<td>로그인(Login), <br/>회원가입(Register)</td>
+        					<td style="vertical-align: middle;">주요 업무</td>
+        					<td style="vertical-align: middle;">일정(Calendar)</td>
+        					<td style="vertical-align: middle;">프로젝트 설계, <br/>게시글(Board)</td>
+        					<td style="vertical-align: middle;">업무(Work)</td>
+        					<td style="vertical-align: middle;">로그인(Login), <br/>회원가입(Register)</td>
         				</tr>
         				<tr>
         					<td rowspan="4" style="vertical-align: middle;">1차 프로젝트 주요 구현사항</td>

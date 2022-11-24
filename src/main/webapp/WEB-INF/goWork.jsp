@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="./images/favicon_16.png">
+  	<link rel="icon" href="./images/doker.ico">
     <title>index.jsp</title>
 
     <script src="js/jquery-3.6.1.js"></script>

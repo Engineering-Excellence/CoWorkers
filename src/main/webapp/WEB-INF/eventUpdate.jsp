@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-	<link rel="icon" href="./images/favicon_16.png">
+	<link rel="icon" href="./images/doker.ico">
 <title>Event updating</title>
 
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
