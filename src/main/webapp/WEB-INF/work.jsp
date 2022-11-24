@@ -354,11 +354,11 @@
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
-                                        <c:if test="${dto.deadline.after(date)}">
+                                        <c:if test="${dto.deadline.after(today)}">
                                             <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
                                         </c:if>
                                         <%--마감일 초과--%>
-                                        <c:if test="${dto.deadline.before(date)}">
+                                        <c:if test="${dto.deadline.before(today)}">
                                             <b style="color: crimson"><fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/></b>
                                         </c:if>
                                     </c:if>
