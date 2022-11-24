@@ -13,79 +13,80 @@ public class EventCommentDTO {
     private Date commentUpdateDate;
     private Date commentDeleteDate;
     private String commentIp;
-    
-    public EventCommentDTO() {}
 
-	public int getEventCommentID() {
-		return eventCommentID;
-	}
+    public EventCommentDTO() {
+    }
 
-	public void setEventCommentID(int eventCommentID) {
-		this.eventCommentID = eventCommentID;
-	}
+    public int getEventCommentID() {
+        return eventCommentID;
+    }
 
-	public int getEventID() {
-		return eventID;
-	}
+    public void setEventCommentID(int eventCommentID) {
+        this.eventCommentID = eventCommentID;
+    }
 
-	public void setEventID(int eventID) {
-		this.eventID = eventID;
-	}
+    public int getEventID() {
+        return eventID;
+    }
 
-	public int getUserID() {
-		return userID;
-	}
+    public void setEventID(int eventID) {
+        this.eventID = eventID;
+    }
 
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
+    public int getUserID() {
+        return userID;
+    }
 
-	public String getCommentContent() {
-		return commentContent;
-	}
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
-	public void setCommentContent(String commentContent) {
-		this.commentContent = commentContent;
-	}
+    public String getCommentContent() {
+        return commentContent;
+    }
 
-	public Date getCommentWriteDate() {
-		return commentWriteDate;
-	}
+    public void setCommentContent(String commentContent) {
+        this.commentContent = commentContent;
+    }
 
-	public void setCommentWriteDate(Date commentWriteDate) {
-		this.commentWriteDate = commentWriteDate;
-	}
+    public Date getCommentWriteDate() {
+        return commentWriteDate;
+    }
 
-	public Date getCommentUpdateDate() {
-		return commentUpdateDate;
-	}
+    public void setCommentWriteDate(Date commentWriteDate) {
+        this.commentWriteDate = commentWriteDate;
+    }
 
-	public void setCommentUpdateDate(Date commentUpdateDate) {
-		this.commentUpdateDate = commentUpdateDate;
-	}
+    public Date getCommentUpdateDate() {
+        return commentUpdateDate;
+    }
 
-	public Date getCommentDeleteDate() {
-		return commentDeleteDate;
-	}
+    public void setCommentUpdateDate(Date commentUpdateDate) {
+        this.commentUpdateDate = commentUpdateDate;
+    }
 
-	public void setCommentDeleteDate(Date commentDeleteDate) {
-		this.commentDeleteDate = commentDeleteDate;
-	}
+    public Date getCommentDeleteDate() {
+        return commentDeleteDate;
+    }
 
-	public String getCommentIp() {
-		return commentIp;
-	}
+    public void setCommentDeleteDate(Date commentDeleteDate) {
+        this.commentDeleteDate = commentDeleteDate;
+    }
 
-	public void setCommentIp(String commentIp) {
-		this.commentIp = commentIp;
-	}
+    public String getCommentIp() {
+        return commentIp;
+    }
 
-	@Override
-	public String toString() {
-		return "CommentDTO [eventCommentID=" + eventCommentID + ", eventID=" + eventID + ", userID=" + userID
-				+ ", commentContent=" + commentContent + ", commentWriteDate=" + commentWriteDate
-				+ ", commentUpdateDate=" + commentUpdateDate + ", commentDeleteDate=" + commentDeleteDate
-				+ ", commentIp=" + commentIp + "]";
-	}
-    
+    public void setCommentIp(String commentIp) {
+        this.commentIp = commentIp;
+    }
+
+    @Override
+    public String toString() {
+        return "CommentDTO [eventCommentID=" + eventCommentID + ", eventID=" + eventID + ", userID=" + userID
+                + ", commentContent=" + commentContent + ", commentWriteDate=" + commentWriteDate
+                + ", commentUpdateDate=" + commentUpdateDate + ", commentDeleteDate=" + commentDeleteDate
+                + ", commentIp=" + commentIp + "]";
+    }
+
 }

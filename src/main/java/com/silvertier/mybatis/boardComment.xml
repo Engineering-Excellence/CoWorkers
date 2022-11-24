@@ -36,7 +36,8 @@
     <select id="boardCommentCount" parameterType="int" resultType="int">
         SELECT COUNT(*)
         FROM BOARDCOMMENT
-        WHERE POSTID = #{postID} AND DELETEDATE IS NULL
+        WHERE POSTID = #{postID}
+          AND DELETEDATE IS NULL
     </select>
 
 </mapper>

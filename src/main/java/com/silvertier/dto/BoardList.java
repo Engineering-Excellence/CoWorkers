@@ -15,7 +15,8 @@ public class BoardList {
     private int startPage = 0;
     private int endPage = 0;
 
-    public BoardList() { }
+    public BoardList() {
+    }
 
     public BoardList(int pageSize, int totalCount, int currentPage) {
         this.pageSize = pageSize;

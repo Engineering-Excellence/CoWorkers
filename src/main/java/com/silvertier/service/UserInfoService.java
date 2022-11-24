@@ -17,78 +17,82 @@ import java.util.Map;
 
 public class UserInfoService {
 
-	private static UserInfoService instance = new UserInfoService();
-	private UserInfoService() { }
-	public static UserInfoService getInstance() {
-		return instance;
-	}
-	
-	private UserInfoDAO userInfoDAO = UserInfoDAO.getInstance();
-	
-	// 회원가입 데이터 입력
-	public void userInfoInsert(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("UserInfoService -> insert()");
-		SqlSession mapper = MySession.getSession();
-	
-		UserInfoDTO userInfoDTO = new UserInfoDTO();
-		userInfoDTO.setAccountID(request.getParameter("accountID"));
-		userInfoDTO.setAccountPassword(request.getParameter("accountPassword"));
-		userInfoDTO.setUserName(request.getParameter("userName"));
-		userInfoDTO.setRegisterNumber(request.getParameter("registerNumber"));
-		userInfoDTO.setMobileNumber(request.getParameter("mobileNumber"));
-		userInfoDTO.setGender(request.getParameter("gender"));
-		userInfoDTO.setEmail(request.getParameter("email"));
-		
-		userInfoDAO.userInfoInsert(mapper, userInfoDTO);
-		mapper.commit();
-		mapper.close();
-	}
-	
-	// 로그인 시 아이디 비교
-	public String userInfoCompareID(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("UserInfoService -> userInfoCompareID()");
-		SqlSession mapper = MySession.getSession();
-		
-		UserInfoDTO userInfoDTO = new UserInfoDTO();
-		userInfoDTO.setAccountID(request.getParameter("accountID"));
-		System.out.println("UserInfoService -> userInfoCompareID() accountID "+request.getParameter("accountID"));
+    private static UserInfoService instance = new UserInfoService();
+
+    private UserInfoService() {
+    }
+
+    public static UserInfoService getInstance() {
+        return instance;
+    }
+
+    private UserInfoDAO userInfoDAO = UserInfoDAO.getInstance();
+
+    // 회원가입 데이터 입력
+    public void userInfoInsert(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("UserInfoService -> insert()");
+        SqlSession mapper = MySession.getSession();
+
+        UserInfoDTO userInfoDTO = new UserInfoDTO();
+        userInfoDTO.setAccountID(request.getParameter("accountID"));
+        userInfoDTO.setAccountPassword(request.getParameter("accountPassword"));
+        userInfoDTO.setUserName(request.getParameter("userName"));
+        userInfoDTO.setRegisterNumber(request.getParameter("registerNumber"));
+        userInfoDTO.setMobileNumber(request.getParameter("mobileNumber"));
+        userInfoDTO.setGender(request.getParameter("gender"));
+        userInfoDTO.setEmail(request.getParameter("email"));
+
+        userInfoDAO.userInfoInsert(mapper, userInfoDTO);
+        mapper.commit();
+        mapper.close();
+    }
+
+    // 로그인 시 아이디 비교
+    public String userInfoCompareID(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("UserInfoService -> userInfoCompareID()");
+        SqlSession mapper = MySession.getSession();
+
+        UserInfoDTO userInfoDTO = new UserInfoDTO();
+        userInfoDTO.setAccountID(request.getParameter("accountID"));
+        System.out.println("UserInfoService -> userInfoCompareID() accountID " + request.getParameter("accountID"));
 //		System.out.println("userInfoCompareID: " + userInfoDTO.getAccountID());
-		String originID = userInfoDAO.userInfoCompareID(mapper, userInfoDTO);
-		System.out.println("UserInfoService -> userInfoCompareID() originID "+originID);
-		mapper.close();
-		return originID;
-	}
-	
-	// 로그인 시 패스워드 비교
-	public String userInfoComparePW(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("UserInfoService -> userInfoComparePW()");
-		SqlSession mapper = MySession.getSession();
-		
-		UserInfoDTO userInfoDTO = new UserInfoDTO();
-		userInfoDTO.setAccountID(userInfoCompareID(request, response));
-		userInfoDTO.setAccountPassword(request.getParameter("accountPassword"));
+        String originID = userInfoDAO.userInfoCompareID(mapper, userInfoDTO);
+        System.out.println("UserInfoService -> userInfoCompareID() originID " + originID);
+        mapper.close();
+        return originID;
+    }
+
+    // 로그인 시 패스워드 비교
+    public String userInfoComparePW(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("UserInfoService -> userInfoComparePW()");
+        SqlSession mapper = MySession.getSession();
+
+        UserInfoDTO userInfoDTO = new UserInfoDTO();
+        userInfoDTO.setAccountID(userInfoCompareID(request, response));
+        userInfoDTO.setAccountPassword(request.getParameter("accountPassword"));
 //		System.out.println("userInfoComparePW: " + userInfoDTO.getAccountPassword());
-		System.out.println("UserInfoService -> userInfoComparePW() accountPassword "+request.getParameter("accountPassword"));
-		String originPW = userInfoDAO.userInfoComparePW(mapper, userInfoDTO);
-		System.out.println("UserInfoService -> userInfoComparePW() originPW "+originPW);
-		mapper.close();
-		return originPW;
-	}
-	public void userInfoSelect(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("UserInfoService -> userInfoSelect()");
-		SqlSession mapper = MySession.getSession();
+        System.out.println("UserInfoService -> userInfoComparePW() accountPassword " + request.getParameter("accountPassword"));
+        String originPW = userInfoDAO.userInfoComparePW(mapper, userInfoDTO);
+        System.out.println("UserInfoService -> userInfoComparePW() originPW " + originPW);
+        mapper.close();
+        return originPW;
+    }
 
-		System.out.println("UserInfoService -> userInfoSelect() accountID "+request.getParameter("accountID"));
-		UserInfoDTO userInfoDTO = new UserInfoDTO();
-		userInfoDTO.setAccountID(userInfoCompareID(request, response));
+    public void userInfoSelect(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("UserInfoService -> userInfoSelect()");
+        SqlSession mapper = MySession.getSession();
 
-		ArrayList<UserInfoDTO> userInfo = userInfoDAO.userInfoSelect(mapper, userInfoDTO);
+        System.out.println("UserInfoService -> userInfoSelect() accountID " + request.getParameter("accountID"));
+        UserInfoDTO userInfoDTO = new UserInfoDTO();
+        userInfoDTO.setAccountID(userInfoCompareID(request, response));
 
-		System.out.println("INFO: " + userInfo);
-		HttpSession session = request.getSession();
-		session.setAttribute("userInfo", userInfo);
-		mapper.close();
-	}
+        ArrayList<UserInfoDTO> userInfo = userInfoDAO.userInfoSelect(mapper, userInfoDTO);
+
+        System.out.println("INFO: " + userInfo);
+        HttpSession session = request.getSession();
+        session.setAttribute("userInfo", userInfo);
+        mapper.close();
+    }
 
 /*
 	 // 전체 유저 리스트 뽑아오기 
@@ -155,5 +159,5 @@ public class UserInfoService {
 		System.out.println("userInfoSelectUser: " + userInfoDTO);
 		mapper.close();
 	}
-*/	
+*/
 }

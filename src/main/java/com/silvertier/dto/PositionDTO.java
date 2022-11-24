@@ -2,42 +2,43 @@ package com.silvertier.dto;
 
 public class PositionDTO {
 
-	//	직급 관련 DTO
-	
-	private int positionCode;
-	private String positionName;
-	private String admin;
-	
-	public PositionDTO() { }
+    //	직급 관련 DTO
 
-	public int getPositionCode() {
-		return positionCode;
-	}
+    private int positionCode;
+    private String positionName;
+    private String admin;
 
-	public void setPositionCode(int positionCode) {
-		this.positionCode = positionCode;
-	}
+    public PositionDTO() {
+    }
 
-	public String getPositionName() {
-		return positionName;
-	}
+    public int getPositionCode() {
+        return positionCode;
+    }
 
-	public void setPositionName(String positionName) {
-		this.positionName = positionName;
-	}
+    public void setPositionCode(int positionCode) {
+        this.positionCode = positionCode;
+    }
 
-	public String getAdmin() {
-		return admin;
-	}
+    public String getPositionName() {
+        return positionName;
+    }
 
-	public void setAdmin(String admin) {
-		this.admin = admin;
-	}
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
+    }
 
-	@Override
-	public String toString() {
-		return "PositionDTO [positionCode=" + positionCode + ", positionName=" + positionName + ", admin=" + admin
-				+ "]";
-	}
+    public String getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(String admin) {
+        this.admin = admin;
+    }
+
+    @Override
+    public String toString() {
+        return "PositionDTO [positionCode=" + positionCode + ", positionName=" + positionName + ", admin=" + admin
+                + "]";
+    }
 
 }

@@ -1,15 +1,15 @@
-<%@page import="java.util.List"%>
-<%@page import="com.silvertier.dto.UserInfoDTO"%>
-<%@page import="java.io.PrintWriter"%>
-<%@page import="com.silvertier.dao.UserInfoDAO"%>
-<%@page import="com.silvertier.service.UserInfoService"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@page import="java.util.List" %>
+<%@page import="com.silvertier.dto.UserInfoDTO" %>
+<%@page import="java.io.PrintWriter" %>
+<%@page import="com.silvertier.dao.UserInfoDAO" %>
+<%@page import="com.silvertier.service.UserInfoService" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="EUC-KR">
-	<link rel="icon" href="./images/doker.ico">
-	<title>Insert title here</title>
+    <meta charset="EUC-KR">
+    <link rel="icon" href="./images/doker.ico">
+    <title>idFindOK.jsp</title>
 </head>
 <body>
 <%-- 
@@ -31,8 +31,8 @@
 	UserInfoList userInfoList = userInfoService.userInfoSelectList(request, response);
 %>
 	
- --%>	
-	
+ --%>
+
 
 </body>
 </html>
