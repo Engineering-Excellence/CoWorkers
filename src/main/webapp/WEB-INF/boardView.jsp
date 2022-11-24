@@ -97,13 +97,30 @@
                         <td align="center">
                             <jsp:useBean id="date" class="java.util.Date"/>
                             <c:if test="${date.year == boardDTO.writeDate.year && date.month == boardDTO.writeDate.month &&
-						date.date == boardDTO.writeDate.date}">
-                                <fmt:formatDate value="${boardDTO.writeDate}" pattern="a h:mm:ss"/>
+						date.date == boardDTO.writeDate.date && boardDTO.deleteDate == null && boardDTO.updateDate == null}">
+                                <fmt:formatDate value="${boardDTO.writeDate}" pattern="a h:mm"/>
                             </c:if>
                             <c:if test="${date.year != boardDTO.writeDate.year || date.month != boardDTO.writeDate.month ||
-						date.date != boardDTO.writeDate.date}">
+						date.date != boardDTO.writeDate.date && boardDTO.deleteDate == null && boardDTO.updateDate == null}">
                                 <fmt:formatDate value="${boardDTO.writeDate}" pattern="yyyy.MM.dd(E)"/>
                             </c:if>
+                            <c:if test="${date.year == boardDTO.writeDate.year && date.month == boardDTO.writeDate.month &&
+						date.date == boardDTO.writeDate.date && boardDTO.deleteDate == null && boardDTO.updateDate != null}">
+                                <fmt:formatDate value="${boardDTO.writeDate}" pattern="(수정됨) a h:mm"/>
+                            </c:if>
+                            <c:if test="${date.year != boardDTO.writeDate.year || date.month != boardDTO.writeDate.month ||
+						date.date != boardDTO.writeDate.date && boardDTO.deleteDate == null && boardDTO.updateDate != null}">
+                                <fmt:formatDate value="${boardDTO.writeDate}" pattern="(수정됨) yyyy.MM.dd(E)"/>
+                            </c:if>
+                            <c:if test="${date.year == boardDTO.writeDate.year && date.month == boardDTO.writeDate.month &&
+						date.date == boardDTO.writeDate.date && boardDTO.deleteDate != null}">
+                                <fmt:formatDate value="${boardDTO.writeDate}" pattern="(삭제됨) a h:mm"/>
+                            </c:if>
+                            <c:if test="${date.year != boardDTO.writeDate.year || date.month != boardDTO.writeDate.month ||
+						date.date != boardDTO.writeDate.date && boardDTO.deleteDate != null}">
+                                <fmt:formatDate value="${boardDTO.writeDate}" pattern="(삭제됨) yyyy.MM.dd(E)"/>
+                            </c:if>
+
                         </td>
                         <td align="center">
                             ${boardDTO.hit}
@@ -134,20 +151,20 @@
                         <td colspan="4" align="center">
                             <c:if test="${userInfo.get(0).getUserID() == boardDTO.userID}">
                                 <input
-                                        class="btn btn-outline-primary btn-sm"
+                                        class="btn btn btn-primary btn-sm btn-sm"
                                         type="button"
                                         value="수정하기"
                                         style="font-size: 13px;"
                                         onclick="location.href=('boardUpdate.sil?postID=${boardDTO.postID}&currentPage=${currentPage}')"/>
                                 <input
-                                        class="btn btn-outline-danger btn-sm"
+                                        class="btn btn-danger btn-sm"
                                         type="button"
                                         value="삭제하기"
                                         style="font-size: 13px;"
                                         onclick="deleteCheck('boardDelete.sil?postID=${boardDTO.postID}&currentPage=${currentPage}&userID=${userInfo.get(0).getUserID()}')"/>
                             </c:if>
                             <input
-                                    class="btn btn-outline-warning btn-sm"
+                                    class="btn btn-info btn-sm"
                                     type="button"
                                     value="돌아가기"
                                     style="font-size: 13px;"
@@ -219,14 +236,14 @@
                     <tr class="table-info">
                         <td colspan="4" align="center">
                             <input
-                                    class="btn btn-outline-primary btn-sm"
+                                    class="btn btn-primary btn-sm"
                                     type="submit"
                                     value="댓글작성"
                                     style="font-size: 13px;"
                                     name="commentBtn"
                             />
                             <input
-                                    class="btn btn-outline-danger btn-sm"
+                                    class="btn btn-danger btn-sm"
                                     type="button"
                                     value="다시쓰기"
                                     style="font-size: 13px;"
@@ -267,14 +284,14 @@
                                         <div align="right">
                                             <c:if test="${userInfo.get(0).getUserID() == commentDTO.userID}">
                                                 <input
-                                                        class="btn btn-outline-primary btn-sm"
+                                                        class="btn btn-primary btn-sm"
                                                         type="button"
                                                         value="수정"
                                                         style="font-size: 13px;"
                                                         onclick="setting(${commentDTO.commentID}, 'update', '댓글 수정', '${commentDTO.userName}', '${commentDTO.content}')"
                                                 />
                                                 <input
-                                                        class="btn btn-outline-danger btn-sm"
+                                                        class="btn btn-danger btn-sm"
                                                         type="button"
                                                         value="삭제"
                                                         style="font-size: 13px;"

@@ -107,20 +107,20 @@
                     <!-- 공지글이 있으면 출력한다. -->
                     <%--<c:if test="${currentPage == 1}">--%>
                     <c:forEach var="boardDTO" items="${notice}">
-                        <c:if test="${boardDTO.deleteDate == null}">
-                            <tr class="table-warning">
+                        <tr class="table-warning">
                             <td align="center"><i class="bi bi-bell"></i></td>
                             <td>
-                                <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
-                                <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
-                                <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
-                                        ${subject}
+                                <c:if test="${boardDTO.deleteDate == null}">
+                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '<', '&lt;')}"/>
+                                    <c:set var="subject" value="${fn:replace(boardDTO.subject, '>', '&gt;')}"/>
+                                    <a href="boardHit.sil?postID=${boardDTO.postID}&currentPage=${boardList.currentPage}">
+                                            ${subject}
                                         <c:if test="${boardDTO.commentCount > 0}">(${boardDTO.commentCount})</c:if>
-                                </a>
+                                    </a>
+                                </c:if>
                                 <c:if test="${boardDTO.deleteDate != null}">
                                     삭제된 글입니다.
                                 </c:if>
-
                             </td>
                             <td align="center">
                                 <c:set var="name" value="${fn:replace(boardDTO.userName, '<', '&lt;')}"/>
@@ -141,7 +141,6 @@
                             <td align="center">
                                     ${boardDTO.hit}
                             </td>
-                        </c:if>
                         </tr>
                     </c:forEach>
                     <%--</c:if>--%>
@@ -188,6 +187,7 @@
 						date.date != boardDTO.writeDate.date}">
                                         <fmt:formatDate value="${boardDTO.writeDate}" pattern="yyyy.MM.dd.(E)"/>
                                     </c:if>
+
                                 </td>
                                 <td align="center">
                                         ${boardDTO.hit}
@@ -273,7 +273,7 @@
                     <!-- 글쓰기 버튼 -->
                     <tr>
                         <td colspan="5" align="right">
-                            <input type="button" class="btn btn-outline-primary btn-sm" value="글쓰기"
+                            <input type="button" class="btn btn-primary btn-sm" value="글쓰기"
                                    onclick="location.href='boardInsert.sil'">
                         </td>
                     </tr>
