@@ -10,10 +10,12 @@
                 #{currentProgress}, #{workProgress},
                 #{startDate}, #{deadline}, #{ip}, 0, #{userID})
     </insert>
+
     <select id="workSelectCount" resultType="int">
         select count(*)
         from work
     </select>
+
     <select id="workSelectList" parameterType="java.util.HashMap" resultType="wdto">
         <![CDATA[
         SELECT *
@@ -23,12 +25,14 @@
         WHERE rnum >= #{startNo}
         ]]>
     </select>
+
     <select id="workSelectPriority" resultType="wdto">
         select *
         from work
         where priority = 1
         order by workID desc
     </select>
+
     <select id="workSelectByWorkID" parameterType="int" resultType="wdto">
         select *
         from work
@@ -49,6 +53,7 @@
         commit;
         end;
     </delete>
+
     <update id="workUpdate" parameterType="wdto">
         begin
         update work
