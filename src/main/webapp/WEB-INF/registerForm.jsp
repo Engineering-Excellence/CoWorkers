@@ -30,7 +30,7 @@
             </thead>
             <tbody>
             <tr>
-                <th id="th1">아이디</th>
+                <th class="th1">아이디</th>
                 <td>
                     <input id="accountID" class="form-control" type="text" name="accountID"
                            placeholder="가입할 ID를 입력해주세요." autocomplete="off">
@@ -38,28 +38,28 @@
                 </td>
             </tr>
             <tr>
-                <th id="th1">비밀번호</th>
+                <th class="th1">비밀번호</th>
                 <td colspan="2">
                     <input id="accountPassword" class="form-control" type="password" name="accountPassword"
                            placeholder="비밀번호를 입력해주세요." maxlength="18" onkeyup="pwCheck()">
                 </td>
             </tr>
             <tr>
-                <th id="th1">비밀번호 확인</th>
+                <th class="th1">비밀번호 확인</th>
                 <td colspan="2">
                     <input id="accountPassword2" class="form-control" type="password" name="accountPassword2"
                            placeholder="비밀번호를 한번 더 입력해주세요." maxlength="18" onkeyup="pwCheck()">
                 </td>
             </tr>
             <tr>
-                <th id="th1">성함</th>
+                <th class="th1">성함</th>
                 <td colspan="2">
                     <input id="userName" class="form-control" type="text" name="userName" placeholder="이름을 입력해주세요."
                            autocomplete="off" onkeyup="nameCheck()">
                 </td>
             </tr>
             <tr>
-                <th id="th1">주민등록번호</th>
+                <th class="th1">주민등록번호</th>
                 <td colspan="2">
                     <input id="registerNumber" class="form-control" type="text" name="registerNumber" maxlength="13"
                            placeholder="주민등록번호 13자리를 입력해주세요" autocomplete="off">
@@ -69,21 +69,21 @@
                 </td>
             </tr>
             <tr>
-                <th id="th1">휴대전화 번호</th>
+                <th class="th1">휴대전화 번호</th>
                 <td colspan="2">
                     <input id="mobileNumber" class="form-control" type="text" name="mobileNumber"
                            placeholder="' - ' 을 제외한 휴대전화 번호를 입력해주세요." autocomplete="off" onkeyup="mobileCheck()">
                 </td>
             </tr>
             <tr>
-                <th id="th1">성별</th>
+                <th class="th1">성별</th>
                 <td colspan="2" align="center">
-                    <input id="gender" type="radio" name="gender" value="male" autocomplete="off" checked="checked">남자
-                    <input id="gender" type="radio" name="gender" value="female" autocomplete="off">여자
+                    <input class="gender" type="radio" name="gender" value="male" autocomplete="off" checked="checked">남자
+                    <input class="gender" type="radio" name="gender" value="female" autocomplete="off">여자
                 </td>
             </tr>
             <tr>
-                <th id="th1">이메일</th>
+                <th class="th1">이메일</th>
                 <td colspan="2">
                     <input id="email" class="form-control" type="text" name="email" placeholder="이메일을 입력해주세요."
                            autocomplete="off">
@@ -97,9 +97,9 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <button id="btnform" class="btn btn-success" type="submit">가입하기</button>
-                    <button id="btnform" class="btn btn-warning" type="reset">다시쓰기</button>
-                    <button id="btnform" class="btn btn-secondary" type="button" onclick="history.back()">돌아가기</button>
+                    <button class="btn btn-success" type="submit">가입하기</button>
+                    <button class="btn btn-warning" type="reset">다시쓰기</button>
+                    <button class="btn btn-secondary" type="button" onclick="history.back()">돌아가기</button>
                 </td>
             </tr>
             </tbody>

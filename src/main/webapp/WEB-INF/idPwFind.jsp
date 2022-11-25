@@ -38,7 +38,7 @@
             <tr>
                 <th class="th">등록한 이메일 주소</th>
                 <td>
-                    <input id="email" class="form-control" type="text" name="email" placeholder="등록한 이메일 주소를 입력해주세요."
+                    <input class="form-control" type="text" name="email" placeholder="등록한 이메일 주소를 입력해주세요."
                            autocomplete="off">
                 </td>
             </tr>
@@ -74,7 +74,7 @@
             <tr>
                 <th class="th">등록한 이메일 주소</th>
                 <td>
-                    <input id="email" class="form-control" type="text" name="email" placeholder="등록한 이메일 주소를 입력해주세요."
+                    <input class="form-control" type="text" name="email" placeholder="등록한 이메일 주소를 입력해주세요."
                            autocomplete="off">
                 </td>
             </tr>
