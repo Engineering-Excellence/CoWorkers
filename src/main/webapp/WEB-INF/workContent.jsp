@@ -14,15 +14,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="./images/favicon_16.png">
-
     <title>CoWorkers</title>
-
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/coWorkers.css" rel="stylesheet">
+    <link rel="icon" href="./images/doker.ico">
 
 </head>
 

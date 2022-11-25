@@ -7,33 +7,37 @@ import java.util.ArrayList;
 
 public class UserInfoDAO {
 
-	private static UserInfoDAO instance = new UserInfoDAO();
-	private UserInfoDAO() { }
-	public static UserInfoDAO getInstance() {
-		return instance;
-	}
-	
-	// 회원가입 데이터 입력
-	public void userInfoInsert(SqlSession mapper, UserInfoDTO userInfoDTO) {
-		System.out.println("UserInfoDAO -> userInfoInsert()");
-		mapper.insert("userInfoInsert", userInfoDTO);
-	}
-	
-	// 로그인시 아이디 비교
-	public String userInfoCompareID(SqlSession mapper, UserInfoDTO userInfoDTO) {
-		System.out.println("UserInfoDAO -> userInfoCompareID()");
-		return (String) mapper.selectOne("userInfoCompareID", userInfoDTO);
-	}
-	
-	// 로그인시 패스워드 비교
-	public String userInfoComparePW(SqlSession mapper, UserInfoDTO userInfoDTO) {
-		System.out.println("UserInfoDAO -> userInfoComparePW()");
-		return (String) mapper.selectOne("userInfoComparePW", userInfoDTO);
-	}
-	public ArrayList<UserInfoDTO> userInfoSelect(SqlSession mapper, UserInfoDTO userInfoDTO) {
-		System.out.println("UserInfoDAO -> userInfoSelect()");
-		return (ArrayList<UserInfoDTO>) mapper.selectList("userInfoSelect", userInfoDTO);
-	}
+    private static UserInfoDAO instance = new UserInfoDAO();
+
+    private UserInfoDAO() {
+    }
+
+    public static UserInfoDAO getInstance() {
+        return instance;
+    }
+
+    // 회원가입 데이터 입력
+    public void userInfoInsert(SqlSession mapper, UserInfoDTO userInfoDTO) {
+        System.out.println("UserInfoDAO -> userInfoInsert()");
+        mapper.insert("userInfoInsert", userInfoDTO);
+    }
+
+    // 로그인시 아이디 비교
+    public String userInfoCompareID(SqlSession mapper, UserInfoDTO userInfoDTO) {
+        System.out.println("UserInfoDAO -> userInfoCompareID()");
+        return (String) mapper.selectOne("userInfoCompareID", userInfoDTO);
+    }
+
+    // 로그인시 패스워드 비교
+    public String userInfoComparePW(SqlSession mapper, UserInfoDTO userInfoDTO) {
+        System.out.println("UserInfoDAO -> userInfoComparePW()");
+        return (String) mapper.selectOne("userInfoComparePW", userInfoDTO);
+    }
+
+    public ArrayList<UserInfoDTO> userInfoSelect(SqlSession mapper, UserInfoDTO userInfoDTO) {
+        System.out.println("UserInfoDAO -> userInfoSelect()");
+        return (ArrayList<UserInfoDTO>) mapper.selectList("userInfoSelect", userInfoDTO);
+    }
 	
 /*
 	 // 유저 전체 리스트 뽑아오기 
@@ -63,6 +67,6 @@ public class UserInfoDAO {
 		System.out.println("UserInfoDAO -> userInfoSelectUser()");
 		return (UserInfoDTO) mapper.selectOne("userInfoSelectUser", string);
 	}
-*/	
+*/
 
 }

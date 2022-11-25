@@ -12,20 +12,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="./images/favicon_16.png">
-    <title>index.jsp</title>
+    <link rel="icon" href="./images/doker.ico">
+    <title>goWork.jsp</title>
 
-    <script src="js/jquery-3.6.1.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 
 <body>
 
 <fmt:requestEncoding value="UTF-8"/>
 <%
-//    System.out.println(pageContext.findAttribute("dto"));
+    //    System.out.println(pageContext.findAttribute("dto"));
 //
 //    Map<String, String[]> map = request.getParameterMap();
 //    Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();

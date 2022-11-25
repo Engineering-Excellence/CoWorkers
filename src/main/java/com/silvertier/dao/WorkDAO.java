@@ -7,10 +7,12 @@ import org.apache.ibatis.session.SqlSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
+
 //조우철
 public class WorkDAO {
     Logger logger = Logger.getLogger(this.getClass().getName());
     private static WorkDAO instance = new WorkDAO();
+
     private WorkDAO() {
 
     }
@@ -18,6 +20,7 @@ public class WorkDAO {
     public static WorkDAO getInstance() {
         return instance;
     }
+
     public void workInsert(SqlSession mapper, WorkDTO dto) {
         System.out.println("dao insert()");
         mapper.insert("workInsert", dto);

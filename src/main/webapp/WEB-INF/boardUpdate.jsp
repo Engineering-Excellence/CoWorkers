@@ -19,7 +19,7 @@
 
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="./images/favicon_16.png">
+    <link rel="icon" href="./images/doker.ico">
 
     <title>CoWorkers</title>
 
@@ -148,9 +148,9 @@
     </div>
 </div>
 
-<script src="../js/jquery-3.6.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/board.js"></script>
+<script type="text/javascript" src="./js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/board.js"></script>
 </body>
 <!-- body 끝 -->
 

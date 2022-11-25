@@ -9,21 +9,22 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class MySession {
-	static SqlSessionFactory factory;
-	static {
-		Reader r = null;
-		try {
-			r = Resources.getResourceAsReader("com/silvertier/mybatis/SqlConfig.xml");
-			SqlSessionFactoryBuilder build = new SqlSessionFactoryBuilder();
-			factory = build.build(r);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static SqlSession getSession(){
-		return factory.openSession();
-	}
+    static SqlSessionFactory factory;
+
+    static {
+        Reader r = null;
+        try {
+            r = Resources.getResourceAsReader("com/silvertier/mybatis/SqlConfig.xml");
+            SqlSessionFactoryBuilder build = new SqlSessionFactoryBuilder();
+            factory = build.build(r);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static SqlSession getSession() {
+        return factory.openSession();
+    }
 }
 
 

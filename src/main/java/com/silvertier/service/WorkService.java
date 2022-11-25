@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
 //조우철
 public class WorkService {
     private static WorkService instance = new WorkService();
+
     private WorkService() {
 
     }
@@ -147,10 +149,9 @@ public class WorkService {
         System.out.println(request.getParameterMap());
         Map<String, String[]> map = request.getParameterMap();
         Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
-        while(itr.hasNext())
-        {
+        while (itr.hasNext()) {
             Map.Entry<String, String[]> entry = itr.next();
-            System.out.println(String.format("%s : %s", entry.getKey(),String.join(", ", entry.getValue())));
+            System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
         }
 
 

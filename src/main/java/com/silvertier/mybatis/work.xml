@@ -38,13 +38,13 @@
         from work
         where workID = #{workID}
     </select>
-<!--
-    <delete id="erase" parameterType="int">
-        delete
-        from work
-        where workID = #{workID}
-    </delete>
--->
+    <!--
+        <delete id="erase" parameterType="int">
+            delete
+            from work
+            where workID = #{workID}
+        </delete>
+    -->
     <delete id="workDelete" parameterType="int">
         begin
         update work

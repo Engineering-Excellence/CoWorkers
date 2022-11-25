@@ -13,16 +13,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="./images/favicon_16.png">
-
     <title>CoWorkers</title>
 
+    <link rel="icon" href="./images/doker.ico">
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/coWorkers.css" rel="stylesheet">
-
 
 </head>
 
@@ -32,37 +29,38 @@
 <c:set var="today" value="${Date(Date().getTime()-60*60*24*1000)}"/>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
+    <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="mainView.sil">coworkers</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="mainView.sil">coWorkers</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">프로필</a></li>
-            <li><a href="#">환경설정</a></li>
-            <li><a href="logout.sil">로그아웃</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="search...">
-          </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">프로필</a></li>
+                <li><a href="#">환경설정</a></li>
+                <li><a href="logout.sil">로그아웃</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
         </div>
-      </div>
-    </nav>
+    </div>
+</nav>
 
-    <div class="container-fluid">
-      <div class="row">
+<div class="container-fluid">
+    <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li><a href="board.sil">게시글</a></li>
-            <li><a href="work.sil">업무관리</a></li>
-            <li><a href="event.sil">일정관리</a></li>
-          </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="board.sil">게시글</a></li>
+                <li><a href="work.sil">업무관리</a></li>
+                <li><a href="event.sil">일정관리</a></li>
+            </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
@@ -359,7 +357,8 @@
                                         </c:if>
                                         <%--마감일 초과--%>
                                         <c:if test="${dto.deadline.before(today)}">
-                                            <b style="color: crimson"><fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/></b>
+                                            <b style="color: crimson"><fmt:formatDate value="${dto.deadline}"
+                                                                                      pattern="yyyy.MM.dd.(E)"/></b>
                                         </c:if>
                                     </c:if>
                                 </td>
@@ -452,8 +451,8 @@
     </div>
 </div>
 
-<script src="../js/jquery-3.6.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="./js/bootstrap.min.js"></script>
 </body>
 
 </html>
