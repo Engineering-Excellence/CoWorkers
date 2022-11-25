@@ -89,7 +89,7 @@
                     <c:forEach var="dto" items="${priority}">
                         <c:if test="${dto.deleteDate!=null}">
                         </c:if>
-                        <c:if test="${dto.deleteDate==null}">
+                        <c:if test="${dto.deleteDate==null and dto.currentProgress!=3}">
                             <tr class="bg-danger">
                                 <td align="center">${dto.workID}</td>
                                 <td align="center">
@@ -201,15 +201,20 @@
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
                                         <%--                                        <c:if test="${dto.deadline>=date}">--%>
-
-                                        <c:if test="${dto.deadline.after(dday)}">
+                                        <c:if test="${dto.currentProgress==3}">
                                             <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
                                         </c:if>
-                                        <%--마감일 초과--%>
-                                        <%--                                        <c:if test="${dto.deadline<date}">--%>
-                                        <c:if test="${dto.deadline.before(dday)}">
-                                            <b style="color: crimson"><fmt:formatDate value="${dto.deadline}"
-                                                                                      pattern="yyyy.MM.dd.(E)"/></b>
+                                        <c:if test="${dto.currentProgress!=3}">
+
+                                            <c:if test="${dto.deadline.after(dday)}">
+                                                <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
+                                            </c:if>
+                                            <%--마감일 초과--%>
+                                            <%--                                        <c:if test="${dto.deadline<date}">--%>
+                                            <c:if test="${dto.deadline.before(dday)}">
+                                                <b style="color: crimson"><fmt:formatDate value="${dto.deadline}"
+                                                                                          pattern="yyyy.MM.dd.(E)"/></b>
+                                            </c:if>
                                         </c:if>
                                     </c:if>
                                 </td>
@@ -352,13 +357,21 @@
                                 <td align="center">
                                     <c:if test="${dto.deleteDate!=null}"></c:if>
                                     <c:if test="${dto.deleteDate==null}">
-                                        <c:if test="${dto.deadline.after(dday)}">
+                                        <%--                                        <c:if test="${dto.deadline>=date}">--%>
+                                        <c:if test="${dto.currentProgress==3}">
                                             <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
                                         </c:if>
-                                        <%--마감일 초과--%>
-                                        <c:if test="${dto.deadline.before(dday)}">
-                                            <b style="color: crimson"><fmt:formatDate value="${dto.deadline}"
-                                                                                      pattern="yyyy.MM.dd.(E)"/></b>
+                                        <c:if test="${dto.currentProgress!=3}">
+
+                                            <c:if test="${dto.deadline.after(dday)}">
+                                                <fmt:formatDate value="${dto.deadline}" pattern="yyyy.MM.dd.(E)"/>
+                                            </c:if>
+                                            <%--마감일 초과--%>
+                                            <%--                                        <c:if test="${dto.deadline<date}">--%>
+                                            <c:if test="${dto.deadline.before(dday)}">
+                                                <b style="color: crimson"><fmt:formatDate value="${dto.deadline}"
+                                                                                          pattern="yyyy.MM.dd.(E)"/></b>
+                                            </c:if>
                                         </c:if>
                                     </c:if>
                                 </td>
