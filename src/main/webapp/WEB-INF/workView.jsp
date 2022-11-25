@@ -28,6 +28,7 @@
 
 <fmt:requestEncoding value="UTF-8"/>
 <c:set var="date" value="${Date(Date().getTime()-60*60*24*1000)}"/>
+<c:set var="dday" value="${Date(Date().getTime()+60*60*24*1000)}"/>
 <%
     //    System.out.println(pageContext.findAttribute("dto"));
 //
@@ -157,7 +158,7 @@
                                             <fmt:formatDate value="${dto.writeDate}" pattern="a h:mm:ss"/>
                                         </c:if>
                                         <c:if test="${dto.writeDate.year!=date.year||dto.writeDate.month!=date.month||dto.writeDate.date!=date.date}">
-                                            <fmt:formatDate value="${dto.writeDate}" pattern="MM/dd"/>
+                                            <fmt:formatDate value="${dto.writeDate}" pattern="yyyy.MM.dd.(E)"/>
                                         </c:if>
                                     </c:if>
                                     <c:if test="${dto.updateDate != null}">
@@ -167,7 +168,7 @@
                                         </c:if>
                                         <c:if test="${dto.updateDate.year!=date.year||dto.updateDate.month!=date.month||dto.updateDate.date!=date.date}">
                                             (수정됨)
-                                            <fmt:formatDate value="${dto.updateDate}" pattern="MM/dd"/>
+                                            <fmt:formatDate value="${dto.updateDate}" pattern="yyyy.MM.dd.(E)"/>
                                         </c:if>
                                     </c:if>
                                 </c:if>

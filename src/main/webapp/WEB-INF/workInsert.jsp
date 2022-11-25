@@ -122,8 +122,7 @@
                             </th>
                             <td>
                                 <input name="currentProgress" type="radio" value="1" checked/><img width="15"
-                                                                                                   src="images/sug.png"/>
-                                요청
+                                                                                                   src="images/sug.png"/> 요청
                                 <input name="currentProgress" type="radio" value="2"/><img width="15"
                                                                                            src="images/on.png"/> 진행
                                 <input name="currentProgress" type="radio" value="3"/><img width="15"
@@ -177,7 +176,6 @@
                     </table>
                     <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
                     <input type="hidden" name="userID" value="${userInfo.get(0).getUserID()}"/>
-                    <%--                    <input type="hidden" name="userName" value="${dto.userName}"/>--%>
                 </form>
             </div>
         </div>

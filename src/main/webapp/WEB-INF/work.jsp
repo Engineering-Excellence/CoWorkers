@@ -25,7 +25,7 @@
 
 <body>
 <fmt:requestEncoding value="UTF-8"/>
-<c:set var="date" value="${java.util.Date}"/>
+<c:set var="date" value="${Date(Date().getTime()-60*60*24*1000)}"/>
 <c:set var="dday" value="${Date(Date().getTime()+60*60*24*1000)}"/>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
