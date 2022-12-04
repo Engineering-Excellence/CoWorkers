@@ -1,6 +1,6 @@
 package com.silvertier.controller;
 
-import java.io.IOException;
+import com.silvertier.service.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,11 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.silvertier.service.BoardService;
-import com.silvertier.service.EventService;
-import com.silvertier.service.UserInfoService;
-import com.silvertier.service.WorkService;
+import java.io.IOException;
 
 @WebServlet("*.sil")
 public class HomeController extends HttpServlet {
@@ -94,8 +90,6 @@ public class HomeController extends HttpServlet {
 
             case "/pwFindOK.sil" -> viewPage += "pwFindView";
             */
-
-            case "/file.sil" -> viewPage += "file";
 
 
             // Emma
@@ -197,6 +191,13 @@ public class HomeController extends HttpServlet {
 
 
             // Kyle
+            case "/board.sil" -> {
+                // 브라우저에 출력할 1 페이지 분량의 글과 페이징 작업에 사용할 8개의 변수가 저장된 클래스 객체를
+                // 얻어오는 메소드를 호출한다.
+                BoardService.getInstance().boardSelectList(request, response);
+                viewPage += "board";
+            }
+
             case "/boardInsert.sil" ->
                 // 글 작성 페이지를 호출한다.
                     viewPage += "boardInsert";
@@ -205,13 +206,6 @@ public class HomeController extends HttpServlet {
                 // 글을 작성하는 메서드를 호출한다.
                 BoardService.getInstance().boardInsert(request, response);
                 viewPage += "boardReturn";
-            }
-
-            case "/board.sil" -> {
-                // 브라우저에 출력할 1 페이지 분량의 글과 페이징 작업에 사용할 8개의 변수가 저장된 클래스 객체를
-                // 얻어오는 메소드를 호출한다.
-                BoardService.getInstance().boardSelectList(request, response);
-                viewPage += "board";
             }
 
             case "/boardHit.sil" -> {
@@ -261,6 +255,11 @@ public class HomeController extends HttpServlet {
             case "/boardCommentDelete.sil" -> {
                 BoardService.getInstance().boardCommentDelete(request, response);
                 viewPage += "boardViewReturn";
+            }
+
+            case "/file.sil" -> {
+                FileService.getInstance().fileSelectList(request, response);
+                viewPage += "file";
             }
 
             default -> viewPage += "error";

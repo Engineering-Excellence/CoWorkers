@@ -3,10 +3,9 @@ package com.silvertier.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-// 곽규창(Kyle)
-public class BoardList {
+public class FileList {
 
-    private List<BoardDTO> list = new ArrayList<>();
+    private List<FileDTO> list = new ArrayList<>();
     private int pageSize = 10;
     private int totalCount = 0;
     private int totalPage = 0;
@@ -16,10 +15,10 @@ public class BoardList {
     private int startPage = 0;
     private int endPage = 0;
 
-    public BoardList() {
+    public FileList() {
     }
 
-    public BoardList(int pageSize, int totalCount, int currentPage) {
+    public FileList(int pageSize, int totalCount, int currentPage) {
         this.pageSize = pageSize;
         this.totalCount = totalCount;
         this.currentPage = currentPage;
@@ -37,11 +36,11 @@ public class BoardList {
         endPage = Math.min(endPage, totalPage);
     }
 
-    public List<BoardDTO> getList() {
+    public List<FileDTO> getList() {
         return list;
     }
 
-    public void setList(List<BoardDTO> list) {
+    public void setList(List<FileDTO> list) {
         this.list = list;
     }
 
@@ -108,4 +107,5 @@ public class BoardList {
     public void setEndPage(int endPage) {
         this.endPage = endPage;
     }
+
 }

@@ -15,7 +15,7 @@
 </head>
 <body>
 <fmt:requestEncoding value="UTF-8"/>
-<!-- 김태형 (Terry) - index(로그인) jsp 파일 -->
+<!-- Terry - index(로그인) jsp 파일 -->
 
 <div id="wrap" class="wrap">
     <div class="main-top">

@@ -22,6 +22,12 @@ public class BoardDAO {
         return (int) mapper.selectOne("boardSelectCount");
     }
 
+    // 모든 공지글을 얻어오는 명령을 실행하는 메서드
+    public ArrayList<BoardDTO> boardSelectNotice(SqlSession mapper) {
+        System.out.println("BoardDAO 클래스의 selectNotice() 메서드 실행");
+        return (ArrayList<BoardDTO>) mapper.selectList("boardSelectNotice");
+    }
+
     // 페이징을 위한 시작, 끝 인덱스가 저장된 HashMap 객체를 넘겨받고 1 페이지 분량의 글 목록을 얻어오는 명령을 실행하는 메서드
     public ArrayList<BoardDTO> boardSelectList(SqlSession mapper, HashMap<String, Integer> hashMap) {
         System.out.println("BoardDAO 클래스의 selectList() 메서드 실행");
@@ -32,12 +38,6 @@ public class BoardDAO {
     public void boardInsert(SqlSession mapper, BoardDTO boardDTO) {
         System.out.println("BoardDAO 클래스의 insert() 메서드 실행");
         mapper.insert("boardInsert", boardDTO);
-    }
-
-    // 모든 공지글을 얻어오는 명령을 실행하는 메서드
-    public ArrayList<BoardDTO> boardSelectNotice(SqlSession mapper) {
-        System.out.println("BoardDAO 클래스의 selectNotice() 메서드 실행");
-        return (ArrayList<BoardDTO>) mapper.selectList("boardSelectNotice");
     }
 
     // 조회수를 증가시키는 UPDATE SQL 명령을 실행하는 메서드
