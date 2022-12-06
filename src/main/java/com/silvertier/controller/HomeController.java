@@ -101,17 +101,17 @@ public class HomeController extends HttpServlet {
             // Emma
             case "/event.sil" -> {
                 System.out.println("event");
-                EventService.getInstance().eventSelectArrayList(request, response);
-                EventService.getInstance().workSelectArrayList(request, response);
+                try{
+                	EventService.getInstance().eventInsert(request, response);
+                } catch(Exception e){ }
                 viewPage += "event";
             }
 
             case "/eventInsertOK.sil" -> {
                 System.out.println("eventInsertOK");
-                EventService.getInstance().eventInsert(request, response);
                 EventService.getInstance().eventSelectArrayList(request, response);
                 EventService.getInstance().workSelectArrayList(request, response);
-                viewPage += "event";
+                viewPage += "eventOK";
             }
 
             case "/eventList.sil" -> {

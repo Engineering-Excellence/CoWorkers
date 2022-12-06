@@ -63,5 +63,10 @@ public class EventDAO {
         mapper.delete("eventDelete", eventID);
     }
 
+	public ArrayList<EventDTO> selectEList(SqlSession mapper) {
+		System.out.println("selectEList() Method of EventDAO Class");
+        return (ArrayList<EventDTO>) mapper.selectList("selectEList");
+	}
+
 
 }

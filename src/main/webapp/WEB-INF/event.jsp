@@ -17,7 +17,7 @@
 
     <link rel="icon" href="./images/doker.ico">
     <title>Event</title>
-
+    
     <link href="./css/event.css" rel="stylesheet">
     <link href="./css/bootstrap.min.css" rel="stylesheet">
 
@@ -25,7 +25,7 @@
     <link href="./css/event.css" rel="stylesheet">
 
 </head>
-<body>
+<body onload="javascript:autoReload()">
 
 <!-- 상단 네비게이션 -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -67,136 +67,53 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">일정 관리</h1>
-
-            <!-- 캘린더 -->
-            <%
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH) + 1;
-                try {
-                    year = request.getParameter("year") == null ? calendar.get(Calendar.YEAR) : Integer.parseInt(request.getParameter("year"));
-                    month = request.getParameter("month") == null ? calendar.get(Calendar.MONTH) + 1 : Integer.parseInt(request.getParameter("month"));
-                    if (month == 13) {
-                        year++;
-                        month = 1;
-                    } else if (month == 0) {
-                        year--;
-                        month = 12;
-                    }
-                } catch (NumberFormatException e) {
-                }
-//   out.println(year + "년 " + month + "월");
-            %>
             <div class="table-reponsive">
                 <div style="display: inline;">
-                    <a title="지난달" href="event.sil?year=<%=year%>&month=<%=month-1%>"><img width="30px" alt="지난달"
-                                                                                           src="./images/arrow_left.png"></a>
+                	<a id="before" href="javascript:lastMonth()"><img width="30px" alt="지난달" src="./images/arrow_left.png"></a>
                 </div>
-                <div style="display: inline; font-size: 30px">
-                    &nbsp;&nbsp;<%=year%>년 <%=month%>월&nbsp;&nbsp;
-                </div>
+                <div id="yearmonth" style="display: inline; font-size: 30px"></div>
+                
                 <div style="display: inline;">
-                    <a title="지난달" href="event.sil?year=<%=year%>&month=<%=month+1%>"><img width="30px" alt="다음달"
-                                                                                           src="./images/arrow_right.png"></a>
+               		<a id="next" title="다음달"  href="javascript:nextMonth()"><img width="30px" alt="다음달" src="./images/arrow_right.png"></a>
                 </div>
                 <div style="float: right ">
                     <!-- 모달 실행 버튼 -->
-                    <%-- <button type="button" class="btn btn-default" onclick="showWork(${wDTO})">긴급업무</button>
-                    <button type="button" class="btn btn-default" onclick="showEvent(${eDTO})">일정</button> --%>
-                    <button type="button" class="btn btn-default" onclick="location.href='event.sil'">오늘</button>
+                    <button type="button" class="btn btn-default" onclick="showWork(${wDTO})">긴급업무</button>
+                    <button type="button" class="btn btn-default" onclick="showEvent(${eDTO})">일정</button>
+                    <button type="button" class="btn btn-default" onclick="thisMonth()">오늘</button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">일정추가
                     </button>
                     <button type="button" class="btn btn-default" onclick="location.href='eventList.sil'">리스트보기</button>
                 </div>
             </div>
+                        
             <br/>
-
+            <br/>
+            
             <div class="table-responsive">
                 <table class="table table-striped">
-                    <tr>
-                        <th id="sunday" width="100" height="40"><span
-                                style="font-weight: bold; font-size: 15px;">일</span></th>
-                        <th width="100px"><span style="font-weight: bold; font-size: 15px;">월</span></th>
-                        <th width="100px"><span style="font-weight: bold; font-size: 15px;">화</span></th>
-                        <th width="100px"><span style="font-weight: bold; font-size: 15px;">수</span></th>
-                        <th width="100px"><span style="font-weight: bold; font-size: 15px;">목</span></th>
-                        <th width="100px"><span style="font-weight: bold; font-size: 15px;">금</span></th>
-                        <th width="100px" id="saturday" style="font-weight: bold;"><span>토</span></th>
-                    </tr>
-
-                    <!-- 달력에 날짜를 출력한다. -->
-                    <tr>
-
-                        <%
-                            //   달력을 출력할 달 1일의 요일을 계산해둔다.
-                            int week = MyCalendar.weekDay(year, month, 1);
-
-                            //   빈 칸에 출력할 전달 날짜의 시작일을 계산한다.
-                            int start = 0;
-                            if (month == 1) {
-                                start = MyCalendar.lastDay(year - 1, 12) - week; // 1월
-                            } else {
-                                start = MyCalendar.lastDay(year, month - 1) - week; // 2 ~ 12월
-                            }
-
-                            //   1일이 출력될 위치(요일)을 맞추기 위해 달력을 출력할 달 1일의 요일만큼 반복하며 전달 날짜를 출력한다.
-                            for (int i = 0; i < MyCalendar.weekDay(year, month, 1); i++) {
-                                if (i == 0) {
-                                    out.println("<td class='beforesun' id='" + year + "-" + (month == 1 ? 12 : month - 1) + "-" + ++start + "' style='padding: 0px; vertical-align:top; height:100px; color : darkgray;' >" + (month == 1 ? 12 : month - 1) + "/" + start + "</td>");
-                                } else {
-                                    out.println("<td class='before' id='" + year + "-" + (month == 1 ? 12 : month - 1) + "-" + ++start + "' style='padding: 0px; vertical-align:top; height:100px; color : darkgray;'>" + (month == 1 ? 12 : month - 1) + "/" + start + "</td>");
-                                }
-                            }
-
-                            //   1일부터 달력을 출력할 달의 마지막 날짜까지 반복하며 날짜를 출력한다.
-                            for (int i = 1; i <= MyCalendar.lastDay(year, month); i++) {
-                                // <td> 태그에 요일에 따른 class 속성을 지정한다.
-                                switch (MyCalendar.weekDay(year, month, i)) {
-                                    case 0: // 일요일
-                                        out.println("<td class='sun' id='" + year + "-" + month + "-" + (i >= 10 ? i : '0' + Integer.toString(i)) + "' style='padding: 0px; margin: 100px; vertical-align:top; height:100px' >" + i + "</td>");
-                                        break;
-                                    case 6: // 토요일
-                                        out.println("<td class='sat' id='" + year + "-" + month + "-" + (i >= 10 ? i : '0' + Integer.toString(i)) + "' style='padding: 0px; margin: 100px; vertical-align:top; height:100px'>" + i + "</td>");
-                                        break;
-                                    default:
-                                        out.println("<td id='" + year + "-" + month + "-" + (i >= 10 ? i : '0' + Integer.toString(i)) + "' style='padding: 0px; margin: 100px; vertical-align:top; height:100px'>" + i + "</td>");
-                                        break;
-                                }
-
-                                // 출력한 날짜가 토요일이고 그 달의 마지막 날짜가 아니면 줄을 바꾼다.
-                                if (MyCalendar.weekDay(year, month, i) == 6 && i != MyCalendar.lastDay(year, month)) {
-                                    out.println("</tr><tr>");
-                                }
-                            }
-
-                            //   다음달 1일의 요일을 계산한다.
-                            if (month == 12) {
-                                week = MyCalendar.weekDay(year + 1, 1, 1); // 12월
-                            } else {
-                                week = MyCalendar.weekDay(year, month + 1, 1); // 1 ~ 11월
-                            }
-
-                            //   다음달 1일이 일요일이면 다음달 날짜를 출력할 필요없다.
-                            if (week != 0) {
-                                // 날짜를 다 출력하고 남은 빈 칸에 다음달 날짜를 다음달 1일의 요일부터 토요일까지 반복하며 출력
-                                start = 0;
-                                for (int i = week; i <= 6; i++) {
-                                    if (i == 6) {
-                                        out.println("<td class='aftersat' id='" + (month == 12 ? 1 : month + 1) + "/" + ++start + "' style='padding: 0px; vertical-align:top; height:100px; color : darkgray;'>" + (month == 12 ? 1 : month + 1) + "/" + start + "</td>");
-                                    } else {
-                                        out.println("<td class='after' id='" + (month == 12 ? 1 : month + 1) + "/" + ++start + "' style='padding: 0px; vertical-align:top; height:100px; color : darkgray;'>" + (month == 12 ? 1 : month + 1) + "/" + start + "</td>");
-                                    }
-                                }
-                            }
-                        %>
-
-                    </tr>
-                </table>
+                	<thead>
+	                    <tr>
+	                        <th id="sunday" width="100" height="40"><span style="font-weight: bold; font-size: 15px;">일</span></th>
+	                        <th width="100px"><span style="font-weight: bold; font-size: 15px;">월</span></th>
+	                        <th width="100px"><span style="font-weight: bold; font-size: 15px;">화</span></th>
+	                        <th width="100px"><span style="font-weight: bold; font-size: 15px;">수</span></th>
+	                        <th width="100px"><span style="font-weight: bold; font-size: 15px;">목</span></th>
+	                        <th width="100px"><span style="font-weight: bold; font-size: 15px;">금</span></th>
+	                        <th width="100px" id="saturday" style="font-weight: bold;"><span>토</span></th>
+	                    </tr>
+					</thead>
+					<tbody id="calendar">
+						<!-- event.js 파일로 날짜 출력 -->
+					</tbody>
+				</table>
             </div>
         </div>
     </div>
 </div>
 <br/><br/>
+
+
 
 
 <!-- Modal_insert -->
@@ -209,7 +126,7 @@
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
-                <form action="eventInsertOK.sil" method="post">
+                <form action="event.sil" method="post">
                     <table class="table">
                         <tr class="table-primary">
                             <th colspan="3" style="font-size: 30px; text-align: center;">일정 작성</th>
@@ -329,98 +246,11 @@
 
 <script type="text/javascript" src="./js/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="./js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    $(() => {
-        now = new Date();
-        now = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
-        $('#' + now).css({'background-color': '#E8E8E8', 'font-weight': 'bold'})
-    })
-</script>
-<script>
-    var eDTO = new Array();
-    var wDTO = new Array();
-
-    <c:forEach items="${eList}" var="eDTO">
-    eDTO.push("${eDTO.eventID}");
-    eDTO.push("${eDTO.startDate}");
-    eDTO.push("${eDTO.endDate}");
-    eDTO.push("${eDTO.subject}");
-    eDTO.push("${eDTO.eventColor}");
-    eDTO.push('${eDTO.writeDate}')
-    </c:forEach>
-
-    <c:set var = "eDeleteDate" value="${eDTO.deleteDate}"/>
-    <c:set var = "wDeleteDate" value="${wDTO.deleteDate}"/>
-
-    <c:forEach items="${wList}" var="wDTO">
-    wDTO.push("${wDTO.workID}");  //[0] startDate
-    wDTO.push("${wDTO.startDate}");  //[0] startDate
-    wDTO.push("${wDTO.deadline}"); //[1]
-    wDTO.push("${wDTO.subject}"); //2
-    wDTO.push("${wDTO.priority}"); //3 //priority 1, 2, 3, 4 => 긴급, 높음, 보통, 낮음
-    wDTO.push('${wDTO.writeDate}') //4
-    </c:forEach>
-    let wArr = new Array();
-    let eArr = new Array();
-    wArr = wDTO;
-    eArr = eDTO;
-
-
-    /*
-       // work의 긴급 업무 목록을 캘린더에 표시한다.
-       console.log(wDTO, typeof(wDTO))
-       for(var i=(wDTO.length-1); i<wDTO.length; i--){
-           wArr = wDTO.splice(0, 6);
-          switch(wArr[4]){
-             case '1': wArr[4] = '#DC143C'; break;
-             case '2': wArr[4] = '#EE82EE'; break;
-             case '3': wArr[4] = '#32CD32'; break;
-             default: wArr[4] = '#A9A9A9'; break;
-             }
-
-          //console.log('wArr: ' + wArr)
-          if(wArr[4] == '#DC143C' && wArr[1] != wArr[2]){ //연속일정 표시
-             //console.log(BetweenDates(wArr[1], wArr[2]));
-             btDates = BetweenDates(wArr[1], wArr[2]);
-             console.log(btDates)
-             var startdate = '<a  href="workView.sil?workID=' + wArr[0] + '&currentPage=1"><div class="startdate work" style="background-color: ' + wArr[4] + ' ;" >'+ wArr[3] +'&nbsp;</div></a>'
-             $('#' + btDates[0]).append(startdate);
-             var deadline = '<a  href="workView.sil?workID=' + wArr[0] + '&currentPage=1"><div class="deadline work" style="background-color: ' + wArr[4] + ' ;" >&nbsp;</div></a>'
-             $('#' + btDates[btDates.length-1]).append(deadline);
-             var btween = '<a  href="workView.sil?workID=' + wArr[0] + '&currentPage=1"><div class="btween work" style="background-color: ' + wArr[4] + ' ;" >&nbsp;</div></a>'
-             for(var i=1; i<btDates.length-1; i++){
-                $('#' + btDates[i]).append(btween);
-             }
-          }
-       }
-
-
-       // event의 일정 목록을 캘린더에 표시한다.
-       if(eDeleteDate != null){
-          for(var i=(eDTO.length-1); i<eDTO.length; i--){
-             eArr = eDTO.splice(0, 6);
-             if(eArr[4] == '#DC143C' && eArr[1] != eArr[2]){ //연속일정 표시
-                //console.log(BetweenDates(eArr[1], eArr[2]));
-                btDates = BetweenDates(eArr[1], eArr[2]);
-                console.log(btDates)
-                var startdate = '<a  href="eventView.sil?eventID=' + eArr[0] + '"><div class="event startdate work" style="background-color: ' + eArr[4] + ' ;" >'+ eArr[3] +'&nbsp;</div></a>'
-                $('#' + btDates[0]).append(startdate);
-                var deadline = '<a  href="eventView.sil?eventID=' + eArr[0] + '"><div class="event deadline work" style="background-color: ' + eArr[4] + ' ;" >&nbsp;</div></a>'
-                $('#' + btDates[btDates.length-1]).append(deadline);
-                var btween = '<a  href="eventView.sil?eventID=' + eArr[0] + '"><div class="event btween work" style="background-color: ' + eArr[4] + ' ;" >&nbsp;</div></a>'
-                for(var i=1; i<btDates.length-1; i++){
-                   $('#' + btDates[i]).append(btween);
-                }
-             } else {
-                let EveOne = '<a href="eventView.sil?eventID='+ eArr[0] +'"><div class="event eveOne" style="background-color: ' + eArr[4] + ' ;" >'+ eArr[3] +'&nbsp;</div></a>'
-                $('#' + eArr[1]).append(EveOne);
-             }
-          }
-       }
-
-
-
-       // 사이 날짜 배열로 반환 함수
+<script type="text/javascript" src="./js/event/event.js"></script>
+<style>
+	td{padding: 0px;}
+</style>
+<!--        // 사이 날짜 배열로 반환 함수
        function BetweenDates( startDate, endDate ) {
           let result = [];
           let btdate = new Date(startDate);
@@ -430,9 +260,6 @@
              //console.log(result);
           }
           return result
-       } */
-
-
-</script>
+       }  -->
 </body>
 </html>

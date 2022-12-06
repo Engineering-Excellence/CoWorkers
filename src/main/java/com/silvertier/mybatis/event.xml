@@ -50,10 +50,15 @@
 	</select>
 
     <!-- 페이징이 필요없는 리스트 dto로 얻어온다. -->
-    <select id="eventSelectArrayList" resultType="eDTO">
+    <select id="eventSelectArrayList" resultType="eDTO"> <!-- 리스트 표시 -->
         select *
         from event
         order by eventid desc, endDate asc
+    </select>
+    <select id="selectEList" resultType="eDTO"> <!-- calendar 표시 -->
+        select *
+        from event
+        order by eventid asc
     </select>
 
     <!-- 페이징이 필요없는 리스트 dto로 얻어온다. -->

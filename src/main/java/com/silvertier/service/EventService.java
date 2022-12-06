@@ -178,6 +178,34 @@ public class EventService {
 
     }
 
+	public ArrayList<EventDTO> selectEList() {
+		System.out.println("(ajax) eventSelectArrayList() Method of EventService Class for calendar");
+        SqlSession mapper = MySession.getSession();
+
+        ArrayList<EventDTO> eList = new ArrayList<>();
+
+        eList = eDAO.selectEList(mapper);
+        System.out.println("eList: " + eList);
+
+        mapper.close();
+        
+		return eList;
+	}
+
+	public ArrayList<WorkDTO> workSelectArrayList() {
+		System.out.println("(ajax) workSelectArrayList() Method of EventService Class for calendar");
+		SqlSession mapper = MySession.getSession();
+        ArrayList<WorkDTO> wList = new ArrayList<>();
+
+        wList = eDAO.workSelectArrayList(mapper);
+		System.out.println("wList: " + wList); // 확인. // workDTO에 toString override가 없음.
+
+        mapper.close();
+		return wList;
+        
+	}
+
+    
 
 }
 
