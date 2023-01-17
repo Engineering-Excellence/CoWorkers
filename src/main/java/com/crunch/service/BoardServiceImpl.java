@@ -1,11 +1,13 @@
 package com.crunch.service;
 
 import com.crunch.domain.BoardDTO;
+import com.crunch.mapper.BoardAttachMapper;
 import com.crunch.mapper.BoardMapper;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +19,8 @@ public class BoardServiceImpl implements BoardService {
     // 인스턴스 변수(mapper)에 알맞은 타입의 객체(BoardMapper)를 자동으로 주입하는 어노테이션
     @Setter(onMethod_ = @Autowired)
     private BoardMapper mapper;
+    @Setter(onMethod_ = @Autowired)
+    private BoardAttachMapper attachMapper;
 
     @Override
     public int selectCount() {
@@ -58,13 +62,24 @@ public class BoardServiceImpl implements BoardService {
         mapper.boardHit(postID);
     }
 
+    @Transactional
     @Override
     public void insert(BoardDTO boardDTO) {
 
         log.info("BoardServiceImpl의 insert() 실행");
 
-        log.info("insert({})", boardDTO);
+        log.info("boardDTO: {}", boardDTO);
         mapper.boardInsert(boardDTO);
+
+        if (boardDTO.getAttachList() == null || boardDTO.getAttachList().isEmpty()) {
+            return;
+        }
+
+        boardDTO.getAttachList().forEach(attachDTO -> {
+            attachDTO.setPostID(boardDTO.getPostID());
+            log.info("attachDTO: {}", attachDTO);
+            attachMapper.boardAttachInsert(attachDTO);
+        });
     }
 
     @Override

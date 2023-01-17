@@ -21,6 +21,7 @@ public class BoardDTO {
     private String notice = "false";    // 공지글 여부
     private String ip;  // IP 주소
     private List<BoardAttachDTO> attachList;
+//    private String attachList;
 
     private int userID; // FK, 사원번호
 

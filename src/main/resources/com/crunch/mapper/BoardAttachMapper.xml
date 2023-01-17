@@ -4,8 +4,8 @@
 
     <!-- 파일 업로드 -->
     <insert id="boardAttachInsert" parameterType="attachDTO">
-        INSERT INTO BOARDATTACH (UUID, FILENAME, UPLOADPATH, POSTID)
-        VALUES (#{uuid}, #{fileName}, #{uploadPath}, #{postID})
+        INSERT INTO BOARDATTACH (UUID, FILENAME, UPLOADPATH, FILETYPE, POSTID)
+        VALUES (#{uuid}, #{fileName}, #{uploadPath}, #{fileType}, BOARD_POSTID_SEQ.currval)
     </insert>
 
     <!-- 파일 삭제 -->

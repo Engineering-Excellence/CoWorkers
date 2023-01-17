@@ -6,6 +6,8 @@ import com.crunch.service.BoardService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnailator;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,9 +22,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @AllArgsConstructor
@@ -34,11 +41,10 @@ public class BoardController {
     private BoardList boardList;
     private BoardCommentList boardCommentList;
 
-
     // 게시글 목록 불러오기
-    @GetMapping(value = "board")
+    @GetMapping(value = "/board")
     public String board(Model model,
-                        @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+                        @RequestParam(value = "/currentPage", required = false, defaultValue = "1") int currentPage) {
 
         log.info("board() 실행");
 
@@ -70,7 +76,7 @@ public class BoardController {
     }
 
     // 게시글 조회 수 증가
-    @GetMapping(value = "boardHit")
+    @GetMapping(value = "/boardHit")
     public String boardHit(Model model,
                            @RequestParam("postID") int postID,
                            @RequestParam("currentPage") int currentPage) {
@@ -86,7 +92,7 @@ public class BoardController {
     }
 
     // 게시글 조회
-    @GetMapping(value = "boardView")
+    @GetMapping(value = "/boardView")
     public String boardView(Model model,
                             @RequestParam("postID") int postID,
                             @RequestParam("currentPage") int currenPage) {
@@ -106,7 +112,7 @@ public class BoardController {
     }
 
     // 게시글 쓰기 페이지 진입
-    @GetMapping(value = "boardInsert")
+    @GetMapping(value = "/boardInsert")
     public String boardInsert() {
 
         log.info("boardInsert() 실행");
@@ -114,24 +120,35 @@ public class BoardController {
         return "board/boardInsert";
     }
 
-    // 파일 업로드 AJAX
-    @PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    public ResponseEntity<List<BoardAttachDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
+    // 신규 게시글 작성
+    @PostMapping(value = "/boardInsertOK")
+    public String boardInsertOK(BoardDTO boardDTO, RedirectAttributes rttr) {
 
-        log.info("uploadAjaxPost() 실행 → uploadFile: {}", uploadFile);
+        log.info("boardInsertOK() 실행 → boardDTO: {}", boardDTO);
 
-        List<BoardAttachDTO> attachList = new ArrayList<>();
-        String uploadFolder = "/Users/kyle/Documents/Study/CRUNCH/CoWorkers_Spring/upload";
-
-        String uploadFolderPath = getFolder();
-        // 폴더 생성
-        File uploadPath = new File(uploadFolder, uploadFolderPath);
-        log.info("upload path: {}", uploadPath);
-
-        if (!uploadPath.exists()) {
-            uploadPath.mkdirs();
+        if (boardDTO.getAttachList() != null) {
+            boardDTO.getAttachList().forEach(attachDTO -> log.info("{}", attachDTO));
         }
+
+        log.info("===================================================================================================");
+
+        service.insert(boardDTO);
+        rttr.addFlashAttribute("result", boardDTO.getPostID());
+
+        return "redirect:board";
+    }
+
+    // 파일 업로드 AJAX
+    @PostMapping(value = "//uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
+
+        log.info("uploadAjaxPost() 실행 → uploadFile: {}", (Object[]) uploadFile);
+
+        List<AttachFileDTO> attachList = new ArrayList<>();
+        String uploadPath = "/Users/kyle/Documents/Study/CRUNCH/CoWorkers_Spring/upload";
+
+        log.info("upload path: {}", uploadPath);
 
         for (MultipartFile multipartFile : uploadFile) {
 
@@ -139,7 +156,7 @@ public class BoardController {
             log.info("Upload File Name: {}", multipartFile.getOriginalFilename());
             log.info("Upload File Size: {}", multipartFile.getSize());
 
-            BoardAttachDTO attachDTO = new BoardAttachDTO();
+            AttachFileDTO attachDTO = new AttachFileDTO();
 
             String uploadFileName = multipartFile.getOriginalFilename();
 
@@ -157,7 +174,7 @@ public class BoardController {
 
                 attachDTO.setFileName(multipartFile.getOriginalFilename());
                 attachDTO.setUuid(uuid.toString());
-                attachDTO.setUploadPath(uploadFolderPath);
+                attachDTO.setUploadPath(uploadPath);
 
                 // 파일 이미지 타입 체크
                 if (checkImageType(saveFile)) {
@@ -181,18 +198,6 @@ public class BoardController {
         return new ResponseEntity<>(attachList, HttpStatus.OK);
     }
 
-    // 년월일 폴더 생성
-    private String getFolder() {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-        Date date = new Date();
-
-        String str = sdf.format(date);
-
-        return str.replace("-", File.separator);
-    }
-
     // 이미지 여부 확인
     private boolean checkImageType(File file) {
 
@@ -211,14 +216,13 @@ public class BoardController {
     }
 
     // 섬네일 전송
-    @GetMapping(value = "display")
+    @GetMapping(value = "/display")
     @ResponseBody
     public ResponseEntity<byte[]> getFile(String fileName) {
 
         log.info("getFile() 실행 → fileName: {}", fileName);
 
-        String uploadFolder = "/Users/kyle/Documents/Study/CRUNCH/CoWorkers_Spring/upload/";
-        File file = new File(uploadFolder + fileName);
+        File file = new File(fileName);
         log.info("file: {}", file);
 
         ResponseEntity<byte[]> result = null;
@@ -234,24 +238,75 @@ public class BoardController {
         return result;
     }
 
-    // 신규 게시글 작성
-    @PostMapping(value = "boardInsertOK")
-    public String boardInsertOK(BoardDTO boardDTO, RedirectAttributes rttr) {
+    // 업로드 파일 삭제
+    @PostMapping(value = "/deleteFile")
+    @ResponseBody
+    public ResponseEntity<String> deleteFile(String fileName, String type) {
 
-        log.info("boardInsertOK() 실행 → boardDTO: {}", boardDTO);
+        log.info("deleteFile() 실행 → fileName:{}, type: {}", fileName, type);
 
-        if (boardDTO.getAttachList() != null) {
-            boardDTO.getAttachList().forEach(attachDTO -> log.info("{}", attachDTO));
+        File file;
+
+//        try {
+            file = new File(URLDecoder.decode(fileName, StandardCharsets.UTF_8));
+
+            file.delete();
+            log.info("업로드 파일 삭제");
+
+            if (type.equals("image")) {
+                String largeFileName = file.getAbsolutePath().replace("s_", "");
+                log.info("largeFileName: {}", largeFileName);
+                file = new File(largeFileName);
+
+                file.delete();
+                log.info("업로드 이미지 원본 삭제");
+            }
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+
+        return new ResponseEntity<>("deleted", HttpStatus.OK);
+    }
+
+    // 첨부파일 다운로드
+    @GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @ResponseBody
+    public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String fileName) {
+
+        log.info("downloadFile() 실행 → fileName: {}", fileName);
+
+        FileSystemResource resource = new FileSystemResource(fileName);
+        log.info("resource: {}", resource);
+        if (!resource.exists()) {
+            log.error("{} 파일이 존재하지 않습니다.", resource);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-//        service.insert(boardDTO);
-//        rttr.addFlashAttribute("result", boardDTO.getPostID());
+        String resourceName = resource.getFilename();
+        // UUID 제거
+        String resourceOriginalName = resourceName.substring(resourceName.indexOf("_") + 1);
 
-        return "redirect:board";
+        HttpHeaders headers = new HttpHeaders();
+        String downloadName = null;
+
+        if (userAgent.contains("Trident")) {
+            log.info("IE browser");
+            downloadName = URLEncoder.encode(resourceOriginalName, StandardCharsets.UTF_8).replaceAll("/+", " ");
+        } else if (userAgent.contains("Edge")) {
+            log.info("Edge Browser");
+            downloadName = URLEncoder.encode(resourceOriginalName, StandardCharsets.UTF_8);
+        } else {
+            log.info("Chrome browser");
+            downloadName = new String(resourceOriginalName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
+        }
+        log.info("downloadName: {}", downloadName);
+        headers.add("Content-Disposition", "attachment; filename=" + downloadName);
+        return new ResponseEntity<>(resource, headers, HttpStatus.OK);
     }
 
     // 게시글 수정 페이지 호출
-    @GetMapping(value = "boardUpdate")
+    @GetMapping(value = "/boardUpdate")
     public String boardUpdate(Model model,
                               @RequestParam("postID") int postID,
                               @RequestParam("currentPage") int currentPage) {
@@ -267,7 +322,7 @@ public class BoardController {
     }
 
     // 게시글 수정
-    @PostMapping(value = "boardUpdateOK")
+    @PostMapping(value = "/boardUpdateOK")
     public String boardUpdateOK(Model model, BoardDTO boardDTO,
                                 @RequestParam("currentPage") int currentPage) {
 
@@ -282,7 +337,7 @@ public class BoardController {
     }
 
     // 게시글 삭제
-    @GetMapping(value = "boardDelete")
+    @GetMapping(value = "/boardDelete")
     public String boardDelete(Model model,
                               @RequestParam("postID") int postID,
                               @RequestParam("currentPage") int currentPage) {
@@ -297,7 +352,7 @@ public class BoardController {
     }
 
     // 신규 덧글 작성 및 수정
-    @RequestMapping(value = "boardCommentOK")
+    @RequestMapping(value = "/boardCommentOK")
     public String boardCommentOK(Model model,
                                  BoardCommentDTO boardCommentDTO,
                                  @RequestParam("mode") String mode,
@@ -323,7 +378,7 @@ public class BoardController {
     }
 
     // 댓글 삭제
-    @GetMapping(value = "boardCommentDelete")
+    @GetMapping(value = "/boardCommentDelete")
     public String boardCommentDelete(Model model,
                                      @RequestParam("commentID") int commentID,
                                      @RequestParam("postID") int postID,

@@ -95,4 +95,11 @@ public class UserInfoController {
         return "redirect:/";
     }
 
+    @RequestMapping(value = "mainView")
+    public String mainView() {
+
+        log.info("UserInfoController의 mainView() 실행");
+
+        return "userInfo/mainView";
+    }
 }

@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Data
 public class BoardAttachDTO {
 
-    private String uuid;    // PK, 파일 UUID
-    private String fileName;    // 파일명
-    private String uploadPath;  // 파일 업로드 경로
-    private boolean image;  // 파일 이미지 여부
+    private String uuid;
+    private String uploadPath;
+    private String fileName;
+    private boolean fileType;
 
-    private int postID;     // FK, 글번호
+    private int postID;
 }
