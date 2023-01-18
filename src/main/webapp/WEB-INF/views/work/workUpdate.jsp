@@ -4,72 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--조우철--%>
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>CoWorkers</title>
-
-    <link rel="icon" href="images/favicon_16.png">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/coWorkers.css" rel="stylesheet">
-
-</head>
-
-<body>
-<%
-    System.out.println(pageContext.findAttribute("dto"));
-
-    Map<String, String[]> map = request.getParameterMap();
-    Iterator<Map.Entry<String, String[]>> itr = map.entrySet().iterator();
-    while (itr.hasNext()) {
-        Map.Entry<String, String[]> entry = itr.next();
-        System.out.println(String.format("%s : %s", entry.getKey(), String.join(", ", entry.getValue())));
-    }
-%>
-<fmt:requestEncoding value="UTF-8"/>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="mainView.sil">coWorkers</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">프로필</a></li>
-                <li><a href="#">환경설정</a></li>
-                <li><a href="logout.sil">로그아웃</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
-        </div>
-    </div>
-</nav>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li><a href="board.sil">게시글</a></li>
-                <li><a href="work.sil">업무관리</a></li>
-                <li><a href="event.sil">일정관리</a></li>
-            </ul>
-        </div>
+<%-- 조우철 --%>
+<%@include file="/WEB-INF/views/header.jsp"%>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
             <div class="table-responsive">
@@ -221,6 +157,7 @@
 
 <script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/resources/js/memo.js"></script>
 </body>
 
 </html>

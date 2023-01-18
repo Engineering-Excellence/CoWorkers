@@ -5,7 +5,8 @@
              xmlns:context="http://www.springframework.org/schema/context"
              xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
              xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+             xmlns:websocket="http://www.springframework.org/schema/websocket"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
     <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
@@ -28,6 +29,19 @@
         <property name="dataSource" ref="dataSource"/>
     </beans:bean>
 
+    <!--웹소켓-->
+    <beans:bean id="alarmHandler" class="com.crunch.socket.AlarmHandler" />
+    <websocket:handlers allowed-origins="*">
+        <websocket:mapping handler="alarmHandler"
+                           path="/alarm" />
+        <websocket:handshake-interceptors>
+            <beans:bean
+                    class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+        </websocket:handshake-interceptors>
+        <websocket:sockjs
+                client-library-url="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js" />
+
+    </websocket:handlers>
     <tx:annotation-driven/>
 
     <mybatis-spring:scan base-package="com.crunch.mapper"/>

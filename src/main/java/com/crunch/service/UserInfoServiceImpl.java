@@ -48,4 +48,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         return mapper.userInfoSelect(accountID);
     }
+
+    @Override
+    public int selectUserID(String accountID) {
+        return mapper.selectUserID(accountID); // 쪽지 보낸이 ID를 가져오기 위한 메서드
+    }
 }

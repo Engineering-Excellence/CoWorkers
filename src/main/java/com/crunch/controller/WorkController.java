@@ -7,7 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class WorkController {
     private WorkService service;
     private WorkList workList;
 
-    @RequestMapping(value = "work")
+    @GetMapping(value = "work")
     public String work(Model model,
                        @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
 
@@ -29,22 +30,24 @@ public class WorkController {
 
         int pageSize = 10;
         int totalCount = service.selectCount();
-
+        log.info("totalCount: " + totalCount);
         List<WorkDTO> priority = service.selectPriority();
         workList.initWorkList(pageSize, totalCount, currentPage);
 
         HashMap<String, Integer> hashMap = new HashMap<>();
         hashMap.put("startNo", workList.getStartNo());
+        log.info("startNo: " + workList.getStartNo());
         hashMap.put("endNo", workList.getEndNo());
+        log.info("endNo: " + workList.getEndNo());
         workList.setList(service.selectList(hashMap));
 
         model.addAttribute("workList", workList);
         model.addAttribute("priority", priority);
-
+        log.info("workList: " + workList);
         return "work/work";
     }
 
-    @RequestMapping(value = "workView")
+    @GetMapping(value = "workView")
     public String workView(Model model,
                            @RequestParam("workID") int workID,
                            @RequestParam("currentPage") int currenPage) {
@@ -60,7 +63,7 @@ public class WorkController {
         return "work/workView";
     }
 
-    @RequestMapping(value = "workInsert")
+    @GetMapping(value = "workInsert")
     public String workInsert() {
 
         log.info("WorkController의 workInsert() 실행");
@@ -68,7 +71,7 @@ public class WorkController {
         return "work/workInsert";
     }
 
-    @RequestMapping(value = "workInsertOK")
+    @PostMapping(value = "workInsertOK")
     public String workInsertOK(WorkDTO workDTO) {
 
         log.info("WorkController의 workInsertOK() 실행");
@@ -78,7 +81,7 @@ public class WorkController {
         return "redirect:work";
     }
 
-    @RequestMapping(value = "workUpdate")
+    @PostMapping(value = "workUpdate")
     public String workUpdate(Model model,
                              @RequestParam("workID") int workID,
                              @RequestParam("currentPage") int currentPage) {
@@ -93,7 +96,7 @@ public class WorkController {
         return "work/workUpdate";
     }
 
-    @RequestMapping(value = "workUpdateOK")
+    @PostMapping(value = "workUpdateOK")
     public String workUpdateOK(Model model, WorkDTO workDTO,
                                @RequestParam("currentPage") int currentPage) {
 
@@ -107,7 +110,7 @@ public class WorkController {
         return "redirect:workView";
     }
 
-    @RequestMapping(value = "workDelete")
+    @GetMapping(value = "workDelete")
     public String workDelete(Model model,
                              @RequestParam("workID") int workID,
                              @RequestParam("currentPage") int currentPage) {

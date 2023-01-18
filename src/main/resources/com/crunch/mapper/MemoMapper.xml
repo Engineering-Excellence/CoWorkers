@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crunch.mapper.MemoMapper">
+
+    <select id="memoSelectCount" resultType="int">
+        select count(*)
+        from memo
+    </select>
+
+    <select id="selectByMemoID" parameterType="int" resultType="mDTO">
+        select *
+        from memo
+        where memoID = #{memoID}
+    </select>
+
+    <select id="memoList" parameterType="java.util.HashMap" resultType="mDTO">
+        select *
+        from (select rownum rnum, AA.*
+              from (select *
+                    from memo
+                        where receiverID = #{userID}
+                        and deleted = 0 -- 정상 작동
+                    order by memoID desc) AA) -- and deleted = 0을 이곳에 넣으면 쪽지가 뷰페이지에서 2개씩 나타나고 사라짐
+        where rnum between #{startNo} and #{endNo}
+    </select>
+
+    <select id="memoReceiverCount" parameterType="int" resultType="int">
+        select count(*)
+        from memo
+        where receiverID = #{userID}
+          and deleted = 0
+    </select>
+
+    <select id="memoDeletedList" parameterType="java.util.HashMap" resultType="mDTO">
+        select *
+        from (select rownum rnum, AA.*
+              from (select *
+                    from memo
+                        where receiverID = #{userID}
+                        and deleted = 1
+                    order by memoID desc) AA)
+        where rnum between #{startNo} and #{endNo}
+    </select>
+
+    <select id="memoSelectDeleteCount" parameterType="int" resultType="int">
+        select count(*)
+        from memo
+        where receiverID = #{userID}
+          and deleted = 1
+    </select>
+
+    <select id="memoImportantList" parameterType="java.util.HashMap" resultType="mDTO">
+        select *
+        from (select rownum rnum, AA.*
+              from (select *
+                    from memo
+                        where receiverID = #{userID}
+                        and important = 1 and deleted = 0
+                    order by memoID desc) AA)
+        where rnum between #{startNo} and #{endNo}
+    </select>
+
+    <select id="memoSelectImportantCount" parameterType="int" resultType="int">
+        select count(*)
+        from memo
+        where receiverID = #{userID}
+          and important = 1 and deleted = 0
+    </select>
+
+    <select id="memoMarkedList" parameterType="java.util.HashMap" resultType="mDTO">
+        select *
+        from (select rownum rnum, AA.*
+              from (select *
+                    from memo
+                        where receiverID = #{userID}
+                        and marked = 1 and deleted = 0
+                    order by memoID desc) AA)
+        where rnum between #{startNo} and #{endNo}
+    </select>
+
+    <select id="memoSelectMarkedCount" parameterType="int" resultType="int">
+        select count(*)
+        from memo
+        where receiverID = #{userID}
+          and marked = 1 and deleted = 0
+    </select>
+
+    <select id="memoNewList" parameterType="java.util.HashMap" resultType="mDTO">
+        select *
+        from (select rownum rnum, AA.*
+              from (select *
+                    from memo
+                    where receiverID = #{userID}
+                      and isnew = 0 and deleted = 0
+                    order by memoID desc) AA)
+        where rnum between #{startNo} and #{endNo}
+    </select>
+
+    <select id="memoSelectNewCount" parameterType="int" resultType="int">
+        select count(*)
+        from memo
+        where receiverID = #{userID}
+          and isnew = 0 and deleted = 0
+    </select>
+
+    <!--
+        &lt;!&ndash;보낸메일(보류)&ndash;&gt;
+        <select id="selectByUserID" parameterType="java.util.HashMap" resultType="mDTO">
+            select *
+            from (select rownum rnum, AA.*
+                  from (select *
+                        from memo
+                        order by memoID desc) AA)
+            where userID = #{userID}
+              and deleted = 0
+              and rnum between #{startNo} and #{endNo}
+        </select>
+    -->
+
+    <!--작성-->
+    <insert id="memoInsert" parameterType="mDTO">
+        insert into memo(memoID, subject, content, userID, "userName", receiverID, accountID, important)
+        values (memo_memoID_seq.nextval, #{subject}, #{content}, #{userID}, #{userName}, #{receiverID}, #{accountID},
+                #{important})
+    </insert>
+
+    <!--쓰레기-->
+    <update id="memoDelete" parameterType="int">
+        update memo
+        set deleted=1
+        where memoID = #{memoID}
+    </update>
+
+    <!--삭제-->
+    <delete id="memoDeleteOK" parameterType="int">
+        delete
+        from memo
+        where memoID = #{memoID}
+    </delete>
+
+    <!--복구-->
+    <update id="memoRestore" parameterType="int">
+        update memo
+        set deleted=0
+        where memoID = #{memoID}
+    </update>
+
+    <!--읽음-->
+    <select id="memoRead" parameterType="int" resultType="mDTO">
+        update memo
+        set isnew = 1
+        where memoID = #{memoID}
+    </select>
+
+    <!--북마크-->
+    <update id="memoMark" parameterType="int">
+        update memo
+        set marked = 1
+        where memoID = #{memoID}
+    </update>
+
+    <!--북마크 해제-->
+    <update id="memoMarkGG" parameterType="int">
+        update memo
+        set marked = 0
+        where memoID = #{memoID}
+    </update>
+
+    <!--중요-->
+    <update id="memoImportant" parameterType="int">
+        update memo
+        set important = 1
+        where memoID = #{memoID}
+    </update>
+
+
+    <select id="selectLastInform" parameterType="int" resultType="mDTO">
+        SELECT * FROM memo
+        WHERE receiverID = #{userID} AND ROWNUM = 1
+          AND isnew = 0
+        ORDER BY memoID DESC
+    </select>
+</mapper>

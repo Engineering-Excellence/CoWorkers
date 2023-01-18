@@ -14,4 +14,5 @@ public interface UserInfoService {
 
     List<UserInfoDTO> select(String accountID);
 
+    int selectUserID(String accountID); // 쪽지 보낸이 ID를 가져오기 위한 메서드
 }

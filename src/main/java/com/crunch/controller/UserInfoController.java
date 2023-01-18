@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@SessionAttributes("userInfo")
+@SessionAttributes({"userInfo","userID"})
 @Slf4j
 @RequestMapping("/")
 public class UserInfoController {
@@ -50,6 +50,7 @@ public class UserInfoController {
 
                 model.addAttribute("userInfoDTO", userInfoDTO);
                 model.addAttribute("userInfo", userInfo);
+                model.addAttribute("userID", userInfo.get(0).getUserID());
 
                 return "userInfo/mainView";
             } else {

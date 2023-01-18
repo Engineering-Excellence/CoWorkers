@@ -8,5 +8,6 @@
         <typeAlias alias="userInfoDTO" type="com.crunch.domain.UserInfoDTO"/>
         <typeAlias alias="wDTO" type="com.crunch.domain.WorkDTO"/>
         <typeAlias alias="eDTO" type="com.crunch.domain.EventDTO"/>
+        <typeAlias alias="mDTO" type="com.crunch.domain.MemoDTO"/>
     </typeAliases>
 </configuration>
