@@ -11,7 +11,7 @@
 <html lang="ko">
 
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -55,7 +55,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                    <li><a href="new"><img width="45" src="../resources/images/M"></a></li>
+                <li><button type="button" onclick="alarmListMove()"
+                            class="newB">
+                    <span id="alarm-span"  class="position-absoluteposition-absolute top-0 end-0 translate-middle badge border border-light rounded-circle bg-danger p-2">
+                    <span class="alarm-span-count" id="alarm-span-count">
+                    </span><a href="new"><img width="45" src="../../resources/images/newM.png"></a></span>
+                </button></li>
                 <li><a href="#">프로필</a></li>
                 <li><a href="logout">로그아웃</a></li>
             </ul>
@@ -83,7 +88,6 @@
                                 <li><a href="memoInsert">쪽지쓰기</a></li>
                                 <li><a href="memo">전체 쪽지함</a></li>
                                 <li><a href="new">신규 쪽지함</a></li>
-                                <li><a href="new">신규 쪽지함</a></li>
                                 <li><a href="important">중요 쪽지함</a></li>
                                 <li><a href="marked">관심 쪽지함</a></li>
                                 <li><a href="trash">휴지통</a></li>
@@ -93,11 +97,6 @@
                 </div>
             </ul>
         </div>
-        <button type="button" onclick="alarmListMove()"
-                class="btn btn-sm btn-#3c3c3c; position-relative">
-            <i class="bi bi-bell-fill" style="font-size: 1.8rem; color: white"></i><span id="alarm-span"
-                                                                                         class="position-absoluteposition-absolute top-0 end-0 translate-middle badge border border-light rounded-circle bg-danger p-2"><span
-                class="" id="alarm-span-count"></span></span>
-        </button>
+
 
 

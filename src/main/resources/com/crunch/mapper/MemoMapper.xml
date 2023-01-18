@@ -175,9 +175,9 @@
 
 
     <select id="selectLastInform" parameterType="int" resultType="mDTO">
-        SELECT * FROM memo
-        WHERE receiverID = #{userID} AND ROWNUM = 1
-          AND isnew = 0
-        ORDER BY memoID DESC
+        SELECT R.* , (SELECT count(memoID) FROM memo
+                      WHERE receiverID=#{userID} AND isnew = 0 ) countInform
+        FROM (SELECT  * FROM memo i WHERE receiverID=#{userID} AND isnew = 0   ORDER BY memoID DESC
+             ) R WHERE  ROWNUM = 1
     </select>
 </mapper>

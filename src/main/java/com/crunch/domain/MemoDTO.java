@@ -18,5 +18,6 @@ public class MemoDTO {
     private int isnew;
     private int marked;
     private int important;
+    private int countInform;
 
 }
