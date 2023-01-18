@@ -143,5 +143,6 @@ div > ul > li > ul > li {
     margin-top: 10px;
 }
 .newB{
-    background-color: rgba(180,167,94,0);
+    background-color: rgba(0,0,0,0);
+    border: none;
 }

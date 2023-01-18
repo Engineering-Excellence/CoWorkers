@@ -4,9 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-
 <%-- 조우철 --%>
 <%@include file="/WEB-INF/views/header.jsp"%>
+<%@include file="/WEB-INF/views/alarm.jsp"%>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
             <div class="table-responsive">

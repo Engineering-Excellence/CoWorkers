@@ -7,6 +7,7 @@
 
 <%-- 조우철 --%>
 <%@include file="/WEB-INF/views/header.jsp"%>
+<%@include file="/WEB-INF/views/alarm.jsp"%>
 <c:set var="date" value="${Date(Date().getTime()-60*60*24*1000)}"/>
 <c:set var="dday" value="${Date(Date().getTime()+60*60*24*1000)}"/>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

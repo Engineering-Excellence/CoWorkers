@@ -23,9 +23,9 @@
     <link href="css/coWorkers.css" rel="stylesheet">
     <!-- sockJS -->
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-    <script>
-
-    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="../../resources/js/notification.js"></script>
 </head>
 
 <body>
@@ -55,9 +55,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+                <%--notification.js의 obj.countInform == null--%>
                 <li><button type="button" onclick="alarmListMove()"
                             class="newB">
-                    <span id="alarm-span"  class="position-absoluteposition-absolute top-0 end-0 translate-middle badge border border-light rounded-circle bg-danger p-2">
+                    <span id="alarm-span" style="display:none" class="position-absoluteposition-absolute top-0 end-0 translate-middle badge border border-light rounded-circle bg-danger p-2">
                     <span class="alarm-span-count" id="alarm-span-count">
                     </span><a href="new"><img width="45" src="../../resources/images/newM.png"></a></span>
                 </button></li>
