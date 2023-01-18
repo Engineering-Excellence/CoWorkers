@@ -1,5 +1,6 @@
 package com.crunch.service;
 
+import com.crunch.domain.BoardAttachDTO;
 import com.crunch.domain.BoardDTO;
 
 import java.util.HashMap;
@@ -23,4 +24,5 @@ public interface BoardService {
 
     boolean delete(int postID);
 
+    List<BoardAttachDTO> selectAttachList(int postID);
 }

@@ -10,7 +10,7 @@ public interface BoardCommentService {
 
     List<BoardCommentDTO> selectCommentList(int postID);
 
-    void commentInsert(BoardCommentDTO commentDTO);
+    boolean commentInsert(BoardCommentDTO commentDTO);
 
     boolean commentDelete(int commentID);
 

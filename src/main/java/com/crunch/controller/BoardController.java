@@ -160,10 +160,11 @@ public class BoardController {
 
             String uploadFileName = multipartFile.getOriginalFilename();
 
-            // IE has file path
+            // IE 파일 경로
             uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("/") + 1);
             log.info("only file name: {}", uploadFileName);
 
+            // 중복 파일명 구분을 위한 랜덤 UUID 생성
             UUID uuid = UUID.randomUUID();
 
             uploadFileName = uuid + "_" + uploadFileName;

@@ -10,7 +10,7 @@ public interface BoardCommentMapper {
 
     List<BoardCommentDTO> boardSelectCommentList(int postID);
 
-    void boardCommentInsert(BoardCommentDTO commentDTO);
+    int boardCommentInsert(BoardCommentDTO commentDTO);
 
     int boardCommentDelete(int commentID);
 

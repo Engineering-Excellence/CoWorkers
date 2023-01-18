@@ -34,11 +34,11 @@ public class BoardCommentServiceImpl implements BoardCommentService {
     }
 
     @Override
-    public void commentInsert(BoardCommentDTO commentDTO) {
+    public boolean commentInsert(BoardCommentDTO commentDTO) {
 
         log.info("BoardCommentServiceImple의 commentInsert() 실행");
 
-        mapper.boardCommentInsert(commentDTO);
+        return mapper.boardCommentInsert(commentDTO) == 1;
     }
 
     @Override

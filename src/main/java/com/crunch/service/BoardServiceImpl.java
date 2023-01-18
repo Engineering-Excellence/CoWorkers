@@ -1,5 +1,6 @@
 package com.crunch.service;
 
+import com.crunch.domain.BoardAttachDTO;
 import com.crunch.domain.BoardDTO;
 import com.crunch.mapper.BoardAttachMapper;
 import com.crunch.mapper.BoardMapper;
@@ -98,5 +99,11 @@ public class BoardServiceImpl implements BoardService {
         return mapper.boardDelete(postID) == 1;
     }
 
+    @Override
+    public List<BoardAttachDTO> selectAttachList(int postID) {
 
+        log.info("BoardServiceImpl의 getAttachList() 실행 → postID: {}", postID);
+
+        return attachMapper.boardSelectAttachList(postID);
+    }
 }
