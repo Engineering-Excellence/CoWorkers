@@ -40,6 +40,8 @@ public class BoardController {
     private BoardCommentService commentService;
     private BoardList boardList;
     private BoardCommentList boardCommentList;
+    static String uploadPath = "/Users/kyle/Documents/Study/CRUNCH/CoWorkers/upload";
+//    static String uploadPath = "";
 
     // 게시글 목록 불러오기
     @GetMapping(value = "/board")
@@ -139,15 +141,14 @@ public class BoardController {
     }
 
     // 파일 업로드 AJAX
-    @PostMapping(value = "//uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
 
         log.info("uploadAjaxPost() 실행 → uploadFile: {}", (Object[]) uploadFile);
 
         List<AttachFileDTO> attachList = new ArrayList<>();
-        String uploadPath = "/Users/kyle/Documents/Study/CRUNCH/CoWorkers_Spring/upload";
-//        String uploadPath = "";
+//        String uploadPath = "/Users/kyle/Documents/Study/CRUNCH/CoWorkers/upload";
 
         log.info("upload path: {}", uploadPath);
 
@@ -278,7 +279,9 @@ public class BoardController {
 
         log.info("downloadFile() 실행 → fileName: {}", fileName);
 
-        FileSystemResource resource = new FileSystemResource(fileName);
+//        String uploadPath = "/Users/kyle/Documents/Study/CRUNCH/CoWorkers/upload";
+
+        FileSystemResource resource = new FileSystemResource(uploadPath + fileName);
         log.info("resource: {}", resource);
         if (!resource.exists()) {
             log.error("{} 파일이 존재하지 않습니다.", resource);
