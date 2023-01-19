@@ -21,10 +21,11 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/coWorkers.css" rel="stylesheet">
     <!-- sockJS -->
-    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-    <script src="../../resources/js/notification.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.6.1.min.js" defer></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js" defer></script>
+    <script src="../../resources/js/notification.js" defer></script>
+    <script type="text/javascript" src="/js/memo.js" defer></script>
 </head>
 
 <body>
@@ -98,6 +99,3 @@
                 </div>
             </ul>
         </div>
-
-
-

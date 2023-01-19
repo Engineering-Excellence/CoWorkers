@@ -46,7 +46,7 @@ public class BoardController {
     // 게시글 목록 불러오기
     @GetMapping(value = "/board")
     public String board(Model model,
-                        @RequestParam(value = "/currentPage", required = false, defaultValue = "1") int currentPage) {
+                        @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
 
         log.info("board() 실행");
 

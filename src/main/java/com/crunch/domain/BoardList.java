@@ -11,9 +11,9 @@ import java.util.List;
 public class BoardList {
 
     private List<BoardDTO> list = new ArrayList<>();
-    private int pageSize;
-    private int totalCount;
-    private int currentPage;
+    private int pageSize = 10;
+    private int totalCount = 0;
+    private int currentPage = 1;
     private int totalPage = 0;
     private int startNo = 0;
     private int endNo = 0;
