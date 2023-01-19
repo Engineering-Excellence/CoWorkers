@@ -1,134 +1,11 @@
-<%@ page import="java.util.Map" %>
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@include file="/WEB-INF/views/header.jsp" %>
+<%@include file="/WEB-INF/views/alarm.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%-- Kyle 글 쓰기 --%>
-<!DOCTYPE html>
-<html lang="ko">
-
-<!-- head 시작 -->
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/images/favicon_16.png">
-
-    <title>CoWorkers</title>
-
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/coWorkers.css" rel="stylesheet">
-
-    <style>
-        /*.uploadResult {
-            width: 100%;
-            background-color: gray;
-        }*/
-
-        .uploadResult ul {
-            display: flex;
-            flex-flow: row;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .uploadResult ul li {
-            list-style: none;
-            padding: 10px;
-            align-content: center;
-            text-align: center;
-        }
-
-        .uploadResult ul li img {
-            width: 100px;
-        }
-
-        .uploadResult ul li span {
-            color: red;
-        }
-
-        .bigPictureWrapper {
-            position: absolute;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            /*background-color: gray;*/
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .bigPicture {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .bigPicture img {
-            width: 600px;
-        }
-    </style>
-
-</head>
-<!-- head 끝 -->
-
-<!-- body 시작 -->
-<body>
-
-<fmt:requestEncoding value="UTF-8"/>
-<%
-    System.out.println("boardDTO: " + pageContext.findAttribute("boardDTO"));
-    System.out.printf("SESSION: " + session.getAttribute("userInfo"));
-
-    Map<String, String[]> map = request.getParameterMap();
-    for (Map.Entry<String, String[]> entry : map.entrySet()) {
-        System.out.printf("%s : %s%n", entry.getKey(), String.join(", ", entry.getValue()));
-    }
-
-%>
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="mainView">coWorkers</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">프로필</a></li>
-                <li><a href="#">환경설정</a></li>
-                <li><a href="logout">로그아웃</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
-        </div>
-    </div>
-</nav>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li><a href="board">게시글</a></li>
-                <li><a href="work">업무관리</a></li>
-                <li><a href="event">일정관리</a></li>
-            </ul>
-        </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">게시판</h1>
 
@@ -215,6 +92,7 @@
     </div>
 </div>
 
+<link rel="stylesheet" href="/css/boardInsert.css">
 <script type="text/javascript" src="/js/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/check.js"></script>
@@ -399,12 +277,13 @@
                     let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName)
                     str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid +
                         "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "'><div>" +
+                        "<a href=\"javascript:showImage(\'" + encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName) + "\')\">" +
                         "<span>" + obj.fileName + "</span>" +
                         "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image' " +
                         "class='btn btn-sm btn-warning btn-circle'>" +
                         "<i class='fa fa-times'>×</i></button><br/>" +
                         "<img src='/display?fileName=" + fileCallPath + "'>" +
-                        "</div></li>"
+                        "</a></div></li>"
                 } else {
                     let fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName)
                     let fileLink = fileCallPath.replace(new RegExp(/\\/g), "/")
