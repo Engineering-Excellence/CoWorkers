@@ -135,7 +135,7 @@
             <div class="table-responsive">
 
                 <!-- 글 작성 부분 -->
-                <form id="formObj" class="m-" action="boardInsertOK" method="post">
+                <form id="formObj" class="m-" action="boardInsertOK" method="post" onsubmit="return boardCheck(this)">
                     <table class="table table-striped" style="width:1500px; margin-left: auto; margin-right: auto;">
                         <tr class="table-primary">
                             <th colspan="15" style="font-size: 30px; text-align: center;">글 작성</th>
@@ -217,6 +217,7 @@
 
 <script type="text/javascript" src="/js/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/check.js"></script>
 <script>
     'use strict'
 
@@ -256,7 +257,7 @@
             })
 
             console.log(attachList)
-            formObj.append('attachList', attachList).submit()
+            formObj.append('attachList', attachList)
         })
 
         // 업로드 파일 종류 및 크기 제한

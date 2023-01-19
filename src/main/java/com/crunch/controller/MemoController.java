@@ -5,6 +5,7 @@ import com.crunch.domain.MemoList;
 import com.crunch.domain.UserInfoDTO;
 import com.crunch.service.MemoService;
 import com.crunch.service.UserInfoService;
+import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -156,9 +158,15 @@ public class MemoController {
     }
 
     @GetMapping(value = "memoInsert")
-    public String memoInsert() {
+    public String memoInsert(Model model) {
 
         log.info("MemoController memoInsert()");
+//        get all accountID from database
+        List<String> allAccountID = service.allAccountID();
+        log.info("accountList: {}",allAccountID.toString());
+//        allAccountID to json
+        model.addAttribute("allAccountID", allAccountID);
+
 
 
         return "memo/memoInsert";

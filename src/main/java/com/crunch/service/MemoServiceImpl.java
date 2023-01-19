@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -123,13 +124,15 @@ public class MemoServiceImpl implements MemoService {
         return mapper.selectByMemoID(memoID);
     }
 
-
+    @Override
     public MemoDTO selectLastInform(int userID) {
         return mapper.selectLastInform(userID);
     }
 
-
-
+    @Override
+    public List<String> allAccountID() {
+        return mapper.allAccountID();
+    }
 
 
 }

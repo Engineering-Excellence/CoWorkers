@@ -5,6 +5,7 @@ import com.crunch.domain.MemoDTO;
 import java.util.HashMap;
 import java.util.List;
 
+
 public interface MemoService {
     int memoSelectCount();
 
@@ -47,4 +48,6 @@ public interface MemoService {
     void markGG(int memoID);
 
     MemoDTO selectLastInform(int userID);
+
+    List<String> allAccountID();
 }

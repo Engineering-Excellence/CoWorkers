@@ -173,11 +173,16 @@
         where memoID = #{memoID}
     </update>
 
-
+    <!--안읽은 memo 갯수와 마지막 memo-->
     <select id="selectLastInform" parameterType="int" resultType="mDTO">
         SELECT R.* , (SELECT count(memoID) FROM memo
                       WHERE receiverID=#{userID} AND isnew = 0 ) countInform
         FROM (SELECT  * FROM memo i WHERE receiverID=#{userID} AND isnew = 0   ORDER BY memoID DESC
              ) R WHERE  ROWNUM = 1
+    </select>
+
+    <!--모든 accountID 검색-->
+    <select id="allAccountID"  resultType="String">
+        select accountID from UserInfo
     </select>
 </mapper>

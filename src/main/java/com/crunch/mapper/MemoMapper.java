@@ -2,6 +2,7 @@ package com.crunch.mapper;
 
 import com.crunch.domain.MemoDTO;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,4 +48,6 @@ public interface MemoMapper {
     void memoMarkGG(int memoID);
 
     MemoDTO selectLastInform(int userID);
+
+    List<String> allAccountID();
 }
