@@ -13,7 +13,7 @@
 
             <div class="table-responsive">
 
-                <form class="m-" action="workInsertOK" method="post">
+                <form class="m-" action="workInsertOK" method="post" onsubmit="return boardCheck(this)">
                     <table class="table" style="width:1500px; margin-left: auto; margin-right: auto;">
                         <tr class="table-primary">
                             <th colspan="10" style="font-size: 30px; text-align: center;">업무 작성</th>
@@ -120,6 +120,7 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script src="js/workInsert.js"></script>
 <script type="text/javascript" src="/resources/js/memo.js"></script>
+<script type="text/javascript" src="/js/check.js"></script>
 </body>
 
 </html>

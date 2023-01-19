@@ -40,7 +40,7 @@
         <beans:property name="maxUploadSize" value="104857560"/>
         <!-- 1024 * 1024 * 2 bytes 2MB -->
         <beans:property name="maxUploadSizePerFile" value="2097152"/>
-        <beans:property name="uploadTempDir" value="file:C:/Users/tjoeun-jr-906-11/Downloads"/>
+        <beans:property name="uploadTempDir" value="file:D:/bc88/silverTier/CoWorkers/upload"/>
         <beans:property name="maxInMemorySize" value="10485756"/>
     </beans:bean>
     <!--<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>-->

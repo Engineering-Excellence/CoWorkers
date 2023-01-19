@@ -146,7 +146,7 @@ public class BoardController {
         log.info("uploadAjaxPost() 실행 → uploadFile: {}", (Object[]) uploadFile);
 
         List<AttachFileDTO> attachList = new ArrayList<>();
-        String uploadPath = "C:\\Users\\tjoeun-jr-906-11\\Downloads";
+        String uploadPath = "D:\\bc88\\silverTier\\CoWorkers\\upload";
 
         log.info("upload path: {}", uploadPath);
 

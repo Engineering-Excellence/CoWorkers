@@ -10,11 +10,12 @@
 <%-- 조우철 --%>
 <%@include file="/WEB-INF/views/header.jsp"%>
 <%@include file="/WEB-INF/views/alarm.jsp"%>
+<input name="accountList" type="hidden" value="${allAccountID}">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
             <div class="table-responsive">
 
-                <form class="m-" action="memoInsertOK" method="post">
+                <form class="m-" action="memoInsertOK" method="post" onsubmit="return memoCheck(this)">
                     <table class="table" style="width:1500px; margin-left: auto; margin-right: auto;">
                         <tr class="table-primary">
                             <th colspan="10" style="font-size: 30px; text-align: center;">쪽지쓰기</th>
@@ -77,6 +78,7 @@
 <script type="text/javascript" src="./js/bootstrap.min.js"></script>
 <script src="/resources/js/workInsert.js"></script>
 <script type="text/javascript" src="/resources/js/memo.js"></script>
+<script type="text/javascript" src="/js/check.js"></script>
 </body>
 
 </html>
