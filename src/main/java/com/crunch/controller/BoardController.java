@@ -146,7 +146,8 @@ public class BoardController {
         log.info("uploadAjaxPost() 실행 → uploadFile: {}", (Object[]) uploadFile);
 
         List<AttachFileDTO> attachList = new ArrayList<>();
-        String uploadPath = "C:\\Users\\tjoeun-jr-906-11\\Downloads";
+        String uploadPath = "/Users/kyle/Documents/Study/CRUNCH/CoWorkers_Spring/upload";
+//        String uploadPath = "";
 
         log.info("upload path: {}", uploadPath);
 
@@ -249,19 +250,19 @@ public class BoardController {
         File file;
 
 //        try {
-            file = new File(URLDecoder.decode(fileName, StandardCharsets.UTF_8));
+        file = new File(URLDecoder.decode(fileName, StandardCharsets.UTF_8));
+
+        file.delete();
+        log.info("업로드 파일 삭제");
+
+        if (type.equals("image")) {
+            String largeFileName = file.getAbsolutePath().replace("s_", "");
+            log.info("largeFileName: {}", largeFileName);
+            file = new File(largeFileName);
 
             file.delete();
-            log.info("업로드 파일 삭제");
-
-            if (type.equals("image")) {
-                String largeFileName = file.getAbsolutePath().replace("s_", "");
-                log.info("largeFileName: {}", largeFileName);
-                file = new File(largeFileName);
-
-                file.delete();
-                log.info("업로드 이미지 원본 삭제");
-            }
+            log.info("업로드 이미지 원본 삭제");
+        }
 //        } catch (UnsupportedEncodingException e) {
 //            e.printStackTrace();
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);

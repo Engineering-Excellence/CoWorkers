@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping(value = "/replies/")
 @org.springframework.web.bind.annotation.RestController
 @AllArgsConstructor
@@ -19,7 +21,7 @@ public class RestController {
 
     // consumes & produces: JSON 데이터만 처리하고 문자열 반환, @RequestBody: JSON을 DTO로 변환
     // 신규 댓글 작성
-    @PostMapping(value = "/new", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
+    @RequestMapping(value = "/new", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> create(@RequestBody BoardCommentDTO boardCommentDTO) {
 
         log.info("create() → boardCommentDTO: {}", boardCommentDTO);
@@ -43,5 +45,14 @@ public class RestController {
         return commentService.commentUpdate(boardCommentDTO)
                 ? new ResponseEntity<>("success", HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    // 댓글 조회
+    @GetMapping(value = "/pages/{postID}/{currentPage}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public ResponseEntity<List<BoardCommentDTO>> getList(@PathVariable("postID") int postID, @PathVariable("currentPage") int currentPage) {
+
+        log.info("getList() → postID: {}, currentPage: {}", postID, currentPage);
+
+        return new ResponseEntity<>(commentService.selectCommentList(postID), HttpStatus.OK);
     }
 }

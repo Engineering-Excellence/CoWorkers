@@ -162,6 +162,7 @@
 
             <!-- 댓글 폼 -->
             <form class="m-3" action="boardCommentOK" method="post" name="commentForm">
+                <%--<form class="m-3" action="javascript:action()" method="post" name="commentForm">--%>
                 <table class="table table-striped" style="width: 100%; margin-left: auto; margin-right: auto;">
                     <tr class="table-success">
                         <th colspan="4" style="font-size: 30px; text-align: center;">댓글 보기(${boardDTO.commentCount}개)
