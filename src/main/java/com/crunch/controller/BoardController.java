@@ -83,7 +83,7 @@ public class BoardController {
                            @RequestParam("postID") int postID,
                            @RequestParam("currentPage") int currentPage) {
 
-        log.info("boardHit() 실행");
+        log.info("Hit() 실행");
 
         service.hit(postID);
 
@@ -99,7 +99,7 @@ public class BoardController {
                             @RequestParam("postID") int postID,
                             @RequestParam("currentPage") int currenPage) {
 
-        log.info("boardView() 실행");
+        log.info("View() 실행");
 
         BoardDTO boardDTO = service.selectByPostID(postID);
         boardDTO.setCommentCount(commentService.commentCount(postID));
@@ -111,6 +111,16 @@ public class BoardController {
         model.addAttribute("boardCommentList", boardCommentList);
 
         return "board/boardView";
+    }
+
+    // 첨부파일 목록 조회
+    @GetMapping(value = "/boardSelectAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<BoardAttachDTO>> boardSelectAttachList(int postID) {
+
+        log.info("SelectAttachList() 실행 → postID: {}", postID);
+
+        return new ResponseEntity<>(service.selectAttachList(postID), HttpStatus.OK);
     }
 
     // 게시글 쓰기 페이지 진입
@@ -126,7 +136,7 @@ public class BoardController {
     @PostMapping(value = "/boardInsertOK")
     public String boardInsertOK(BoardDTO boardDTO, RedirectAttributes rttr) {
 
-        log.info("boardInsertOK() 실행 → boardDTO: {}", boardDTO);
+        log.info("InsertOK() 실행 → boardDTO: {}", boardDTO);
 
         if (boardDTO.getAttachList() != null) {
             boardDTO.getAttachList().forEach(attachDTO -> log.info("{}", attachDTO));
@@ -316,7 +326,7 @@ public class BoardController {
                               @RequestParam("postID") int postID,
                               @RequestParam("currentPage") int currentPage) {
 
-        log.info("boardUpdate() 실행");
+        log.info("Update() 실행");
 
         BoardDTO boardDTO = service.selectByPostID(postID);
 
@@ -331,7 +341,7 @@ public class BoardController {
     public String boardUpdateOK(Model model, BoardDTO boardDTO,
                                 @RequestParam("currentPage") int currentPage) {
 
-        log.info("boardUpdateOK() 실행");
+        log.info("UpdateOK() 실행");
 
         service.update(boardDTO);
 
@@ -347,7 +357,7 @@ public class BoardController {
                               @RequestParam("postID") int postID,
                               @RequestParam("currentPage") int currentPage) {
 
-        log.info("boardDelete() 실행");
+        log.info("Delete() 실행");
 
         service.delete(postID);
 
@@ -363,7 +373,7 @@ public class BoardController {
                                  @RequestParam("mode") String mode,
                                  @RequestParam("currentPage") int currentPage) {
 
-        log.info("boardCommentOK() 실행");
+        log.info("CommentOK() 실행");
 
         switch (mode) {
             case "insert":
@@ -389,7 +399,7 @@ public class BoardController {
                                      @RequestParam("postID") int postID,
                                      @RequestParam("currentPage") int currentPage) {
 
-        log.info("boardCommentDelete() 실행");
+        log.info("CommentDelete() 실행");
 
         commentService.commentDelete(commentID);
 

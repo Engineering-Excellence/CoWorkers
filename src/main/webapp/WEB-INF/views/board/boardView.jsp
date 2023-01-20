@@ -233,6 +233,19 @@
 
 <script type="text/javascript" src="/js/board.js"></script>
 
+<!-- 첨부파일 Ajax -->
+<script>
+    $(document).ready(function () {
+        (function () {
+            let postID = '<c:out value="${boardDTO.postID}"/>'
+
+            $.getJSON('/boardSelectAttachList', {postID: postID}, arr => {
+                console.log(arr)
+            })
+        })()
+    })
+</script>
+
 </body>
 
 </html>

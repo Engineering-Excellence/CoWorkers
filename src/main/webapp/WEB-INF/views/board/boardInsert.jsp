@@ -111,7 +111,7 @@
     }
 
     // 파일 업로드 AJAX
-    $(document).ready(() => {
+    $(() => {
 
         // let formObj = $("form[role='form']")
         let formObj = $("#formObj")
