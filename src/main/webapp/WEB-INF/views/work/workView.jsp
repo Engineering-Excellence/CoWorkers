@@ -174,8 +174,10 @@
 </div>
 </div>
 
+
+<%@include file="/WEB-INF/views/scripts.jsp"%>
 <script src="js/workDelete.js"></script>
 
 </body>
-
+<%@include file="/WEB-INF/views/footer.jsp"%>
 </html>

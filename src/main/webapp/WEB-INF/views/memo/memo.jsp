@@ -134,7 +134,8 @@
         </div>
     </div>
 </div>
+<%@include file="/WEB-INF/views/scripts.jsp"%>
 
 </body>
-
+<%@include file="/WEB-INF/views/footer.jsp"%>
 </html>

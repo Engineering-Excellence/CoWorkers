@@ -77,8 +77,9 @@
 </div>
 </div>
 
+<%@include file="/WEB-INF/views/scripts.jsp"%>
 <script src="/resources/js/workDelete.js"></script>
 
 </body>
-
+<%@include file="/WEB-INF/views/footer.jsp"%>
 </html>

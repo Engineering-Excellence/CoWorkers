@@ -20,12 +20,9 @@
     <link rel="icon" href="images/favicon_16.png">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/coWorkers.css" rel="stylesheet">
-    <!-- sockJS -->
+
     <script type="text/javascript" src="/js/jquery-3.6.1.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js" defer></script>
-    <script src="../../resources/js/notification.js" defer></script>
-    <script type="text/javascript" src="/js/memo.js" defer></script>
+
 </head>
 
 <body>

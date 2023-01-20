@@ -70,8 +70,10 @@
     </div>
 </div>
 
+<%@include file="/WEB-INF/views/scripts.jsp"%>
 <script src="/resources/js/workInsert.js"></script>
 <script type="text/javascript" src="/resources/js/check.js"></script>
-</body>
 
+</body>
+<%@include file="/WEB-INF/views/footer.jsp"%>
 </html>

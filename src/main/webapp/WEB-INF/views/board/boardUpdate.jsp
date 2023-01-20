@@ -77,9 +77,9 @@
     </div>
 </div>
 
+
+<%@include file="/WEB-INF/views/scripts.jsp"%>
 <script type="text/javascript" src="/js/board.js"></script>
-
 </body>
-<!-- body 끝 -->
-
+<%@include file="/WEB-INF/views/footer.jsp"%>
 </html>

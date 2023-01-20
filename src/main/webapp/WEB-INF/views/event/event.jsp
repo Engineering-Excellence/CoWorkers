@@ -3,10 +3,10 @@
 <%@page import="java.sql.Date" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.Calendar" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html>
@@ -116,10 +116,6 @@
         </div>
     </div>
 </div>
-<br/><br/>
-
-
-<!-- Modal_insert -->
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -247,8 +243,11 @@
     </div>
 </div>
 
-<script type="text/javascript" src="/js/jquery-3.6.1.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+<!-- Modal_insert -->
+<br/><br/>
+
+<%@include file="/WEB-INF/views/scripts.jsp"%>
 <script type="text/javascript" src="/js/event/event.js"></script>
 
 <!--        // 사이 날짜 배열로 반환 함수
@@ -263,4 +262,5 @@
           return result
        }  -->
 </body>
+<%@include file="/WEB-INF/views/footer.jsp"%>
 </html>
