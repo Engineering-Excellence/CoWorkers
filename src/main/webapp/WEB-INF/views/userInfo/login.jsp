@@ -21,7 +21,7 @@
     <div class="main-top">
         <header id="header" class="header">Crunch Mode</header>
     </div>
-    <div id="container" class="container">
+    <div id="container" class="container" style="margin-top: 30px;">
         <form action="loginOK" method="post">
             <p>CO-WORKERS</p>
             <hr width="650">
@@ -44,8 +44,10 @@
                         <input id="submit" class="btn btn-primary" type="submit" value="로그인"></input>
                         <input class="btn btn-success" type="button" value="회원가입" width="82"
                                onclick="location.href='registerForm'"></input>
-                        <!-- <input class="btn btn-warning" type="button" value="ID/PW 찾기" width="120" onclick="location.href='idPwFind'"></input> -->
-                        <!-- Terry, ID/PW 찾기 추후 업데이트 -->
+                        <input class="btn btn-warning" type="button" value="ID 찾기" width="120" 
+                        	   onclick="location.href='idFindView'"></input>
+                        <input class="btn btn-warning" type="button" value="PW 찾기" width="120" 
+                        	   onclick="location.href='pwFindView'"></input>
                     </td>
                 </tr>
             </table>
@@ -53,7 +55,7 @@
     </div>
 </div>
 
-<%@include file="/WEB-INF/views/scripts.jsp"%>
-
+<script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
 </html>

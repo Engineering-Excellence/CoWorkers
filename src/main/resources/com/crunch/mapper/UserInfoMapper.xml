@@ -7,8 +7,8 @@
     <!-- 회원가입 데이터 입력 -->
     <insert id="userInfoInsert" parameterType="userInfoDTO">
         insert into UserInfo (userID, accountID, accountPassword, userName, registerNumber, mobileNumber, gender, email)
-        values (UserInfo_userID_seq.nextval, #{accountID}, #{accountPassword}, #{userName}, #{registerNumber},
-                #{mobileNumber}, #{gender}, #{email})
+        values (userinfo_userID_seq.nextval, #{accountID, jdbcType=VARCHAR}, #{accountPassword, jdbcType=VARCHAR}, #{userName, jdbcType=VARCHAR}, 
+        		#{registerNumber, jdbcType=VARCHAR}, #{mobileNumber, jdbcType=VARCHAR}, #{gender, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR})
     </insert>
 
     <!-- 로그인 아이디 비교 -->
@@ -47,35 +47,60 @@
         from UserInfo
         where accountID = #{accountID}
     </select>
-    <!-- 회원가입시 아이디 / 주민등록번호 중복체크용 유저 리스트 뽑아오기 -->
-    <!-- <select id="userInfoSelectList" resultType="userInfoDTO">
-        select * from UserInfo where accountID = #{accountID}
-    </select> -->
-
-    <!-- 로그인 시 유저정보 가져오기 -->
-    <!-- <select id="userInfoSelectUser" parameterType="userInfoDTO" resultType="userInfoDTO">
-        select * from UserInfo where accountID = #{accountID}
-    </select> -->
-
-    <!-- (ID/PW 찾기 / 추후 업데이트)
-    ID찾기 이름 비교
-    <select id="userInfoCompareName" parameterType="userInfoDTO" resultType="String">
-        select userName from UserInfo where mobileNumber = #{mobileNumber}
+    
+    <!-- 회원가입시 아이디 중복체크용 유저 수 확인 -->
+    <select id="userInfoAccountIDCount" parameterType="String" resultType="int">
+        select count(*) from UserInfo where accountID = #{accountID, jdbcType=VARCHAR}
+    </select>
+    
+    <!-- 회원가입시 주민등록번호 중복체크용 주민등록번호 수 확인 -->
+    <select id="userInfoRegisterNumberCount" parameterType="String" resultType="int">
+        select count(*) 
+        from UserInfo 
+        where registerNumber = #{registerNumber, jdbcType=VARCHAR}
+    </select>
+    
+	<!-- 사원목록 Search -->
+	<select id="getUserInfoList" resultType="userInfoDTO">
+		select * 
+		from userinfo 
+		inner join position 
+		on userinfo.positioncode = position.positioncode
+	</select>
+	
+    <!-- ID찾기 이름 비교 -->
+    <select id="userInfoFindIdByName" parameterType="String" resultType="String">
+        select accountID 
+        from UserInfo 
+        where userName = #{userName, jdbcType=VARCHAR}
     </select>
 
-    ID찾기 이메일 비교
-    <select id="userInfoCompareEmail" parameterType="userInfoDTO" resultType="String">
-        select email from UserInfo where mobileNumber = #{mobileNumber}
+    <!-- ID찾기 이메일 비교 -->
+    <select id="userInfoFindIdByMail" parameterType="String" resultType="String">
+        select accountID 
+        from UserInfo 
+        where email = #{email, jdbcType=VARCHAR}
     </select>
-
-    ID찾기 아이디 가져오기
-    <select id="userInfoSelectUser" parameterType="String" resultType="userInfoDTO">
-        select * from userinfo where userName=#{userName} and email=#{email}
+    
+    <!-- PW찾기 아이디 비교 -->
+  	 <select id="userInfoFindPwById" parameterType="String" resultType="String">
+        select accountPassword
+        from UserInfo 
+        where accountID = #{accountID, jdbcType=VARCHAR}
     </select>
-
-    PW찾기 비밀번호 가져오기
-    <select id="userInfoSelectUser" parameterType="userInfoDTO" resultType="String">
-        select * from userinfo where accountID=#{accountID} and email=#{email}
+    
+    <!-- PW찾기 이름 비교 -->
+  	 <select id="userInfoFindPwByName" parameterType="String" resultType="String">
+        select accountPassword 
+        from UserInfo 
+        where userName = #{userName, jdbcType=VARCHAR}
     </select>
-     -->
+    
+    <!-- PW찾기 이메일 비교 -->
+     <select id="userInfoFindPwByMail" parameterType="String" resultType="String">
+        select accountPassword 
+        from UserInfo 
+        where email = #{email, jdbcType=VARCHAR}
+    </select>
+    
 </mapper>

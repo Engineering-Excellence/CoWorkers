@@ -20,5 +20,7 @@ public class UserInfoDTO {
     private java.sql.Date joinDate; // 계정 입사일자
     private java.sql.Date retireDate; // 계정 탈퇴일자 -- 개인정보 보존 용도(결제 관련 5년, 일반 정보는 보존기간 3년)
     private int positionCode; // FK, 직급코드
+    private String positionName; // FK 이너조인으로 position 테이블에서 불러올 데이터, 직급명
+    private String admin; // FK 이너조인으로 position 테이블에서 불러올 데이터, 관리자권한
 
 }

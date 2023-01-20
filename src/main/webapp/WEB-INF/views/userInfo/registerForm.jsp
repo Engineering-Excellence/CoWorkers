@@ -34,28 +34,29 @@
                 <td>
                     <input id="accountID" class="form-control" type="text" name="accountID"
                            placeholder="가입할 ID를 입력해주세요." autocomplete="off">
-                    <button id="btnId" class="btn btn-primary" type="button" onclick="idCheck()">ID 체크</button>
+                    <button id="btnId" class="btn btn-primary" type="button" onclick="idDupCheck()">ID 체크</button>
+                    <input id="idChkResult" type="hidden" value="true" readonly="readonly">
                 </td>
             </tr>
             <tr>
                 <th class="th1">비밀번호</th>
                 <td colspan="2">
                     <input id="accountPassword" class="form-control" type="password" name="accountPassword"
-                           placeholder="비밀번호를 입력해주세요." maxlength="18" onkeyup="pwCheck()">
+                           placeholder="비밀번호를 입력해주세요." maxlength="18" onblur="pwCheck()">
                 </td>
             </tr>
             <tr>
                 <th class="th1">비밀번호 확인</th>
                 <td colspan="2">
                     <input id="accountPassword2" class="form-control" type="password" name="accountPassword2"
-                           placeholder="비밀번호를 한번 더 입력해주세요." maxlength="18" onkeyup="pwCheck()">
+                           placeholder="비밀번호를 한번 더 입력해주세요." maxlength="18" onblur="pwCheck()">
                 </td>
             </tr>
             <tr>
                 <th class="th1">성함</th>
                 <td colspan="2">
                     <input id="userName" class="form-control" type="text" name="userName" placeholder="이름을 입력해주세요."
-                           autocomplete="off" onkeyup="nameCheck()">
+                           autocomplete="off" onblur="nameCheck()">
                 </td>
             </tr>
             <tr>
@@ -63,16 +64,17 @@
                 <td colspan="2">
                     <input id="registerNumber" class="form-control" type="text" name="registerNumber" maxlength="13"
                            placeholder="주민등록번호 13자리를 입력해주세요" autocomplete="off">
-                    <button id="registerCheck" class="btn btn-primary" type="button" name="registerCheck"
+                    <button id="registerCheck" class="btn btn-primary" type="button" name="registerChk"
                             onclick="regCheck()">유효검사
                     </button>
+                    <input id="regChkResult" type="hidden" value="false">
                 </td>
             </tr>
             <tr>
                 <th class="th1">휴대전화 번호</th>
                 <td colspan="2">
                     <input id="mobileNumber" class="form-control" type="text" name="mobileNumber"
-                           placeholder="' - ' 을 제외한 휴대전화 번호를 입력해주세요." autocomplete="off" onkeyup="mobileCheck()">
+                           placeholder="' - ' 을 제외한 휴대전화 번호를 입력해주세요." autocomplete="off" onblur="mobileCheck()">
                 </td>
             </tr>
             <tr>
@@ -91,13 +93,13 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <h5 id="idCheckMsg" style="color: green; font-weight: bold;"></h5>
-                    <h5 id="pwCheckMsg" style="color: red; font-weight: bold;"></h5>
+                    <h5 id="idCheckMsg" style="font-weight: bold;"></h5>
+                    <h5 id="pwCheckMsg" style="font-weight: bold;"></h5>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <button class="btn btn-success" type="submit">가입하기</button>
+                    <button id="joinMember" type="submit" class="btn btn-success" onsub="joinCheck()">가입하기</button>
                     <button class="btn btn-warning" type="reset">다시쓰기</button>
                     <button class="btn btn-secondary" type="button" onclick="history.back()">돌아가기</button>
                 </td>
@@ -107,8 +109,10 @@
     </form>
 </div>
 
-<%@include file="/WEB-INF/views/scripts.jsp"%>
-<script type="text/javascript" src="/js/registerForm.js"></script>
+<%-- <%@include file="/WEB-INF/views/scripts.jsp"%> --%>
+<script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/ajaxRegister.js"></script>
 
 </body>
 </html>

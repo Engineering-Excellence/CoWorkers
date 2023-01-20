@@ -63,7 +63,8 @@
                     </span><a href="new"><img width="45" src="../../resources/images/newM.png"></a></span>
                     </button>
                 </li>
-                <li><a href="#">프로필</a></li>
+                <li><a href="userAllMember">사원 목록</a></li>
+                <li><a href="userProfile">내 프로필</a></li>
                 <li><a href="logout">로그아웃</a></li>
             </ul>
             <form class="navbar-form navbar-right">

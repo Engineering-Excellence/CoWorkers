@@ -6,7 +6,8 @@
             <div class="col-sm-12 col-md-6">
                 <h6>About US</h6>
                 <p class="text-justify">
-
+					Crunch는 특별함보다는 기본에 충실하여 사내업무 효율화를 증진하고<br>
+					고객분들의 즐거운 일상을 조성하는 프로젝트 팀입니다.<br>
                 </p>
             </div>
 
