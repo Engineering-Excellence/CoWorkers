@@ -55,13 +55,29 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="align-middle" style="text-align: center; height: 300px;">내용</th>
+                        <th class="align-middle" style="text-align: center; height: 200px;">내용</th>
                         <td colspan="3">
                             <c:if test="${boardDTO.deleteDate == null}">
                                 <c:set var="content" value="${fn:replace(boardDTO.content, '<', '&lt;')}"/>
                                 <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
                                 <c:set var="content" value="${fn:replace(content, enter, '<br/>')}"/>
                                 ${content}
+                            </c:if>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="align-middle" style="text-align: center;">파일</th>
+<%--                        <td colspan="3">
+                            <div class="uploadResult">
+                                <ul>
+                                </ul>
+                            </div>
+                        </td>--%>
+                        <td colspan="3" class="uploadResult">
+                            <c:if test="${boardDTO.deleteDate == null}">
+                                <ul>
+
+                                </ul>
                             </c:if>
                         </td>
                     </tr>
@@ -186,7 +202,7 @@
                                         <c:set var="userName"
                                                value="${fn:replace(boardCommentDTO.userName, '<', '&lt;')}"/>
                                         <c:set var="userName" value="${fn:replace(userName, '>', '&gt;')}"/>
-                                            ${userName}님이
+                                                <strong>${userName}</strong>님이
                                         <fmt:formatDate value="${boardCommentDTO.writeDate}"
                                                         pattern="yyyy.MM.dd(E) HH:mm:ss"/>에
                                         남긴 댓글:<br/>
@@ -231,22 +247,95 @@
     </div>
 </div>
 
+<!-- 이미지 원본 보기 -->
+<div class="bigPictureWrapper">
+    <div class="bigPicture">
+    </div>
+</div>
+
+<link rel="stylesheet" href="/css/board.css">
 <script type="text/javascript" src="/js/board.js"></script>
 
-<!-- 첨부파일 Ajax -->
+<!-- 첨부파일 -->
 <script>
-    $(document).ready(function () {
-        (function () {
+    'use strict'
+
+    $(() => {
+
+        // 첨부파일 보기
+        (() => {
             let postID = '<c:out value="${boardDTO.postID}"/>'
 
-            $.getJSON('/boardSelectAttachList', {postID: postID}, arr => {
+            $.getJSON("/boardSelectAttachList", {postID: postID}, arr => {
+
                 console.log(arr)
-            })
+
+                let str = ''
+
+                $(arr).each((i, attach) => {
+
+                    // 이미지
+                    if (attach.fileType) {
+                        let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName)
+
+                        str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid
+                            + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'><div>"
+                            + "<img src='/display?fileName=" + fileCallPath + "' />" + "</div></li>"
+                    } else {
+
+                        str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid
+                            + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'><div>"
+                            + "<span>" + attach.fileName + "</span><br/>"
+                            + "<img src='/resources/images/doker.ico'>"
+                            + "</div></li>"
+                    }
+                })
+
+                $('.uploadResult ul').html(str)
+            })  // end getJSON
         })()
+
+        // 첨부 이미지 원본 보기 & 파일 다운로드
+        $('.uploadResult').on('click', 'li', function () {
+
+            console.log('이미지 보기')
+
+            let liObj = $(this)
+            // console.log(this)
+
+            let path = encodeURIComponent(liObj.data("path") + "/" + liObj.data("uuid") + "_" + liObj.data("filename"))
+
+            if (liObj.data("type")) {
+                showImage(path.replace(new RegExp(/\\/g), "/"))
+            } else {
+                // 다운로드
+                self.location = "/download?fileName=" + path
+            }
+        })
+
+        // 이미지 원본 보기
+        function showImage(fileCallPath) {
+
+            // alert(fileCallPath)
+
+            $('.bigPictureWrapper').css('display', 'flex').show()
+
+            $('.bigPicture')
+                .html("<img src='/display?fileName=" + fileCallPath + "'>")
+                .animate({width: '100%', height: '100%'}, 1000)
+        }
+
+        // 원본 이미지 닫기
+        $(".bigPictureWrapper").on("click", () => {
+            $(".bigPicture").animate({width: '0%', height: '0%'}, 1000)
+            setTimeout(() => {
+                $(".bigPictureWrapper").hide()
+            }, 1000)
+        })
     })
 </script>
 
-<%@include file="/WEB-INF/views/scripts.jsp"%>
+<%@include file="/WEB-INF/views/scripts.jsp" %>
 </body>
-<%@include file="/WEB-INF/views/footer.jsp"%>
+<%@include file="/WEB-INF/views/footer.jsp" %>
 </html>

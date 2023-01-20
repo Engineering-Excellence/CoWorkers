@@ -40,7 +40,7 @@ public class BoardController {
     private BoardCommentService commentService;
     private BoardList boardList;
     private BoardCommentList boardCommentList;
-    static String uploadPath = "/Users/kyle/Documents/Study/CRUNCH/CoWorkers/upload";
+    static String uploadPath = "/Users/kyle/Documents/Study/CRUNCH/CoWorkers/upload/";
 //    static String uploadPath = "";
 
     // 게시글 목록 불러오기
@@ -291,7 +291,7 @@ public class BoardController {
 
 //        String uploadPath = "/Users/kyle/Documents/Study/CRUNCH/CoWorkers/upload";
 
-        FileSystemResource resource = new FileSystemResource(uploadPath + fileName);
+        FileSystemResource resource = new FileSystemResource(fileName);
         log.info("resource: {}", resource);
         if (!resource.exists()) {
             log.error("{} 파일이 존재하지 않습니다.", resource);

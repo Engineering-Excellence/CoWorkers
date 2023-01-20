@@ -22,7 +22,8 @@
 }
 
 .uploadResult ul li span {
-    color: red;
+    /*color: red;*/
+    color: blue;
 }
 
 .bigPictureWrapper {
