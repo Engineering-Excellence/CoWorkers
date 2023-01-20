@@ -39,6 +39,7 @@ function connectWs() {
             console.log("alarmData: ", obj.subject);
         } else {
             $("#alarm-span").hide();
+            $("#no-alarm").show();
         }
     };
 
@@ -64,16 +65,19 @@ function getContextPath() {
 
 function alarmData(obj) {
     $("#alarm-span").hide();
+    $("#no-alarm").show();
     //알람 보이기
     if (obj.important > 0 && location.href.indexOf("important") == -1 && location.href.indexOf("new") == -1 && location.href.indexOf("memo") == -1) {
         $("#newB").show();
         $("#alarm-span").show();
+        $("#no-alarm").hide();
         $("#alarm-span").text(obj.countInform);
         alert(obj.userName + "님으로부터 중요 쪽지(" + obj.subject + ")가 도착했습니다.")
         window.location = "important"
     }
     else if (obj.countInform > 0) {
         $("#alarm-span").show();
+        $("#no-alarm").hide();
         $("#alarm-span-count").text(obj.countInform);
 
         //토스트 메시지 보이기
@@ -95,5 +99,6 @@ function alarmData(obj) {
                     */
     } else {
         $("#alarm-span").hide();
+        $("#no-alarm").show();
     }
 }

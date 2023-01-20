@@ -54,6 +54,9 @@
                 <li>
                     <button type="button" onclick="alarmListMove()"
                             class="newB">
+                    <span id="no-alarm" style="display:none"
+                          class="position-absoluteposition-absolute top-0 end-0 translate-middle badge border border-light rounded-circle bg-danger p-2">
+                    <a href="memo"><img width="45" src="../../resources/images/M.png"></a></span>
                     <span id="alarm-span" style="display:none"
                           class="position-absoluteposition-absolute top-0 end-0 translate-middle badge border border-light rounded-circle bg-danger p-2">
                     <span class="alarm-span-count" id="alarm-span-count">
