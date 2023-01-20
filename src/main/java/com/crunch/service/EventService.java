@@ -1,29 +1,23 @@
 package com.crunch.service;
 
-import com.crunch.domain.EventDTO;
-import com.crunch.domain.WorkDTO;
+import java.util.*;
 
-import java.util.HashMap;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+
+import com.crunch.domain.EventDTO;
 
 public interface EventService {
 
-    void insert(EventDTO eventDTO);
-
-    int selectCount();
-
-    List<EventDTO> selectList(HashMap<String, Integer> hashMap);
-
-    List<EventDTO> selectArrayList();
-
+    void insert(EventDTO eDTO);
+    
     List<EventDTO> selectEList();
-
-    List<WorkDTO> workSelectArrayList();
-
+    
     EventDTO selectByEventID(int eventID);
+    
+    void delete(int eventID);
+    
+//    void update(EventDTO eventDTO);
 
-    boolean update(EventDTO eventDTO);
-
-    boolean delete(int eventID);
+	void update(HttpServletRequest request, EventDTO eDTO);
 
 }
