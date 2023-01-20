@@ -50,7 +50,7 @@
                                         onclick="memoRestore('memoRestore?memoID=${mDTO.memoID}&currentPage=${currentPage}','${userInfo.get(0).getUserID()==mDTO.receiverID}')"/>
                                 <input class="btn btn-danger btn-sm" type="button" value="삭제"
                                        style="font-size: 13px; width: 80px"
-                                       onclick="memoDelete('memoDeleteOK?memoID=${mDTO.memoID}&currentPage=${currentPage}','${userInfo.get(0).getUserID()==mDTO.receiverID}')"/>
+                                       onclick="memoDeleteOK('memoDeleteOK?memoID=${mDTO.memoID}&currentPage=${currentPage}','${userInfo.get(0).getUserID()==mDTO.receiverID}')"/>
                                 <input class="btn btn-info btn-sm" type="button" value="돌아가기"
                                        style="font-size: 13px; width: 80px"
                                        onclick="history.back()"/>
@@ -70,10 +70,9 @@
 </div>
 
 <%@include file="/WEB-INF/views/scripts.jsp"%>
-<script src="/resources/js/workDelete.js"></script>
+<script src="/resources/js/memoChange.js"></script>
 
 
 </body>
 <%@include file="/WEB-INF/views/footer.jsp"%>
-</html>
 </html>
