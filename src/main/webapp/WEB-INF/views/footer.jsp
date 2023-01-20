@@ -23,7 +23,7 @@
                 <h6>Special Thanks</h6>
                 <ul class="footer-links">
                     <li><a href="https://www.tjoeun.co.kr/">더조은아카데미</a></li>
-                    <li><a href="https://getbootstrap.com/"></a>BootStrap</li>
+                    <li><a href="https://getbootstrap.com/">BootStrap</a></li>
                     <li><a href="https://www.w3schools.com/">w3Schools</a></li>
                     <li><a href="https://www.oracle.com/">Oracle</a></li>
                     <li><a href="https://www.jetbrains.com/">JetBrains</a></li>
