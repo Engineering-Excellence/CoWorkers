@@ -92,7 +92,7 @@
     </div>
 </div>
 
-<link rel="stylesheet" href="/css/boardInsert.css">
+<link rel="stylesheet" href="/css/board.css">
 <script type="text/javascript" src="/js/jquery-3.6.1.min.js"></script>
 <%@include file="/WEB-INF/views/scripts.jsp" %>
 <script type="text/javascript" src="/js/check.js"></script>
