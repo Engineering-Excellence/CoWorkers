@@ -280,6 +280,7 @@
 
                         str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid
                             + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'><div>"
+                            + "<span>" + attach.fileName + "</span><br/>"
                             + "<img src='/display?fileName=" + fileCallPath + "' />" + "</div></li>"
                     } else {
 

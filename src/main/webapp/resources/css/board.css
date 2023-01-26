@@ -6,7 +6,7 @@
 .uploadResult ul {
     display: flex;
     flex-flow: row;
-    justify-content: center;
+    /*justify-content: center;*/
     align-items: center;
 }
 
