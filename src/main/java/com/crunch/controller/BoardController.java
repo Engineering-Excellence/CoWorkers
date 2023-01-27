@@ -40,7 +40,7 @@ public class BoardController {
     private BoardCommentService commentService;
     private BoardList boardList;
     private BoardCommentList boardCommentList;
-    static String uploadPath = "/Users/kyle/Documents/Study/CRUNCH/CoWorkers/upload/";
+    static String uploadPath = "/opt/homebrew/Cellar/tomcat@9/9.0.71/libexec/webapps/upload/";
 //    static String uploadPath = "C:\\Users\\kyle\\Documents\\Study\\CRUNCH\\CoWorkers\\upload\\";
 
     // 게시글 목록 불러오기

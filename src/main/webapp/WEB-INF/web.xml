@@ -27,7 +27,7 @@
         <load-on-startup>1</load-on-startup>
 
         <multipart-config>
-            <location>/Users/kyle/Documents/Study/CRUNCH/CoWorkers/upload/</location>
+            <location>/opt/homebrew/Cellar/tomcat@9/9.0.71/libexec/webapps/upload/</location>
             <!--<location>C:\\Users\\kyle\\Documents\\Study\\CRUNCH\\CoWorkers\\upload\\</location>-->
             <max-file-size>20971520</max-file-size><!--20MB-->
             <max-request-size>41943040</max-request-size><!--40MB-->

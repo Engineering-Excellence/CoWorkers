@@ -21,7 +21,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/coWorkers.css" rel="stylesheet">
 
-    <script type="text/javascript" src="/js/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
 
 </head>
 
@@ -56,11 +56,11 @@
                             class="newB">
                     <span id="no-alarm" style="display:none"
                           class="position-absoluteposition-absolute top-0 end-0 translate-middle badge border border-light rounded-circle bg-danger p-2">
-                    <a href="memo"><img width="45" src="../../resources/images/M.png"></a></span>
+                    <a href="memo"><img width="45" src="images/M.png"></a></span>
                     <span id="alarm-span" style="display:none"
                           class="position-absoluteposition-absolute top-0 end-0 translate-middle badge border border-light rounded-circle bg-danger p-2">
                     <span class="alarm-span-count" id="alarm-span-count">
-                    </span><a href="new"><img width="45" src="../../resources/images/newM.png"></a></span>
+                    </span><a href="new"><img width="45" src="images/newM.png"></a></span>
                     </button>
                 </li>
                 <li><a href="userAllMember">사원 목록</a></li>

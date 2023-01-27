@@ -23,9 +23,6 @@
     <resources mapping="/images/**" location="/resources/images/"/>
     <resources mapping="/css/**" location="/resources/css/"/>
     <resources mapping="/js/**" location="/resources/js/"/>
-    <!--<resources mapping="/images/**" location="/WEB-INF/images/"/>
-    <resources mapping="/css/**" location="/WEB-INF/css/"/>
-    <resources mapping="/js/**" location="/WEB-INF/js/"/>-->
 
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -40,7 +37,7 @@
         <beans:property name="maxUploadSize" value="104857560"/>
         <!-- 1024 * 1024 * 2 bytes 2MB -->
         <beans:property name="maxUploadSizePerFile" value="2097152"/>
-        <beans:property name="uploadTempDir" value="file:/Users/kyle/Documents/Study/CRUNCH/CoWorkers/upload/"/>
+        <beans:property name="uploadTempDir" value="file:/opt/homebrew/Cellar/tomcat@9/9.0.71/libexec/webapps/upload/temp/"/>
         <!--<beans:property name="uploadTempDir" value="file:C:\\Users\\kyle\\Documents\\Study\\CRUNCH\\CoWorkers\\upload\\"/>-->
         <beans:property name="maxInMemorySize" value="10485756"/>
     </beans:bean>
