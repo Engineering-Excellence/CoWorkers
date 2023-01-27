@@ -12,7 +12,13 @@
             <br/>
             <br/>
             <div style="float: right ">
-                <button type="button" class="btn btn-default" onclick="location.href='event'">캘린더</button>
+                <button type="button" class="btn btn-default" onclick="location.href='event'">돌아가기</button>
+                <button class="btn btn-primary btn-sm" type="button" style="font-size: 13px;"
+                                    onclick="location.href='eventUpdate?eventID=${eDTO.eventID}&view=${param.view}'"
+                >수정하기</button>
+                <button class="btn btn-danger btn-sm" type="button" style="font-size: 13px;"
+                                    onclick="location.href='eventDelete?eventID=${eDTO.eventID}&view=${param.view}'"
+                >삭제하기</button>
             </div>
             <div><br/></div>
             <br/>
@@ -35,7 +41,7 @@
                     </tr>
                     <tr>
                         <th style="font-size: 20px; text-align: center; width: 100px;">
-                            색상
+                            중요도
                         </th>
                         <td colspan="2" style="font-size: 20px; text-align: left; width: 100px;">
                             <c:if test="${eDTO.eventColor=='#E1E1E0'}">
@@ -103,32 +109,13 @@
                         </td>
 
                     </tr>
-                    <tr class="table-secondary">
-                        <td colspan="3" align="center">
-                            <button
-                                    class="btn btn-primary btn-sm"
-                                    type="button"
-                                    style="font-size: 13px;"
-                                    onclick="location.href='eventUpdate?eventID=${eDTO.eventID}&view=${param.view}'"
-                            >수정하기
-                            </button>
-                            <button
-                                    class="btn btn-danger btn-sm"
-                                    type="button"
-                                    style="font-size: 13px;"
-                                    onclick="location.href='eventDelete?eventID=${eDTO.eventID}&view=${param.view}'"
-                            >삭제하기
-                            </button>
-                        </td>
-                    </tr>
                 </table>
             </div>
         </div>
     </div>
 </div>
 
-<script type="text/javascript" src="./js/jquery-3.6.1.min.js"></script>
-<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+<%@include file="/WEB-INF/views/scripts.jsp"%>
 </body>
 <%@include file="/WEB-INF/views/footer.jsp"%>
 </html>
