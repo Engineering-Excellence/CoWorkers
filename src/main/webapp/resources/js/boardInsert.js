@@ -41,7 +41,7 @@ $(() => {
     })
 
     // 업로드 파일 종류 및 크기 제한
-    let regex = new RegExp('(.*?)\.(exe|sh|zip|alz)$')
+    let regex = /(.*?).(exe|sh|zip|alz)$/
     let maxSize = 5242880   // 5MB
 
     function checkExtension(fileName, fileSize) {
@@ -54,36 +54,6 @@ $(() => {
             return false
         }
         return true
-    }
-
-    // 업로드 파일 보기
-    let uploadResult = $('.uploadResult ul')
-
-    function showUploadedFile(uploadResultArr) {
-
-        let str = ''
-
-        $(uploadResultArr).each((i, obj) => {
-
-            if (!obj.image) {
-
-                let fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName)
-                let fileLink = fileCallPath.replace(new RegExp(/\\/g), "/")
-                str += "<li><div><a href='/download?fileName=" + fileLink + "'>" +
-                    "<img src='/resources/images/doker.ico'>" + obj.fileName + "</a>" +
-                    "<span data-file=\'" + fileCallPath + "\' data-type='file'> × </span></div></li>"
-            } else {
-
-                let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName)
-                let originPath = obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName
-                originPath = originPath.replace(new RegExp(/\\/g), "/")
-                str += "<li><a href=\"javascript:showImage(\'" + originPath + "\')\">" +
-                    "<img src='/display?fileName=" + fileCallPath + "'></a>" +
-                    "<span data-file=\'" + fileCallPath + "\' data-type='image'> × </span></li>"
-            }
-        })
-
-        uploadResult.append(str)
     }
 
     // 원본 이미지 닫기

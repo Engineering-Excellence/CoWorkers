@@ -236,6 +236,7 @@
 
                 </table>
                 <input type="hidden" id="userID" name="userID" value="${userInfo.get(0).getUserID()}">
+                <input type="hidden" id="postID" name="postID" value="${boardDTO.postID}">
             </form>
         </div>
     </div>

@@ -116,7 +116,7 @@ public class BoardController {
     // 첨부파일 목록 조회
     @GetMapping(value = "/boardSelectAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseEntity<List<BoardAttachDTO>> boardSelectAttachList(int postID) {
+    public ResponseEntity<List<BoardAttachDTO>> boardSelectAttachList(@RequestParam("postID") int postID) {
 
         log.info("SelectAttachList() 실행 → postID: {}", postID);
 

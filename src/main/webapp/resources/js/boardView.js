@@ -5,9 +5,8 @@ $(() => {
 
     // 첨부파일 보기
     (() => {
-        let postID = '<c:out value="${boardDTO.postID}"/>'
 
-        $.getJSON("/boardSelectAttachList", {postID: postID}, arr => {
+        $.getJSON("/boardSelectAttachList?postID=" + $('#postID').val(), arr => {
 
             console.log(arr)
 

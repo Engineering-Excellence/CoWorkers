@@ -26,6 +26,13 @@
     color: blue;
 }
 
+.uploadResult ul li span:hover {
+    /*color: red;*/
+    color: red;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .bigPictureWrapper {
     position: absolute;
     display: none;
