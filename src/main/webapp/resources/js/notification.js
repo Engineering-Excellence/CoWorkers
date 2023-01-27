@@ -12,7 +12,7 @@ $(function () {
     }, 300);
 
     //10초마다 알림데이터 가져오기
-    setInterval("autoScript()", 10000);
+    setInterval("autoScript()", 5000);
 });
 
 function autoScript() {

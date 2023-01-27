@@ -8,7 +8,7 @@
 <%@include file="/WEB-INF/views/alarm.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <c:set var="date" value="${Date(Date().getTime()-60*60*24*1000)}"/>
-<c:set var="dday" value="${Date(Date().getTime()+60*60*24*1000)}"/>
+<c:set var="dday" value="${Date(Date().getTime())}"/>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
             <div class="table-responsive">
@@ -411,7 +411,6 @@
     </div>
 </div>
 <%@include file="/WEB-INF/views/scripts.jsp"%>
-
 </body>
 <%@include file="/WEB-INF/views/footer.jsp"%>
 </html>

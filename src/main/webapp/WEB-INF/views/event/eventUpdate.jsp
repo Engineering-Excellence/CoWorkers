@@ -230,6 +230,10 @@
     </div>
 </div>
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 <%@include file="/WEB-INF/views/scripts.jsp"%>
 </body>
 <%@include file="/WEB-INF/views/footer.jsp"%>

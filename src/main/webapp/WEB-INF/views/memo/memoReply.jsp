@@ -27,7 +27,7 @@
                             <th class="align-middle table-dark">받는이
                             </th>
                             <td>
-                                <input type="text" class="form-control form-control-sm" name="accountID" value="${mDTO.accountID}" readonly/>
+                                <input type="text" class="form-control form-control-sm" name="accountID" value="${mDTO.senderID}" readonly/>
                             </td>
                         </tr>
                         <tr>
@@ -64,6 +64,7 @@
                         </tr>
                     </table>
                     <input type="hidden" name="userID" value="${userInfo.get(0).getUserID()}"/>
+                    <input type="hidden" name="senderID" value="${userInfo.get(0).getAccountID()}"/>
                 </form>
             </div>
         </div>

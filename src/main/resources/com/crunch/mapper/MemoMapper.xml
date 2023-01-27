@@ -119,9 +119,9 @@
 
     <!--작성-->
     <insert id="memoInsert" parameterType="mDTO">
-        insert into memo(memoID, subject, content, userID, "userName", receiverID, accountID, important)
+        insert into memo(memoID, subject, content, userID, "userName", receiverID, accountID, important, senderID)
         values (memo_memoID_seq.nextval, #{subject}, #{content}, #{userID}, #{userName}, #{receiverID}, #{accountID},
-                #{important})
+                #{important}, #{senderID})
     </insert>
 
     <!--쓰레기-->

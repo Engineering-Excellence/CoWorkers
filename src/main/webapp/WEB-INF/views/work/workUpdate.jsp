@@ -124,8 +124,7 @@
                             <th class="align-middle table-dark">시작일
                             </th>
                             <td>
-                                <input id="startDate" type="date" class="form-control form-control-sm" name="startDate"
-                                       value="${dto.startDate}"/>
+                                <input id="startDate" type="date" class="form-control form-control-sm" name="startDate" value="${dto.startDate}"/>
                             </td>
                         </tr>
                         <tr>
@@ -158,7 +157,6 @@
 </div>
 
 <%@include file="/WEB-INF/views/scripts.jsp"%>
-<script src="js/workInsert.js"></script>
 <script type="text/javascript" src="/js/check.js"></script>
 </body>
 <%@include file="/WEB-INF/views/footer.jsp"%>

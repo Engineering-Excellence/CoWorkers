@@ -68,6 +68,7 @@
                         </tr>
                     </table>
                     <input type="hidden" name="userID" value="${userInfo.get(0).getUserID()}"/>
+                    <input type="hidden" name="senderID" value="${userInfo.get(0).getAccountID()}"/>
                 </form>
             </div>
         </div>

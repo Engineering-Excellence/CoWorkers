@@ -10,6 +10,7 @@ public class MemoDTO {
     private int userID;
     private String userName;
     private String accountID;
+    private String senderID;
     private int receiverID;
     private String content;
     private String subject;
