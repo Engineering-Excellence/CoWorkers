@@ -1,28 +1,27 @@
--- ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
-DROP TABLE "CRUNCH"."POSITION";
-CREATE TABLE "CRUNCH"."POSITION"
-(	"POSITIONCODE" NUMBER NOT NULL ENABLE,
+-- Å×ÀÌºí »ý¼º
+CREATE TABLE "CRUNCH"."POSITION" 
+(	"POSITIONCODE" NUMBER NOT NULL ENABLE, 
 	"POSITIONNAME" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
-	"ADMIN" CHAR(3 BYTE) DEFAULT 'NO' NOT NULL ENABLE,
+	"ADMIN" CHAR(3 BYTE) DEFAULT 'no' NOT NULL ENABLE, 
 	 CONSTRAINT "POSITION_PK" PRIMARY KEY ("POSITIONCODE")
 );
 
--- POSITION CODE SELECT
-SELECT * FROM POSITION ORDER BY POSITIONCODE ASC;
+-- position code select
+select * from position order by positioncode asc;
 
--- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-DELETE FROM USERINFO;
-DROP SEQUENCE POSITION_POSITIONCODE_SEQ;
-CREATE SEQUENCE POSITION_POSITIONCODE_SEQ;
+-- ½ÃÄö½º »ý¼º ¹× Á¦°Å
+delete from userinfo;
+drop sequence position_positioncode_seq; 
+create sequence position_positioncode_seq;
 
--- POSITION INSERT
-INSERT INTO POSITION (POSITIONCODE, POSITIONNAME, ADMIN) VALUES (1, 'ï¿½ï¿½ï¿½', 'NO');
-INSERT INTO POSITION (POSITIONCODE, POSITIONNAME, ADMIN) VALUES (2, 'ï¿½ï¿½ï¿½ï¿½', 'NO');
-INSERT INTO POSITION (POSITIONCODE, POSITIONNAME, ADMIN) VALUES (3, 'ï¿½ë¸®', 'NO');
-INSERT INTO POSITION (POSITIONCODE, POSITIONNAME, ADMIN) VALUES (4, 'ï¿½ï¿½ï¿½ï¿½', 'NO');
-INSERT INTO POSITION (POSITIONCODE, POSITIONNAME, ADMIN) VALUES (5, 'ï¿½ï¿½ï¿½ï¿½', 'NO');
-INSERT INTO POSITION (POSITIONCODE, POSITIONNAME, ADMIN) VALUES (6, 'ï¿½ï¿½ï¿½ï¿½', 'NO');
-INSERT INTO POSITION (POSITIONCODE, POSITIONNAME, ADMIN) VALUES (7, 'ï¿½Ì»ï¿½', 'NO');
-INSERT INTO POSITION (POSITIONCODE, POSITIONNAME, ADMIN) VALUES (8, 'ï¿½ï¿½ï¿½Ì»ï¿½', 'NO');
-INSERT INTO POSITION (POSITIONCODE, POSITIONNAME, ADMIN) VALUES (9, 'ï¿½ï¿½ï¿½ï¿½ï¿½Ì»ï¿½', 'NO');
-INSERT INTO POSITION (POSITIONCODE, POSITIONNAME, ADMIN) VALUES (10, 'ï¿½Î›ï¿½ï¿½ï¿½', 'NO');
+-- position insert
+insert into position (positioncode, positionname, admin) values (1, '»ç¿ø', 'no');
+insert into position (positioncode, positionname, admin) values (2, 'ÁÖÀÓ', 'no');
+insert into position (positioncode, positionname, admin) values (3, '´ë¸®', 'no');
+insert into position (positioncode, positionname, admin) values (4, '°úÀå', 'no');
+insert into position (positioncode, positionname, admin) values (5, 'Â÷Àå', 'no');
+insert into position (positioncode, positionname, admin) values (6, 'ºÎÀå', 'no');
+insert into position (positioncode, positionname, admin) values (7, 'ÀÌ»ç', 'no');
+insert into position (positioncode, positionname, admin) values (8, '»ó¹«ÀÌ»ç', 'no');
+insert into position (positioncode, positionname, admin) values (9, 'Àü¹«ÀÌ»ç', 'no');
+insert into position (positioncode, positionname, admin) values (10, 'ºÎ»çÀå', 'no');

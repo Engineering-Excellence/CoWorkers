@@ -1,88 +1,56 @@
--- ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
-DROP TABLE "CRUNCH"."USERINFO";
-CREATE TABLE "CRUNCH"."USERINFO"
-(
-    "USERID"          NUMBER            NOT NULL ENABLE,
-    "ACCOUNTID"       VARCHAR2(20 BYTE) NOT NULL ENABLE,
-    "ACCOUNTPASSWORD" VARCHAR2(20 BYTE) NOT NULL ENABLE,
-    "USERNAME"        VARCHAR2(20 BYTE) NOT NULL ENABLE,
-    "REGISTERNUMBER"  CHAR(13 BYTE)     NOT NULL ENABLE,
-    "MOBILENUMBER"    VARCHAR2(15 BYTE) NOT NULL ENABLE,
-    "GENDER"          VARCHAR2(6 BYTE)  NOT NULL ENABLE,
-    "EMAIL"           VARCHAR2(50 BYTE) NOT NULL ENABLE,
-    "JOINDATE"        DATE DEFAULT SYSDATE,
-    "RETIREDATE"      DATE,
-    "POSITIONCODE"    NUMBER,
-    CONSTRAINT "USERINFO_PK" PRIMARY KEY ("USERID")
+-- Å×ÀÌºí »ý¼º
+CREATE TABLE "CRUNCH"."USERINFO" 
+(	"USERID" NUMBER NOT NULL ENABLE, 
+	"ACCOUNTID" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"ACCOUNTPASSWORD" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"USERNAME" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"REGISTERNUMBER" CHAR(13 BYTE) NOT NULL ENABLE, 
+	"MOBILENUMBER" VARCHAR2(15 BYTE) NOT NULL ENABLE, 
+	"GENDER" VARCHAR2(6 BYTE) NOT NULL ENABLE, 
+	"EMAIL" VARCHAR2(50 BYTE) NOT NULL ENABLE, 
+	"JOINDATE" DATE DEFAULT sysdate, 
+	"RETIREDATE" DATE, 
+	"POSITIONCODE" NUMBER, 
+	 CONSTRAINT "USERINFO_PK" PRIMARY KEY ("USERID")
 );
 
--- ï¿½ï¿½ï¿½ï¿½ (FK) ï¿½ï¿½ï¿½ï¿½
-ALTER TABLE USERINFO
-    ADD CONSTRAINT USERINFO_FK FOREIGN KEY (POSITIONCODE) REFERENCES POSITION (POSITIONCODE);
-    
--- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-DELETE
-FROM USERINFO;
-DROP SEQUENCE USERINFO_USERID_SEQ;
-CREATE SEQUENCE USERINFO_USERID_SEQ;
+-- Å×ÀÌºí È®ÀÎ
+select * from userinfo;
 
+-- ½ÃÄö½º »ý¼º ¹× Á¦°Å
+delete from userinfo;
+drop sequence userinfo_userid_seq; 
+create sequence userinfo_userid_seq;
 
--- ï¿½ï¿½ï¿½Ìºï¿½ È®ï¿½ï¿½
-SELECT *
-FROM USERINFO;
+-- ´õ¹Ìµ¥ÀÌÅÍ »ðÀÔ
+insert into userinfo(userid, accountid, accountpassword, username, registernumber, mobilenumber, gender, email, positioncode)
+values (userinfo_userid_seq.nextval, 'gemini', '12131415', '±èÀç¹Î', '9101011245124', '01021132323', 'male', 'kjy@naver.com', 3);
+insert into userinfo(userid, accountid, accountpassword, username, registernumber, mobilenumber, gender, email, positioncode)
+values (userinfo_userid_seq.nextval, 'nokenoke', '10293847', '±è³ì³ì', '8302131256132', '01012314231', 'female', 'knock@naver.com', 4);
+insert into userinfo(userid, accountid, accountpassword, username, registernumber, mobilenumber, gender, email, positioncode)
+values (userinfo_userid_seq.nextval, 'jjonggu', '12345678', '¹ÚÁö¿ë', '5809231231212', '01021112222', 'male', 'youndu@naver.com', 7);
+insert into userinfo(userid, accountid, accountpassword, username, registernumber, mobilenumber, gender, email, positioncode)
+values (userinfo_userid_seq.nextval, 'jjanggu', '23456789', '±èÁö¿ë', '6903222849574', '01035083929', 'female', 'mattuiki@naver.com', 6);
+insert into userinfo(userid, accountid, accountpassword, username, registernumber, mobilenumber, gender, email, positioncode)
+values (userinfo_userid_seq.nextval, 'jjangaa', '34567891', 'ÀÓÃ¢Á¤', '8703132152123', '01078992034', 'male', 'lambda@naver.com', 10);
+insert into userinfo(userid, accountid, accountpassword, username, registernumber, mobilenumber, gender, email, positioncode)
+values (userinfo_userid_seq.nextval, 'dully', '45678912', 'È«±æµ¿', '9503211522342', '01044013890', 'male', 'java@naver.com', 1);
+insert into userinfo(userid, accountid, accountpassword, username, registernumber, mobilenumber, gender, email, positioncode)
+values (userinfo_userid_seq.nextval, 'picolo', '56789123', 'Àå¹ßÀå', '9412311232232', '01072839281', 'male', 'python@naver.com', 1);
+insert into userinfo(userid, accountid, accountpassword, username, registernumber, mobilenumber, gender, email, positioncode)
+values (userinfo_userid_seq.nextval, 'ssamjang', '67891234', 'ÇÇ³ëÅ°¿À', '9101201231312', '01094613467', 'male', 'jquery@naver.com', 5);
+insert into userinfo(userid, accountid, accountpassword, username, registernumber, mobilenumber, gender, email, positioncode)
+values (userinfo_userid_seq.nextval, 'jjondiki', '78912345', 'ÂËµð±â', '7603192211559', '01045612852', 'female', 'jstl@naver.com', 5);
+insert into userinfo(userid, accountid, accountpassword, username, registernumber, mobilenumber, gender, email, positioncode)
+values (userinfo_userid_seq.nextval, 'ramyeon', '89123456', '¸¸µÎ¶ó¸é', '8304222123209', '01089077545', 'female', 'jeondal@naver.com', 7);
+insert into userinfo(userid, accountid, accountpassword, username, registernumber, mobilenumber, gender, email, positioncode)
+values (userinfo_userid_seq.nextval, 'anirago', '91234567', '¾Æ³ª°í', '9109201250991', '01012305991', 'male', 'dramsram@naver.com', 8);
+insert into userinfo(userid, accountid, accountpassword, username, registernumber, mobilenumber, gender, email, positioncode)
+values (userinfo_userid_seq.nextval, 'kingbat', '13479125', 'Å·¹Þµå', '9102242215167', '01029005899', 'female', 'question@naver.com', 10);
+insert into userinfo(userid, accountid, accountpassword, username, registernumber, mobilenumber, gender, email, positioncode)
+values (userinfo_userid_seq.nextval, 'punchcrunch', '75369852', 'Å©·±Ä¡', '9008292214234', '01028761010', 'female', 'rondo@naver.com', 12);
 
--- ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-INSERT INTO USERINFO(USERID, ACCOUNTID, ACCOUNTPASSWORD, USERNAME, REGISTERNUMBER, MOBILENUMBER, GENDER, EMAIL,
-                     POSITIONCODE)
-VALUES (USERINFO_USERID_SEQ.NEXTVAL, 'GEMINI', '12131415', 'ï¿½ï¿½ï¿½ï¿½ï¿½', '9101011245124', '01021132323', 'MALE',
-        'KJY@NAVER.COM', 3);
-INSERT INTO USERINFO(USERID, ACCOUNTID, ACCOUNTPASSWORD, USERNAME, REGISTERNUMBER, MOBILENUMBER, GENDER, EMAIL,
-                     POSITIONCODE)
-VALUES (USERINFO_USERID_SEQ.NEXTVAL, 'NOKENOKE', '10293847', 'ï¿½ï¿½ï¿½ï¿½', '8302131256132', '01012314231', 'FEMALE',
-        'KNOCK@NAVER.COM', 4);
-INSERT INTO USERINFO(USERID, ACCOUNTID, ACCOUNTPASSWORD, USERNAME, REGISTERNUMBER, MOBILENUMBER, GENDER, EMAIL,
-                     POSITIONCODE)
-VALUES (USERINFO_USERID_SEQ.NEXTVAL, 'JJONGGU', '12345678', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '5809231231212', '01021112222', 'MALE',
-        'YOUNDU@NAVER.COM', 7);
-INSERT INTO USERINFO(USERID, ACCOUNTID, ACCOUNTPASSWORD, USERNAME, REGISTERNUMBER, MOBILENUMBER, GENDER, EMAIL,
-                     POSITIONCODE)
-VALUES (USERINFO_USERID_SEQ.NEXTVAL, 'JJANGGU', '23456789', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '6903222849574', '01035083929', 'FEMALE',
-        'MATTUIKI@NAVER.COM', 6);
-INSERT INTO USERINFO(USERID, ACCOUNTID, ACCOUNTPASSWORD, USERNAME, REGISTERNUMBER, MOBILENUMBER, GENDER, EMAIL,
-                     POSITIONCODE)
-VALUES (USERINFO_USERID_SEQ.NEXTVAL, 'JJANGAA', '34567891', 'ï¿½ï¿½Ã‚ï¿½ï¿½', '8703132152123', '01078992034', 'MALE',
-        'LAMBDA@NAVER.COM', 10);
-INSERT INTO USERINFO(USERID, ACCOUNTID, ACCOUNTPASSWORD, USERNAME, REGISTERNUMBER, MOBILENUMBER, GENDER, EMAIL,
-                     POSITIONCODE)
-VALUES (USERINFO_USERID_SEQ.NEXTVAL, 'DULLY', '45678912', 'Èªï¿½æµ¿', '9503211522342', '01044013890', 'MALE',
-        'JAVA@NAVER.COM', 1);
-INSERT INTO USERINFO(USERID, ACCOUNTID, ACCOUNTPASSWORD, USERNAME, REGISTERNUMBER, MOBILENUMBER, GENDER, EMAIL,
-                     POSITIONCODE)
-VALUES (USERINFO_USERID_SEQ.NEXTVAL, 'PICOLO', '56789123', 'ï¿½ï¿½ï¿½ï¿½ï¿½', '9412311232232', '01072839281', 'MALE',
-        'PYTHON@NAVER.COM', 1);
-INSERT INTO USERINFO(USERID, ACCOUNTID, ACCOUNTPASSWORD, USERNAME, REGISTERNUMBER, MOBILENUMBER, GENDER, EMAIL,
-                     POSITIONCODE)
-VALUES (USERINFO_USERID_SEQ.NEXTVAL, 'SSAMJANG', '67891234', 'ï¿½Ç±ï¿½Å°ï¿½ï¿½', '9101201231312', '01094613467', 'MALE',
-        'JQUERY@NAVER.COM', 5);
-INSERT INTO USERINFO(USERID, ACCOUNTID, ACCOUNTPASSWORD, USERNAME, REGISTERNUMBER, MOBILENUMBER, GENDER, EMAIL,
-                     POSITIONCODE)
-VALUES (USERINFO_USERID_SEQ.NEXTVAL, 'JJONDIKI', '78912345', 'ï¿½Ëµï¿½ï¿½', '7603192211559', '01045612852', 'FEMALE',
-        'JSTL@NAVER.COM', 5);
-INSERT INTO USERINFO(USERID, ACCOUNTID, ACCOUNTPASSWORD, USERNAME, REGISTERNUMBER, MOBILENUMBER, GENDER, EMAIL,
-                     POSITIONCODE)
-VALUES (USERINFO_USERID_SEQ.NEXTVAL, 'RAMYEON', '89123456', 'ï¿½ï¿½ï¿½Î–ï¿½ï¿½', '8304222123209', '01089077545', 'FEMALE',
-        'JEONDAL@NAVER.COM', 7);
-INSERT INTO USERINFO(USERID, ACCOUNTID, ACCOUNTPASSWORD, USERNAME, REGISTERNUMBER, MOBILENUMBER, GENDER, EMAIL,
-                     POSITIONCODE)
-VALUES (USERINFO_USERID_SEQ.NEXTVAL, 'ANIRAGO', '91234567', 'ï¿½Æ³ï¿½ï¿½ï¿½', '9109201250991', '01012305991', 'MALE',
-        'DRAMSRAM@NAVER.COM', 8);
-INSERT INTO USERINFO(USERID, ACCOUNTID, ACCOUNTPASSWORD, USERNAME, REGISTERNUMBER, MOBILENUMBER, GENDER, EMAIL,
-                     POSITIONCODE)
-VALUES (USERINFO_USERID_SEQ.NEXTVAL, 'KINGBAT', '13479125', 'Å¶ï¿½Þµï¿½', '9102242215167', '01029005899', 'FEMALE',
-        'QUESTION@NAVER.COM', 10);
-INSERT INTO USERINFO(USERID, ACCOUNTID, ACCOUNTPASSWORD, USERNAME, REGISTERNUMBER, MOBILENUMBER, GENDER, EMAIL,
-                     POSITIONCODE)
-VALUES (USERINFO_USERID_SEQ.NEXTVAL, 'PUNCHCRUNCH', '75369852', 'Å¨ï¿½ï¿½Ä ', '9008292214234', '01028761010', 'FEMALE',
-        'RONDO@NAVER.COM', 12);
+-- Á÷±Þ (FK) ¼³Á¤
+alter table userinfo add constraint fk_positioncode foreign key(positioncode) references position(positioncode);
 
-COMMIT;
+commit;
