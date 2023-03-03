@@ -25,7 +25,7 @@
                         <th style="width: 250px; text-align: center;">상태</th>
                         <th style="width: 100px; text-align: center;">담당자</th>
                         <th style="width: 100px; text-align: center;">진척도</th>
-                        <th style="width: 300px; text-align: center;">작성(수정)일</th>
+                        <th style="width: 300px; text-align: center;">작성일(수정,삭제)</th>
                         <th style="width: 150px; text-align: center;">시작일</th>
                         <th style="width: 150px; text-align: center;">마감일</th>
                     </tr>
@@ -36,7 +36,7 @@
                     <c:forEach var="dto" items="${priority}">
                         <c:if test="${dto.deleteDate!=null}">
                         </c:if>
-                        <c:if test="${dto.deleteDate==null and dto.currentProgress!=3}">
+                        <c:if test="${dto.deleteDate==null and dto.currentProgress!=3 and dto.workProgress!=10}">
                             <tr class="bg-danger">
                                 <td align="center">${dto.workID}</td>
                                 <td align="center">
@@ -88,7 +88,7 @@
                                             <c:if test="${dto.workProgress<5}">
                                                 <div style="height: 5px;width:${dto.workProgress*10}px;background-color:red;"></div>
                                                 <c:if test="${dto.workProgress==0}">
-                                                    <img width="20" src="images/thief.png">
+<%--                                                    <img width="20" src="images/thief.png">--%>
                                                 </c:if>
                                             </c:if>
                                         </c:if>
@@ -116,22 +116,22 @@
                                         </c:if>
                                         <c:if test="${dto.updateDate != null}">
                                             <c:if test="${dto.updateDate.year==date.year&&dto.updateDate.month==date.month&&dto.updateDate.date==date.date}">
-                                                (수정됨)
+                                                (수정)
                                                 <fmt:formatDate value="${dto.updateDate}" pattern="a h:mm:ss"/>
                                             </c:if>
                                             <c:if test="${dto.updateDate.year!=date.year||dto.updateDate.month!=date.month||dto.updateDate.date!=date.date}">
-                                                (수정됨)
+                                                (수정)
                                                 <fmt:formatDate value="${dto.updateDate}" pattern="yyyy.MM.dd.(E)"/>
                                             </c:if>
                                         </c:if>
                                     </c:if>
                                     <c:if test="${dto.deleteDate!=null}">
                                         <c:if test="${dto.deleteDate.year==date.year&&dto.deleteDate.month==date.month&&dto.deleteDate.date==date.date}">
-                                            (삭제됨)
+                                            (삭제)
                                             <fmt:formatDate value="${dto.deleteDate}" pattern="a h:mm:ss"/>
                                         </c:if>
                                         <c:if test="${dto.updateDate.year!=date.year||dto.deleteDate.month!=date.month||dto.deleteDate.date!=date.date}">
-                                            (삭제됨)
+                                            (삭제)
                                             <fmt:formatDate value="${dto.deleteDate}" pattern="yyyy.MM.dd.(E)"/>
                                         </c:if>
                                     </c:if>
@@ -175,7 +175,7 @@
                     <c:set var="list" value="${workList.list}"/>
                     <c:if test="${list.size() == 0}">
                         <tr>
-                            <td colspan="10" align="center">
+                            <td colspan="10" align="center">등록된 글이 없습니다.
                                 <img style="width: 350px" src="images/thief.png">
                             </td>
                         </tr>
@@ -246,7 +246,7 @@
                                             <c:if test="${dto.workProgress<5}">
                                                 <div style="height: 5px;width:${dto.workProgress*10}px;background-color:red;"></div>
                                                 <c:if test="${dto.workProgress==0}">
-                                                    <img width="20" src="images/thief.png">
+<%--                                                    <img width="20" src="images/thief.png">--%>
                                                 </c:if>
                                             </c:if>
                                         </c:if>

@@ -14,61 +14,68 @@
 
             <div class="table-responsive">
                 <form action="memoReply?memoID=${mDTO.memoID}" method="post">
-                    <table class="table" style="width:1500px; margin-left: auto; margin-right: auto;">
-                        <tr class="bg-info">
-                            <th name="subject" colspan="15" style="font-size: 30px; text-align: center;">
-                                <c:set var="subject" value="${fn:replace(mDTO.subject, '<', '&lt;')}"/>
-                                <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
-                                ${subject}(${mDTO.writeDate})
-                            </th>
-                        </tr>
-                        <tr class="bg-primary">
+                    <%--receiverID가 현재 세션 유저일 경우--%>
+                    <c:if test="${mDTO.receiverID==userInfo.get(0).getUserID()}">
+                        <table class="table" style="width:1500px; margin-left: auto; margin-right: auto;">
+                            <tr class="bg-info">
+                                <th name="subject" colspan="15" style="font-size: 30px; text-align: center;">
+                                    <c:set var="subject" value="${fn:replace(mDTO.subject, '<', '&lt;')}"/>
+                                    <c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
+                                    ${subject}(${mDTO.writeDate})${sessionScope.loginUser.id}
+                                </th>
+                            </tr>
+                            <tr class="bg-primary">
 
-                            <th class="align-middle table-dark" style="font-size: 22px; width: 100px; text-align: center;">
-                                <c:set var="name" value="${fn:replace(mDTO.userName, '<', '&lt;')}"/>
-                                <c:set var="name" value="${fn:replace(name, '>', '&gt;')}"/>
-                                ${name}
-                            </th>
-                        </tr>
+                                <th class="align-middle table-dark" style="font-size: 22px; width: 100px; text-align: center;">
+                                    <c:set var="name" value="${fn:replace(mDTO.userName, '<', '&lt;')}"/>
+                                    <c:set var="name" value="${fn:replace(name, '>', '&gt;')}"/>
+                                    ${name}
+                                </th>
+                            </tr>
 
-                        <tr>
-                            <td align="center" style="font-size: 21px">
-                                <c:set var="content" value="${fn:replace(mDTO.content, '<', '&lt;')}"/>
-                                <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
-                                <c:set var="content" value="${fn:replace(content, enter, '<br/>')}"/>
-                                ${content}
-                            </td>
-                        </tr>
+                            <tr>
+                                <td align="center" style="font-size: 21px">
+                                    <c:set var="content" value="${fn:replace(mDTO.content, '<', '&lt;')}"/>
+                                    <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
+                                    <c:set var="content" value="${fn:replace(content, enter, '<br/>')}"/>
+                                    ${content}
+                                </td>
+                            </tr>
 
 
-                    </table>
-                    <table class="table" width="600" align="center" cellpadding="5" cellspacing="0">
-                        <tr class="table-secondary">
-                            <td align="center">
-                                <input class="btn btn-primary btn-sm" type="submit" value="답장"
-                                       style="font-size: 13px; width: 80px"/>
-                                <c:if test="${mDTO.marked==0}">
-                                    <input class="btn btn-success btn-sm" type="button" value="관심쪽지"
+                        </table>
+                        <table class="table" width="600" align="center" cellpadding="5" cellspacing="0">
+                            <tr class="table-secondary">
+                                <td align="center">
+                                    <input class="btn btn-primary btn-sm" type="submit" value="답장"
+                                           style="font-size: 13px; width: 80px"/>
+                                    <c:if test="${mDTO.marked==0}">
+                                        <input class="btn btn-success btn-sm" type="button" value="관심쪽지"
+                                               style="font-size: 13px; width: 80px"
+                                               onclick="memoMark('memoMark?memoID=${mDTO.memoID}&currentPage=${currentPage}','${userInfo.get(0).getUserID()==mDTO.receiverID}')"/></c:if>
+                                    <c:if test="${mDTO.marked==1}">
+                                        <input class="btn btn-dark btn-sm" type="button" value="관심없음"
+                                               style="font-size: 13px; width: 80px"
+                                               onclick="memoMarkGG('memoMarkGG?memoID=${mDTO.memoID}&currentPage=${currentPage}','${userInfo.get(0).getUserID()==mDTO.receiverID}')"/>
+                                    </c:if>
+                                    <input class="btn btn-danger btn-sm" type="button" value="삭제"
                                            style="font-size: 13px; width: 80px"
-                                           onclick="memoMark('memoMark?memoID=${mDTO.memoID}&currentPage=${currentPage}','${userInfo.get(0).getUserID()==mDTO.receiverID}')"/></c:if>
-                                <c:if test="${mDTO.marked==1}">
-                                    <input class="btn btn-dark btn-sm" type="button" value="관심없음"
+                                           onclick="memoDelete('memoDelete?memoID=${mDTO.memoID}&currentPage=${currentPage}','${userInfo.get(0).getUserID()==mDTO.receiverID}')"/>
+                                    <input class="btn btn-info btn-sm" type="button" value="돌아가기"
                                            style="font-size: 13px; width: 80px"
-                                           onclick="memoMarkGG('memoMarkGG?memoID=${mDTO.memoID}&currentPage=${currentPage}','${userInfo.get(0).getUserID()==mDTO.receiverID}')"/>
-                                </c:if>
-                                <input class="btn btn-danger btn-sm" type="button" value="삭제"
-                                       style="font-size: 13px; width: 80px"
-                                       onclick="memoDelete('memoDelete?memoID=${mDTO.memoID}&currentPage=${currentPage}','${userInfo.get(0).getUserID()==mDTO.receiverID}')"/>
-                                <input class="btn btn-info btn-sm" type="button" value="돌아가기"
-                                       style="font-size: 13px; width: 80px"
-                                       onclick="history.back()"/>
-                                <input type="hidden" name="userID" value="${mDTO.userID}"/>
-                                <input type="hidden" name="currentPage" value="${currentPage}"/>
-                                <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
-                                <input type="hidden" name="memoID" value="${mDTO.memoID}">
-                            </td>
-                        </tr>
-                    </table>
+                                           onclick="history.back()"/>
+                                    <input type="hidden" name="userID" value="${mDTO.userID}"/>
+                                    <input type="hidden" name="currentPage" value="${currentPage}"/>
+                                    <input type="hidden" name="ip" value="${pageContext.request.remoteAddr}"/>
+                                    <input type="hidden" name="memoID" value="${mDTO.memoID}">
+                                </td>
+                            </tr>
+                        </table>
+                    </c:if>
+                    <c:if test="${mDTO.receiverID!=userInfo.get(0).getUserID()}">
+                        <img style="width: 350px" src="images/thief.png">
+                        <b style="font-size: 50px; color: crimson">훔쳐보지 마세요</b>
+                    </c:if>
                 </form>
             </div>
         </div>
