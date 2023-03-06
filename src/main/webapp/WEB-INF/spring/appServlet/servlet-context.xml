@@ -37,13 +37,13 @@
         <beans:property name="maxUploadSize" value="104857560"/>
         <!-- 1024 * 1024 * 2 bytes 2MB -->
         <beans:property name="maxUploadSizePerFile" value="2097152"/>
-        <beans:property name="uploadTempDir" value="file:/opt/homebrew/Cellar/tomcat@9/9.0.71/libexec/webapps/upload/temp/"/>
+        <beans:property name="uploadTempDir" value="file:/opt/homebrew/Cellar/tomcat@9/9.0.73/libexec/webapps/upload/temp/"/>
         <!--<beans:property name="uploadTempDir" value="file:C:\\Users\\kyle\\Documents\\Study\\CRUNCH\\CoWorkers\\upload\\"/>-->
         <beans:property name="maxInMemorySize" value="10485756"/>
     </beans:bean>
     <!--<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>-->
 
     <context:component-scan base-package="com.crunch.controller"/>
-    <context:component-scan base-package="com.crunch.exception"/>
+    <!--<context:component-scan base-package="com.crunch.exception"/>-->
 
 </beans:beans>
