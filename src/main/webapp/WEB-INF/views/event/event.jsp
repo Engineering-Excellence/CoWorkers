@@ -166,10 +166,12 @@
 
     <!-- main theme -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
-	<link rel="stylesheet" href="./css/coWorkers.css">
-	
-	<!-- event -->
+    <link rel="stylesheet" href="./css/coWorkers.css">
     <script type="text/javascript" src='https://cdn.jsdelivr.net/npm/fullcalendar@6.0.1/index.global.min.js'></script>
+    <script type="text/javascript" src="./js/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+	
+    <!-- event -->
     <script type="text/javascript" src='./js/event/index.global.js'></script>
     <script type="text/javascript" src='./js/event/event.js'></script>
 	
