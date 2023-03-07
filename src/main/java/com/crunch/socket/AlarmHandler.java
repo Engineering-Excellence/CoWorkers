@@ -33,13 +33,13 @@ public class AlarmHandler extends TextWebSocketHandler  {
     // 접속
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        //접속한 전체 유저 아이디
+        // 접속한 전체 유저 아이디
         sessions.add(session);
         log.info("접속한 전체 유저 아이디 : " + session.getId());
-        //로그인한 개별 유저 아이디를 가져온다.
+        // 로그인한 개별 유저 아이디를 가져온다.
         String senderID = getId(session);
         log.info("senderID : " + senderID);
-        //userSessionsMap 에 개별 유저 아이디를를 넣는다.
+        // userSessionsMap 에 개별 유저 아이디를를 넣는다.
         userSessionsMap.put(senderID, session);
         log.info("userSessionsMap : " + userSessionsMap);
     }
@@ -50,8 +50,8 @@ public class AlarmHandler extends TextWebSocketHandler  {
         String loginId=getId(session);
         log.info("loginId : " + loginId);
         Map<String, Object> httpSession = session.getAttributes();
-//        log.info("session : " + session);
-//        log.info("httpSession : " + httpSession);
+        log.info("session : " + session);
+        log.info("httpSession : " + httpSession);
         int userID = (int) httpSession.get("userID");
         log.info("userID : " + userID);
         if(loginId!=null) {
@@ -60,14 +60,11 @@ public class AlarmHandler extends TextWebSocketHandler  {
             log.info("selectLsatInform : " + selectLsatInform);
 
             WebSocketSession webSocketSession = userSessionsMap.get(loginId);
-//            log.info("webSocketSession : " + webSocketSession);
-
+            log.info("webSocketSession : " + webSocketSession);
             Gson gson = new Gson();
-            // 알림 데이터 JSON 으로 전환 후 TextMessage 변환
-            TextMessage textMessage = new TextMessage(gson.toJson(selectLsatInform));
-            webSocketSession.sendMessage(textMessage);
-            log.info("textMessage : " + (textMessage));
-
+            String json = gson.toJson(selectLsatInform);
+            log.info("json : " + json);
+            webSocketSession.sendMessage(new TextMessage(json));
         }
         else {
             log.info("로그인이 되어있지 않습니다.");
@@ -87,24 +84,12 @@ public class AlarmHandler extends TextWebSocketHandler  {
 
     // 웹소켓 id 가져오기
     private String getId(WebSocketSession session) {
-/*
-        (int)request.getSession().getAttribute("userID");
-        또는 ,
-        session.getAttribute("userID");
-        이렇게 세션값을 가져오나 여기 웹소켓에서는 세션값을 WebSocketSession session  형태로 가져옵니다.
-        따라서 , 다음과 코드 형태로 세션값을 가져옵니다.
-*/
-
 
         String loginId = session.getId();
         log.info("loginId : " + loginId);
         if (loginId == null) {
-            //System.out.println("로그인 loginID 가 널일경우  :" + session.getId());
-            //랜덤 아이디 생성, 사이트 접속한 사람 전체
-            //ex ) vawpuj5h, 5qw40sff
             return session.getId();
         } else {
-            //로그인한 유저 반환
             return loginId;
         }
     }
