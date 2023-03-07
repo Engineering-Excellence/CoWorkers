@@ -86,7 +86,19 @@ public class UserInfoController {
     // 로그아웃 시 세션무효화 및 로그인화면으로 이동하는 메소드
     @GetMapping(value = "logout")
     public String logout(SessionStatus sessionStatus) {
+        //        HttpSession ⇒ invalidate(), removeAttribute("key")
+        //        HttpSession 객체를 생성하여 세션에 저장한 데이터의 경우(=@SessionAttribute에 등록하지 않은 경우),
+        //        HttpSession의 invalidate() 메소드를 통해 세션 데이터 일괄 삭제
+        //        혹은 removeAttribute("key") 메소드를 통해 특정 키 값의 세션 데이터 삭제
+        //
+        //        @SessionAttribute ⇒ setComplete()
+        //        @SessionAttribute에 데이터 키 값을 등록하여, 스프링 API가 관리하는 세션 데이터로 설정한 경우,
+        //        SessionStatus 객체인 SessionStatus status 생성하여 파라미터로 넘기고
+        //        status.setComplete() 메소드를 통해 스프링 API 관리 세션 데이터 일괄 삭제
 
+        //        session.invalidate();  // 세션 무효화 방법 1
+        //        session.removeAttribute("userInfo");  // 세션 무효화 방법 2
+        //        sessionStatus.setComplete();    // 세션 무효화 방법 3
         log.info("UserInfoController의 logout() 실행");
 
         sessionStatus.setComplete();    // 세션 제거

@@ -79,7 +79,7 @@
 
 <%@include file="/WEB-INF/views/scripts.jsp"%>
 <link rel="stylesheet" href="css/board.css" />
-<script type="text/javascript" src="/js/board.js"></script>
+<script type="text/javascript" src="js/board.js"></script>
 </body>
 <%@include file="/WEB-INF/views/footer.jsp"%>
 </html>
