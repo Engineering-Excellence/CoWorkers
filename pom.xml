@@ -309,7 +309,7 @@
                 <artifactId>tomcat-maven-plugin</artifactId>
                 <configuration>
                     <url>http://localhost:8090/manager/text</url>
-                    <path>/CoWorkers_Spring</path>
+                    <path>/</path>
                     <username>admin</username>
                     <password>0000</password>
                 </configuration>
