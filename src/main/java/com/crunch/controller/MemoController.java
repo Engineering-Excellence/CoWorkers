@@ -163,7 +163,7 @@ public class MemoController {
         log.info("MemoController memoInsert()");
 //        get all accountID from database
         List<String> allAccountID = service.allAccountID();
-        log.info("accountList: {}",allAccountID.toString());
+        log.info("accountList: {}",allAccountID);
 //        allAccountID to json
         model.addAttribute("allAccountID", allAccountID);
 
