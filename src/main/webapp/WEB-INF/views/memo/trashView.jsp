@@ -69,7 +69,7 @@
 </div>
 
 <%@include file="/WEB-INF/views/scripts.jsp"%>
-<script src="/resources/js/memoChange.js"></script>
+<script src="js/memoChange.js"></script>
 
 
 </body>

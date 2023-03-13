@@ -75,8 +75,8 @@
 </div>
 
 <%@include file="/WEB-INF/views/scripts.jsp"%>
-<script src="/resources/js/workInsert.js"></script>
-<script type="text/javascript" src="/js/check.js"></script>
+<script src="js/workInsert.js"></script>
+<script type="text/javascript" src="js/check.js"></script>
 
 </body>
 <%@include file="/WEB-INF/views/footer.jsp"%>
