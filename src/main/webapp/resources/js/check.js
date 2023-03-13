@@ -1,20 +1,14 @@
 function memoCheck(obj) {
 
-    accountList = Array.from(document.getElementsByName('accountList'))[0].value.replace('[','').replace(']','').split(' ');
+    accountList = Array.from(document.getElementsByName('accountList'))[0].value.replace('[','').replace(']','').replace(/,/g, '').split(' ');
 
-    for (let i = 0; i < accountList.length; i++) {
-        accountList[i] = accountList[i].replace(/,/g, '');
-    }
     // for (let i = 0; i < accountList.length; i++) {
     //     console.log(accountList[i]);
     // }
-    
+
     if (!obj.subject.value || obj.subject.value.trim().length === 0) {
         window.alert('제목이 입력되지 않았습니다.')
         obj.subject.focus();
-        console.log(accountList);
-        console.log(accountList.indexOf(obj.accountID.value))
-        console.log(accountList.length);
         return false;
     }
     if (!obj.accountID.value || obj.accountID.value.trim().length === 0) {
