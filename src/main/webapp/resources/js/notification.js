@@ -1,8 +1,6 @@
 // 소켓 전역변수 선언
-var socket = null;
+let socket = null;
 console.log("소켓 연결", socket);
-// 한번만 메시지 알림을 위해 alarmCount 변수 설정
-var alarmCount = 0;
 $(function () {
     connectWs();
     setTimeout(() => {
@@ -27,7 +25,7 @@ function connectWs() {
 
 
     sock.onmessage = function (evt) {
-        var data = evt.data;
+        let data = evt.data;
         console.log("ReceivMessage : " + data + "\n");
         if (data != "null") {
             const obj = JSON.parse(data);
@@ -55,7 +53,7 @@ function alarmListMove() {
 }
 
 function getContextPath() {
-    var hostIndex = location.href.indexOf(location.host) + location.host.length;
+    let hostIndex = location.href.indexOf(location.host) + location.host.length;
     return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
 };
 

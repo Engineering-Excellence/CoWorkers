@@ -167,8 +167,18 @@
                             </tr>
                         </c:if>
                     </c:forEach>
-                    <%--                    </c:if>--%>
 
+                    <%--긴급글이 2개 이상일시 아래 버튼 표시--%>
+                    <c:if test="${priority.stream().filter(p -> p.deleteDate == null).count() >= 2}">
+                        <tr>
+                            <td colspan="10" align="center">
+                                <%--펼치기--%>
+                                <button id="showAll" class="panel-primary btn-success label-info">▼</button>
+                                <%--접기--%>
+                                <button id="showOne" class="panel-primary btn-success label-info hidden">▲</button>
+                            </td>
+                        </tr>
+                    </c:if>
 
                     <!-- 글을 출력한다. -->
                     <c:set var="list" value="${workList.list}"/>
@@ -410,6 +420,7 @@
     </div>
 </div>
 <%@include file="/WEB-INF/views/scripts.jsp"%>
+<script type="text/javascript" src="js/work.js"></script>
 </body>
 <%@include file="/WEB-INF/views/footer.jsp"%>
 </html>
