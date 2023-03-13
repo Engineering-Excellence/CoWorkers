@@ -261,7 +261,7 @@
         </dependency>
     </dependencies>
 
-    <!-- Jenkins -->
+    <!-- Jenkins Profile -->
     <profiles>
         <profile>
             <id>production</id>
@@ -303,13 +303,13 @@
             </resource>
         </resources>
         <plugins>
-            <!-- Jenkins -->
+            <!-- Jenkins Deployment -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>tomcat-maven-plugin</artifactId>
                 <configuration>
                     <url>http://localhost:8090/manager/text</url>
-                    <path>/CoWorkers_Spring</path>
+                    <path>/</path>
                     <username>admin</username>
                     <password>0000</password>
                 </configuration>
