@@ -1,17 +1,26 @@
 
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<style>
+    @media (max-width: 768px) {
+        .col-sm-8 {
+            width: 100%;
+        }
+    }
+</style>
 <footer class="footer" >
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-4 mb-4 mb-md-0">
                 <h6>About US</h6>
                 <p class="text-justify">
-					Crunch는 특별함보다는 기본에 충실하여 사내업무 효율화를 증진하고<br>
-					고객분들의 즐거운 일상을 조성하는 프로젝트 팀입니다.<br>
+					Crunch는 특별함보다는 기본에 충실하여<br>
+                    사내업무 효율화를 증진하고<br>
+					고객분들의 즐거운 일상을 조성하는<br>
+                    프로젝트 팀입니다.<br>
                 </p>
             </div>
 
-            <div class="col-xs-6 col-md-3">
+            <div class="col-sm-4 col-md-2 mb-4 mb-md-0">
                 <h6>Languages</h6>
                 <ul class="footer-links">
                     <li>JAVA</li>
@@ -20,7 +29,7 @@
                 </ul>
             </div>
 
-            <div class="col-xs-6 col-md-3">
+            <div class="col-sm-4 col-md-2 mb-4 mb-md-0">
                 <h6>Special Thanks</h6>
                 <ul class="footer-links">
                     <li><a href="https://www.tjoeun.co.kr/">더조은아카데미</a></li>
@@ -36,7 +45,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-sm-6 col-xs-12">
+            <div class="col-md-8 col-sm-8 col-xs-12">
                 <p class="copyright-text">&copy; 2023 All Rights Reserved by
                     <a href="mainView">Crunch_Mode</a>.
                 </p>

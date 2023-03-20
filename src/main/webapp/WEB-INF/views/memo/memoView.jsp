@@ -72,8 +72,9 @@
                         </table>
                     </c:if>
                     <c:if test="${mDTO.receiverID!=userInfo.get(0).getUserID()}">
-                        <img style="width: 350px" src="images/thief.png">
-                        <b style="font-size: 50px; color: crimson">훔쳐보지 마세요</b>
+                        <div style="text-align: center">
+                            <img style="width: 500px" src="images/thief.png">
+                        </div>
                     </c:if>
                 </form>
             </div>
